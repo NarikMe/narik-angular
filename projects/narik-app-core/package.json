@@ -1,0 +1,10 @@
+{
+  "name": "narik-app-core",
+  "version": "1.0.0-beta.4",
+  "peerDependencies": {
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "lodash": "^4.17.11"
+  },
+  "dependencies": {}
+}
