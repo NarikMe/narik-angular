@@ -1,12 +1,12 @@
 {
-  "name": "narik-client",
+  "name": "narik-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "doc": "compodoc -p projects/tsconfig.compodoc.json -s -o -w",
+    "doc": "compodoc -p projects/tsconfig.compodoc.json -s -o -w --theme  material",
     "build-infrastructure": "ng build narik-infrastructure",
     "build-common": "ng build narik-common",
     "build-core": "ng build narik-core",
