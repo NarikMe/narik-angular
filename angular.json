@@ -1,0 +1,436 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "narik-core": {
+      "root": "projects/narik-core",
+      "sourceRoot": "projects/narik-core/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-core/tsconfig.lib.json",
+            "project": "projects/narik-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-core/src/test.ts",
+            "tsConfig": "projects/narik-core/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-core/tsconfig.lib.json",
+              "projects/narik-core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-common": {
+      "root": "projects/narik-common",
+      "sourceRoot": "projects/narik-common/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-common/tsconfig.lib.json",
+            "project": "projects/narik-common/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-common/src/test.ts",
+            "tsConfig": "projects/narik-common/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-common/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-common/tsconfig.lib.json",
+              "projects/narik-common/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-app-core": {
+      "root": "projects/narik-app-core",
+      "sourceRoot": "projects/narik-app-core/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-app-core/tsconfig.lib.json",
+            "project": "projects/narik-app-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-app-core/src/test.ts",
+            "tsConfig": "projects/narik-app-core/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-app-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-app-core/tsconfig.lib.json",
+              "projects/narik-app-core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-infrastructure": {
+      "root": "projects/narik-infrastructure",
+      "sourceRoot": "projects/narik-infrastructure/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-infrastructure/tsconfig.lib.json",
+            "project": "projects/narik-infrastructure/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-infrastructure/src/test.ts",
+            "tsConfig": "projects/narik-infrastructure/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-infrastructure/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-infrastructure/tsconfig.lib.json",
+              "projects/narik-infrastructure/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-ui-core": {
+      "root": "projects/narik-ui-core",
+      "sourceRoot": "projects/narik-ui-core/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-ui-core/tsconfig.lib.json",
+            "project": "projects/narik-ui-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-ui-core/src/test.ts",
+            "tsConfig": "projects/narik-ui-core/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-ui-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-ui-core/tsconfig.lib.json",
+              "projects/narik-ui-core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-ui-material": {
+      "root": "projects/narik-ui-material",
+      "sourceRoot": "projects/narik-ui-material/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-ui-material/tsconfig.lib.json",
+            "project": "projects/narik-ui-material/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-ui-material/src/test.ts",
+            "tsConfig": "projects/narik-ui-material/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-ui-material/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-ui-material/tsconfig.lib.json",
+              "projects/narik-ui-material/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-ui-primeng": {
+      "root": "projects/narik-ui-primeng",
+      "sourceRoot": "projects/narik-ui-primeng/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-ui-primeng/tsconfig.lib.json",
+            "project": "projects/narik-ui-primeng/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-ui-primeng/src/test.ts",
+            "tsConfig": "projects/narik-ui-primeng/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-ui-primeng/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-ui-primeng/tsconfig.lib.json",
+              "projects/narik-ui-primeng/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-ui-ng-bootstrap": {
+      "root": "projects/narik-ui-ng-bootstrap",
+      "sourceRoot": "projects/narik-ui-ng-bootstrap/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-ui-ng-bootstrap/tsconfig.lib.json",
+            "project": "projects/narik-ui-ng-bootstrap/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-ui-ng-bootstrap/src/test.ts",
+            "tsConfig": "projects/narik-ui-ng-bootstrap/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-ui-ng-bootstrap/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-ui-ng-bootstrap/tsconfig.lib.json",
+              "projects/narik-ui-ng-bootstrap/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-ui-devextreme": {
+      "root": "projects/narik-ui-devextreme",
+      "sourceRoot": "projects/narik-ui-devextreme/src",
+      "projectType": "library",
+      "prefix": "narik",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-ui-devextreme/tsconfig.lib.json",
+            "project": "projects/narik-ui-devextreme/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-ui-devextreme/src/test.ts",
+            "tsConfig": "projects/narik-ui-devextreme/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-ui-devextreme/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-ui-devextreme/tsconfig.lib.json",
+              "projects/narik-ui-devextreme/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-jwt-authentication": {
+      "root": "projects/narik-jwt-authentication",
+      "sourceRoot": "projects/narik-jwt-authentication/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-jwt-authentication/tsconfig.lib.json",
+            "project": "projects/narik-jwt-authentication/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-jwt-authentication/src/test.ts",
+            "tsConfig": "projects/narik-jwt-authentication/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-jwt-authentication/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-jwt-authentication/tsconfig.lib.json",
+              "projects/narik-jwt-authentication/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-client-storage": {
+      "root": "projects/narik-client-storage",
+      "sourceRoot": "projects/narik-client-storage/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-client-storage/tsconfig.lib.json",
+            "project": "projects/narik-client-storage/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-client-storage/src/test.ts",
+            "tsConfig": "projects/narik-client-storage/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-client-storage/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-client-storage/tsconfig.lib.json",
+              "projects/narik-client-storage/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-signalr-client": {
+      "root": "projects/narik-signalr-client",
+      "sourceRoot": "projects/narik-signalr-client/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-signalr-client/tsconfig.lib.json",
+            "project": "projects/narik-signalr-client/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-signalr-client/src/test.ts",
+            "tsConfig": "projects/narik-signalr-client/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-signalr-client/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-signalr-client/tsconfig.lib.json",
+              "projects/narik-signalr-client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "narik-ui-ngx-bootstrap": {
+      "root": "projects/narik-ui-ngx-bootstrap",
+      "sourceRoot": "projects/narik-ui-ngx-bootstrap/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-ui-ngx-bootstrap/tsconfig.lib.json",
+            "project": "projects/narik-ui-ngx-bootstrap/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-ui-ngx-bootstrap/src/test.ts",
+            "tsConfig": "projects/narik-ui-ngx-bootstrap/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-ui-ngx-bootstrap/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-ui-ngx-bootstrap/tsconfig.lib.json",
+              "projects/narik-ui-ngx-bootstrap/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  }
+}
