@@ -4,12 +4,12 @@ Narik is a framework that helps you create your angular project more creatively 
 
 ## Documentation
 
-You can find documentation in  [Narik Wiki](https://github.com/NarikMe/narik-angular/wiki)  
+You can find documentation in  [Narik Wiki](https://github.com/NarikMe/narik-angular/wiki)
+and [Narik.me](http://narik.me)
 
 ## Samples
 
 You can see examples in these Narik samples and starters  
-
 
 [narik-material-starter](https://github.com/NarikMe/narik-material-starter)  
 [narik-material-demo](https://github.com/NarikMe/narik-material-demo)  
