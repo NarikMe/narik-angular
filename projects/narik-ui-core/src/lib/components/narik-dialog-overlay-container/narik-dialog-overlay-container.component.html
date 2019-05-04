@@ -1,0 +1,9 @@
+<div class="narik-modal">
+  <div (click)='modalClick($event)' [ngClass]="{ 'narik-overlay-dark-backdrop': options.showBackdrop }" class="narik-back-drop"></div>
+  <div class="narik-content-wrapper cdk-overlay-pane">
+    <div class="narik-content-container" [ngStyle]="{'width':options.width  ? options.width : null,'height':options.height  ? options.height : null }"
+      [ngClass]="{'full-screen':options.isFullScreen}">
+      <ng-template narik-loader-host></ng-template>
+    </div>
+  </div>
+</div>
