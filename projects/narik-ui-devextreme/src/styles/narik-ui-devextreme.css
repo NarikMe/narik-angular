@@ -1,0 +1,28 @@
+.dx-button-content {
+  padding: 0;
+}
+
+.dx-button-indicator {
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+
+.dx-menu-items-container {
+  padding: 0 !important;
+}
+
+.dx-toolbar-center {
+  margin: 0px;
+}
+
+.dev-toolbar-seprator {
+  border-left: solid 1px #ccc;
+  height: 80%;
+}
+.dx-field:last-of-type {
+  margin: 0 0 10px 0 !important;
+}

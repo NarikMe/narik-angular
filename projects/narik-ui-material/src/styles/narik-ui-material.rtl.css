@@ -1,0 +1,20 @@
+.toolbar-btn {
+  margin-right: 0.2rem !important;
+  margin-left: initial !important;
+}
+
+.toolbar-btn:first-child {
+  margin-right: 0 !important;
+  margin-left: initial !important;
+}
+
+
+.mat-toolbar>.mat-divider-vertical {
+  margin-right: 8px !important;
+  margin-left: 4px !important;
+}
+
+.narik-mat-table-select-arrow-wrapper {
+  right: initial;
+  left: 0;
+}

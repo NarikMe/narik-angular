@@ -1,0 +1,13 @@
+<div *ngIf="label" class="dx-field-label">{{ label }}</div>
+<div class="dx-field-value">
+  <dx-select-box
+    [dataSource]="optionData"
+    [displayExpr]="displayField"
+    [valueExpr]="valueField"
+    [searchEnabled]="true"
+    [placeholder]="placeHolder"
+    [showClearButton]="!required"
+    [(ngModel)]="value"
+  >
+  </dx-select-box>
+</div>

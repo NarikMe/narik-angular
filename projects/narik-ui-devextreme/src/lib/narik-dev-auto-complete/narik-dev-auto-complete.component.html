@@ -1,0 +1,31 @@
+<!-- <div *ngIf="label" class="dx-field-label">{{ label }}</div>
+<div class="dx-field-value">
+  <dx-autocomplete
+    placeholder="{{ placeHolder | translate }}"
+    [minSearchLength]="minLenToShowAutoComplete"
+    [searchTimeout]="500"
+    [dataSource]="optionData"
+    [disabled]="disabled"
+    [showClearButton]="!required"
+    [valueExpr]="displayField"
+
+  >
+  <div *dxTemplate="let item of 'item'">
+      <span>{{item[displayField]}}</span>
+  </div>
+  </dx-autocomplete>
+</div> -->
+
+<div *ngIf="label" class="dx-field-label">{{ label }}</div>
+<div class="dx-field-value">
+  <dx-select-box
+    [dataSource]="optionData"
+    [displayExpr]="displayField"
+    [valueExpr]="valueField"
+    [searchEnabled]="true"
+    [placeholder]="placeHolder"
+    [showClearButton]="!required"
+    [(ngModel)]="value"
+  >
+  </dx-select-box>
+</div>

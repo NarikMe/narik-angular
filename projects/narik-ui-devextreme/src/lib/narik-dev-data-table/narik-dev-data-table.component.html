@@ -1,0 +1,16 @@
+<dx-data-grid [rtlEnabled]="rtlEnabled" id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true"
+  [allowColumnResizing]="true" [columnAutoWidth]="true" [columns]="fields" [rowAlternationEnabled]="true" [showBorders]="false"
+  (onSelectionChanged)="onSelectionChanged($event)" (onRowClick)="onRowClick($event)">
+
+
+  <dxo-paging *ngIf="pagingInfo" [pageSize]="pagingInfo.pageSize"></dxo-paging>
+  <dxo-pager *ngIf="pagingInfo" [showPageSizeSelector]="pagingInfo.options?.showPageSizeSelector" [allowedPageSizes]="pagingInfo.availablePageSizes"
+    [showInfo]="pagingInfo.options?.showInfo">
+  </dxo-pager>
+  <dxo-group-panel [visible]="showGroupPanel"></dxo-group-panel>
+  <dxo-selection *ngIf="selectMode==='multiple'" [selectAllMode]="allMode" [showCheckBoxesMode]="checkBoxesMode" mode="multiple"></dxo-selection>
+  <dxo-selection *ngIf="selectMode==='single'" mode="single"></dxo-selection>
+  <dxo-filter-row [visible]="filterRow"></dxo-filter-row>
+  <dxo-remote-operations *ngIf="isServerSide" [sorting]="true" [filtering]="true" [paging]="true">
+  </dxo-remote-operations>
+</dx-data-grid>

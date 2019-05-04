@@ -1,0 +1,77 @@
+<narik-mat-input [placeHolder]="'search' | translate" [hidden]="!options.showSearchPanel" (keyup)="applyFilter($event.target.value)">
+</narik-mat-input>
+<narik-mat-busy-indicator [isBusy]="dataSource.loadingObservable | async">
+  <div [ngClass]="containerCssClass">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 narik-mat-table" matSort>
+      <ng-container matColumnDef="index">
+        <th class="mat-table-index-column" mat-header-cell *matHeaderCellDef>
+          #
+        </th>
+        <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="select">
+        <th class="mat-table-select-column" mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container [matColumnDef]="column.model" *ngFor="let column of fields">
+        <th mat-header-cell [ngStyle]="{ width: column.options.columnWidth || '' }" *matHeaderCellDef>
+          <span mat-sort-header>{{ column.label | translate }}</span>
+
+          <mat-checkbox *ngIf="column.type === 'boolean'" (change)="applyFilter($event.checked, column)">
+          </mat-checkbox>
+
+          <input *ngIf="column.type !== 'boolean'" type="column.type || 'string'" class="filter-input" matInput (keyup)="applyFilter($event.target.value, column)"
+            placeholder="{{ 'search' | translate }}" />
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <ng-container [ngSwitch]="column.type">
+            <ng-container *ngSwitchCase="'boolean'">
+              <mat-icon class="text-success" *ngIf="element[column.model]">done</mat-icon>
+              <mat-icon class="text-danger" *ngIf="!element[column.model]">clear</mat-icon>
+            </ng-container>
+            <ng-container *ngSwitchCase="'date'">
+              {{ element[column.model] | date: column.options.format || 'mediumDate' }}</ng-container>
+            <ng-container *ngSwitchDefault>
+              {{ element[column.model] }}</ng-container>
+          </ng-container>
+
+
+        </td>
+      </ng-container>
+      <ng-container *ngIf="rowCommands && rowCommands.length !== 0" matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          <span>{{ "table.actions" | translate }}</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table-command-container">
+            <ng-container *ngIf="rowCommandType === 'Menu'">
+              <mat-icon class="table-command-menu" [matMenuTriggerFor]="menu">dehaze</mat-icon>
+              <mat-menu #menu="matMenu">
+                <narik-mat-button [cssClass]="'item-full-width'" *ngFor="let item of rowCommands" (nClick)="rowCommandClicked(item.commandKey, element)"
+                  label=" {{ item.label | translate }}" [buttonStyle]="'mat-flat-button'" [icon]="item.icon" matTooltip="{{ item.hint || item.commandKey | translate }}">
+                </narik-mat-button>
+              </mat-menu>
+            </ng-container>
+            <ng-container *ngIf="rowCommandType === 'Flat'">
+              <mat-icon class="table-command-menu" *ngFor="let item of rowCommands" (click)="rowCommandClicked(item.commandKey, element)"
+                matTooltip="{{ item.hint || item.commandKey | translate }}">{{ item.icon }}</mat-icon>
+            </ng-container>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="fieldNames; sticky: true"></tr>
+      <tr [class]="rowCssClass" [ngClass]="{ selected: row === selectedItem }" mat-row *matRowDef="let row; columns: fieldNames"
+        (dblclick)="dblclick(row)" (click)="select(row)"></tr>
+    </table>
+  </div>
+</narik-mat-busy-indicator>
+<mat-paginator *ngIf="pagingInfo" [pageSize]="pagingInfo.pageSize" [pageSizeOptions]="pagingInfo.availablePageSizes"
+  showFirstLastButtons></mat-paginator>

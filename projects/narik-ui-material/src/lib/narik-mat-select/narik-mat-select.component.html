@@ -1,0 +1,71 @@
+<mat-form-field
+  [ngClass]="cssClass"
+  [floatLabel]="floatLabel"
+  [appearance]="appearance"
+  [hintLabel]="hintLabel"
+>
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <mat-select
+    [disabled]="disabled"
+    [required]="required"
+    placeholder="{{ placeHolder }}"
+    [(ngModel)]="value"
+    [name]="name"
+  >
+    <ng-container *ngIf="options.showSearchBox">
+      <div class="search-continer">
+        <input
+          autocomplete="off"
+          #input
+          class="search-input"
+          placeholder="{{ 'search' | translate }}"
+          matInput
+          (keydown)="onKeydown($event)"
+          (keyup)="keyUp($event)"
+          type="text"
+        />
+      </div>
+    </ng-container>
+    <mat-option
+      *ngFor="let item of (filteredData | async)"
+      [value]="item[valueField]"
+    >
+      {{ item[displayField] }}
+    </mat-option>
+    <ng-container *ngIf="options.showToolbar">
+      <narik-mat-toolbar
+        cssClass="select-tool-bar"
+        itemsStyle="mat-flat-button"
+        itemsCssClass="select-tool-bar-btn"
+        [moduleKey]="options.toolbarModuleKey"
+        [host]="this"
+        [toolbarKey]="options.toolbarKey"
+      ></narik-mat-toolbar>
+    </ng-container>
+  </mat-select>
+
+  <mat-spinner
+    class="select-clear"
+    matSuffix
+    *ngIf="dataIsLoading"
+    mode="indeterminate"
+    diameter="17"
+  ></mat-spinner>
+  <mat-icon
+    matTooltip="{{ 'clear' | translate }}"
+    class="select-clear"
+    (click)="clear($event)"
+    *ngIf="isOver && value && !required"
+    color="warn"
+    matSuffix
+    >clear</mat-icon
+  >
+
+  <mat-icon (click)="iconClick('suffix')" *ngIf="suffixIcon" matSuffix>{{ suffixIcon }}</mat-icon>
+  <mat-icon (click)="iconClick('prefix')" *ngIf="prefixIcon" matPrefix>{{ prefixIcon }}</mat-icon>
+  <mat-hint *ngIf="startHint">{{ startHint }}</mat-hint>
+  <mat-hint *ngIf="endHint" align="end">{{ endHint }}</mat-hint>
+
+  <span *ngIf="prefixContent" matPrefix>{{ prefixContent }}</span>
+  <span *ngIf="suffixContent" matSuffix>{{ suffixContent }}</span>
+</mat-form-field>

@@ -1,0 +1,11 @@
+<div *ngIf="label" class="dx-field-label">{{label}}</div>
+<div class="dx-field-value">
+  <dx-radio-group
+    [items]="itemsData"
+    [(ngModel)]="value"
+    [layout]="layoutDirection"
+    [displayExpr]="displayField"
+    [valueExpr]="valueField"
+  >
+  </dx-radio-group>
+</div>

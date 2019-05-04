@@ -1,0 +1,13 @@
+<dx-button text="{{ isBusy && busyLabel ? busyLabel : label}}" [icon]="icon" [type]="color" [stylingMode]="buttonStyle"
+  [disabled]="disable || isBusy" (onClick)="buttonClick($event)">
+
+  <div *dxTemplate="let data of 'content'">
+    <dx-load-indicator class='dx-button-indicator' [visible]="isBusy">
+    </dx-load-indicator>
+    <i *ngIf="icon && !icon.startsWith('fa-')" class="dx-icon dx-icon-{{icon}}"></i>
+    <i *ngIf="icon && icon.startsWith('fa-')" class="dx-icon fas {{icon}}"></i>
+    <span class='dx-button-text'>{{ isBusy && busyLabel ? busyLabel : label}}</span>
+  </div>
+
+
+</dx-button>

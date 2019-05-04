@@ -1,0 +1,17 @@
+<mat-toolbar [color]="color" [ngClass]='cssClass'>
+  <ng-container *ngFor='let item of items'>
+    <ng-container *ngIf="item.itemType==='divider'">
+      <mat-divider [vertical]="true"></mat-divider>
+    </ng-container>
+    <ng-container *ngIf="item.itemType==='button'">
+      <narik-button class="toolbar-btn"
+      *ngIf='!item.hideExpr || !invisibleItems[item.key]'
+       [disable]="item.disableExpr && disableItems[item.key]"
+       [isBusy]="item.busyExpr && busyItems[item.key]"
+      matTooltip="{{ item.hint | translate}}"
+      [cssClass]="itemsCssClass"
+        (nClick)="itemCommand(item)" [buttonStyle]='itemsStyle'
+         [icon]="item.icon" [label]="showLabel ? item.label : ''"></narik-button>
+    </ng-container>
+  </ng-container>
+</mat-toolbar>

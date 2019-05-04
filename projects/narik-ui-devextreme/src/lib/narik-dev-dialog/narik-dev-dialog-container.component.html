@@ -1,0 +1,13 @@
+<div class="dx-overlay-content dx-popup-normal dx-popup-draggable dx-resizable p-2 dialog-container">
+  <h4 *ngIf="title" mat-dialog-title>{{ title | translate }}</h4>
+  <div>
+    <ng-template narik-loader-host></ng-template>
+  </div>
+  <div class="pt-2" *ngIf="actions && actions.length!==0" align="end">
+    <ng-container *ngFor="let item of actions">
+      <ng-container>
+        <narik-button class="mr-2" (nClick)="actionClick(item)" [color]="item.color" [icon]="item.icon" label="{{'dialog-buttons.'+item.label | translate}}"></narik-button>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

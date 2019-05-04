@@ -1,0 +1,79 @@
+<button
+  #button1
+  [ngClass]='cssClass'
+  [color]="color"
+  (click)="buttonClick($event)"
+  *ngIf="!buttonStyle || buttonStyle === 'mat-button'"
+  mat-button
+>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+<button
+  #button1
+  [ngClass]='cssClass'
+  [color]="color"
+  (click)="buttonClick($event)"
+  *ngIf="buttonStyle === 'mat-raised-button'"
+  mat-raised-button
+>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+<button
+  #button1
+  [ngClass]='cssClass'
+  [color]="color"
+  (click)="buttonClick($event)"
+  *ngIf="buttonStyle === 'mat-stroked-button'"
+  mat-stroked-button
+>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+<button
+  #button1
+  [ngClass]='cssClass'
+  [color]="color"
+  (click)="buttonClick($event)"
+  *ngIf="buttonStyle === 'mat-flat-button'"
+  mat-flat-button
+>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+<button
+  #button1
+  [ngClass]='cssClass'
+  [color]="color"
+  (click)="buttonClick($event)"
+  *ngIf="buttonStyle === 'mat-icon-button'"
+  mat-icon-button
+>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+<button
+  #button1
+  [ngClass]='cssClass'
+  [color]="color"
+  (click)="buttonClick($event)"
+  *ngIf="buttonStyle === 'mat-fab'"
+  mat-fab
+>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+<button
+  #button1
+  [ngClass]='cssClass'
+  [color]="color"
+  (click)="buttonClick($event)"
+  *ngIf="buttonStyle === 'mat-mini-fab'"
+  mat-mini-fab
+>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+
+<ng-template #buttonContent>
+  <i *ngIf="isBusy" [ngClass]="busyFontIcon" class="fas fa-spin"></i>
+  <i *ngIf="fontIcon" class="fas" [ngClass]="fontIcon"></i>
+  <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+  <ng-container *ngIf="buttonStyle !== 'mat-icon-button'">
+    {{ isBusy && busyLabel ? busyLabel : label }}
+  </ng-container>
+</ng-template>

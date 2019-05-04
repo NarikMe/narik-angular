@@ -1,0 +1,18 @@
+<mat-form-field [ngClass]="cssClass" [floatLabel]='floatLabel' [appearance]='appearance' [hintLabel]='hintLabel'>
+  <mat-label *ngIf="label">{{label}}</mat-label>
+  <input [required]="required" type="hidden" [name]="name" [matDatepicker]="picker" [(ngModel)]='value'>
+
+  <input matInput [required]="required" [textMask]="mask" style="direction: ltr" [ngModel]="textValue" placeholder="{{placeHolder  }}"
+  (blur)="onBlur()"   (input)='todate($event.target.value)'>
+
+
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  <mat-icon *ngIf='suffixIcon' matSuffix>{{suffixIcon}}</mat-icon>
+  <mat-icon *ngIf='prefixIcon' matPrefix>{{prefixIcon}}</mat-icon>
+  <mat-hint *ngIf='startHint'>{{startHint}}</mat-hint>
+  <mat-hint *ngIf='endHint' align="end">{{endHint}}</mat-hint>
+
+  <span *ngIf='prefixContent' matPrefix>{{prefixContent}}</span>
+  <span *ngIf='suffixContent' matSuffix>{{suffixContent}}</span>
+</mat-form-field>

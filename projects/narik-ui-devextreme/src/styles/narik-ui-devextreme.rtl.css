@@ -1,0 +1,28 @@
+.dx-toolbar-center {
+  float: right;
+}
+
+
+.dx-toolbar .dx-toolbar-item:last-child {
+  padding: 0 5px 0 0 !important;
+}
+
+.dx-toolbar .dx-toolbar-item:first-child {
+  padding: 0 0 0 0 !important;
+}
+
+.dx-field:last-of-type {
+  margin: 0 0 10px 0 !important;
+}
+
+.dx-rtl .dx-dropdowneditor-button-visible.dx-show-clear-button .dx-texteditor-input,
+.dx-rtl.dx-dropdowneditor-button-visible.dx-show-clear-button .dx-texteditor-input {
+  padding-right: 9px !important;
+  padding-left: 64px;
+}
+
+.dx-rtl .dx-dropdowneditor-button-visible .dx-texteditor-input,
+.dx-rtl.dx-dropdowneditor-button-visible .dx-texteditor-input {
+  padding-right: 9px !important;
+  padding-left: 34px;
+}

@@ -1,0 +1,12 @@
+<mat-form-field class="mat-form-field-no-underline"
+ [ngClass]='{cssClass : true, "mat-form-field-no-underline-without-label" : !label}'
+  floatLabel="always">
+  <mat-label *ngIf="label">{{label }}</mat-label>
+  <input matInput placeholder="Input" style="display: none">
+  <mat-spinner class="select-clear" matSuffix *ngIf="dataIsLoading" mode="indeterminate" diameter="17"></mat-spinner>
+  <mat-radio-group [(ngModel)]="value" [ngClass]='{"vertical-content" : layoutDirection=="vertical"}'>
+    <mat-radio-button class="example-radio-button" *ngFor="let item of itemsData" [value]="item[valueField]">
+      {{item[displayField]}}
+    </mat-radio-button>
+  </mat-radio-group>
+</mat-form-field>

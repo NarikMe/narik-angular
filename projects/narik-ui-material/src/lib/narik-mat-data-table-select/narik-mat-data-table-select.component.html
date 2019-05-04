@@ -1,0 +1,41 @@
+<mat-form-field (click)="openPanel()" [ngClass]="{'select-mode' : !allowType}" [class]="cssClass"
+  class="item-full-width" [floatLabel]='floatLabel' [appearance]='appearance' [hintLabel]='hintLabel'>
+  <mat-label *ngIf="label">{{label }}</mat-label>
+  <div>
+    <input [ngClass]="{'select-mode' : !allowType}" [readonly]="!allowType" [required]="required"
+      [matAutocomplete]="auto" #input matInput placeholder="{{placeHolder}}" [name]="name" (keyup)="keyUp($event)"
+      (blur)="onBlur()" type='text'>
+    <div *ngIf="!allowType" class="narik-mat-table-select-arrow-wrapper">
+      <div class="mat-select-arrow"></div>
+    </div>
+  </div>
+
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option style="display: none">
+      111
+    </mat-option>
+
+    <narik-data-table [pagingInfo]="gridPagingInfo" [selectedItem]="selectedItem" [options]="gridOptions"
+      (selectedItemChange)="rowSelect($event)" (rowDoubleClick)="rowDblClick($event)" rowCssClass="forSelect"
+      containerCssClass="mat-table-select-container" [selectMode]="gridSelectMode" [fields]="fields"
+      [dataSource]="tableDataSource" selectMode="Single">
+    </narik-data-table>
+    <ng-container *ngIf="options.showToolbar">
+      <narik-mat-toolbar cssClass="select-tool-bar" itemsStyle="mat-flat-button" itemsCssClass="select-tool-bar-btn"
+        [moduleKey]="options.toolbarModuleKey" [host]="this" [toolbarKey]="options.toolbarKey"></narik-mat-toolbar>
+    </ng-container>
+  </mat-autocomplete>
+
+  <mat-spinner class="select-clear" matSuffix *ngIf="dataIsLoading" mode="indeterminate" diameter="17"></mat-spinner>
+  <mat-icon *ngIf='suffixIcon' matSuffix>{{suffixIcon}}</mat-icon>
+  <mat-icon *ngIf='prefixIcon' matPrefix>{{prefixIcon}}</mat-icon>
+  <mat-hint *ngIf='startHint'>{{startHint}}</mat-hint>
+  <mat-hint *ngIf='endHint' align="end">{{endHint}}</mat-hint>
+
+  <span *ngIf='prefixContent' matPrefix>{{prefixContent}}</span>
+  <span *ngIf='suffixContent' matSuffix>{{suffixContent}}</span>
+
+
+
+</mat-form-field>

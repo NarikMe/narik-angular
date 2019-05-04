@@ -1,0 +1,6 @@
+<div *ngIf="label" class="dx-field-label">{{ label }}</div>
+<div class="dx-field-value">
+  <dx-date-box [(ngModel)]="value" [disabled]="disabled" [placeholder]="placeHolder" displayFormat="yyyy/MM/dd"
+    [showClearButton]="!required" type="date">
+  </dx-date-box>
+</div>

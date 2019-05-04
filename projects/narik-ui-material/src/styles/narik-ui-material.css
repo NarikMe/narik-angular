@@ -1,0 +1,141 @@
+.item-full-width {
+  width: 100% !important;
+}
+
+.vertical-content {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.mat-form-field-no-underline .mat-form-field-underline {
+  background-color: transparent;
+}
+
+.mat-form-field-no-underline-without-label .mat-form-field-label {
+  display: none !important;
+}
+
+.narik-mat-table {
+  width: 100%;
+}
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.mat-table-select-container {
+  height: initial;
+}
+
+.mat-paginator {
+  display: block;
+  position: sticky;
+  bottom: 0;
+}
+
+.mat-table-container {
+  overflow-y: auto;
+  height: 400px;
+}
+
+.mat-table-select-column {
+  width: 30px;
+}
+
+.mat-table-index-column {
+  width: 50px;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #fff;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: rgb(235, 239, 245);
+}
+
+.mat-row.selected {
+  background-color: #a3d0e4 !important;
+}
+
+.mat-row.forSelect {
+  cursor: pointer;
+}
+
+.mat-toolbar>.mat-divider-vertical {
+  height: 30px;
+  margin-right: 4px !important;
+  margin-left: 8px !important;
+}
+
+.mat-tree-node-text {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.mat-tree-node-text.selected {
+  background-color: #a3d0e4 !important;
+}
+
+.mat-small-tool-bar {
+  height: 34px !important;
+}
+
+.tool-bar-icon {
+  cursor: pointer;
+}
+
+.narik-mat-toolbar {
+  height: initial !important;
+  padding: 0.25rem 0 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+}
+
+.select-tool-bar {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  position: sticky;
+  bottom: 0;
+  background-color: #fff;
+  height: 45px !important;
+}
+
+.select-tool-bar-btn {
+  padding: 0 4px !important;
+  min-width: 30px !important;
+  background-color: transparent !important;
+}
+
+.toolbar-btn {
+  margin-left: 0.2rem;
+}
+
+.toolbar-btn:first-child {
+  margin-left: 0;
+}
+
+.table-command-container {
+  display: flex;
+}
+
+.table-command-menu {
+  cursor: pointer;
+}
+
+.mat-dialog-container {
+  box-shadow: 20px 20px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  background: white;
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 8px;
+}
+
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1000 !important;
+}
+
+.narik-mat-table-select-arrow-wrapper{
+  position: absolute;
+  right: 0px;
+  top: 15px;
+}

@@ -1,0 +1,32 @@
+<div class="mb-1 dx-toolbar dx-widget dx-visibility-change-handler dx-collection" role="toolbar">
+  <div class="dx-toolbar-items-container">
+    <div class="dx-toolbar-center">
+      <ng-container *ngFor='let item of items;let i=index'>
+        <div class="dx-item dx-toolbar-item dx-toolbar-button">
+
+          <ng-container *ngIf="item.itemType==='divider'">
+            <div class="dev-toolbar-seprator">
+            </div>
+
+          </ng-container>
+          <ng-container *ngIf="item.itemType==='button'">
+            <div class="dx-item-content dx-toolbar-item-content">
+
+              <narik-button (mouseenter)="item.showTooltip=true" (mouseleave)="item.showTooltip=false" id="b{{uniqueId}}{{i}}"
+                *ngIf='!item.hideExpr || !invisibleItems[item.key]' [disable]="item.disableExpr && disableItems[item.key]"
+                (nClick)="itemCommand(item)" [buttonStyle]='itemsStyle' [icon]="item.icon" [label]="showLabel ? item.label : ''"></narik-button>
+
+              <dx-tooltip target="#b{{uniqueId}}{{i}}" [(visible)]="item.showTooltip">
+                <div *dxTemplate="let data = data of 'content'">
+                  {{item.hint | translate}}
+                </div>
+              </dx-tooltip>
+            </div>
+          </ng-container>
+
+
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
