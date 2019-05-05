@@ -1,15 +1,33 @@
 import { Directive, ElementRef, Input, AfterContentInit } from "@angular/core";
 
+/**
+ * AutoFocusDirective
+ * Uses to set default focus on a element.
+ */
 @Directive({ selector: "[auto-focus]" })
+
 export class AutoFocusDirective implements AfterContentInit {
   constructor(private element: ElementRef) {}
 
+  /**
+   * Whether autoFocus is active or not
+   */
   @Input("auto-focus")
   active = true;
 
+
+  /**
+   * specify container name of autoFocus element.
+   * if specify, directive select auto focus element from elements inside autoFocusContainerName.
+   */
   @Input()
   autoFocusContainerName: string;
 
+
+  /**
+   * timeout
+   * timeout to Focus;
+   */
   @Input()
   timeout = 100;
 

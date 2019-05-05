@@ -8,18 +8,33 @@ import {
   AfterViewInit
 } from "@angular/core";
 
+/**
+ * NarikComponentLoaderDirective
+ * Uses to load a component dynamically.
+ */
 @Directive({
   selector: "[narikComponentLoader]"
 })
 export class NarikComponentLoaderDirective implements AfterViewInit {
+  /**
+   * Type of component.
+   */
   @Input("narikComponentLoader")
   component: Type<any>;
 
   // tslint:disable-next-line:no-input-rename
+
+  /**
+   * Parameters that should be sent to component.
+   */
   @Input("narikComponentLoaderParameters")
   parameters: any;
 
   // tslint:disable-next-line:no-input-rename
+
+  /**
+   * event that should be subscribed on component.
+   */
   @Input("narikComponentLoaderEvents")
   events: any;
 

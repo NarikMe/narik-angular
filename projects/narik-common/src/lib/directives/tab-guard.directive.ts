@@ -1,16 +1,19 @@
-import {
-  Directive,
-  ElementRef,
-  OnInit,
-  HostListener,
-  Input
-} from "@angular/core";
+import { Directive, ElementRef, HostListener, Input } from "@angular/core";
 import { TAB } from "@angular/cdk/keycodes";
 
+/**
+ * TabGuardDirective
+ * Uses to prevent Tab circle on a element.
+ * Usually use for data forms.
+ */
 @Directive({ selector: "[tab-guard]" })
+
 export class TabGuardDirective {
   constructor(private element: ElementRef) {}
 
+  /**
+   * Whether tabGuard is active or not
+   */
   @Input("tab-guard")
   active = true;
 
