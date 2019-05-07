@@ -3,7 +3,7 @@ import { TAB } from "@angular/cdk/keycodes";
 
 /**
  * TabGuardDirective
- * Uses to prevent Tab circle on a element.
+ * Uses to keep Tab circle on a element.
  * Usually use for data forms.
  */
 @Directive({ selector: "[tab-guard]" })
