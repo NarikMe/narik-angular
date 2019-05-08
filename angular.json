@@ -31,7 +31,9 @@
               "projects/narik-core/tsconfig.lib.json",
               "projects/narik-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -64,7 +66,9 @@
               "projects/narik-common/tsconfig.lib.json",
               "projects/narik-common/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -97,7 +101,9 @@
               "projects/narik-app-core/tsconfig.lib.json",
               "projects/narik-app-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -130,7 +136,9 @@
               "projects/narik-infrastructure/tsconfig.lib.json",
               "projects/narik-infrastructure/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -163,7 +171,9 @@
               "projects/narik-ui-core/tsconfig.lib.json",
               "projects/narik-ui-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -196,7 +206,9 @@
               "projects/narik-ui-material/tsconfig.lib.json",
               "projects/narik-ui-material/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -229,7 +241,9 @@
               "projects/narik-ui-primeng/tsconfig.lib.json",
               "projects/narik-ui-primeng/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -262,7 +276,9 @@
               "projects/narik-ui-ng-bootstrap/tsconfig.lib.json",
               "projects/narik-ui-ng-bootstrap/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -295,7 +311,9 @@
               "projects/narik-ui-devextreme/tsconfig.lib.json",
               "projects/narik-ui-devextreme/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -328,7 +346,9 @@
               "projects/narik-jwt-authentication/tsconfig.lib.json",
               "projects/narik-jwt-authentication/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -361,7 +381,9 @@
               "projects/narik-client-storage/tsconfig.lib.json",
               "projects/narik-client-storage/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -394,7 +416,9 @@
               "projects/narik-signalr-client/tsconfig.lib.json",
               "projects/narik-signalr-client/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -427,7 +451,44 @@
               "projects/narik-ui-ngx-bootstrap/tsconfig.lib.json",
               "projects/narik-ui-ngx-bootstrap/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "narik-cli": {
+      "root": "projects/narik-cli",
+      "sourceRoot": "projects/narik-cli/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-cli/tsconfig.lib.json",
+            "project": "projects/narik-cli/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-cli/src/test.ts",
+            "tsConfig": "projects/narik-cli/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-cli/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-cli/tsconfig.lib.json",
+              "projects/narik-cli/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

@@ -106,7 +106,9 @@ export class NarikMatAutoComplete extends NarikMatAutoCompleteBase
         )
       );
     } else {
-      const dataProviderService = this.injector.get(DataProviderService);
+      const dataProviderService: DataProviderService = this.injector.get(
+        DataProviderService
+      );
       const dataInfo = this.createDataInfo();
       dataInfo.dataMethod = "POST";
       dataInfo.actionType = "COMPLETE";
