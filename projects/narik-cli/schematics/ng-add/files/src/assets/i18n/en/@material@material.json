@@ -1,0 +1,20 @@
+{
+  "dialog-buttons": {
+    "ok": "Ok",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "clear": "Clear",
+  "refresh": "Refresh",
+  "ITEMS_PER_PAGE_LABEL": "Items per page:",
+  "NEXT_PAGE_LABEL": "Next Page",
+  "PREVIOUS_PAGE_LABEL": "Previous page",
+  "FIRST_PAGE_LABEL": "First Page",
+  "LAST_PAGE_LABEL": "Last Page",
+  "RANGE_PAGE_LABEL_1": "0 of  {{length}}",
+  "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} از {{length}}",
+  "table": {
+    "actions": "Action"
+  }
+}

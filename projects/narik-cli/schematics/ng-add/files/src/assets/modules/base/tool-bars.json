@@ -1,0 +1,58 @@
+{
+  "detailToolBar": {
+    "key": "detailToolBar",
+    "items": [{
+        "key": "new",
+        "icon": "add"
+      },
+      {
+        "key": "save",
+        "disableExpr": "host.config.readOnly"
+      },
+      {
+        "key": "delete",
+        "disableExpr": "host.config.readOnly || !host.currentEntity || !host.currentEntity.viewModelId"
+      },
+      {
+        "key": "close",
+        "hideExpr": "!host.isInDialog"
+      }
+    ]
+  },
+  "listToolBar": {
+    "key": "listToolBar",
+    "items": [{
+        "key": "new",
+        "icon": "add",
+        "disableExpr": "host.config.readOnly"
+      },
+      {
+        "key": "edit",
+        "disableExpr": "host.config.readOnly || !host.selectedEntity "
+      },
+      {
+        "key": "delete",
+        "disableExpr": "host.config.readOnly "
+
+      },
+      "-",
+      "refresh",
+      {
+        "key": "close",
+        "hideExpr": "!host.isInDialog"
+      }
+    ]
+  },
+  "addRemoveToolBar": {
+    "key": "addRemoveToolBar",
+    "items": [{
+        "key": "add",
+        "icon": "add"
+      },
+      {
+        "key": "delete",
+        "icon": "delete"
+      }
+    ]
+  }
+}

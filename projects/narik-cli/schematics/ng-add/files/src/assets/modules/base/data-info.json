@@ -1,0 +1,18 @@
+{
+  "dataInfo": {
+    "dataUrlInfo": {
+      "defaultRemoteDataProvider": "odata",
+      "dataPathTemplate": "odata/{moduleKey}/{dataKey}/Default.{dataUrlMethod}",
+      "getPathTemplate": "odata/{moduleKey}/{dataKey}",
+      "listPathTemplate": "odata/{moduleKey}/{dataKey}/{dataUrlMethod}",
+      "postPathTemplate": "odata/{moduleKey}/{dataKey}",
+      "updatePathTemplate": "odata/{moduleKey}/{dataKey}",
+      "deletePathTemplate": "odata/{moduleKey}/{dataKey}/Default.Delete",
+      "completePathTemplate": "odata/{moduleKey}/{dataKey}/Default.Complete",
+      "parameterPrefix": "?",
+      "defaultDataUrlMethod": "GetForSelector"
+    },
+    "defaultDataProvider": "remote",
+    "defaultOriginDataProvider": "remote"
+  }
+}

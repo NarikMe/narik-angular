@@ -1,0 +1,16 @@
+@import "style-font.css";
+
+@import "app-style.css";
+
+@import 'themes';
+
+
+@import '~@nebular/theme/styles/globals';
+
+
+
+@include nb-install() {
+  @include nb-theme-global();
+}
+
+;

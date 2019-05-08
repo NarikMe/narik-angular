@@ -1,0 +1,21 @@
+{
+  "imports": {
+    "$$dataInfo": "./base/data-info.json",
+    "$$toolbar": "./base/tool-bars.json",
+    "$$uiDefaults": "./base/ui-default-options.json"
+  },
+  "metaData": {
+    "translateItems": ["main"],
+    "dataInfo": "$$dataInfo.dataInfo",
+    "uiDefaultOptions": [
+      "$$uiDefaults.select",
+      "$$uiDefaults.data-table",
+      "$$uiDefaults.data-table-select"
+    ],
+    "entities": [],
+    "views": [],
+    "menuItems": [],
+
+    "toolbars": ["$$toolbar.detailToolBar", "$$toolbar.listToolBar"]
+  }
+}

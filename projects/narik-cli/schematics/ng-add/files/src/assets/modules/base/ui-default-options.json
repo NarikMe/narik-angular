@@ -1,0 +1,25 @@
+{
+  "select": {
+    "key": "select",
+    "value": {
+      "toolbarKey": "selectToolbar",
+      "toolbarModuleKey": "narik",
+      "showSearchBox": true,
+      "showToolbar": true
+    }
+  },
+  "data-table-select": {
+    "key": "data-table-select",
+    "value": {
+      "toolbarKey": "dataSelectToolbar",
+      "toolbarModuleKey": "narik",
+      "showToolbar": true
+    }
+  },
+  "data-table": {
+    "key": "data-table",
+    "value": {
+      "showSearchPanel": true
+    }
+  }
+}

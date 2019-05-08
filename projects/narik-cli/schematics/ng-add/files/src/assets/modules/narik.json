@@ -1,0 +1,62 @@
+{
+  "metaData": {
+    "translateItems": ["narik"],
+    "events": [
+      {
+        "key": "MODULE_LOAD_COMPLETELY",
+        "info": {
+          "subjectType": "ReplaySubject",
+          "subjectParam": 10
+        }
+      }
+    ],
+    "toolbars": [
+      {
+        "key": "selectToolbar",
+        "items": [
+          {
+            "key": "refresh",
+            "busyExpr": "host.dataIsLoading"
+          },
+          {
+            "key": "new",
+            "icon": "add"
+          },
+          {
+            "key": "edit",
+            "disableExpr": "!host.value"
+          }
+        ]
+      },
+      {
+        "key": "dataSelectToolbar",
+        "items": [
+          {
+            "key": "refresh",
+            "busyExpr": "host.dataIsLoading"
+          },
+          {
+            "key": "list"
+          },
+          {
+            "key": "new",
+            "icon": "add"
+          },
+          {
+            "key": "edit",
+            "disableExpr": "!host.value"
+          }
+        ]
+      },
+      {
+        "key": "selectRefreshToolbar",
+        "items": [
+          {
+            "key": "refresh",
+            "busyExpr": "host.dataIsLoading"
+          }
+        ]
+      }
+    ]
+  }
+}

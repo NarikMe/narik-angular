@@ -1,0 +1,7 @@
+<narik-busy-indicator>
+  <narik-toolbar toolbarKey="{{config && config.toolbarKey ? config.toolbarKey : 'listToolBar'}}"></narik-toolbar>
+  <narik-data-table [fields]="devFields" [pagingInfo]="config?.pagingInfo" [dataSource]="dataSource" [showGroupPanel]="config?.options?.showGroupPanel"
+    selectMode="multiple" [isServerSide]="isServerSide"  [(selectedItem)]="selectedEntity"
+    [(selectedItems)]="selectedItems" (rowDoubleClick)="editEntity($event)">
+  </narik-data-table>
+</narik-busy-indicator>
