@@ -12,9 +12,73 @@
       "$$uiDefaults.data-table",
       "$$uiDefaults.data-table-select"
     ],
-    "entities": [],
-    "views": [],
-    "menuItems": [],
+    "entities": [
+      {
+        "key": "branch",
+        "fields": [
+          {
+            "name": "address",
+            "required": false,
+            "fieldType": "text",
+            "showInList": false
+          },
+          {
+            "name": "city",
+            "required": false,
+            "fieldType": "text",
+            "order": 3
+          },
+          {
+            "name": "name",
+            "required": true,
+            "fieldType": "text",
+            "order": 1
+          },
+          {
+            "name": "state",
+            "required": false,
+            "fieldType": "text",
+            "order": 2
+          },
+          {
+            "name": "zipCode",
+            "required": false,
+            "fieldType": "text",
+            "order": 4
+          }
+        ],
+        "defaultEntity": {}
+      }
+    ],
+    "views": [
+      {
+        "key": "branch",
+        "viewType": "Detail",
+        "entity": "branch"
+      },
+      {
+        "key": "branch-list",
+        "viewType": "List",
+        "entity": "branch"
+      }
+    ],
+    "menuItems": [
+      {
+        "title": "branch",
+        "icon": "nb-keypad",
+        "link": "/pages/ui-features",
+        "children": [
+          {
+            "title": "branch_new",
+            "link": "/branch"
+          },
+          {
+            "title": "list_branch",
+            "link": "/branch-list"
+          }
+        ]
+      }
+    ],
 
     "toolbars": ["$$toolbar.detailToolBar", "$$toolbar.listToolBar"]
   }

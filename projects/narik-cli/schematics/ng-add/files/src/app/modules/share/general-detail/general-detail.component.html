@@ -1,0 +1,12 @@
+<ng-template #formContent>
+  <narik-dynamic-form
+    [layoutGap]="config?.options?.layoutGap || 10"
+    [columnsCount]="config?.options?.columnsCount || 1"
+    [groupFields]="config?.options?.groupFields"
+    [activeTabGuard]="config?.options?.activeTabGuard != false"
+    [activeAutoFocus]="config?.options?.activeAutoFocus != false"
+    [defaultFocusField]="config?.options?.defaultFocusField"
+    [model]="currentEntity"
+    [fields]="fields"
+  ></narik-dynamic-form>
+</ng-template>

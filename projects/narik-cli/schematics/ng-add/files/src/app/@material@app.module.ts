@@ -28,14 +28,15 @@ import { FORM_ITEM_DEFAULT_CLASS } from "narik-ui-material";
 import { Observable } from "rxjs/internal/Observable";
 import { DemoCommandProcessor } from "./services/command-processor.service";
 
-import { AdminMainComponent } from './main/admin-main.component';
-import { AdminMainViewComponent } from './main-view/admin-main-view.component';
+import { MainComponent } from './main/main.component';
+import { MainViewComponent } from './main-view/main-view.component';
 import { NarikNgxAdmin } from './modules/narik-ngx-admin/narik-ngx-admin.module';
+import { ShareModule } from "./modules/share/share.module";
 
 const moduleKey = "main";
 
 @NgModule({
-  declarations: [AppComponent , AdminMainComponent , AdminMainViewComponent],
+  declarations: [AppComponent , MainComponent , MainViewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -70,7 +71,8 @@ const moduleKey = "main";
     ),
     BrowserAnimationsModule,
     NarikClientStorageModule.forRoot(),
-    NarikNgxAdmin
+    NarikNgxAdmin,
+    ShareModule
   ],
   providers: [
     {

@@ -27,7 +27,7 @@ import {
   WorkspaceSchema
 } from "@angular-devkit/core/src/workspace";
 import { normalize } from "@angular-devkit/core";
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 
 const commonStyles = [
   "node_modules/bootstrap/dist/css/bootstrap.css",
@@ -203,6 +203,8 @@ export function ngAdd(_options: any): Rule {
     addStyles(ui, rtl),
     addCustomBuilder(),
     addExtraFiles(ui),
+    updateTsConfig(ui),
+    updateIndexhtml(ui),
     // addModuleImports(ui, rtl),
     // addModuleProvids(ui),
     // updateAppModule(),
@@ -237,7 +239,6 @@ function updateAppModule(): Rule {
           if (start !== null) {
             token = scanner.scan();
             const end = scanner.getStartPos();
-            console.log("wwww:" + sourceText.substring(start, end));
             statements.push(sourceText.substring(start, end));
             start = null;
           } else {
@@ -336,6 +337,67 @@ function sortObjectByKeys(obj: { [key: string]: string }) {
       /* tslint:disable-next-line: no-any */
       .reduce((result: any, key: any) => (result[key] = obj[key]) && result, {})
   );
+}
+
+function updateIndexhtml(ui: string) {
+  return (host: Tree) => {
+    if (ui === "material" && host.exists("src/index.html")) {
+      let sourceText = host.read("src/index.html")!.toString("utf-8");
+
+      const headPosition = sourceText.toLowerCase().indexOf("</head>");
+      if (headPosition >= 0) {
+        sourceText = sourceText.replace(
+          "</head>",
+          '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>'
+        );
+      }
+      // const doc$ = cheerio.load(sourceText);
+      // const headElement = doc$(`head`)[0];
+      // const newElement = cheerio(
+      //   '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">'
+      // )[0];
+      // headElement.childNodes.push(newElement);
+      host.overwrite("src/index.html", sourceText);
+    }
+
+    return host;
+  };
+}
+
+function updateTsConfig(ui: string) {
+  const pathItems: any = {
+    material: {
+      "narik-ui-lib": ["node_modules/narik-ui-material"],
+      "narik-ui-lib/*": ["node_modules/narik-ui-material/*"]
+    },
+    devextreme: {
+      "narik-ui-lib": ["node_modules/narik-ui-devextreme"],
+      "narik-ui-lib/*": ["node_modules/narik-ui-devextreme/*"]
+    }
+  };
+
+  return (host: Tree) => {
+    if (host.exists("tsconfig.json")) {
+      const sourceText = host.read("tsconfig.json")!.toString("utf-8");
+      const json = JSON.parse(sourceText);
+
+      if (!json.compilerOptions.paths) {
+        json.compilerOptions.paths = {};
+      }
+
+      const pathItem = pathItems[ui];
+      if (pathItem) {
+        for (const key in pathItem) {
+          if (pathItem.hasOwnProperty(key)) {
+            json.compilerOptions.paths[key] = pathItem[key];
+          }
+        }
+      }
+      host.overwrite("tsconfig.json", JSON.stringify(json, null, 2));
+    }
+
+    return host;
+  };
 }
 
 function addModuleProvids(ui: string) {
