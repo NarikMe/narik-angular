@@ -202,9 +202,9 @@ export function ngAdd(_options: any): Rule {
     addPackageJsonDependencies(ui),
     addStyles(ui, rtl),
     addCustomBuilder(),
-    addExtraFiles(ui),
+    addExtraFiles(ui, rtl),
     updateTsConfig(ui),
-    updateIndexhtml(ui),
+    updateIndexhtml(ui, rtl),
     // addModuleImports(ui, rtl),
     // addModuleProvids(ui),
     // updateAppModule(),
@@ -339,24 +339,25 @@ function sortObjectByKeys(obj: { [key: string]: string }) {
   );
 }
 
-function updateIndexhtml(ui: string) {
+function updateIndexhtml(ui: string, rtl: boolean) {
   return (host: Tree) => {
     if (ui === "material" && host.exists("src/index.html")) {
       let sourceText = host.read("src/index.html")!.toString("utf-8");
 
-      const headPosition = sourceText.toLowerCase().indexOf("</head>");
-      if (headPosition >= 0) {
-        sourceText = sourceText.replace(
-          "</head>",
-          '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>'
-        );
+      if (
+        sourceText.toLowerCase().indexOf("https://fonts.googleapis.com") < 0
+      ) {
+        const headPosition = sourceText.toLowerCase().indexOf("</head>");
+        if (headPosition >= 0) {
+          sourceText = sourceText.replace(
+            "</head>",
+            '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>'
+          );
+        }
       }
-      // const doc$ = cheerio.load(sourceText);
-      // const headElement = doc$(`head`)[0];
-      // const newElement = cheerio(
-      //   '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">'
-      // )[0];
-      // headElement.childNodes.push(newElement);
+      if (rtl && sourceText.toLowerCase().indexOf(`dir="rtl"`) < 0) {
+        sourceText = sourceText.replace("<html ", '<html dir="rtl" ');
+      }
       host.overwrite("src/index.html", sourceText);
     }
 
@@ -769,12 +770,15 @@ export function addStyles(
 }
 
 export function addExtraFiles(
-  ui: string
+  ui: string,
+  rtl: boolean
 ): (host: Tree, context: SchematicContext) => Rule {
   return function(host: Tree, context: SchematicContext): Rule {
     context.logger.log("info", `🔍 Adding  extra...`);
     const templateSource = apply(url("./files"), [
-      applyTemplates({}),
+      applyTemplates({
+        direction: rtl ? "RTL" : "LTR"
+      }),
       forEach((fileEntry: FileEntry) => {
         if (fileEntry.path.indexOf("@") >= 0) {
           if (fileEntry.path.indexOf(`@${ui}@`) < 0) {

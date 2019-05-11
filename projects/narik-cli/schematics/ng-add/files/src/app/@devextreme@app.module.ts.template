@@ -24,7 +24,7 @@ import { NarikClientStorageModule } from "narik-client-storage";
 
 import { NbLayoutDirection, NbThemeModule } from "@nebular/theme";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FORM_ITEM_DEFAULT_CLASS } from "narik-ui-material";
+
 import { Observable } from "rxjs/internal/Observable";
 import { DemoCommandProcessor } from "./services/command-processor.service";
 
@@ -36,7 +36,7 @@ import { ShareModule } from "./modules/share/share.module";
 const moduleKey = "main";
 
 @NgModule({
-  declarations: [AppComponent , MainComponent , MainViewComponent],
+  declarations: [AppComponent, MainComponent , MainViewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -67,7 +67,7 @@ const moduleKey = "main";
       { name: "default" },
       undefined,
       undefined,
-      NbLayoutDirection.LTR
+      NbLayoutDirection.<%= direction %>
     ),
     BrowserAnimationsModule,
     NarikClientStorageModule.forRoot(),
@@ -86,10 +86,6 @@ const moduleKey = "main";
     {
       provide: MEMORY_STORAGE_VALIDITY_LEN,
       useValue: 1
-    },
-    {
-      provide: FORM_ITEM_DEFAULT_CLASS,
-      useValue: "item-full-width"
     }
   ],
   bootstrap: [AppComponent]

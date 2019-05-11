@@ -5,7 +5,7 @@
     "$$uiDefaults": "./base/ui-default-options.json"
   },
   "metaData": {
-    "translateItems": ["main"],
+    "translateItems": ["main", "toolbar"],
     "dataInfo": "$$dataInfo.dataInfo",
     "uiDefaultOptions": [
       "$$uiDefaults.select",
