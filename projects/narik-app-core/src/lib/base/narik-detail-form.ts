@@ -36,7 +36,6 @@ import { NarikGeneralForm } from "./narik-general-form";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
 import { Subscription } from "rxjs/internal/Subscription";
 
-
 /**
  * Narik detail form
  */
@@ -132,15 +131,20 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
       if (!this._models.has(model.name)) {
         this.form.addControl(model);
         const modelName = model.name;
-        const sub = model.update.pipe(debounceTime(100)).subscribe(newValue => {
-          this.onModelValueChanged(
-            modelName,
-            newValue,
-            this._lastModelValues.get(modelName)
-          );
-          this.detectChanges();
-          this._lastModelValues.set(modelName, newValue);
-        });
+        const sub = model.update
+          .pipe(
+            takeWhile(() => this.isAlive),
+            debounceTime(100)
+          )
+          .subscribe(newValue => {
+            this.onModelValueChanged(
+              modelName,
+              newValue,
+              this._lastModelValues.get(modelName)
+            );
+            this.detectChanges();
+            this._lastModelValues.set(modelName, newValue);
+          });
         this._models.set(model.name, {
           model: model,
           sub: sub
