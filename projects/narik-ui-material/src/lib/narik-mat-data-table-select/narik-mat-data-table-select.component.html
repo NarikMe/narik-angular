@@ -2,7 +2,7 @@
   class="item-full-width" [floatLabel]='floatLabel' [appearance]='appearance' [hintLabel]='hintLabel'>
   <mat-label *ngIf="label">{{label }}</mat-label>
   <div>
-    <input [ngClass]="{'select-mode' : !allowType}" [readonly]="!allowType" [required]="required"
+    <input [ngClass]="{'select-mode' : !allowType}" [readonly]="!allowType" [required]="required" canfocus
       [matAutocomplete]="auto" #input matInput placeholder="{{placeHolder}}" [name]="name" (keyup)="keyUp($event)"
       (blur)="onBlur()" type='text'>
     <div *ngIf="!allowType" class="narik-mat-table-select-arrow-wrapper">
