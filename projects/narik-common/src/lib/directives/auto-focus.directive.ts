@@ -38,7 +38,9 @@ export class AutoFocusDirective implements AfterContentInit {
           "button:not([disabled])",
           "[href]",
           "input:not([disabled]):not([readonly]):not([type='hidden'])",
+          "input[canfocus]:not([disabled]):not([type='hidden'])",
           "select:not([disabled]):not([readonly])",
+          "mat-select:not([disabled]):not([readonly])",
           "textarea:not([disabled]):not([readonly])"
         ];
         const selector = selectorElements.join();
