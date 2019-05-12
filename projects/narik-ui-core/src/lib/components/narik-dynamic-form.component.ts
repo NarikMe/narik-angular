@@ -1,3 +1,4 @@
+import { Subscription } from "rxjs/internal/Subscription";
 import { NarikInject } from "narik-core";
 import { NarikViewField, EntityField } from "narik-infrastructure";
 
@@ -7,7 +8,9 @@ import {
   ViewChildren,
   QueryList,
   ViewContainerRef,
-  OnInit
+  OnInit,
+  Output,
+  EventEmitter
 } from "@angular/core";
 
 import { DynamicFormService } from "../services/dynamic-form.service";
@@ -16,6 +19,7 @@ import { Observable, ReplaySubject } from "rxjs";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
 import { evalStringExpression } from "narik-common";
 import { NarikUiComponent } from "../base/narik-ui-component";
+import { takeWhile } from "rxjs/internal/operators/takeWhile";
 
 export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   readonly expressionPrefix = "$$$narik";
@@ -47,7 +51,12 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
 
   _model: any;
   _fields: NarikViewField[] | EntityField[];
-  _models: NgModel[];
+  private _models = new Map<string, { model: NgModel; sub: Subscription }>();
+
+  private _lastModelValues = new Map<string, any>();
+
+  @Output()
+  formValueChanged = new EventEmitter<any>();
 
   private _modelsChangedSubject = new ReplaySubject<{
     items: NgModel[];
@@ -67,9 +76,10 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
     );
     this._lastModelNames = modelNameArray;
 
-    this._models = modelArray;
+    this.manupulateModels(modelArray, removed);
+
     this._modelsChangedSubject.next({
-      items: this._models,
+      items: modelArray,
       removed: removed
     });
   }
@@ -97,7 +107,6 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);
 
-    const dd = injector.get(ViewContainerRef);
     if (viewContainerRef && viewContainerRef["_view"]) {
       this.host = viewContainerRef["_view"].component;
     }
@@ -111,6 +120,36 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
     }
   }
 
+  manupulateModels(modelArray: NgModel[], removed: string[]) {
+    for (const model of modelArray) {
+      if (!this._models.has(model.name)) {
+        const sub = model.update
+          .pipe(
+            takeWhile(() => this.isAlive),
+            debounceTime(100)
+          )
+          .subscribe(newValue => {
+            this.formValueChanged.emit({
+              name: model.name,
+              newValue,
+              oldValue: this._lastModelValues.get(model.name)
+            });
+            this._lastModelValues.set(model.name, newValue);
+          });
+        this._models.set(model.name, {
+          model: model,
+          sub: sub
+        });
+      }
+    }
+    for (const item of removed) {
+      const removeItem = this._models.get(item);
+      if (removeItem) {
+        removeItem.sub.unsubscribe();
+        this._models.delete(item);
+      }
+    }
+  }
   initExpression(fields: NarikViewField[] | EntityField[]) {
     for (const field of fields) {
       field.hideExpr = field.hideExpr
