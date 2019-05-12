@@ -131,7 +131,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-common",
-    version: "^1.0.0"
+    version: "^1.0.1"
   },
   {
     name: "narik-core",
@@ -139,11 +139,11 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-app-core",
-    version: "^1.0.1"
+    version: "^1.0.2"
   },
   {
     name: "narik-ui-core",
-    version: "^1.0.0"
+    version: "^1.0.1"
   },
   {
     name: "narik-jwt-authentication",
@@ -159,7 +159,7 @@ const uiDependency: any = {
   material: [
     {
       name: "narik-ui-material",
-      version: "^1.0.1"
+      version: "^1.0.2"
     },
     {
       name: "@angular/material",
