@@ -777,7 +777,8 @@ export function addExtraFiles(
     context.logger.log("info", `🔍 Adding  extra...`);
     const templateSource = apply(url("./files"), [
       applyTemplates({
-        direction: rtl ? "RTL" : "LTR"
+        direction: rtl ? "RTL" : "LTR",
+        ui: ui
       }),
       forEach((fileEntry: FileEntry) => {
         if (fileEntry.path.indexOf("@") >= 0) {

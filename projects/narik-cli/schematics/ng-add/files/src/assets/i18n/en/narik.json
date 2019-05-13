@@ -3,12 +3,23 @@
     "invalid_form": "Please Fill Form",
     "required": "{0} Is Required",
     "STATUS_401": "Its Not Accessable By Your Role",
-    "password_mismatch":"Your password dont mismatch",
-    "invalid_password":"Invalid password"
+    "password_mismatch": "Your password dont mismatch",
+    "invalid_password": "Invalid password"
   },
   "info": {
     "submit-succeed": "The information is saved",
     "delete-confirm": "Are you sure?"
   },
-  "INVALID_LOGIN": "Invalid username or password"
+  "INVALID_LOGIN": "Invalid username or password",
+  "dialog-buttons": {
+    "ok": "Ok",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "clear": "Clear",
+  "refresh": "Refresh",
+  "table": {
+    "actions": "Action"
+  }
 }
