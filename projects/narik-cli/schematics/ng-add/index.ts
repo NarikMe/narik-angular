@@ -159,7 +159,7 @@ const uiDependency: any = {
   material: [
     {
       name: "narik-ui-material",
-      version: "^1.0.2"
+      version: "^1.0.3"
     },
     {
       name: "@angular/material",

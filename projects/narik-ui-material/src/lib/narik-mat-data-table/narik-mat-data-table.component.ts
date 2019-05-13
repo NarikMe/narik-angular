@@ -1,4 +1,4 @@
-import { isPresent, isString, toFilterFunction } from "narik-common";
+import { isPresent, isString, toFilterFunction, isArray } from "narik-common";
 import {
   NarikDataSource,
   FilterItems,
@@ -125,6 +125,11 @@ export class NarikMatDataTable extends NarikDataTable
 
   @Input()
   set fields(value: NarikViewField[]) {
+    if (value && isArray(value)) {
+      for (const field of value) {
+        field.options = field.options || {};
+      }
+    }
     this._fields = value;
   }
   get fields(): NarikViewField[] {
