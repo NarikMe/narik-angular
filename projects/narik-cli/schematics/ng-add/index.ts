@@ -829,6 +829,8 @@ export function addCustomBuilder(): (
 
     const serveTargetOptions = getProjectTarget(project, "serve");
     serveTargetOptions.builder = "@angular-builders/dev-server:generic";
+    serveTargetOptions.options = serveTargetOptions.options || {};
+    serveTargetOptions.options.proxyConfig = "proxy.config.json";
 
     context.logger.log("info", `🔍 Adding custom builder...`);
 
