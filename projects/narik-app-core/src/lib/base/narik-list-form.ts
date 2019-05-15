@@ -265,7 +265,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
     }
     if (this.selectedItems && this.selectedItems.length !== 0) {
       this.dialogService
-        .showConfirm("info.delete-confirm")
+        .showConfirm("info.delete-confirm", "info.confirm")
         .closed.then((confirmResult: DialogResult<any>) => {
           if (confirmResult.dialogResult === "yes") {
             this.isBusy = true;

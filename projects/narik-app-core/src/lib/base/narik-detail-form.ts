@@ -339,7 +339,7 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
     }
     if (this.currentEntity) {
       this.dialogService
-        .showConfirm("info.delete-confirm")
+        .showConfirm("info.delete-confirm", "info.confirm")
         .closed.then((confirmResult: DialogResult<any>) => {
           if (confirmResult.dialogResult === "yes") {
             this.isBusy = true;
