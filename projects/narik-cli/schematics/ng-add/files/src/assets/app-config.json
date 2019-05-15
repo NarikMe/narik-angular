@@ -1,5 +1,6 @@
 {
   "modulesMetaDataRoot": "assets/modules",
   "dynamicResourcesPath": "assets",
-  "translationsPath":"assets/i18n"
+  "translationsPath": "assets/i18n",
+  "entityKeyField": "viewModelId"
 }

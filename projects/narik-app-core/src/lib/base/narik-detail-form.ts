@@ -5,7 +5,8 @@ import {
   DialogService,
   NarikEntity,
   NarikViewField,
-  DialogResult
+  DialogResult,
+  ConfigService
 } from "narik-infrastructure";
 import { DynamicFormService, NarikDynamicForm } from "narik-ui-core";
 import { Observable } from "rxjs/internal/Observable";
@@ -47,11 +48,16 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
   private _lastModelValues = new Map<string, any>();
   private _dynamicForms = new Map<NarikDynamicForm, Subscription>();
 
+  protected entityKeyField: string;
+
   @NarikInject(DETAIL_DEFAULT_VIEW_OPTION, DefaultDetailViewOption)
   defaultOption: DetailFormViewOption;
 
   @NarikInject(DialogService)
   dialogService: DialogService;
+
+  @NarikInject(ConfigService)
+  configService: ConfigService;
 
   @NarikInject(TranslateService)
   translateService: TranslateService;
@@ -124,6 +130,8 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
 
   constructor(injector: Injector) {
     super(injector);
+    this.entityKeyField =
+      this.configService.getConfig("entityKeyField") || "viewModelId";
   }
 
   private applyNgModels(ngModels: NgModel[], removed: string[]) {
@@ -233,8 +241,10 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
   submit() {
     if (
       this.config.readOnly ||
-      (this.config.allowEdit === false && this.currentEntity.viewModelId) ||
-      (this.config.allowNew === false && !this.currentEntity.viewModelId)
+      (this.config.allowEdit === false &&
+        this.currentEntity[this.entityKeyField]) ||
+      (this.config.allowNew === false &&
+        !this.currentEntity[this.entityKeyField])
     ) {
       return;
     }
@@ -258,8 +268,8 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
       .post(
         {
           dataKey: this.config.entityKey,
-          dataMethod: this.currentEntity.viewModelId ? "PUT" : "POST",
-          urlParameters: this.currentEntity.viewModelId
+          dataMethod: this.currentEntity[this.entityKeyField] ? "PUT" : "POST",
+          urlParameters: this.currentEntity[this.entityKeyField]
         },
         { Entity: this.currentEntity }
       )
@@ -333,7 +343,7 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
         .closed.then((confirmResult: DialogResult<any>) => {
           if (confirmResult.dialogResult === "yes") {
             this.isBusy = true;
-            const data = [{ id: this.currentEntity.viewModelId }];
+            const data = [{ id: this.currentEntity[this.entityKeyField] }];
             this.queryService
               .delete({ dataKey: this.config.entityKey }, { items: data })
               .pipe(

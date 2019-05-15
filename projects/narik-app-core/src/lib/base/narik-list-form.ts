@@ -11,7 +11,8 @@ import {
   DialogRef,
   DialogResult,
   DialogService,
-  DataInfo
+  DataInfo,
+  ConfigService
 } from "narik-infrastructure";
 import { DynamicFormService } from "narik-ui-core";
 import { takeWhile, filter, finalize } from "rxjs/operators";
@@ -32,7 +33,6 @@ import { ServerResponse } from "../interfaces/server-response.model";
 import { StringConstants } from "../util/constants";
 import { NarikGeneralForm } from "./narik-general-form";
 
-
 /**
  * Narik list form
  */
@@ -46,6 +46,11 @@ export abstract class NarikListForm<TE extends NarikEntity>
   _selectedEntity: TE;
   _config: ListFormConfig;
   _selectedItems: any[];
+
+  protected entityKeyField: string;
+
+  @NarikInject(ConfigService)
+  configService: ConfigService;
 
   @NarikInject(DialogService)
   dialogService: DialogService;
@@ -141,6 +146,8 @@ export abstract class NarikListForm<TE extends NarikEntity>
 
   constructor(injector: Injector) {
     super(injector);
+    this.entityKeyField =
+      this.configService.getConfig("entityKeyField") || "viewModelId";
   }
 
   ngOnInit() {
@@ -230,7 +237,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
     }
     const data = selectedEntity
       ? {
-          entityId: this.selectedEntity.viewModelId
+          entityId: this.selectedEntity[this.entityKeyField]
         }
       : {};
     data["__dialogTitle"] = this.config.entityKey;
@@ -264,7 +271,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
             this.isBusy = true;
             const data = this.selectedItems.map(x => {
               return {
-                id: x.viewModelId
+                id: x[this.entityKeyField]
               };
             });
             this.queryService
