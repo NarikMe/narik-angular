@@ -139,7 +139,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-app-core",
-    version: "^1.0.2"
+    version: "^1.0.3"
   },
   {
     name: "narik-ui-core",

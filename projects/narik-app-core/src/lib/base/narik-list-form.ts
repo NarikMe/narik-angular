@@ -264,7 +264,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
             this.isBusy = true;
             const data = this.selectedItems.map(x => {
               return {
-                id: x.id
+                id: x.viewModelId
               };
             });
             this.queryService
