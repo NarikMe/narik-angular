@@ -173,7 +173,7 @@ const uiDependency: any = {
   devextreme: [
     {
       name: "narik-ui-devextreme",
-      version: "^1.0.0"
+      version: "^1.0.1"
     },
     {
       name: "devextreme",

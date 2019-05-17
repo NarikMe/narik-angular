@@ -9,7 +9,7 @@
   "info": {
     "submit-succeed": "The information is saved",
     "delete-confirm": "Are you sure you want to delete?",
-    "confirm": "confirm"
+    "confirm": "Confirm"
   },
   "INVALID_LOGIN": "Invalid username or password",
   "dialog-buttons": {
