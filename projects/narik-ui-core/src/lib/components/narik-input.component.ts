@@ -8,6 +8,7 @@ export class NarikInput extends NarikFormComponent {
   _type = "text";
   _maxlength: number;
   _mask: any;
+  _icon: string;
 
   @Input()
   set mask(value: any) {
@@ -33,6 +34,14 @@ export class NarikInput extends NarikFormComponent {
     return this._type;
   }
 
+  @Input()
+  set icon(value: string) {
+    this._icon = value;
+  }
+  get icon(): string {
+    return this._icon;
+  }
+
   constructor(injector: Injector) {
     super(injector);
   }
@@ -42,5 +51,6 @@ export const NARIK_INPUT_INPUTS: string[] = [
   "maxlength",
   "type",
   "mask",
+  "icon",
   ...NARIK_UI_FORM_INPUTS
 ];
