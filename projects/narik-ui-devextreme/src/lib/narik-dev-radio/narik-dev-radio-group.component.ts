@@ -20,16 +20,16 @@ import {
 export class NarikDevRadioGroup extends NarikRadioGroup {
   _cssClass: string;
   itemsData: any[] = [];
-  _layoutDirection: "vertical" | "horizental" = "vertical";
+  _layoutDirection: "vertical" | "horizontal" = "vertical";
 
   @HostBinding("class")
   class = "dx-field display-block";
 
   @Input()
-  set layoutDirection(value: "vertical" | "horizental") {
+  set layoutDirection(value: "vertical" | "horizontal") {
     this._layoutDirection = value;
   }
-  get layoutDirection(): "vertical" | "horizental" {
+  get layoutDirection(): "vertical" | "horizontal" {
     return this._layoutDirection;
   }
 

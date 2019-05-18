@@ -20,13 +20,13 @@ import { NG_VALUE_ACCESSOR } from "@angular/forms";
 export class NarikDevCheckBoxList extends NarikCheckBoxList {
   itemsData: any[] = [];
   _cssClass: string;
-  _layoutDirection: "vertical" | "horizental" = "vertical";
+  _layoutDirection: "vertical" | "horizontal" = "vertical";
 
   @Input()
-  set layoutDirection(value: "vertical" | "horizental") {
+  set layoutDirection(value: "vertical" | "horizontal") {
     this._layoutDirection = value;
   }
-  get layoutDirection(): "vertical" | "horizental" {
+  get layoutDirection(): "vertical" | "horizontal" {
     return this._layoutDirection;
   }
 

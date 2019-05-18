@@ -21,13 +21,13 @@ import { FORM_ITEM_DEFAULT_CLASS } from "../injectionTokens";
 export class NarikMatRadioGroup extends NarikRadioGroup {
   _cssClass: string;
   itemsData: any[] = [];
-  _layoutDirection: "vertical" | "horizental" = "vertical";
+  _layoutDirection: "vertical" | "horizontal" = "vertical";
 
   @Input()
-  set layoutDirection(value: "vertical" | "horizental") {
+  set layoutDirection(value: "vertical" | "horizontal") {
     this._layoutDirection = value;
   }
-  get layoutDirection(): "vertical" | "horizental" {
+  get layoutDirection(): "vertical" | "horizontal" {
     return this._layoutDirection;
   }
 
