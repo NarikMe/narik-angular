@@ -2,8 +2,7 @@ import { isPresent, isString, toFilterFunction, isArray } from "narik-common";
 import {
   NarikDataSource,
   FilterItems,
-  NarikViewField,
-  IPagingInfo
+  NarikViewField
 } from "narik-infrastructure";
 import { NarikDataTable } from "narik-ui-core";
 import { Subject } from "rxjs/internal/Subject";
@@ -16,8 +15,6 @@ import {
   Input,
   OnInit,
   ViewChild,
-  Output,
-  EventEmitter,
   AfterContentInit,
   ChangeDetectorRef,
   AfterViewChecked,
@@ -42,23 +39,11 @@ export class NarikMatDataTable extends NarikDataTable
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild("searchInput") searchInput: ElementRef;
   filterChange = new Subject<FilterItems>();
-
   selection: SelectionModel<any>;
-  _dataSource: NarikDataSource<any>;
-  _fields: NarikViewField[];
   _selectMode: "None" | "One" | "Multiple" = "Multiple";
   _showRowNumber = true;
-  _pagingInfo: IPagingInfo;
-  _selectedItem: any;
   _containerCssClass = "mat-table-container";
   _rowCssClass: string;
-  _selectedItems: any[];
-
-  @Output()
-  selectedItemsChange = new EventEmitter<any[]>();
-
-  @Output()
-  rowDoubleClick = new EventEmitter<any>();
 
   @Input()
   set rowCssClass(value: string) {
@@ -77,37 +62,6 @@ export class NarikMatDataTable extends NarikDataTable
   }
 
   @Input()
-  set selectedItems(value: any[]) {
-    this._selectedItems = value;
-    this.selectedItemsChange.emit(value);
-  }
-  get selectedItems(): any[] {
-    return this._selectedItems;
-  }
-
-  @Output()
-  selectedItemChange = new EventEmitter<any>();
-
-  @Input()
-  set selectedItem(value: any) {
-    if (this._selectedItem !== value) {
-      this._selectedItem = value;
-      this.selectedItemChange.emit(value);
-    }
-  }
-  get selectedItem(): any {
-    return this._selectedItem;
-  }
-
-  @Input()
-  set pagingInfo(value: IPagingInfo) {
-    this._pagingInfo = value;
-  }
-  get pagingInfo(): IPagingInfo {
-    return this._pagingInfo;
-  }
-
-  @Input()
   set showRowNumber(value: boolean) {
     this._showRowNumber = value;
   }
@@ -123,29 +77,8 @@ export class NarikMatDataTable extends NarikDataTable
     return this._selectMode;
   }
 
-  @Input()
-  set fields(value: NarikViewField[]) {
-    if (value && isArray(value)) {
-      for (const field of value) {
-        field.options = field.options || {};
-      }
-    }
-    this._fields = value;
-  }
-  get fields(): NarikViewField[] {
-    return this._fields;
-  }
-
   get isServerSide(): boolean {
     return this.dataSource && this.dataSource instanceof MatLazyDataSource;
-  }
-
-  @Input()
-  set dataSource(value: NarikDataSource<any>) {
-    this._dataSource = value;
-  }
-  get dataSource(): NarikDataSource<any> {
-    return this._dataSource;
   }
 
   get currentData(): any[] {

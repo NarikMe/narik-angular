@@ -1,15 +1,8 @@
-import {
-  NarikDataSource,
-  NarikViewField,
-  IPagingInfo
-} from "narik-infrastructure";
 import { NarikDataTable } from "narik-ui-core";
 
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   ViewChild,
   Injector,
   ChangeDetectorRef,
@@ -23,12 +16,7 @@ import { DOCUMENT } from "@angular/common";
   templateUrl: "narik-dev-data-table.component.html"
 })
 export class NarikDevDataTable extends NarikDataTable {
-  _fields: NarikViewField[];
-  _pagingInfo: IPagingInfo;
-  _dataSource: NarikDataSource<any>;
   _selectMode: "none" | "single" | "multiple" = "multiple";
-  _selectedItem: any;
-  _selectedItems: any[];
   _filterRow = true;
   _showGroupPanel = false;
   _isServerSide = false;
@@ -38,11 +26,6 @@ export class NarikDevDataTable extends NarikDataTable {
 
   @ViewChild(DxDataGridComponent)
   grid: DxDataGridComponent;
-
-  @Output()
-  selectedItemsChange = new EventEmitter<any[]>();
-  @Output()
-  selectedItemChange = new EventEmitter<any>();
 
   @Input()
   set isServerSide(value: boolean) {
@@ -58,53 +41,6 @@ export class NarikDevDataTable extends NarikDataTable {
   }
   get showGroupPanel(): boolean {
     return this._showGroupPanel;
-  }
-
-  @Input()
-  set selectedItems(value: any[]) {
-    this._selectedItems = value;
-    this.selectedItemsChange.emit(value);
-  }
-  get selectedItems(): any[] {
-    return this._selectedItems;
-  }
-
-  @Input()
-  set selectedItem(value: any) {
-    if (this._selectedItem !== value) {
-      this._selectedItem = value;
-      this.selectedItemChange.emit(value);
-    }
-  }
-  get selectedItem(): any {
-    return this._selectedItem;
-  }
-
-  @Output()
-  rowDoubleClick = new EventEmitter<any>();
-
-  @Input()
-  set fields(value: NarikViewField[]) {
-    this._fields = value;
-  }
-  get fields(): NarikViewField[] {
-    return this._fields;
-  }
-
-  @Input()
-  set pagingInfo(value: IPagingInfo) {
-    this._pagingInfo = value;
-  }
-  get pagingInfo(): IPagingInfo {
-    return this._pagingInfo;
-  }
-
-  @Input()
-  set dataSource(value: NarikDataSource<any>) {
-    this._dataSource = value;
-  }
-  get dataSource(): NarikDataSource<any> {
-    return this._dataSource;
   }
 
   @Input()
