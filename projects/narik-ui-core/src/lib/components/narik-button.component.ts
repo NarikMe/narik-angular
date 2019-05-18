@@ -55,6 +55,9 @@ export class NarikButton extends NarikUiComponent implements AfterViewInit {
   @Input()
   tag: any;
 
+  @Input()
+  tooltip: any;
+
   @Output()
   nClick = new EventEmitter<any>();
 
