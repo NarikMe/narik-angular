@@ -1,7 +1,8 @@
 import { DataProviderService, MODULE_DATA_KEY } from "narik-infrastructure";
 import {
   NARIK_DATA_DISPLAY_VALUE_INPUTS,
-  NARIK_DATA_DISPLAY_VALUE_OUTPUTS
+  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
+  NARIK_AUTOCOMPLETE_INPUTS
 } from "narik-ui-core";
 import { Observable } from "rxjs/internal/Observable";
 import { of } from "rxjs/internal/observable/of";
@@ -19,7 +20,6 @@ import {
   ElementRef,
   forwardRef,
   Injector,
-  Input,
   OnInit,
   ViewChild
 } from "@angular/core";
@@ -32,7 +32,11 @@ import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
   selector: "narik-mat-autocomplete  , narik-autocomplete ",
   templateUrl: "narik-mat-auto-complete.component.html",
   styleUrls: ["narik-mat-auto-complete.component.css"],
-  inputs: [...NARIK_MAT_FORM_INPUTS, ...NARIK_DATA_DISPLAY_VALUE_INPUTS],
+  inputs: [
+    ...NARIK_MAT_FORM_INPUTS,
+    ...NARIK_DATA_DISPLAY_VALUE_INPUTS,
+    ...NARIK_AUTOCOMPLETE_INPUTS
+  ],
   outputs: [...NARIK_DATA_DISPLAY_VALUE_OUTPUTS],
   providers: [
     {
@@ -51,15 +55,6 @@ export class NarikMatAutoComplete extends NarikMatAutoCompleteBase
   @ViewChild("input")
   input: ElementRef;
 
-  @Input()
-  displayText: string;
-
-  @Input()
-  minLenToShowAutoComplete = 0;
-
-  @Input()
-  isLazyLoadData = false;
-
   constructor(injector: Injector) {
     super(injector);
   }
@@ -77,7 +72,6 @@ export class NarikMatAutoComplete extends NarikMatAutoCompleteBase
     if (!this.isLazyLoadData) {
       this.textChanged.next(this.input ? this.input.nativeElement.value : null);
     }
-
     this.setDisplayText();
   }
 
@@ -98,9 +92,9 @@ export class NarikMatAutoComplete extends NarikMatAutoCompleteBase
         debounceTime(300),
         distinctUntilChanged(),
         map((filter: string | null) =>
-          filter && filter.length >= this.minLenToShowAutoComplete
+          filter && filter.length >= this.minSearchLength
             ? this._filter(filter)
-            : this.minLenToShowAutoComplete === 0
+            : this.minSearchLength === 0
             ? this.optionData.slice()
             : []
         )
@@ -121,7 +115,7 @@ export class NarikMatAutoComplete extends NarikMatAutoCompleteBase
         debounceTime(300),
         distinctUntilChanged(),
         tap(filter => {
-          if (filter && filter.length >= this.minLenToShowAutoComplete) {
+          if (filter && filter.length >= this.minSearchLength) {
             this.dataIsLoading = true;
           }
         }),
@@ -129,7 +123,7 @@ export class NarikMatAutoComplete extends NarikMatAutoCompleteBase
           dataInfo.dataParameters = {
             filter: filter
           };
-          return filter && filter.length >= this.minLenToShowAutoComplete
+          return filter && filter.length >= this.minSearchLength
             ? dataProviderService.getData(dataInfo).pipe(
                 tap((result: any[]) => (this.optionData = result)),
                 finalize(() => (this.dataIsLoading = false))

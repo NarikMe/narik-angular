@@ -1,7 +1,8 @@
 import {
   NARIK_DATA_DISPLAY_VALUE_INPUTS,
   NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
-  NarikAutoComplete
+  NarikAutoComplete,
+  NARIK_AUTOCOMPLETE_INPUTS
 } from "narik-ui-core";
 import { Observable } from "rxjs/internal/Observable";
 import { Subject } from "rxjs/internal/Subject";
@@ -22,7 +23,7 @@ import { NG_VALUE_ACCESSOR } from "@angular/forms";
   selector: "narik-dev-autocomplete  , narik-autocomplete ",
   templateUrl: "narik-dev-auto-complete.component.html",
   styleUrls: ["narik-dev-auto-complete.component.css"],
-  inputs: [...NARIK_DATA_DISPLAY_VALUE_INPUTS],
+  inputs: [...NARIK_DATA_DISPLAY_VALUE_INPUTS, ...NARIK_AUTOCOMPLETE_INPUTS],
   outputs: [...NARIK_DATA_DISPLAY_VALUE_OUTPUTS],
   providers: [
     {
@@ -39,15 +40,6 @@ export class NarikDevAutoComplete extends NarikAutoComplete implements OnInit {
 
   @ViewChild("input")
   input: ElementRef;
-
-  @Input()
-  displayText: string;
-
-  @Input()
-  minLenToShowAutoComplete = 0;
-
-  @Input()
-  isLazyLoadData = false;
 
   @HostBinding("class")
   class = "dx-field display-block";

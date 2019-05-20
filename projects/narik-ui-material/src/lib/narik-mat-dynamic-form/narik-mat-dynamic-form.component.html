@@ -123,7 +123,7 @@
         [disabled]="item.disableExpr && disableItems[item.name]"
         [required]="item.required"
         placeHolder="{{ item.options.placeHolder | translate }}"
-        [minLenToShowAutoComplete]="item.options.minLenToShowAutoComplete || 0"
+        [minSearchLength]="item.options.minSearchLength || 0"
         [isLazyLoadData]="item.options.isLazyLoadData"
         [dataInfo]="item.dataInfo"
         label="{{ item.label | translate }}"
@@ -141,6 +141,18 @@
         label="{{ item.label | translate }}"
         [(ngModel)]="model[item.model]"
       ></narik-mat-radio-group>
+    </ng-container>
+    <ng-container *ngIf="item.type == 'checkList'">
+      <narik-mat-checkbox-list
+        [options]="item.options"
+        [name]="item.name"
+        [disabled]="item.disableExpr && disableItems[item.name]"
+        [required]="item.required"
+        placeHolder="{{ item.options.placeHolder | translate }}"
+        [dataInfo]="item.dataInfo"
+        label="{{ item.label | translate }}"
+        [(ngModel)]="model[item.model]"
+      ></narik-mat-checkbox-list>
     </ng-container>
     <ng-container *ngIf="item.type == 'table-select'">
       <narik-mat-data-table-select
