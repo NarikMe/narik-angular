@@ -3,7 +3,8 @@ import {
   forwardRef,
   Injector,
   OnInit,
-  HostBinding
+  HostBinding,
+  Input
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import {
@@ -29,6 +30,8 @@ import {
 })
 export class NarikNgbSelect extends NarikSelect implements OnInit {
   optionData: any[] = [];
+  @Input()
+  icon: any;
 
   constructor(injector: Injector) {
     super(injector);

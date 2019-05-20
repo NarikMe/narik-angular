@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label for="{{id}}">{{label}}</label>
+  <div class="form-check-container p-1 pl-2">
+    <div class="form-check " [ngClass]="{'form-check-inline': layoutDirection==='horizontal'}"
+      *ngFor="let item of itemsData;let i=index">
+      <input [attr.disabled]="disabled || null" class="form-check-input" type="radio" name="{{name}}" id="{{id+i}}"
+        value="{{item[valueField]}}" checked>
+      <label class="form-check-label" for="{{id+i}}">
+        {{item[displayField]}}
+      </label>
+    </div>
+  </div>
+</div>

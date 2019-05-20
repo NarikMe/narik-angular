@@ -1,1 +1,7 @@
-
+<ng-content></ng-content>
+<div class="loading-panel" *ngIf="isBusy"></div>
+<div *ngIf="isBusy" id="loader-wrapper">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

@@ -44,7 +44,6 @@ export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
     if (!this.isServerSide) {
       this.getEntities();
     } else {
-      // this.grid.refresh();
     }
   }
 }

@@ -1,1 +1,14 @@
-
+<div class="btn-toolbar"  role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-1" *ngFor="let group of toolbarItems" role="group" aria-label="First group">
+    <ng-container *ngFor='let item of group;let i=index'>
+      <ng-container *ngIf="item.itemType==='button'">
+        <narik-button class="toolbar-btn" *ngIf='!item.hideExpr || !invisibleItems[item.key]'
+          [disable]="item.disableExpr && disableItems[item.key]" [isBusy]="item.busyExpr && busyItems[item.key]"
+          [cssClass]="item.cssClass"
+          (nClick)="itemCommand(item)" [buttonStyle]='"secondary"' [icon]="item.icon"
+          tooltip="{{ item.hint | translate}}"
+          [label]="showLabel ? item.label : ''"></narik-button>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
