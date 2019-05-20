@@ -492,6 +492,41 @@
           }
         }
       }
+    },
+    "narik-ui-swimlane": {
+      "root": "projects/narik-ui-swimlane",
+      "sourceRoot": "projects/narik-ui-swimlane/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-ui-swimlane/tsconfig.lib.json",
+            "project": "projects/narik-ui-swimlane/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-ui-swimlane/src/test.ts",
+            "tsConfig": "projects/narik-ui-swimlane/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-ui-swimlane/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-ui-swimlane/tsconfig.lib.json",
+              "projects/narik-ui-swimlane/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   }
 }
