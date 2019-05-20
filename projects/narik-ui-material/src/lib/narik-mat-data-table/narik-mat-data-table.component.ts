@@ -26,6 +26,8 @@ import { MatSort } from "@angular/material/sort";
 import { MatLazyDataSource } from "../data-source/mat-lazy-data-source";
 import { MatLocalDataSource } from "../data-source/mat-local-data-source";
 import { takeWhile } from "rxjs/operators";
+import { debounceTime } from "rxjs/internal/operators/debounceTime";
+import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
 
 @Component({
   selector: "narik-mat-data-table , narik-data-table",
@@ -44,6 +46,7 @@ export class NarikMatDataTable extends NarikDataTable
   _showRowNumber = true;
   _containerCssClass = "mat-table-container";
   _rowCssClass: string;
+  searchSubject = new Subject<any>();
 
   @Input()
   set rowCssClass(value: string) {
@@ -98,6 +101,28 @@ export class NarikMatDataTable extends NarikDataTable
     this.selection.changed.subscribe(x => {
       this.selectedItems = this.selection.selected;
     });
+
+    this.searchSubject
+      .pipe(
+        debounceTime(200),
+        distinctUntilChanged(
+          (
+            x: { filterValue: string; column: any },
+            y: { filterValue: string; column: any }
+          ) => {
+            if (!x) return false;
+            if (x.filterValue !== y.filterValue) return false;
+            if (!x.column && !y.column) return true;
+            if (x.column && y.column) {
+              return (x.column.model = y.column.model);
+            }
+            return false;
+          }
+        )
+      )
+      .subscribe(f => {
+        this.doFilter(f.filterValue, f.column);
+      });
   }
 
   ngAfterViewInit() {
@@ -168,8 +193,13 @@ export class NarikMatDataTable extends NarikDataTable
       ? this.selection.clear()
       : this.currentData.forEach(row => this.selection.select(row));
   }
-
   applyFilter(filterValue, column?: NarikViewField) {
+    this.searchSubject.next({
+      filterValue: filterValue,
+      column: column
+    });
+  }
+  doFilter(filterValue, column?: NarikViewField) {
     const filter = this.createFilter(filterValue, column);
 
     if (this.isServerSide) {
