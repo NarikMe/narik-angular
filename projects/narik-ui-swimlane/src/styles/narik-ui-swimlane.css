@@ -1,0 +1,15 @@
+.ngx-datatable {
+  width: 100%;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.selected {
+  background-color: #6c757d !important;
+  color: #FFF;
+}
+
+
+
+.search-input{
+  padding: 0.20rem 0.25rem !important;
+  height: calc(1.2em + 0.75rem + 2px) !important;
+}

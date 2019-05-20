@@ -1,0 +1,51 @@
+<div>
+
+  <input type="text" class="form-control mt-1" (keyup)="applyFilter($event.target.value)"
+    *ngIf="options.showSearchPanel" placeholder="{{'search' | translate}}">
+  <ngx-datatable class="bootstrap" [selectionType]="selectMode" [columnMode]="'force'" [rowHeight]="'auto'"
+    [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" [rows]="rows"
+    [footerHeight]="pagingInfo ? 50 : 0" (page)='setPage($event)' (sort)="onSort($event)"
+    [externalPaging]="isServerSide===true" [externalSorting]="isServerSide===true" (activate)="onActivate($event)"
+    [rowClass]="getRowClass" (select)='onSelect($event)'>
+
+    <ng-container *ngFor="let field of fields">
+      <ngx-datatable-column [prop]="field.prop" [name]="field.name" [width]="field.width"
+        [sortable]="field.sortable || true" [canAutoResize]="field.canAutoResize" [draggable]="field.draggable || true"
+        [resizeable]="field.resizeable" [checkboxable]="field.checkboxable"
+        [headerCheckboxable]="field.headerCheckboxable">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <ng-container [ngSwitch]="field.type">
+            <ng-container *ngSwitchCase="'boolean'">
+              <i class="text-success fa fa-check" *ngIf="value"></i>
+              <i class="text-danger fa fa-times" *ngIf="!value"></i>
+            </ng-container>
+            <ng-container *ngSwitchCase="'date'">
+              {{ value | date: field.options.format || 'mediumDate' }}</ng-container>
+            <ng-container *ngSwitchDefault>
+              {{value }}</ng-container>
+          </ng-container>
+        </ng-template>
+
+        <ng-template *ngIf="field.prop && options.showSearchFields" let-column="column" let-sort="sortFn"
+          ngx-datatable-header-template>
+          <ng-container>
+            <ng-container [ngSwitch]="field.type">
+              <ng-container *ngSwitchCase="'boolean'">
+                <input type="checkbox" (change)="applyFilter($event.target.checked, column)">
+                <br>
+              </ng-container>
+              <ng-container *ngSwitchCase="'date'">
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <input type="text" class="form-control search-input" (keyup)="applyFilter($event.target.value,column)"
+                  placeholder="{{'search' | translate}}">
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <span (click)="sort()" class="datatable-header-cell-wrapper ng-star-inserted">
+            <span class="datatable-header-cell-label draggable">{{column.name}}</span></span>
+        </ng-template>
+      </ngx-datatable-column>
+    </ng-container>
+  </ngx-datatable>
+</div>

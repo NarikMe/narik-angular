@@ -101,6 +101,12 @@
       ],
       "narik-ui-ngx-bootstrap/*": [
         "dist/narik-ui-ngx-bootstrap/*"
+      ],
+      "narik-ui-swimlane": [
+        "dist/narik-ui-swimlane"
+      ],
+      "narik-ui-swimlane/*": [
+        "dist/narik-ui-swimlane/*"
       ]
     }
   }
