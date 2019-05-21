@@ -30,7 +30,6 @@ import { normalize } from "@angular-devkit/core";
 import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 
 const commonStyles = [
-  "node_modules/bootstrap/dist/css/bootstrap.css",
   "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
   "node_modules/nebular-icons/scss/nebular-icons.scss",
   "node_modules/ionicons/scss/ionicons.scss",
@@ -44,6 +43,13 @@ const uiStyles: any = {
     "node_modules/devextreme/dist/css/dx.common.css",
     "node_modules/devextreme/dist/css/dx.light.css",
     "node_modules/narik-ui-devextreme/styles/narik-ui-devextreme.css"
+  ],
+  "ng-bootstrap": [
+    "node_modules/@swimlane/ngx-datatable/release/index.css",
+    "node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
+    "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
+    "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
+    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.css"
   ]
 };
 
@@ -51,6 +57,10 @@ const rtlUiStyles: any = {
   material: ["node_modules/narik-ui-material/styles/narik-ui-material.rtl.css"],
   devextreme: [
     "node_modules/narik-ui-devextreme/styles/narik-ui-devextreme.rtl.css"
+  ],
+  "ng-bootstrap": [
+    "ode_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
+    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.rtl.css"
   ]
 };
 
@@ -143,7 +153,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-ui-core",
-    version: "^1.0.2"
+    version: "^1.0.3"
   },
   {
     name: "narik-jwt-authentication",
@@ -155,11 +165,15 @@ const commonDependencies: any[] = [
   }
 ];
 
+const rtlUiDependency: any = {
+  "ng-bootstrap": [{ name: "bootstrap-4.1.3-rtl", version: "^1.0.1" }]
+};
+
 const uiDependency: any = {
   material: [
     {
       name: "narik-ui-material",
-      version: "^1.0.5"
+      version: "^1.0.8"
     },
     {
       name: "@angular/material",
@@ -173,7 +187,7 @@ const uiDependency: any = {
   devextreme: [
     {
       name: "narik-ui-devextreme",
-      version: "^1.0.2"
+      version: "^1.0.3"
     },
     {
       name: "devextreme",
@@ -187,6 +201,16 @@ const uiDependency: any = {
       name: "stream",
       version: "0.0.2"
     }
+  ],
+  "ng-bootstrap": [
+    { name: "narik-ui-ng-bootstrap", version: "^1.0.2" },
+    { name: "narik-ui-swimlane", version: "^1.0.0" },
+    { name: "@swimlane/ngx-datatable", version: "^14.0.0" },
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^4.1.3" },
+    {
+      name: "@angular/flex-layout",
+      version: "^7.0.0-beta.24"
+    }
   ]
 };
 
@@ -199,7 +223,7 @@ export function ngAdd(_options: any): Rule {
 
   ui = ui || "material";
   return chain([
-    addPackageJsonDependencies(ui),
+    addPackageJsonDependencies(ui, rtl),
     addStyles(ui, rtl),
     addCustomBuilder(),
     addExtraFiles(ui, rtl),
@@ -257,7 +281,7 @@ function updateAppModule(): Rule {
   };
 }
 
-function addPackageJsonDependencies(ui: string): Rule {
+function addPackageJsonDependencies(ui: string, rtl: boolean): Rule {
   return (host: Tree, context: SchematicContext) => {
     commonDependencies.forEach(dependency => {
       addPackageToPackageJson(host, dependency.name, `${dependency.version}`);
@@ -270,6 +294,14 @@ function addPackageJsonDependencies(ui: string): Rule {
         context.logger.log("info", `✅️ Added "${dependency.name}`);
       }
     }
+
+    if (rtl && rtlUiDependency[ui]) {
+      for (const dependency of rtlUiDependency[ui]) {
+        addPackageToPackageJson(host, dependency.name, `${dependency.version}`);
+        context.logger.log("info", `✅️ Added "${dependency.name}`);
+      }
+    }
+
     devDependencies.forEach(dependency => {
       addPackageToPackageJson(
         host,
@@ -374,6 +406,10 @@ function updateTsConfig(ui: string) {
     devextreme: {
       "narik-ui-lib": ["node_modules/narik-ui-devextreme"],
       "narik-ui-lib/*": ["node_modules/narik-ui-devextreme/*"]
+    },
+    "ng-bootstrap": {
+      "narik-ui-lib": ["node_modules/narik-ui-ng-bootstrap"],
+      "narik-ui-lib/*": ["node_modules/narik-ui-ng-bootstrap/*"]
     }
   };
 
@@ -751,6 +787,11 @@ export function addStyles(
     const workspace = getWorkspace(host);
     const project = workspace.projects[workspace.defaultProject!];
     let assets: string[] = [];
+    if (!rtl || ui !== "ng-bootstrap") {
+      assets.push("node_modules/bootstrap/dist/css/bootstrap.css");
+    } else {
+      assets.push("node_modules/bootstrap-4.1.3-rtl/css/bootstrap.css");
+    }
     assets = assets.concat(commonStyles);
 
     if (uiStyles[ui]) {

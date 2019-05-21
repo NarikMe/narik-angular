@@ -1,0 +1,69 @@
+{
+  "detailToolBar": {
+    "key": "detailToolBar",
+    "items": [
+      {
+        "key": "new",
+        "icon": "plus"
+      },
+      {
+        "key": "save",
+        "disableExpr": "host.config.readOnly"
+      },
+      {
+        "key": "delete",
+        "icon": "trash-alt",
+        "disableExpr": "host.config.readOnly || !host.currentEntity || !host.currentEntity.viewModelId"
+      },
+      "-",
+      {
+        "key": "close",
+        "icon": "times",
+        "hideExpr": "!host.isInDialog"
+      }
+    ]
+  },
+  "listToolBar": {
+    "key": "listToolBar",
+    "items": [
+      {
+        "key": "new",
+        "icon": "plus",
+        "disableExpr": "host.config.readOnly"
+      },
+      {
+        "key": "edit",
+        "disableExpr": "host.config.readOnly || !host.selectedEntity "
+      },
+      {
+        "key": "delete",
+        "icon": "trash-alt",
+        "disableExpr": "host.config.readOnly "
+      },
+      "-",
+      {
+        "key": "refresh",
+        "icon": "sync-alt"
+      },
+      "-",
+      {
+        "key": "close",
+        "icon": "times",
+        "hideExpr": "!host.isInDialog"
+      }
+    ]
+  },
+  "addRemoveToolBar": {
+    "key": "addRemoveToolBar",
+    "items": [
+      {
+        "key": "add",
+        "icon": "add"
+      },
+      {
+        "key": "delete",
+        "icon": "delete"
+      }
+    ]
+  }
+}

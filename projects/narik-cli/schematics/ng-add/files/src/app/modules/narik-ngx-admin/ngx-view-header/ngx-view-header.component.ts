@@ -1,9 +1,7 @@
-import { AuthenticationService, DialogService } from "narik-infrastructure";
+import { AuthenticationService } from "narik-infrastructure";
 import { Component, Input } from "@angular/core";
-import { NbSidebarService, NbMenuItem, NbMenuService } from "@nebular/theme";
+import { NbSidebarService, NbMenuItem } from "@nebular/theme";
 import { TranslateService } from "@ngx-translate/core";
-import { filter } from "rxjs/internal/operators/filter";
-import { map } from "rxjs/internal/operators/map";
 
 @Component({
   selector: "ngx-view-header",
@@ -15,10 +13,7 @@ export class NgxHeaderComponent {
   @Input() headerTitle = "";
   user: any;
 
-  userMenu: NbMenuItem[] = [
-    { title: "changePass", data: "changePass" },
-    { title: "logout", data: "logout" }
-  ];
+  userMenu: NbMenuItem[] = [{ title: "Test Menu", data: "test-menu" }];
 
   constructor(
     private sidebarService: NbSidebarService,

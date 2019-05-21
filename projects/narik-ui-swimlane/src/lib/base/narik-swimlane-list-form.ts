@@ -5,10 +5,6 @@ import { NarikListForm, ServerResponse } from "narik-app-core";
 import { OnInit, AfterViewInit, Injector, ViewChild } from "@angular/core";
 import { NarikInject } from "narik-core";
 import { TranslateService } from "@ngx-translate/core";
-import { catchError } from "rxjs/internal/operators/catchError";
-import { of } from "rxjs/internal/observable/of";
-import { map } from "rxjs/internal/operators/map";
-import { isArray } from "narik-common";
 
 export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
   implements OnInit, AfterViewInit {
