@@ -13,7 +13,8 @@
 </div>
 <ng-template #inputElement>
 
-  <select class="custom-select" [(ngModel)]="value" [attr.disabled]="disabled || null" id="{{id}}">
+  <select [required]="required" class="custom-select" [(ngModel)]="value" [attr.disabled]="disabled || null"
+    id="{{id}}">
     <option *ngFor="let item of optionData" [value]="item[valueField]">{{item[displayField]}}</option>
   </select>
 

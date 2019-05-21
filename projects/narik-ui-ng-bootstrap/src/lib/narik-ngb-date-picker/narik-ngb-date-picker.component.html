@@ -2,7 +2,7 @@
   <label for="{{id}}">{{label}}</label>
 
   <div class="input-group">
-    <input [attr.disabled]="disabled || null" class="form-control" id="{{id}}" placeholder="{{placeHolder}}" name="dp"
+    <input [required]="required" [attr.disabled]="disabled || null" class="form-control" id="{{id}}" placeholder="{{placeHolder}}" name="dp"
       [(ngModel)]="value" ngbDatepicker #d="ngbDatepicker">
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">

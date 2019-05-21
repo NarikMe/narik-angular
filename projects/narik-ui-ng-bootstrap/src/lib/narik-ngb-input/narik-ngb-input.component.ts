@@ -1,12 +1,6 @@
 import { NARIK_INPUT_INPUTS, NarikInput } from "narik-ui-core";
 
-import {
-  Component,
-  forwardRef,
-  Injector,
-  HostBinding,
-  Input
-} from "@angular/core";
+import { Component, forwardRef, Injector, Input } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({

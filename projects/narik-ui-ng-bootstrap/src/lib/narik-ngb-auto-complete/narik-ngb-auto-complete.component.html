@@ -12,7 +12,7 @@
 
 </div>
 <ng-template #inputElement>
-  <input (blur)="onBlur()" [(ngModel)]="displayValue"  [attr.disabled]="disabled || null" type="text" name="{{name}}" class="form-control"
-    [ngbTypeahead]="search" id="{{id}}" placeholder="{{placeHolder}}">
+  <input (blur)="onBlur()" [required]="required" [(ngModel)]="displayValue" [attr.disabled]="disabled || null"
+    type="text" name="{{name}}" class="form-control" [ngbTypeahead]="search" id="{{id}}" placeholder="{{placeHolder}}">
   <input type="hidden" name="{{name}}" [(ngModel)]="value">
 </ng-template>
