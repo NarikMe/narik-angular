@@ -6,7 +6,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "doc": "compodoc -p projects/tsconfig.compodoc.json -s -o -w --theme  material",
+    "doc": "compodoc -p projects/tsconfig.compodoc.json -s -o -w --theme  material  --disableRoutesGraph",
     "build-infrastructure": "ng build narik-infrastructure && node build-tools/copy.js readme.md dist/narik-infrastructure",
     "build-common": "ng build narik-common && node build-tools/copy.js readme.md dist/narik-common",
     "build-core": "ng build narik-core && node build-tools/copy.js readme.md dist/narik-core",
