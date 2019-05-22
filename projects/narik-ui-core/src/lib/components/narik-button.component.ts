@@ -7,6 +7,10 @@ import {
 } from "@angular/core";
 import { NarikUiComponent } from "../base/narik-ui-component";
 export class NarikButton extends NarikUiComponent implements AfterViewInit {
+  get uiKey(): string {
+    return "button";
+  }
+
   private _disable: boolean;
   private _isBusy: boolean;
 
