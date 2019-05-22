@@ -149,11 +149,11 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-app-core",
-    version: "^1.0.5"
+    version: "^1.0.6"
   },
   {
     name: "narik-ui-core",
-    version: "^1.0.3"
+    version: "^1.0.4"
   },
   {
     name: "narik-jwt-authentication",
@@ -204,7 +204,7 @@ const uiDependency: any = {
   ],
   "ng-bootstrap": [
     { name: "narik-ui-ng-bootstrap", version: "^1.0.2" },
-    { name: "narik-ui-swimlane", version: "^1.0.0" },
+    { name: "narik-ui-swimlane", version: "^1.0.1" },
     { name: "@swimlane/ngx-datatable", version: "^14.0.0" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^4.1.3" },
     {
