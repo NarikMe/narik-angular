@@ -9,10 +9,6 @@ import { TranslateService } from "@ngx-translate/core";
 export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
   implements OnInit, AfterViewInit {
   swimlaneFields: any[] = [];
-  totalElements = 0;
-
-  @ViewChild(NarikSwimlaneDataTable)
-  grid: NarikSwimlaneDataTable;
 
   @NarikInject(TranslateService)
   translateService: TranslateService;

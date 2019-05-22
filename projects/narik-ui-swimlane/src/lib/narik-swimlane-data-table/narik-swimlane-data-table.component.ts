@@ -1,30 +1,24 @@
-import { SwimlaneLazyDataSource } from "./../data-source/swimlane-lazy-data-source";
-import { NarikDataTable } from "narik-ui-core";
-
+import { isArray, isPresent, isString, toFilterFunction } from "narik-common";
 import {
-  Component,
-  Injector,
-  ChangeDetectorRef,
-  Inject,
-  Input
-} from "@angular/core";
-import { DOCUMENT } from "@angular/common";
-import {
+  FilterItems,
   NarikDataSource,
-  NarikViewField,
-  FilterItems
+  NarikViewField
 } from "narik-infrastructure";
-import { isArray, toFilterFunction, isString, isPresent } from "narik-common";
-import { Subject } from "rxjs/internal/Subject";
+import { NarikDataTable } from "narik-ui-core";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
 import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
+import { Subject } from "rxjs/internal/Subject";
+
+import { Component, Injector, Input, OnInit } from "@angular/core";
+
+import { SwimlaneLazyDataSource } from "../data-source/swimlane-lazy-data-source";
 
 @Component({
   selector: "narik-swimlane-data-table , narik-data-table",
   templateUrl: "narik-swimlane-data-table.component.html",
   styleUrls: ["narik-swimlane-data-table.component.css"]
 })
-export class NarikSwimlaneDataTable extends NarikDataTable {
+export class NarikSwimlaneDataTable extends NarikDataTable implements OnInit {
   _selectMode: "none" | "single" | "checkbox" = "checkbox";
   page: any = {
     size: undefined,
@@ -43,11 +37,13 @@ export class NarikSwimlaneDataTable extends NarikDataTable {
   @Input()
   set dataSource(value: NarikDataSource<any>) {
     this._dataSource = value;
+    this.isServerSide = false;
     if (value) {
       if (isArray(value)) {
         this.rows = <any>value;
         this.allData = <any>[...(<any>value)];
       } else {
+        this.isServerSide = true;
         value.dataObservable.subscribe(result => {
           this.rows = result;
           this.page.totalElements = (<SwimlaneLazyDataSource<any>>(
@@ -63,21 +59,8 @@ export class NarikSwimlaneDataTable extends NarikDataTable {
     return this._dataSource;
   }
 
-  @Input()
   isServerSide = false;
 
-  _totalElements: number;
-
-  @Input()
-  set totalElements(value: number) {
-    if (this._totalElements != value) {
-      this._totalElements = value;
-      this.page.totalElements = value;
-    }
-  }
-  get totalElements(): number {
-    return this._totalElements;
-  }
   @Input()
   set selectMode(value: "none" | "single" | "checkbox") {
     this._selectMode = value;
@@ -86,11 +69,7 @@ export class NarikSwimlaneDataTable extends NarikDataTable {
     return this._selectMode;
   }
 
-  constructor(
-    injector: Injector,
-    private changeDetector: ChangeDetectorRef,
-    @Inject(DOCUMENT) private document
-  ) {
+  constructor(injector: Injector) {
     super(injector);
   }
 
@@ -123,7 +102,9 @@ export class NarikSwimlaneDataTable extends NarikDataTable {
     this.fields.forEach(x => {
       this.filterObj["$$" + (<any>x).prop] = x.type;
     });
-    if (this.isServerSide) this.refreshServerData();
+    if (this.isServerSide) {
+      this.refreshServerData();
+    }
 
     this.searchSubject
       .pipe(
@@ -133,9 +114,15 @@ export class NarikSwimlaneDataTable extends NarikDataTable {
             x: { filterValue: string; column: any },
             y: { filterValue: string; column: any }
           ) => {
-            if (!x) return false;
-            if (x.filterValue !== y.filterValue) return false;
-            if (!x.column && !y.column) return true;
+            if (!x) {
+              return false;
+            }
+            if (x.filterValue !== y.filterValue) {
+              return false;
+            }
+            if (!x.column && !y.column) {
+              return true;
+            }
             if (x.column && y.column) {
               return (x.column.prop = y.column.prop);
             }
