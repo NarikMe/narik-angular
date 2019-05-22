@@ -237,7 +237,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
     }
     const data = selectedEntity
       ? {
-          entityId: this.selectedEntity[this.entityKeyField]
+          entityId: selectedEntity[this.entityKeyField]
         }
       : {};
     data["__dialogTitle"] = this.config.entityKey;
