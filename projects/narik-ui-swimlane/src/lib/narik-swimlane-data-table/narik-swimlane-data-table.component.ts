@@ -34,6 +34,8 @@ export class NarikSwimlaneDataTable extends NarikDataTable implements OnInit {
   _dataSource: NarikDataSource<any>;
   searchSubject = new Subject<any>();
 
+  isServerSide = false;
+  
   @Input()
   set dataSource(value: NarikDataSource<any>) {
     this._dataSource = value;
@@ -59,7 +61,6 @@ export class NarikSwimlaneDataTable extends NarikDataTable implements OnInit {
     return this._dataSource;
   }
 
-  isServerSide = false;
 
   @Input()
   set selectMode(value: "none" | "single" | "checkbox") {

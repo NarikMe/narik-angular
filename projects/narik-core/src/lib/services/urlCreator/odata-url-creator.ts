@@ -70,7 +70,7 @@ export class ODataUrlCreator extends UrlCreator {
         .join(",");
     }
     let filter = "";
-    if (pagingParameter.filter) {
+    if (pagingParameter.filter && pagingParameter.filter.filters) {
       filter = `&%24filter=${this.toOdataFilter(pagingParameter.filter)}`;
     }
     pagingParameter.skip =
