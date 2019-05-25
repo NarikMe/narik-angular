@@ -1,5 +1,5 @@
 import { UUID } from "angular2-uuid";
-import { MetaDataService,  MODULE_UI_KEY } from "narik-infrastructure";
+import { MetaDataService, MODULE_UI_KEY } from "narik-infrastructure";
 
 import {
   EventEmitter,
@@ -26,7 +26,6 @@ export class NarikFormComponent extends NarikUiComponent
   _placeHolder: string;
   _disabled: any;
   _required: boolean;
-
 
   uiKey: string;
 
@@ -120,10 +119,8 @@ export class NarikFormComponent extends NarikUiComponent
     this.createIdentifier();
   }
   createIdentifier() {
-    if (this._id) {
-      this.identifier = this.id;
-    } else {
-      this.identifier = "input" + UUID.UUID();
+    if (!this._id) {
+      this._id = "input" + UUID.UUID();
     }
   }
 
