@@ -1,1 +1,12 @@
-
+<div class="form-group">
+  <label for="{{id}}">{{label}}</label>
+  <div class="form-check-container p-1 pl-2">
+    <div class="check-box-list">
+      <narik-checkbox
+      [ngClass]="{'vertical-check-box-item': layoutDirection==='vertical'}"
+      *ngFor="let item of itemsData" (Change)="addOrRemove(valueField ? item[valueField] : item)"
+        [tag]="valueField ? item[valueField] : item" label="{{ item[displayField] }}">
+      </narik-checkbox>
+    </div>
+  </div>
+</div>

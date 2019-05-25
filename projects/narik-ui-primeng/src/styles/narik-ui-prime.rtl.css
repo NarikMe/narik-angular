@@ -1,0 +1,17 @@
+.toolbar-btn {
+  margin-right: 0.2rem !important;
+  margin-left: initial !important;
+}
+
+.toolbar-btn:first-child {
+  margin-right: 0 !important;
+  margin-left: initial !important;
+}
+
+
+p-radiobutton {
+  margin-right: initial;
+  margin-left: 6px;
+}
+
+

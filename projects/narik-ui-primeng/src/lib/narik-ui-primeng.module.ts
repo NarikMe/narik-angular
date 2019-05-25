@@ -56,4 +56,4 @@ import { NarikPrimeCoreModule } from "./narik-prime-core/narik-prime-core.module
   ],
   providers: []
 })
-export class NarikUiNgBootstrapModule {}
+export class NarikUiPrimeModule {}

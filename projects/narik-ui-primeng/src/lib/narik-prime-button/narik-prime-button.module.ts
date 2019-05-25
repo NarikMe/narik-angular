@@ -1,11 +1,12 @@
 import { NgModule } from "@angular/core";
 
-import { DxLoadIndicatorModule } from "devextreme-angular/ui/load-indicator";
 import { CommonModule } from "@angular/common";
 import { NarikPrimeButtonComponent } from "./narik-prime-button.component";
+import { ButtonModule } from "primeng/button";
+import { TooltipModule } from "primeng/tooltip";
 
 @NgModule({
-  imports: [CommonModule, DxLoadIndicatorModule],
+  imports: [CommonModule, ButtonModule, TooltipModule],
   declarations: [NarikPrimeButtonComponent],
   exports: [NarikPrimeButtonComponent],
   providers: []

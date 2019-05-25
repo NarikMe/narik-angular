@@ -12,9 +12,17 @@ import { BusyIndicator } from "narik-app-core";
     }
   ]
 })
-export class NarikPrimeBusyIndicator
- implements BusyIndicator {
+export class NarikPrimeBusyIndicator implements BusyIndicator {
   busyMessage: string;
+
+  @Input()
+  strokeWidth: 5;
+
+  @Input()
+  width: 80;
+
+  @Input()
+  height: 80;
 
   @Input()
   isBusy: boolean;

@@ -1,0 +1,9 @@
+<div class="form-group">
+  <label for="{{id}}">{{label}}</label>
+
+  <p-autoComplete class="d-block" (blur)="onBlur()" [required]="required" [disabled]="disabled"
+    [(ngModel)]="displayValue" [suggestions]="results" [appendTo]="'body'" name="{{name}}"
+    (completeMethod)="search($event)" [dropdown]="true">
+  </p-autoComplete>
+
+</div>

@@ -26,4 +26,14 @@ export class NarikPrimeDialogContainer implements DialogContainer, OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  actionClick(item: DialogAction) {
+    this.dialogRef.close(
+      {
+        componentInstance: this.dialogRef.componentInstance,
+        dialogResult: item.dialogResult
+      },
+      "DIALOG"
+    );
+  }
 }

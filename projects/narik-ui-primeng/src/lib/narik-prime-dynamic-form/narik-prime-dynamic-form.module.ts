@@ -1,3 +1,4 @@
+import { NarikPrimeCheckBoxListModule } from "./../narik-prime-check-box-list/narik-prime-checkbox-list.module";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -11,6 +12,7 @@ import { NarikPrimeRadioGroupModule } from "../narik-prime-radio/narik-prime-rad
 import { NarikPrimeSelectModule } from "../narik-prime-select/narik-prime-select.module";
 import { NarikPrimeDynamicForm } from "./narik-prime-dynamic-form.component";
 import { NarikCommonModule } from "narik-common";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { NarikCommonModule } from "narik-common";
     NarikPrimeRadioGroupModule,
     NarikPrimeAutoCompleteModule,
     NarikPrimeDatePickerModule,
-    NarikCommonModule
+    NarikPrimeCheckBoxListModule,
+    NarikCommonModule,
+    FlexLayoutModule
   ],
   declarations: [NarikPrimeDynamicForm],
   exports: [NarikPrimeDynamicForm],

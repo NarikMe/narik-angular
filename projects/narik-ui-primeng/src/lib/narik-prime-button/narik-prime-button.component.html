@@ -1,1 +1,6 @@
-
+<button pButton (click)="buttonClick($event)" [disabled]="disable || isBusy"
+  icon="{{ isBusy ?  'pi pi-spin pi-spinner' : (icon ? 'pi  pi-'+icon : '')}}"
+  class="{{ (cssClass || ' ui-button-secondary ' ) + (buttonStyle || '') }}" pTooltip="{{tooltip}}"
+  tooltipPosition="top"
+  [label]=" isBusy && busyLabel ? busyLabel : label" type="button" [ngClass]='cssClass'>
+</button>

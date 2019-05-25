@@ -1,16 +1,13 @@
-import { NarikPrimeDataTable } from "../narik-prime-data-table/narik-prime-data-table.component";
 import { NarikEntity, PagingParameters } from "narik-infrastructure";
 import { NarikListForm, ServerResponse } from "narik-app-core";
-import { OnInit, AfterViewInit, Injector, ViewChild } from "@angular/core";
+import { OnInit, AfterViewInit, Injector } from "@angular/core";
 import { NarikInject } from "narik-core";
 import { TranslateService } from "@ngx-translate/core";
+import { PrimeLazyDataSource } from "../data-source/prime-lazy-data-source";
 
 export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
   implements OnInit, AfterViewInit {
-  ds: any[] = [];
-
-  @ViewChild(NarikPrimeDataTable)
-  grid: NarikPrimeDataTable;
+  primeFields: any[] = [];
 
   @NarikInject(TranslateService)
   translateService: TranslateService;
@@ -21,16 +18,27 @@ export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
 
   constructor(injector: Injector) {
     super(injector);
-    this.hasDataSource = false;
   }
 
   ngOnInit() {
     super.ngOnInit();
     if (this.fields) {
+      this.primeFields = this.fields.map(f => {
+        return {
+          header: this.translateService.instant(f.label),
+          field: f.name,
+          type: f.type,
+          options: f.options
+        };
+      });
     }
     if (this.config) {
       if (this.isServerSide) {
-        const that = this;
+        this.dataSource = new PrimeLazyDataSource(
+          this.queryService,
+          () => this.DataInfoForGetList
+        );
+        this.dataSource.loadingObservable.subscribe(x => (this.isBusy = x));
       }
     }
   }
@@ -44,7 +52,7 @@ export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
     if (!this.isServerSide) {
       this.getEntities();
     } else {
-      // this.grid.refresh();
+      this.dataSource.loadData();
     }
   }
 }

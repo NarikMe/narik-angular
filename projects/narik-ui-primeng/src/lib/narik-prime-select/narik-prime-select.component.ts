@@ -28,7 +28,19 @@ import {
   ]
 })
 export class NarikPrimeSelect extends NarikSelect implements OnInit {
+  isInternal = false;
   optionData: any[] = [];
+
+  _selectedObject: any;
+  set selectedObject(value: any) {
+    this._selectedObject = value;
+    if (!this.isInternal) {
+      this.value = value ? value[this.valueField] : undefined;
+    }
+  }
+  get selectedObject(): any {
+    return this._selectedObject;
+  }
 
   constructor(injector: Injector) {
     super(injector);
@@ -36,5 +48,24 @@ export class NarikPrimeSelect extends NarikSelect implements OnInit {
 
   protected useData(data: any[]) {
     this.optionData = data;
+    this.setCurrentObject(this.value);
+  }
+
+  protected valueChanged(newValue: any, oldValue: any): void {
+    this.setCurrentObject(newValue);
+  }
+
+  private setCurrentObject(newValue) {
+    this.isInternal = true;
+    if (newValue) {
+      if (this.optionData) {
+        this.selectedObject = this.optionData.filter(
+          x => x[this.valueField] === newValue
+        )[0];
+      }
+    } else {
+      this.selectedObject = undefined;
+    }
+    this.isInternal = false;
   }
 }

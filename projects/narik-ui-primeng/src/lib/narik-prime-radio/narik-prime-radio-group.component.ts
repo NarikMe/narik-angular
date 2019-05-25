@@ -14,6 +14,7 @@ import {
 @Component({
   selector: "narik-prime-radio-group , narik-radio-group",
   templateUrl: "narik-prime-radio-group.component.html",
+  styleUrls: ["narik-prime-radio-group.component.css"],
   inputs: [...NARIK_DATA_DISPLAY_VALUE_INPUTS],
   providers: [
     {
@@ -24,7 +25,22 @@ import {
   ]
 })
 export class NarikPrimeRadioGroup extends NarikRadioGroup {
+  itemsData: any[] = [];
+  _layoutDirection: "vertical" | "horizontal" = "vertical";
+
+  @Input()
+  set layoutDirection(value: "vertical" | "horizontal") {
+    this._layoutDirection = value;
+  }
+  get layoutDirection(): "vertical" | "horizontal" {
+    return this._layoutDirection;
+  }
+
   constructor(injector: Injector) {
     super(injector);
+  }
+
+  protected useData(data: any[]) {
+    this.itemsData = data;
   }
 }

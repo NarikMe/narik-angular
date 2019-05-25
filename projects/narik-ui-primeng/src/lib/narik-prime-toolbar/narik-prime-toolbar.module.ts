@@ -5,13 +5,16 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NarikPrimeToolBar } from "./narik-prime-toolbar.component";
 import { NarikPrimeButtonModule } from "../narik-prime-button/narik-prime-button.module";
+import { ToolbarModule } from "primeng/toolbar";
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NarikPrimeButtonModule,
-    TranslateModule
+    TranslateModule,
+    ToolbarModule
   ],
   declarations: [NarikPrimeToolBar],
   exports: [NarikPrimeToolBar],

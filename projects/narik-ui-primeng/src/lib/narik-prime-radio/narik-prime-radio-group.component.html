@@ -1,0 +1,10 @@
+<div class="form-group">
+  <label for="{{id}}">{{label}}</label>
+  <div class="form-check-container p-1 pl-2">
+    <narik-busy-indicator [width]="50" [height]="50" [strokeWidth]="5" [isBusy]="dataIsLoading">
+      <p-radioButton [ngClass]="{'vertical-radio-item': layoutDirection==='vertical'}"
+        *ngFor="let item of itemsData;let i=index" name="{{name}}" value="{{item[valueField]}}"
+        label="{{item[displayField]}}" [(ngModel)]="value"></p-radioButton>
+    </narik-busy-indicator>
+  </div>
+</div>

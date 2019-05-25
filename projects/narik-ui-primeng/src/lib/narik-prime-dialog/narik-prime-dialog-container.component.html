@@ -1,0 +1,20 @@
+<div class="modal-content" cdkDrag [tab-guard]="true">
+    <div class="modal-header">
+      <h5 cdkDragHandle class="modal-title">{{ title | translate }}</h5>
+    </div>
+
+    <div class="modal-body">
+      <ng-template narik-loader-host></ng-template>
+    </div>
+
+    <div class="modal-footer" [auto-focus]="true" [autoFocusContainerName]="options.defaultAction"
+      *ngIf="actions && actions.length!==0" align="end">
+      <ng-container *ngFor="let item of actions">
+        <ng-container>
+          <narik-button cssClass="btn-sm" [attr.narik-form-item-key]="item.dialogResult" class="mr-2"
+            (nClick)="actionClick(item)" [color]="item.color" [icon]="item.icon"
+            label="{{'dialog-buttons.'+item.label | translate}}"></narik-button>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
