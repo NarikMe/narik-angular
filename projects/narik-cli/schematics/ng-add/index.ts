@@ -50,6 +50,12 @@ const uiStyles: any = {
     "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
     "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
     "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.css"
+  ],
+  primeng: [
+    "node_modules/primeng/resources/themes/nova-light/theme.css",
+    "node_modules/primeng/resources/primeng.min.css",
+    "node_modules/primeicons/primeicons.css",
+    "node_modules/narik-ui-primeng/styles/narik-ui-prime.css"
   ]
 };
 
@@ -59,9 +65,10 @@ const rtlUiStyles: any = {
     "node_modules/narik-ui-devextreme/styles/narik-ui-devextreme.rtl.css"
   ],
   "ng-bootstrap": [
-    "ode_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
+    "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
     "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.rtl.css"
-  ]
+  ],
+  primeng: ["node_modules/narik-ui-primeng/styles/narik-ui-prime.rtl.css"]
 };
 
 const devDependencies: any[] = [
@@ -145,11 +152,11 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-core",
-    version: "^1.0.0"
+    version: "^1.0.1"
   },
   {
     name: "narik-app-core",
-    version: "^1.0.6"
+    version: "^1.0.7"
   },
   {
     name: "narik-ui-core",
@@ -204,9 +211,18 @@ const uiDependency: any = {
   ],
   "ng-bootstrap": [
     { name: "narik-ui-ng-bootstrap", version: "^1.0.2" },
-    { name: "narik-ui-swimlane", version: "^1.0.1" },
+    { name: "narik-ui-swimlane", version: "^1.0.2" },
     { name: "@swimlane/ngx-datatable", version: "^14.0.0" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^4.1.3" },
+    {
+      name: "@angular/flex-layout",
+      version: "^7.0.0-beta.24"
+    }
+  ],
+  primeng: [
+    { name: "primeng", version: "^7.1.3" },
+    { name: "primeicons", version: "^1.0.0" },
+    { name: "narik-ui-primeng", version: "^1.0.1" },
     {
       name: "@angular/flex-layout",
       version: "^7.0.0-beta.24"
@@ -373,23 +389,34 @@ function sortObjectByKeys(obj: { [key: string]: string }) {
 
 function updateIndexhtml(ui: string, rtl: boolean) {
   return (host: Tree) => {
-    if (ui === "material" && host.exists("src/index.html")) {
+    if (host.exists("src/index.html")) {
       let sourceText = host.read("src/index.html")!.toString("utf-8");
 
-      if (
-        sourceText.toLowerCase().indexOf("https://fonts.googleapis.com") < 0
-      ) {
-        const headPosition = sourceText.toLowerCase().indexOf("</head>");
-        if (headPosition >= 0) {
-          sourceText = sourceText.replace(
-            "</head>",
-            '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>'
-          );
+      if (ui === "material") {
+        if (
+          sourceText.toLowerCase().indexOf("https://fonts.googleapis.com") < 0
+        ) {
+          const headPosition = sourceText.toLowerCase().indexOf("</head>");
+          if (headPosition >= 0) {
+            sourceText = sourceText.replace(
+              "</head>",
+              '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>'
+            );
+          }
         }
       }
+
       if (rtl && sourceText.toLowerCase().indexOf(`dir="rtl"`) < 0) {
-        sourceText = sourceText.replace("<html ", '<html dir="rtl" ');
+        if (ui === "primeng") {
+          sourceText = sourceText.replace(
+            "<html ",
+            '<html  class="ui-rtl" dir="rtl" '
+          );
+        } else {
+          sourceText = sourceText.replace("<html ", '<html dir="rtl" ');
+        }
       }
+
       host.overwrite("src/index.html", sourceText);
     }
 
@@ -410,6 +437,10 @@ function updateTsConfig(ui: string) {
     "ng-bootstrap": {
       "narik-ui-lib": ["node_modules/narik-ui-ng-bootstrap"],
       "narik-ui-lib/*": ["node_modules/narik-ui-ng-bootstrap/*"]
+    },
+    primeng: {
+      "narik-ui-lib": ["node_modules/narik-ui-primeng"],
+      "narik-ui-lib/*": ["node_modules/narik-ui-primeng/*"]
     }
   };
 

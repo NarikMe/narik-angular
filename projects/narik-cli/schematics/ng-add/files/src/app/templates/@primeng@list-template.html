@@ -1,0 +1,8 @@
+<narik-busy-indicator>
+  <narik-toolbar toolbarKey="{{config && config.toolbarKey ? config.toolbarKey : 'listToolBar'}}"></narik-toolbar>
+  <narik-data-table [fields]="primeFields" [pagingInfo]="config?.pagingInfo" [dataSource]="dataSource"
+    selectMode="checkbox" (rowDoubleClick)="editEntity($event)" (rowCommandClick)="rowCommandClick($event)"
+    [rowCommands]="config?.rowCommands" [rowCommandType]="config?.rowCommandType" [(selectedItem)]="selectedEntity"
+    [(selectedItems)]="selectedItems">
+  </narik-data-table>
+</narik-busy-indicator>
