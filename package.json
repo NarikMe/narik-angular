@@ -17,7 +17,7 @@
     "build-ui-ngx-bootstrap": "ng build narik-ui-ngx-bootstrap && node build-tools/copy.js readme.md dist/narik-ui-ngx-bootstrap",
     "build-ui-material": "ng build narik-ui-material && node build-tools/copy.js readme.md dist/narik-ui-material && node build-tools/copy.js projects/narik-ui-material/src/styles/* dist/narik-ui-material/styles",
     "build-ui-devextreme": "ng build narik-ui-devextreme && node build-tools/copy.js readme.md dist/narik-ui-devextreme && node build-tools/copy.js projects/narik-ui-devextreme/src/styles/* dist/narik-ui-devextreme/styles",
-    "build-ui-primeng": "ng build narik-ui-primeng && node build-tools/copy.js readme.md dist/narik-ui-primeng",
+    "build-ui-primeng": "ng build narik-ui-primeng && node build-tools/copy.js readme.md dist/narik-ui-primeng && node build-tools/copy.js projects/narik-ui-primeng/src/styles/* dist/narik-ui-primeng/styles",
     "build-cli": "ng build narik-cli && node build-tools/copy.js readme.md dist/narik-cli",
     "build-jwt": "ng build narik-jwt-authentication && node build-tools/copy.js readme.md dist/narik-jwt-authentication",
     "build-signalr": "ng build narik-signalr-client && node build-tools/copy.js readme.md dist/narik-signalr-client",
@@ -62,7 +62,9 @@
     "ngx-toastr": "^9.1.1",
     "rxjs": "~6.5.1",
     "zone.js": "~0.8.26",
-    "@swimlane/ngx-datatable": "^14.0.0"
+    "@swimlane/ngx-datatable": "^14.0.0",
+    "primeicons": "^1.0.0",
+    "primeng": "^7.1.3"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^7.4.3",
