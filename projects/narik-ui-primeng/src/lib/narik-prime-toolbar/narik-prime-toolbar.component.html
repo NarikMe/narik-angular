@@ -1,20 +1,28 @@
 <p-toolbar>
-  <div class="ui-toolbar-group-left">
-
-    <ng-container *ngFor='let item of items'>
-      <ng-container *ngIf="item.itemType==='divider'">
+  <div
+    [ngClass]="{
+      'ui-toolbar-group-left': !isRtl,
+      'ui-toolbar-group-right': isRtl
+    }"
+  >
+    <ng-container *ngFor="let item of items">
+      <ng-container *ngIf="item.itemType === 'divider'">
         <i class="pi pi-ellipsis-v  toolbar-separator"></i>
       </ng-container>
-      <ng-container *ngIf="item.itemType==='button'">
-        <narik-button class="toolbar-btn" *ngIf='!item.hideExpr || !invisibleItems[item.key]'
-        tooltip="{{item.hint | translate}}"
-          [disable]="item.disableExpr && disableItems[item.key]" [isBusy]="item.busyExpr && busyItems[item.key]"
-          [cssClass]="itemsCssClass" (nClick)="itemCommand(item)" [buttonStyle]='itemsStyle' [icon]="item.icon"
-          [label]="showLabel ? item.label : null"></narik-button>
+      <ng-container *ngIf="item.itemType === 'button'">
+        <narik-button
+          class="toolbar-btn"
+          *ngIf="!item.hideExpr || !invisibleItems[item.key]"
+          tooltip="{{ item.hint | translate }}"
+          [disable]="item.disableExpr && disableItems[item.key]"
+          [isBusy]="item.busyExpr && busyItems[item.key]"
+          [cssClass]="itemsCssClass"
+          (nClick)="itemCommand(item)"
+          [buttonStyle]="itemsStyle"
+          [icon]="item.icon"
+          [label]="showLabel ? item.label : null"
+        ></narik-button>
       </ng-container>
     </ng-container>
-
-
-
   </div>
 </p-toolbar>
