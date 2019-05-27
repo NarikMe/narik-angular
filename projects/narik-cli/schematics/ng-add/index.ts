@@ -222,7 +222,7 @@ const uiDependency: any = {
   primeng: [
     { name: "primeng", version: "^7.1.3" },
     { name: "primeicons", version: "^1.0.0" },
-    { name: "narik-ui-primeng", version: "^1.0.1" },
+    { name: "narik-ui-primeng", version: "^1.0.2" },
     {
       name: "@angular/flex-layout",
       version: "^7.0.0-beta.24"
