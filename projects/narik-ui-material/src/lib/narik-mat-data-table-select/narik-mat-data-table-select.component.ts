@@ -140,7 +140,9 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
 
   protected useData(data: any[]) {
     this.optionData = data;
-    (this.tableDataSource as MatLocalDataSource<any>).setData(data);
+    if (this.tableDataSource) {
+      (this.tableDataSource as MatLocalDataSource<any>).setData(data);
+    }
     this.setDisplayText();
   }
 
@@ -160,6 +162,11 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
       );
     } else {
       this.tableDataSource = new MatLocalDataSource(undefined, undefined);
+      if (this.optionData) {
+        (this.tableDataSource as MatLocalDataSource<any>).setData(
+          this.optionData
+        );
+      }
     }
     super.ngOnInit();
     this.detectChanges();
