@@ -1,16 +1,17 @@
-import { isEquivalent } from "narik-common";
+import { isArray, isEquivalent } from "narik-common";
+import { NarikInject } from "narik-core";
 import {
-  NarikDataSource,
   DataInfo,
   DataOption,
-  DataProviderService
+  DataProviderService,
+  NarikDataSource
 } from "narik-infrastructure";
 import {
   NARIK_DATA_DISPLAY_VALUE_INPUTS,
   NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
-  NARIK_DATA_TABLE_SELECT_INPUTS
+  NARIK_DATA_TABLE_SELECT_INPUTS,
+  DynamicFormService
 } from "narik-ui-core";
-
 import { Observable } from "rxjs/internal/Observable";
 
 import {
@@ -24,11 +25,12 @@ import {
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { MatAutocompleteTrigger } from "@angular/material/autocomplete";
+
 import { NarikMatDataTableSelectBase } from "../base/narik-mat-data-table-select-base";
 import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
-import { NarikMatDataTable } from "../narik-mat-data-table/narik-mat-data-table.component";
-import { MatLocalDataSource } from "../data-source/mat-local-data-source";
 import { MatLazyDataSource } from "../data-source/mat-lazy-data-source";
+import { MatLocalDataSource } from "../data-source/mat-local-data-source";
+import { NarikMatDataTable } from "../narik-mat-data-table/narik-mat-data-table.component";
 
 @Component({
   selector: "narik-mat-data-table-select , narik-data-table-select",
@@ -61,6 +63,9 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
   get selectMode(): "Click" | "DblClick" {
     return this._selectMode;
   }
+
+  @NarikInject(DynamicFormService)
+  dynamicFormService: DynamicFormService;
 
   @ViewChild(MatAutocompleteTrigger)
   autoComplete: MatAutocompleteTrigger;
@@ -106,15 +111,24 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
   tableDataSource: NarikDataSource<any>;
   optionData: any[] = [];
 
-  _fields: any[];
+  _fields: any[] = [
+    {
+      label: "title",
+      model: "title",
+      name: "title",
+      options: {},
+      type: "text"
+    }
+  ];
 
   @Input()
   set fields(value: any[]) {
-    this._fields = value;
-  }
-  get fields(): any[] {
-    return (
-      this._fields || [
+    if (value && isArray(value)) {
+      this._fields = this.dynamicFormService.createFieldsFromEntityFields(
+        value
+      );
+    } else {
+      this._fields = [
         {
           label: "title",
           model: "title",
@@ -122,8 +136,11 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
           options: {},
           type: "text"
         }
-      ]
-    );
+      ];
+    }
+  }
+  get fields(): any[] {
+    return this._fields;
   }
 
   gridPagingInfo: any;
