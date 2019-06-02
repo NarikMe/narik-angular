@@ -59,14 +59,14 @@
                 <narik-mat-button [cssClass]="'item-full-width'" *ngFor="let item of rowCommands"
                   (nClick)="rowCommandClicked(item.commandKey, element)" label=" {{ item.label | translate }}"
                   [buttonStyle]="'mat-flat-button'" [icon]="item.icon"
-                  matTooltip="{{ item.hint || item.commandKey | translate }}">
+                  matTooltip="{{ item.title || item.commandKey | translate }}">
                 </narik-mat-button>
               </mat-menu>
             </ng-container>
             <ng-container *ngIf="rowCommandType === 'Flat'">
               <mat-icon class="table-command-menu" *ngFor="let item of rowCommands"
                 (click)="rowCommandClicked(item.commandKey, element)"
-                matTooltip="{{ item.hint || item.commandKey | translate }}">{{ item.icon }}</mat-icon>
+                matTooltip="{{ item.title || item.commandKey | translate }}">{{ item.icon }}</mat-icon>
             </ng-container>
           </div>
         </td>
