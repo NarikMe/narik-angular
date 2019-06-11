@@ -4,12 +4,12 @@ class TemplateResolver {
       case "NarikListUi":
         return {
           template: "",
-          templateUrl: "./app/templates/list-template.html"
+          templateUrl: "./src/app/templates/list-template.html"
         };
       case "NarikDetailUi":
         return {
           template: "",
-          templateUrl: "./app/templates/detail-template.html"
+          templateUrl: "./src/app/templates/detail-template.html"
         };
 
       default:
