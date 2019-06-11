@@ -83,7 +83,7 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
     return this._parameters;
   }
 
-  @ViewChild(BusyIndicator, { static: false }) busyIndicator: BusyIndicator;
+  @ViewChild(BusyIndicator, { static: true }) busyIndicator: BusyIndicator;
 
   constructor(private injector: Injector) {
     super();
