@@ -9,6 +9,15 @@ export class NarikInput extends NarikFormComponent {
   _maxlength: number;
   _mask: any;
   _icon: string;
+  _displayStatus: string;
+
+  @Input()
+  set displayStatus(value: string) {
+    this._displayStatus = value;
+  }
+  get displayStatus(): string {
+    return this._displayStatus;
+  }
 
   @Input()
   set mask(value: any) {
@@ -52,5 +61,6 @@ export const NARIK_INPUT_INPUTS: string[] = [
   "type",
   "mask",
   "icon",
+  "displayStatus",
   ...NARIK_UI_FORM_INPUTS
 ];
