@@ -200,6 +200,10 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
     this.applyExpressionsOnObject(this.busyItems);
   }
   itemCommand(data: ToolBarItem) {
+    if (data.disableExpr && this.disableItems[data.key]) {
+      console.log("disabled toolbar item clicked!!" + data.key);
+      return;
+    }
     if (this.host && !this.alwaysCallCommand) {
       this.host.processCommand({
         commandKey: data.key,
