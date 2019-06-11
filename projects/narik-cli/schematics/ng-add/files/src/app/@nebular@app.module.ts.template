@@ -33,6 +33,8 @@ import { MainComponent } from './main/main.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { NarikNgxAdmin } from './modules/narik-ngx-admin/narik-ngx-admin.module';
 import { ShareModule } from "./modules/share/share.module";
+import { NbDateFnsDateModule } from "@nebular/date-fns";
+
 
 const moduleKey = "main";
 
@@ -72,6 +74,11 @@ const moduleKey = "main";
       undefined,
       NbLayoutDirection.<%= direction %>
     ),
+      NbDateFnsDateModule.forRoot({
+      format: "yyyy/MM/dd",
+      parseOptions: { awareOfUnicodeTokens: true },
+      formatOptions: { awareOfUnicodeTokens: true }
+    }),
     BrowserAnimationsModule,
     NarikClientStorageModule.forRoot(),
     NarikNgxAdmin,

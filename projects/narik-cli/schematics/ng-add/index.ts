@@ -221,10 +221,12 @@ const uiDependency: any = {
     { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" }
   ],
   nebular: [
-    { name: "narik-ui-nebular", version: "^2.0.0" },
+    { name: "narik-ui-nebular", version: "^2.0.1" },
     { name: "narik-ui-swimlane", version: "^2.0.0" },
     { name: "@swimlane/ngx-datatable", version: "^15.0.1" },
-    { name: "@nebular/theme", version: "^4.0.0" }
+    { name: "@nebular/theme", version: "^4.0.0" },
+    { name: "@nebular/date-fns", version: "^4.0.0" },
+    { name: "date-fns", version: "^1.30.1" }
   ],
   primeng: [
     { name: "primeng", version: "^8.0.0-rc.1" },
