@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label for="{{id}}">{{label}}</label>
+  <div class="input-group mb-3" *ngIf="icon">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-{{icon}}"></i></span>
+    </div>
+    <ng-container *ngTemplateOutlet="inputElement"></ng-container>
+  </div>
+  <ng-container *ngIf="!icon">
+    <ng-container *ngTemplateOutlet="inputElement"></ng-container>
+  </ng-container>
+
+</div>
+<ng-template #inputElement>
+  <nb-select fullWidth placeholder="{{placeHolder}}" [(ngModel)]="value" [attr.disabled]="disabled || null" id="{{id}}">
+    <nb-option *ngFor="let item of optionData" [value]="item[valueField]">{{item[displayField]}}</nb-option>
+  </nb-select>
+</ng-template>

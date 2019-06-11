@@ -1,0 +1,25 @@
+<button *ngIf="buttonStyle==='outline'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+  outline [ngClass]='cssClass' nbButton>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+
+<button *ngIf="buttonStyle==='hero'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+  hero [ngClass]='cssClass' nbButton>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+
+<button *ngIf="buttonStyle==='ghost'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+  ghost [ngClass]='cssClass' nbButton>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+
+<button *ngIf="!buttonStyle" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+  [ngClass]='cssClass' nbButton>
+  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+</button>
+
+<ng-template #buttonContent>
+  <span *ngIf="isBusy" class="mx-1 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  <nb-icon class="button-icon" *ngIf="icon" icon="{{icon}}"></nb-icon>
+  {{ isBusy && busyLabel ? busyLabel : label}}
+</ng-template>

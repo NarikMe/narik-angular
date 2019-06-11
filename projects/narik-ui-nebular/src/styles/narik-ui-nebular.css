@@ -1,0 +1,37 @@
+[nbInput].shape-rectangle.has-icon {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+
+[nbInput].has-icon:focus {
+  box-shadow: initial !important;
+}
+
+.input-with-icon-container-focus {
+  box-shadow: 0 0 0 0.375rem #e4e9f2;
+  border-radius: 5px;
+}
+
+
+.tool-bar-card {
+  padding-left: 0 !important
+}
+
+.toolbar-separator:last-child {
+  display: none
+}
+
+
+nb-select {
+  height: 40px;
+  display: block !important;
+}
+
+nb-select>button {
+  height: 100%;
+}
+
+.was-validated nb-select.ng-invalid>button {
+  border-color: #dc3545 !important;
+}

@@ -1,0 +1,12 @@
+<narik-busy-indicator [isBusy]="dataIsLoading">
+  <div class="form-group">
+    <label for="{{id}}">{{label}}</label>
+    <div class="form-check-container p-1 pl-2">
+      <nb-radio-group [(ngModel)]="value" [disabled]="disabled">
+        <nb-radio *ngFor="let option of itemsData;let i=index" [value]="option[valueField]">
+          {{ option[displayField] }}
+        </nb-radio>
+      </nb-radio-group>
+    </div>
+  </div>
+</narik-busy-indicator>

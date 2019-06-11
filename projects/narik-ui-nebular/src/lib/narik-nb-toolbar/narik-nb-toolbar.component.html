@@ -1,0 +1,12 @@
+<nb-card >
+  <nb-card-body class="tool-bar-card">
+    <ng-container *ngFor='let group of toolbarItems;'>
+      <nb-actions size="small">
+        <nb-action (click)="itemCommand(item)" *ngFor="let item of group"
+          [disabled]="item.disableExpr && disableItems[item.key]" [hidden]='item.hideExpr && invisibleItems[item.key]'
+          nbTooltip="{{ item.hint | translate}}" icon="{{item.icon}}"></nb-action>
+      </nb-actions>
+      <nb-icon class="toolbar-separator" icon="more-vertical-outline"></nb-icon>
+    </ng-container>
+  </nb-card-body>
+</nb-card>

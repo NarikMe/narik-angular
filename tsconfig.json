@@ -107,6 +107,12 @@
       ],
       "narik-ui-swimlane/*": [
         "dist/narik-ui-swimlane/*"
+      ],
+      "narik-ui-nebular": [
+        "dist/narik-ui-nebular"
+      ],
+      "narik-ui-nebular/*": [
+        "dist/narik-ui-nebular/*"
       ]
     }
   }

@@ -527,6 +527,41 @@
           }
         }
       }
+    },
+    "narik-ui-nebular": {
+      "root": "projects/narik-ui-nebular",
+      "sourceRoot": "projects/narik-ui-nebular/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/narik-ui-nebular/tsconfig.lib.json",
+            "project": "projects/narik-ui-nebular/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-ui-nebular/src/test.ts",
+            "tsConfig": "projects/narik-ui-nebular/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-ui-nebular/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-ui-nebular/tsconfig.lib.json",
+              "projects/narik-ui-nebular/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   }
 }

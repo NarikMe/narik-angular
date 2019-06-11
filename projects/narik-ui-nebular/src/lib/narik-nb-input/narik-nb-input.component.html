@@ -1,0 +1,22 @@
+<div class="form-group ">
+  <label for="{{id}}">{{label}}</label>
+  <div class="input-group mb-3" [ngClass]="{'input-with-icon-container-focus': hasFocus}" *ngIf="icon">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-{{icon}}"></i></span>
+    </div>
+    <ng-container *ngTemplateOutlet="inputElement"></ng-container>
+  </div>
+  <ng-container *ngIf="!icon">
+    <ng-container *ngTemplateOutlet="inputElement"></ng-container>
+  </ng-container>
+
+</div>
+<ng-template #inputElement>
+  <input *ngIf="!fullWidth" [(ngModel)]="value" (focus)="hasFocus=true;" (blur)="hasFocus=false;"
+    [attr.disabled]="disabled || null" type="{{type}}" name="{{name}}" [required]="required"
+    [ngClass]="{'has-icon': icon}" nbInput class="form-control" id="{{id}}" status="{{displayStatus}}"
+    placeholder="{{placeHolder}}">
+  <input *ngIf="fullWidth" fullWidth [(ngModel)]="value" (focus)="hasFocus=true;" (blur)="hasFocus=false;"
+    status="{{displayStatus}}" [attr.disabled]="disabled || null" type="{{type}}" name="{{name}}" [required]="required"
+    [ngClass]="{'has-icon': icon}" nbInput class="form-control" id="{{id}}" placeholder="{{placeHolder}}">
+</ng-template>

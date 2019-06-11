@@ -1,0 +1,7 @@
+nb-card-body {
+  display: flex
+}
+
+.toolbar-separator {
+  margin-top: 2px;
+}

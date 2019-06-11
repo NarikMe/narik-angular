@@ -1,0 +1,22 @@
+{
+  "name": "narik-ui-nebular",
+  "version": "2.0.0",
+  "peerDependencies": {
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0",
+    "@nebular/theme": "^4.0.0",
+    "@angular/flex-layout": "^8.0.0-beta.26"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NarikMe/narik-angular.git"
+  },
+  "homepage": "http://narik.me",
+  "license": "MIT",
+  "description": "Framework to create angular application",
+  "keywords": [
+    "angular",
+    "Narik"
+  ]
+}
