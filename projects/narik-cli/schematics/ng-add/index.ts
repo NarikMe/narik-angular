@@ -49,6 +49,13 @@ const uiStyles: any = {
     "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
     "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.css"
   ],
+  nebular: [
+    "node_modules/@swimlane/ngx-datatable/release/index.css",
+    "node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
+    "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
+    "node_modules/narik-ui-nebular/styles/narik-ui-nebular.css",
+    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.css"
+  ],
   primeng: [
     "node_modules/primeng/resources/themes/nova-light/theme.css",
     "node_modules/primeng/resources/primeng.min.css",
@@ -64,6 +71,10 @@ const rtlUiStyles: any = {
   ],
   "ng-bootstrap": [
     "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
+    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.rtl.css"
+  ],
+  nebular: [
+    "node_modules/narik-ui-nebular/styles/narik-ui-nebular.rtl.css",
     "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.rtl.css"
   ],
   primeng: ["node_modules/narik-ui-primeng/styles/narik-ui-prime.rtl.css"]
@@ -154,11 +165,11 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-app-core",
-    version: "^2.0.0"
+    version: "^2.0.1"
   },
   {
     name: "narik-ui-core",
-    version: "^2.0.0"
+    version: "^2.0.1"
   },
   {
     name: "narik-jwt-authentication",
@@ -206,8 +217,14 @@ const uiDependency: any = {
   "ng-bootstrap": [
     { name: "narik-ui-ng-bootstrap", version: "^2.0.0" },
     { name: "narik-ui-swimlane", version: "^2.0.0" },
-    { name: "@swimlane/ngx-datatable", version: "^15.0.1" },
+    { name: "@swimlane/ngx-datatable", version: "^15.0.2" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" }
+  ],
+  nebular: [
+    { name: "narik-ui-nebular", version: "^2.0.0" },
+    { name: "narik-ui-swimlane", version: "^2.0.0" },
+    { name: "@swimlane/ngx-datatable", version: "^15.0.1" },
+    { name: "@nebular/theme", version: "^4.0.0" }
   ],
   primeng: [
     { name: "primeng", version: "^8.0.0-rc.1" },
@@ -423,6 +440,10 @@ function updateTsConfig(ui: string) {
     "ng-bootstrap": {
       "narik-ui-lib": ["node_modules/narik-ui-ng-bootstrap"],
       "narik-ui-lib/*": ["node_modules/narik-ui-ng-bootstrap/*"]
+    },
+    nebular: {
+      "narik-ui-lib": ["node_modules/narik-ui-nebular"],
+      "narik-ui-lib/*": ["node_modules/narik-ui-nebular/*"]
     },
     primeng: {
       "narik-ui-lib": ["node_modules/narik-ui-primeng"],

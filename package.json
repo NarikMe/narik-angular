@@ -59,7 +59,7 @@
     "@nebular/theme": "^4.0.0",
     "rxjs": "^6.5.2",
     "zone.js": "^0.9.1",
-    "@swimlane/ngx-datatable": "^15.0.1",
+    "@swimlane/ngx-datatable": "^15.0.2",
     "primeicons": "^1.0.0",
     "primeng": "^8.0.0-rc.1"
   },

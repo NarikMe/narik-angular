@@ -65,7 +65,7 @@
     "menuItems": [
       {
         "title": "branch",
-        "icon": "nb-keypad",
+        "icon": "menu-outline",
         "link": "/pages/ui-features",
         "children": [
           {
