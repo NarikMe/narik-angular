@@ -12,7 +12,7 @@ export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
   ds: any[] = [];
   devFields: any[] = [];
 
-  @ViewChild(NarikDevDataTable)
+  @ViewChild(NarikDevDataTable, { static: false })
   grid: NarikDevDataTable;
 
   @NarikInject(TranslateService)

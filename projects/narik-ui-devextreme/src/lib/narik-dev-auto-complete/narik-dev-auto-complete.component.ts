@@ -9,12 +9,9 @@ import { Subject } from "rxjs/internal/Subject";
 
 import {
   Component,
-  ElementRef,
   forwardRef,
   Injector,
-  Input,
   OnInit,
-  ViewChild,
   HostBinding
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
@@ -37,9 +34,6 @@ export class NarikDevAutoComplete extends NarikAutoComplete implements OnInit {
   filteredData: Observable<any[]>;
   optionData: any[] = [];
   textChanged = new Subject<string>();
-
-  @ViewChild("input")
-  input: ElementRef;
 
   @HostBinding("class")
   class = "dx-field display-block";

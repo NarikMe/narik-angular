@@ -9,9 +9,6 @@ export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
   implements OnInit, AfterViewInit {
   ds: any[] = [];
 
-  @ViewChild(NarikNgxDataTable)
-  grid: NarikNgxDataTable;
-
   @NarikInject(TranslateService)
   translateService: TranslateService;
 

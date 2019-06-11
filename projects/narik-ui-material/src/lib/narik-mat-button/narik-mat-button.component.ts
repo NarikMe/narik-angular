@@ -23,7 +23,7 @@ import {
 })
 export class NarikMatButtonComponent extends NarikButton
   implements OnInit, AfterViewInit {
-  @ViewChild("button1") button: MatButton;
+  @ViewChild("contentButton", { static: false }) button: MatButton;
 
   @NarikInject(BUTTON_DEFAULT_OPTIONS, {
     buttonStyle: "mat-raised-button",

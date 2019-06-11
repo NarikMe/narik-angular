@@ -3,7 +3,6 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  ViewChild,
   Renderer2,
   HostListener,
   Injector
@@ -20,8 +19,6 @@ import {
 })
 export class NarikDevButtonComponent extends NarikButton
   implements OnInit, AfterViewInit {
-  @ViewChild("button1") button: any;
-
   @NarikInject(BUTTON_DEFAULT_OPTIONS, {
     buttonStyle: "mat-raised-button",
     busyFontIcon: "fa-spinner"
@@ -40,28 +37,6 @@ export class NarikDevButtonComponent extends NarikButton
     this.cssClass = this.defaultOptions.cssClass;
   }
 
-  ngOnInit() {}
-
-  ngAfterViewInit(): void {
-    this.setDisabledState();
-  }
-
-  setDisabledState() {
-    if (this.button) {
-      if (this.disable || this.isBusy) {
-        this.renderer.setAttribute(
-          this.button._elementRef.nativeElement,
-          "disabled",
-          ""
-        );
-      } else {
-        this.renderer.removeAttribute(
-          this.button._elementRef.nativeElement,
-          "disabled"
-        );
-      }
-    }
-  }
   buttonClick(e) {
     if (!this.disable && !this.isBusy) {
       this.nClick.emit({

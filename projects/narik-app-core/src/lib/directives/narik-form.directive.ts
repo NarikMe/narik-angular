@@ -28,7 +28,7 @@ export class NarikForm
 
   @ContentChildren(NarikDynamicForm) contentList: QueryList<NarikDynamicForm>;
 
-  @ContentChild("form")
+  @ContentChild("form", { static: false })
   form: NgForm;
 
   @ContentChildren(NarikDynamicForm, { descendants: true })

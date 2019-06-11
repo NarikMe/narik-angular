@@ -8,6 +8,6 @@ export interface INarikMatInputBase
     NarikInput {}
 
 export class NarikMatInputBase extends Mixin<INarikMatInputBase>(
-  NarikMatFormFieldInput,
-  NarikInput
+  NarikInput,
+  NarikMatFormFieldInput
 ) {}

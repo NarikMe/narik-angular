@@ -8,8 +8,8 @@ export interface INarikMatAutoCompleteBase
     NarikAutoComplete {}
 
 export class NarikMatAutoCompleteBase extends Mixin<INarikMatAutoCompleteBase>(
-  NarikMatFormFieldInput,
-  NarikAutoComplete
+  NarikAutoComplete,
+  NarikMatFormFieldInput
 ) {}
 {
 }

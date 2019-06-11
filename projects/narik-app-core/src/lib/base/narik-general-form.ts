@@ -30,7 +30,6 @@ import { NarikParameterResolver } from "../services/narik-parameter-resolver";
 import { QueryService } from "../services/queryService";
 import { QUERY_SERVICE_TYPE } from "../internal-injectionTokens";
 
-
 /**
  * Narik general form
  */
@@ -84,7 +83,7 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
     return this._parameters;
   }
 
-  @ViewChild(BusyIndicator) busyIndicator: BusyIndicator;
+  @ViewChild(BusyIndicator, { static: false }) busyIndicator: BusyIndicator;
 
   constructor(private injector: Injector) {
     super();

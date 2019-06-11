@@ -62,13 +62,13 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
   @NarikInject(TranslateService)
   translateService: TranslateService;
 
-  @ViewChild("form")
+  @ViewChild("form", { static: false })
   form: NgForm;
 
-  @ViewChild("form", { read: ViewContainerRef })
+  @ViewChild("form", { read: ViewContainerRef, static: false })
   formContainerRef: ViewContainerRef;
 
-  @ViewChild("form", { read: ElementRef })
+  @ViewChild("form", { read: ElementRef, static: false })
   formElement: ElementRef;
 
   _currentEntity: TE = <any>{};

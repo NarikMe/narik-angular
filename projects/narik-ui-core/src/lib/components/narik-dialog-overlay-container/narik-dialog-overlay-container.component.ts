@@ -13,7 +13,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 })
 export class NarikDialogOverlayContainerComponent
   implements DialogOverlayContainer, OnInit {
-  @ViewChild(ComponentLoaderHostDirective)
+  @ViewChild(ComponentLoaderHostDirective, { static: true })
   loaderHost: ComponentLoaderHostDirective;
 
   dialogRef: DialogRef<any>;

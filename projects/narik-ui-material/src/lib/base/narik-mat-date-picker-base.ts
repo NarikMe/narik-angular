@@ -8,8 +8,8 @@ export interface INarikMatDatePickerBase
     NarikDatePicker {}
 
 export class NarikMatDatePickerBase extends Mixin<INarikMatDatePickerBase>(
-  NarikMatFormFieldInput,
-  NarikDatePicker
+  NarikDatePicker,
+  NarikMatFormFieldInput
 ) {}
 {
 }

@@ -52,7 +52,7 @@ export class NarikMatAutoComplete extends NarikMatAutoCompleteBase
   optionData: any[] = [];
   textChanged = new Subject<string>();
 
-  @ViewChild("input")
+  @ViewChild("input", { static: true })
   input: ElementRef;
 
   constructor(injector: Injector) {

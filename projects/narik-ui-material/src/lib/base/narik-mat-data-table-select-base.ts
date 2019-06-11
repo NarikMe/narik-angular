@@ -9,6 +9,6 @@ export interface INarikMatDataTableSelectBase
 
 export class NarikMatDataTableSelectBase extends Mixin<
   INarikMatDataTableSelectBase
->(NarikMatFormFieldInput, NarikDataTableSelect) {}
+>(NarikDataTableSelect, NarikMatFormFieldInput) {}
 {
 }

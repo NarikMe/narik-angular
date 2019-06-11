@@ -12,9 +12,8 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
   templateUrl: "narik-dev-dialog-container.component.html",
   styleUrls: ["narik-dev-dialog-container.component.css"]
 })
-export class NarikDevDialogContainer
-  implements DialogContainer, OnInit {
-  @ViewChild(ComponentLoaderHostDirective)
+export class NarikDevDialogContainer implements DialogContainer, OnInit {
+  @ViewChild(ComponentLoaderHostDirective, { static: true })
   loaderHost: ComponentLoaderHostDirective;
   options: DialogOption;
   title: string;

@@ -13,7 +13,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
   styleUrls: ["narik-swimlane-dialog-container.component.css"]
 })
 export class NarikSwimlaneDialogContainer implements DialogContainer, OnInit {
-  @ViewChild(ComponentLoaderHostDirective)
+  @ViewChild(ComponentLoaderHostDirective, { static: true })
   loaderHost: ComponentLoaderHostDirective;
   options: DialogOption;
   title: string;

@@ -24,7 +24,7 @@ export class NarikDevDataTable extends NarikDataTable {
   allMode = "allPages";
   checkBoxesMode = "onClick";
 
-  @ViewChild(DxDataGridComponent)
+  @ViewChild(DxDataGridComponent, { static: true })
   grid: DxDataGridComponent;
 
   @Input()

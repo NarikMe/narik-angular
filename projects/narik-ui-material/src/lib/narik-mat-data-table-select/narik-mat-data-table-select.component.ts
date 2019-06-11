@@ -67,13 +67,13 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
   @NarikInject(DynamicFormService)
   dynamicFormService: DynamicFormService;
 
-  @ViewChild(MatAutocompleteTrigger)
+  @ViewChild(MatAutocompleteTrigger, { static: true })
   autoComplete: MatAutocompleteTrigger;
 
-  @ViewChild(NarikMatDataTable)
+  @ViewChild(NarikMatDataTable, { static: true })
   dataTable: NarikMatDataTable;
 
-  @ViewChild("input")
+  @ViewChild("input", { static: true })
   input: ElementRef;
 
   @Input()

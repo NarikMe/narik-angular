@@ -31,8 +31,6 @@ import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 
 const commonStyles = [
   "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-  "node_modules/nebular-icons/scss/nebular-icons.scss",
-  "node_modules/ionicons/scss/ionicons.scss",
   "node_modules/ngx-toastr/toastr.css",
   "src/styles/styles.scss"
 ];
@@ -74,41 +72,49 @@ const rtlUiStyles: any = {
 const devDependencies: any[] = [
   {
     name: "@angular-builders/custom-webpack",
-    version: "^7.4.3"
-  },
-  {
-    name: "@angular-builders/dev-server",
-    version: "^7.3.1"
+    version: "^8.0.2"
   },
   {
     name: "cheerio",
-    version: "^1.0.0-rc.2"
+    version: "^1.0.0-rc.3"
   },
   {
     name: "narik-webpack-tools",
-    version: "0.0.6"
+    version: "2.0.0"
   }
 ];
 const commonDependencies: any[] = [
   {
     name: "@fortawesome/fontawesome-free",
-    version: "^5.5.0"
+    version: "^5.9.0"
   },
   {
     name: "@angular/cdk",
-    version: "^7.3.7"
+    version: "^8.0.0"
   },
   {
     name: "@nebular/theme",
-    version: "^2.0.2"
+    version: "^4.0.0"
+  },
+  {
+    name: "eva-icons",
+    version: "^1.1.1"
+  },
+  {
+    name: "@nebular/eva-icons",
+    version: "^4.0.0"
   },
   {
     name: "@ngx-translate/core",
-    version: "^11.0.0"
+    version: "^11.0.1"
   },
   {
     name: "angular2-text-mask",
     version: "^9.0.0"
+  },
+  {
+    name: "@angular/flex-layout",
+    version: "^8.0.0-beta.26"
   },
   {
     name: "angular2-uuid",
@@ -119,56 +125,48 @@ const commonDependencies: any[] = [
     version: "^4.3.1"
   },
   {
-    name: "ionicons",
-    version: "^2.0.1"
-  },
-  {
     name: "localforage",
-    version: "^1.5.0"
+    version: "^1.7.3"
   },
   {
     name: "lodash",
     version: "^4.17.11"
   },
   {
-    name: "nebular-icons",
-    version: "^1.1.0"
-  },
-  {
     name: "ngforage",
-    version: "^4.0.2"
+    version: "^4.0.3"
   },
   {
     name: "ngx-toastr",
-    version: "^9.1.1"
+    version: "^10.0.4"
   },
   {
     name: "narik-infrastructure",
-    version: "^1.0.0"
+    version: "^2.0.0"
   },
   {
     name: "narik-common",
-    version: "^1.0.1"
+    version: "^2.0.0"
   },
   {
     name: "narik-core",
-    version: "^1.0.1"
+    version: "^2.0.0"
   },
   {
     name: "narik-app-core",
-    version: "^1.0.7"
+    version: "^2.0.0"
   },
   {
     name: "narik-ui-core",
-    version: "^1.0.4"
+    version: "^2.0.0"
   },
   {
     name: "narik-jwt-authentication",
-    version: "^1.0.0"
+    version: "^2.0.0"
   },
   {
     name: "narik-client-storage",
-    version: "^1.0.0"
+    version: "^2.0.0"
   }
 ];
 
@@ -180,29 +178,25 @@ const uiDependency: any = {
   material: [
     {
       name: "narik-ui-material",
-      version: "^1.0.8"
+      version: "^2.0.0"
     },
     {
       name: "@angular/material",
-      version: "^7.3.7"
-    },
-    {
-      name: "@angular/flex-layout",
-      version: "^7.0.0-beta.24"
+      version: "^8.0.0"
     }
   ],
   devextreme: [
     {
       name: "narik-ui-devextreme",
-      version: "^1.0.3"
+      version: "^2.0.0"
     },
     {
       name: "devextreme",
-      version: "^18.2.4"
+      version: "^19.1.3"
     },
     {
       name: "devextreme-angular",
-      version: "^18.2.4"
+      version: "^19.1.3"
     },
     {
       name: "stream",
@@ -210,23 +204,15 @@ const uiDependency: any = {
     }
   ],
   "ng-bootstrap": [
-    { name: "narik-ui-ng-bootstrap", version: "^1.0.2" },
-    { name: "narik-ui-swimlane", version: "^1.0.2" },
-    { name: "@swimlane/ngx-datatable", version: "^14.0.0" },
-    { name: "@ng-bootstrap/ng-bootstrap", version: "^4.1.3" },
-    {
-      name: "@angular/flex-layout",
-      version: "^7.0.0-beta.24"
-    }
+    { name: "narik-ui-ng-bootstrap", version: "^2.0.0" },
+    { name: "narik-ui-swimlane", version: "^2.0.0" },
+    { name: "@swimlane/ngx-datatable", version: "^15.0.1" },
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" }
   ],
   primeng: [
-    { name: "primeng", version: "^7.1.3" },
+    { name: "primeng", version: "^8.0.0-rc.1" },
     { name: "primeicons", version: "^1.0.0" },
-    { name: "narik-ui-primeng", version: "^1.0.2" },
-    {
-      name: "@angular/flex-layout",
-      version: "^7.0.0-beta.24"
-    }
+    { name: "narik-ui-primeng", version: "^2.0.0" }
   ]
 };
 
@@ -901,7 +887,7 @@ export function addCustomBuilder(): (
     };
 
     const serveTargetOptions = getProjectTarget(project, "serve");
-    serveTargetOptions.builder = "@angular-builders/dev-server:generic";
+    serveTargetOptions.builder = "@angular-builders/custom-webpack:dev-server";
     serveTargetOptions.options = serveTargetOptions.options || {};
     serveTargetOptions.options.proxyConfig = "proxy.config.json";
 

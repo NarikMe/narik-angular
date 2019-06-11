@@ -37,9 +37,9 @@ export class NarikMatDataTable extends NarikDataTable
   implements OnInit, AfterViewInit, AfterContentInit, AfterViewChecked {
   fieldNames: string[] = [];
   filterObj: any = {};
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild("searchInput") searchInput: ElementRef;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild("searchInput", { static: false }) searchInput: ElementRef;
   filterChange = new Subject<FilterItems>();
   selection: SelectionModel<any>;
   _selectMode: "None" | "One" | "Multiple" = "Multiple";

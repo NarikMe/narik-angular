@@ -1,4 +1,3 @@
-import { NarikNgbDataTable } from "../narik-ngb-data-table/narik-ngb-data-table.component";
 import { NarikEntity, PagingParameters } from "narik-infrastructure";
 import { NarikListForm, ServerResponse } from "narik-app-core";
 import { OnInit, AfterViewInit, Injector, ViewChild } from "@angular/core";
@@ -8,9 +7,6 @@ import { TranslateService } from "@ngx-translate/core";
 export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>
   implements OnInit, AfterViewInit {
   ds: any[] = [];
-
-  @ViewChild(NarikNgbDataTable)
-  grid: NarikNgbDataTable;
 
   @NarikInject(TranslateService)
   translateService: TranslateService;

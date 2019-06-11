@@ -47,7 +47,7 @@ export class NarikMatSelect extends NarikMatSelectBase implements OnInit {
   optionData: any[] = [];
   filteredData: Observable<any[]>;
   textChanged = new Subject<{ filter: string; force: boolean }>();
-  @ViewChild("input")
+  @ViewChild("input", { static: false })
   input: ElementRef;
 
   isOver = false;

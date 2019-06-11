@@ -15,12 +15,11 @@ import {
 import { ActivatedRoute } from "@angular/router";
 import { ComponentLoaderHostDirective } from "narik-common";
 
-
 @Component({
   templateUrl: "form-container.component.html"
 })
 export class FormContainerComponent implements OnInit {
-  @ViewChild(ComponentLoaderHostDirective)
+  @ViewChild(ComponentLoaderHostDirective, { static: true })
   loaderHost: ComponentLoaderHostDirective;
 
   parameters: any = {};

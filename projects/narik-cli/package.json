@@ -1,6 +1,6 @@
 {
   "name": "narik",
-  "version": "1.0.25",
+  "version": "2.0.0",
   "scripts": {
     "build": "..\\..\\node_modules\\.bin\\tsc -p tsconfig.schematics.json",
     "copy:schemas": "node ../../build-tools/copy.js schematics\\*\\schema.json ..\\..\\dist\\narik-cli\\schematics\\ ",
@@ -10,8 +10,8 @@
     "postbuild": "npm run copy:schemas && npm run copy:files && npm run copy:collection"
   },
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0"
   },
   "schematics": "./schematics/collection.json",
   "repository": {
