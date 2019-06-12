@@ -22,3 +22,5 @@ export * from "./urlCreator/odata-url-creator";
 
 export * from "./narik-resource-base-authorization.service";
 export * from "./narik-role-base-authorization.service";
+
+export * from "./narik-validation.service";

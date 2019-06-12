@@ -9,7 +9,8 @@ import {
   UrlCreatorService,
   ConfigService,
   JsonService,
-  CommandProcessor
+  CommandProcessor,
+  ValidationService
 } from "narik-infrastructure";
 
 import { Type } from "@angular/core";
@@ -27,6 +28,7 @@ export interface NarikCoreModuleConfig {
   configService?: Type<ConfigService>;
   jsonService?: Type<JsonService>;
   commandProcessor?: Type<CommandProcessor>;
+  validationService?: Type<ValidationService>;
   defaultLang?: string;
   useDefaultLang?: boolean;
 }

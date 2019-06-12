@@ -21,7 +21,8 @@ import {
   CONFIG_PATH,
   ConfigService,
   JsonService,
-  CommandProcessor
+  CommandProcessor,
+  ValidationService
 } from "narik-infrastructure";
 import { ToastrModule } from "ngx-toastr";
 
@@ -58,6 +59,7 @@ import { NarikUrlCreatorService } from "./services/narik-url-creator.service";
 import { ApiUrlCreator } from "./services/urlCreator/api-url-creator";
 import { ODataUrlCreator } from "./services/urlCreator/odata-url-creator";
 import { NarikEmptyCommandProcessor } from "./services/narik-empty-command-processor.service";
+import { NarikValidationService } from "./services/narik-validation.service";
 
 @NgModule({
   imports: [ToastrModule.forRoot()],
@@ -192,6 +194,11 @@ export class NarikCoreModule {
             (config && config.moduleManagerService) || NarikModuleManager
         },
         {
+          provide: ValidationService,
+          useClass:
+            (config && config.validationService) || NarikValidationService
+        },
+        {
           provide: EventAggregatorService,
           useClass:
             (config && config.eventAggregatorService) ||
@@ -213,7 +220,8 @@ export class NarikCoreModule {
         },
         {
           provide: CommandProcessor,
-          useClass: (config && config.commandProcessor) || NarikEmptyCommandProcessor
+          useClass:
+            (config && config.commandProcessor) || NarikEmptyCommandProcessor
         },
         {
           provide: DEFAULT_LANG,

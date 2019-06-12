@@ -202,7 +202,8 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
         for (const errKey in form.controls[key].errors) {
           errors.push({
             key: key,
-            errKey: errKey
+            errKey: errKey,
+            errData: form.controls[key].errors[errKey]
           });
         }
       }
@@ -215,10 +216,19 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
           : item.key
           ? this.translateService.instant(item.key)
           : "";
+      const errorDataArray = [];
+      if (item.errData) {
+        for (const key in item.errData) {
+          if (item.errData.hasOwnProperty(key)) {
+            errorDataArray.push(item.errData[key]);
+          }
+        }
+      }
       errMessage +=
         formatString(
           this.translateService.instant("errors." + item.errKey),
-          label
+          label,
+          ...errorDataArray
         ) + "<br>";
     }
     this.dialogService.error(errMessage, "", {

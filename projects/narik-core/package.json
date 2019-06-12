@@ -1,11 +1,12 @@
 {
   "name": "narik-core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
     "@ngx-translate/core": "^11.0.1",
-    "ngx-toastr": "^10.0.4"
+    "ngx-toastr": "^10.0.4",
+    "ng2-validation": "^4.2.0"
   },
   "dependencies": {},
   "repository": {

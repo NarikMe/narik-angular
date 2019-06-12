@@ -21,3 +21,4 @@ export * from "./JsonService";
 export * from "./ConfigService";
 export * from "./RemoteMessagingService";
 export * from "./comandProcessor";
+export * from "./ValidationService";
