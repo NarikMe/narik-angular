@@ -44,7 +44,9 @@ export class NarikDynamicFormService extends DynamicFormService {
           order: x.order || 100,
           required: x.required,
           hideExpr: x.hideExpr,
-          disableExpr: x.disableExpr
+          disableExpr: x.disableExpr,
+          validators: x.validators,
+          validatorParams: x.validatorParams,
         }
     );
   }

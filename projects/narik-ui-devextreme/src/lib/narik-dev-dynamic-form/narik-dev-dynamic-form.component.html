@@ -9,40 +9,40 @@
         item.type == 'textArea' ||
         item.type == 'password'
       " [options]="item.options" placeHolder="{{ item.options.placeHolder | translate }}" [type]="item.type || 'text'"
-      label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.options.validators"
-      [narikValidatorParams]="item.options.validatorParams">
+      label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
+      [narikValidatorParams]="item.validatorParams">
     </narik-input>
 
     <narik-checkbox [name]="item.name" [options]="item.options" *ngIf="item.type == 'boolean'"
-      [(ngModel)]="model[item.model]" label="{{ item.label | translate }}" [narikValidator]="item.options.validators"
-      [narikValidatorParams]="item.options.validatorParams"></narik-checkbox>
+      [(ngModel)]="model[item.model]" label="{{ item.label | translate }}" [narikValidator]="item.validators"
+      [narikValidatorParams]="item.validatorParams"></narik-checkbox>
 
     <narik-date-picker [name]="item.name" [options]="item.options" [required]="item.required"
       *ngIf="item.type == 'date'" placeHolder="{{ item.options.placeHolder | translate }}"
-      [(ngModel)]="model[item.model]" label="{{ item.label | translate }}" [narikValidator]="item.options.validators"
-      [narikValidatorParams]="item.options.validatorParams"></narik-date-picker>
+      [(ngModel)]="model[item.model]" label="{{ item.label | translate }}" [narikValidator]="item.validators"
+      [narikValidatorParams]="item.validatorParams"></narik-date-picker>
 
     <narik-select [name]="item.name" [options]="item.options" [required]="item.required" *ngIf="item.type == 'select'"
       placeHolder="{{ item.options.placeHolder | translate }}" [dataInfo]="item.dataInfo"
-      label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.options.validators"
-      [narikValidatorParams]="item.options.validatorParams"></narik-select>
+      label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
+      [narikValidatorParams]="item.validatorParams"></narik-select>
 
     <narik-autocomplete [name]="item.name" [options]="item.options" [required]="item.required"
       *ngIf="item.type == 'autoComplete'" placeHolder="{{ item.options.placeHolder | translate }}"
       [minSearchLength]="item.options.minSearchLength || 0" [isLazyLoadData]="item.options.isLazyLoadData"
       [dataInfo]="item.dataInfo" label="{{ item.label | translate }}" [(ngModel)]="model[item.model]"
-      [narikValidator]="item.options.validators" [narikValidatorParams]="item.options.validatorParams">
+      [narikValidator]="item.validators" [narikValidatorParams]="item.validatorParams">
     </narik-autocomplete>
 
     <narik-radio-group [name]="item.name" [options]="item.options" [required]="item.required"
       *ngIf="item.type == 'radio'" placeHolder="{{ item.options.placeHolder | translate }}" [dataInfo]="item.dataInfo"
-      label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.options.validators"
-      [narikValidatorParams]="item.options.validatorParams"></narik-radio-group>
+      label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
+      [narikValidatorParams]="item.validatorParams"></narik-radio-group>
 
     <narik-dev-checkbox-list [name]="item.name" [options]="item.options" [required]="item.required"
       *ngIf="item.type == 'checkList'" placeHolder="{{ item.options.placeHolder | translate }}"
       [dataInfo]="item.dataInfo" label="{{ item.label | translate }}" [(ngModel)]="model[item.model]"
-      [narikValidator]="item.options.validators" [narikValidatorParams]="item.options.validatorParams">
+      [narikValidator]="item.validators" [narikValidatorParams]="item.validatorParams">
     </narik-dev-checkbox-list>
 
 

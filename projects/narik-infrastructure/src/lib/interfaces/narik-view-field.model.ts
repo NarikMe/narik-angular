@@ -1,7 +1,5 @@
 import { DataInfo } from "./data-info.model";
 
-
-
 /**
  * Narik view field
  */
@@ -20,8 +18,9 @@ export interface NarikViewField {
   required?: boolean;
   hideExpr?: string;
   disableExpr?: string;
+  validators?: string[];
+  validatorParams?: any;
 }
-
 
 /**
  * Determines whether narik view field is

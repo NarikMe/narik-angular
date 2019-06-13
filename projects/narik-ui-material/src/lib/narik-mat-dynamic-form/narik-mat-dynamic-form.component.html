@@ -80,8 +80,8 @@
         [type]="item.type || 'text'"
         label="{{ item.label | translate }}"
         [(ngModel)]="model[item.model]"
-        [narikValidator]="item.options.validators"
-        [narikValidatorParams]="item.options.validatorParams"
+        [narikValidator]="item.validators"
+        [narikValidatorParams]="item.validatorParams"
         [options]="item.options"
       >
       </narik-mat-input>
@@ -92,8 +92,8 @@
         [disabled]="item.disableExpr && disableItems[item.name]"
         [options]="item.options"
         [(ngModel)]="model[item.model]"
-        [narikValidator]="item.options.validators"
-        [narikValidatorParams]="item.options.validatorParams"
+        [narikValidator]="item.validators"
+        [narikValidatorParams]="item.validatorParams"
         label="{{ item.label | translate }}"
       ></narik-mat-checkbox>
     </ng-container>
@@ -105,8 +105,8 @@
         [required]="item.required"
         placeHolder="{{ item.options.placeHolder | translate }}"
         [(ngModel)]="model[item.model]"
-        [narikValidator]="item.options.validators"
-        [narikValidatorParams]="item.options.validatorParams"
+        [narikValidator]="item.validators"
+        [narikValidatorParams]="item.validatorParams"
         label="{{ item.label | translate }}"
       ></narik-mat-date-picker>
     </ng-container>
@@ -120,8 +120,8 @@
         [dataInfo]="item.dataInfo"
         label="{{ item.label | translate }}"
         [(ngModel)]="model[item.model]"
-        [narikValidator]="item.options.validators"
-        [narikValidatorParams]="item.options.validatorParams"
+        [narikValidator]="item.validators"
+        [narikValidatorParams]="item.validatorParams"
       ></narik-mat-select>
     </ng-container>
     <ng-container *ngIf="item.type == 'autoComplete'">
@@ -136,8 +136,8 @@
         [dataInfo]="item.dataInfo"
         label="{{ item.label | translate }}"
         [(ngModel)]="model[item.model]"
-        [narikValidator]="item.options.validators"
-        [narikValidatorParams]="item.options.validatorParams"
+        [narikValidator]="item.validators"
+        [narikValidatorParams]="item.validatorParams"
       ></narik-mat-autocomplete>
     </ng-container>
     <ng-container *ngIf="item.type == 'radio'">
@@ -150,8 +150,8 @@
         [dataInfo]="item.dataInfo"
         label="{{ item.label | translate }}"
         [(ngModel)]="model[item.model]"
-        [narikValidator]="item.options.validators"
-        [narikValidatorParams]="item.options.validatorParams"
+        [narikValidator]="item.validators"
+        [narikValidatorParams]="item.validatorParams"
       ></narik-mat-radio-group>
     </ng-container>
     <ng-container *ngIf="item.type == 'checkList'">
@@ -164,8 +164,8 @@
         [dataInfo]="item.dataInfo"
         label="{{ item.label | translate }}"
         [(ngModel)]="model[item.model]"
-        [narikValidator]="item.options.validators"
-        [narikValidatorParams]="item.options.validatorParams"
+        [narikValidator]="item.validators"
+        [narikValidatorParams]="item.validatorParams"
       ></narik-mat-checkbox-list>
     </ng-container>
     <ng-container *ngIf="item.type == 'table-select'">
@@ -180,8 +180,8 @@
         [fields]="item.options ? item.options.fields :  undefined"
         [isLazyLoadData]="item.options.isLazyLoadData"
         [(ngModel)]="model[item.model]"
-        [narikValidator]="item.options.validators"
-        [narikValidatorParams]="item.options.validatorParams"
+        [narikValidator]="item.validators"
+        [narikValidatorParams]="item.validatorParams"
       ></narik-mat-data-table-select>
     </ng-container>
   </ng-container>

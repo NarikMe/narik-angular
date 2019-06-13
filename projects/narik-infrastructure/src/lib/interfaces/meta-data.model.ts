@@ -160,6 +160,8 @@ export interface EntityField {
   options?: any;
   hideExpr?: string;
   disableExpr?: string;
+  validators?: string[];
+  validatorParams?: any;
 }
 
 
