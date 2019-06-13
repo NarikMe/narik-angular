@@ -15,11 +15,13 @@ You can start narik in two ways:
     `
     ng new narik-project
     `
-    
+   
     2. Add Narik to project  
     `
     ng add narik 
     `
+
+    More information about **ng add narik** can be found in [Narik Schematics](https://github.com/NarikMe/narik-angular/wiki/19.-Narik-Schematics)
 - Clone any of Narik starters 
 
     [narik-material-starter](https://github.com/NarikMe/narik-material-starter)   
@@ -33,5 +35,6 @@ You can start narik in two ways:
     [narik-material-demo](https://github.com/NarikMe/narik-material-demo)   
     [narik-devextreme-demo](https://github.com/NarikMe/narik-devextreme-demo)  
     [narik-ng-bootstrap-demo](https://github.com/NarikMe/narik-ng-bootstrap-demo)  
-    [narik-primeng-demo](https://github.com/NarikMe/narik-primeng-demo)
+    [narik-primeng-demo](https://github.com/NarikMe/narik-primeng-demo)  
+    [narik-nebular-demo](https://github.com/NarikMe/narik-nebular-demo)
 
