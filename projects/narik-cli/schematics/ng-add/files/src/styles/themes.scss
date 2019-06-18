@@ -1,16 +1,15 @@
-// import Nebular Theme System and the default theme
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes';
 
-
-
-$nb-enabled-themes: (default, cosmic, corporate);
-$nb-themes: nb-register-theme(( // app wise variables for each theme
-sidebar-header-gap: 2rem,
-sidebar-header-height: initial,
-layout-content-width: 1400px,
-
-switcher-background: #ebeff5,
-switcher-background-percentage: 50%,
-drops-icon-line-gadient: -webkit-linear-gradient(#01dbb5, #0bbb79)
+$nb-themes: nb-register-theme((
+  // app wise variables for each theme
+  sidebar-header-gap: 2rem,
+  sidebar-header-height: initial,
+  layout-content-width: 1400px,
+  header-height: 5.45rem,
+  font-family-primary: Roboto,
+  font-family-secondary: Exo,
+  card-height-tiny: 13.5rem,
 ), default, default);
+
+

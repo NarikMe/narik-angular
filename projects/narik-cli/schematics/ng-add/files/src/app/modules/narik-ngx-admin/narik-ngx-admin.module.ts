@@ -11,8 +11,8 @@ import {
   NbSearchModule,
   NbSidebarModule,
   NbSidebarService,
-  NbIconModule,
-  NbUserModule
+  NbUserModule,
+  NbIconModule
 } from "@nebular/theme";
 import { RouterModule } from "@angular/router";
 

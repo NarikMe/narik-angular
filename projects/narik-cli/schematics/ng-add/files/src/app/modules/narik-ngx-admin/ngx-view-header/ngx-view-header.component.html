@@ -1,14 +1,15 @@
-<div class="header-container" [class.left]="position === 'normal'" [class.right]="position === 'inverse'">
-  <div class="logo-containter">
-    <a (click)="toggleSidebar()" href="#" class="navigation">
-      <nb-icon icon='menu-outline'></nb-icon>
+
+<div class="header-container">
+  <div class="logo-container">
+    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
-    <div class="logo" (click)="goToHome()">{{headerTitle}}</div>
+    <a class="logo" href="#" (click)="goToHome()">{{headerTitle}}</a>
   </div>
 </div>
 <div class="header-container">
-  <nb-actions size="medium" [class.right]="position === 'normal'" [class.left]="position === 'inverse'">
-    <nb-action style="margin-left:50px">
+  <nb-actions size="small">
+    <nb-action>
       <nb-user nbContextMenuTag="user-context-menu" [nbContextMenu]="userMenu" [name]="user?.title"
         [picture]="'assets/images/user-avatar.png'"></nb-user>
     </nb-action>

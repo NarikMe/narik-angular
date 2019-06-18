@@ -13,7 +13,10 @@ export class NgxHeaderComponent {
   @Input() headerTitle = "";
   user: any;
 
-  userMenu: NbMenuItem[] = [{ title: "Test Menu", data: "test-menu" }];
+  userMenu: NbMenuItem[] = [
+    { title: "changePass", data: "changePass" },
+    { title: "logout", data: "logout" }
+  ];
 
   constructor(
     private sidebarService: NbSidebarService,

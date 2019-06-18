@@ -3,14 +3,16 @@
     <ngx-view-header [headerTitle]='headerTitle' [position]="'normal'"></ngx-view-header>
   </nb-layout-header>
 
-  <nb-sidebar [end]='false' class="menu-sidebar" tag="menu-sidebar" responsive>
-    <nb-sidebar-header>
+
+  <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
+    <!-- <nb-sidebar-header >
       <a  class="btn btn-hero-success main-btn">
         <i class="nb-menu"></i> <span>{{menuHeader}}</span>
       </a>
-    </nb-sidebar-header>
+    </nb-sidebar-header> -->
     <nb-menu [items]="menuItems"></nb-menu>
   </nb-sidebar>
+
 
   <nb-layout-column>
     <nb-card>
@@ -21,6 +23,5 @@
         <router-outlet></router-outlet>
       </nb-card-body>
     </nb-card>
-
   </nb-layout-column>
 </nb-layout>

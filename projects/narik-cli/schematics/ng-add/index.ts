@@ -32,6 +32,8 @@ import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 const commonStyles = [
   "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
   "node_modules/ngx-toastr/toastr.css",
+  "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+  "node_modules/typeface-exo/index.css",
   "src/styles/styles.scss"
 ];
 
@@ -154,6 +156,14 @@ const commonDependencies: any[] = [
   {
     name: "ng2-validation",
     version: "^4.2.0"
+  },
+  {
+    name: "roboto-fontface",
+    version: "^0.10.0"
+  },
+  {
+    name: "typeface-exo",
+    version: "^0.0.61"
   },
   {
     name: "narik-infrastructure",
