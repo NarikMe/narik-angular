@@ -33,4 +33,4 @@ import { RouterModule } from "@angular/router";
   exports: [COMPONENTS],
   providers: [NbSidebarService]
 })
-export class NarikNgxAdmin {}
+export class NarikNgxLayout {}

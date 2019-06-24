@@ -31,7 +31,7 @@ import { DemoCommandProcessor } from "./services/command-processor.service";
 
 import { MainComponent } from './main/main.component';
 import { MainViewComponent } from './main-view/main-view.component';
-import { NarikNgxAdmin } from './modules/narik-ngx-admin/narik-ngx-admin.module';
+import { NarikNgxLayout } from './modules/narik-ngx-layout/narik-ngx-layout.module';
 import { ShareModule } from "./modules/share/share.module";
 
 const moduleKey = "main";
@@ -74,7 +74,7 @@ const moduleKey = "main";
     ),
     BrowserAnimationsModule,
     NarikClientStorageModule.forRoot(),
-    NarikNgxAdmin,
+    NarikNgxLayout,
     ShareModule
   ],
   providers: [

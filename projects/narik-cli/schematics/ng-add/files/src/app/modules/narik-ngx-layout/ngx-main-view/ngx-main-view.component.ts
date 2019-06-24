@@ -10,7 +10,7 @@ import { NbMenuItem } from "@nebular/theme";
 import { takeWhile } from "rxjs/internal/operators/takeWhile";
 
 @Component({
-  selector: "ngx-main-view",
+  selector: "main-view",
   templateUrl: "ngx-main-view.component.html",
   styleUrls: ["ngx-main-view.component.scss"]
 })
