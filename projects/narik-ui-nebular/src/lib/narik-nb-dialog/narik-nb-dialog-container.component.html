@@ -1,4 +1,4 @@
-<div class="modal-content" cdkDrag [tab-guard]="true">
+<div [@openClose]="isOpen ? 'open' : 'closed'" (@openClose.done)="_onAnimationDone($event)" class="modal-content" cdkDrag [tab-guard]="true">
   <div class="modal-header">
     <h5 cdkDragHandle class="modal-title">{{ title | translate }}</h5>
   </div>

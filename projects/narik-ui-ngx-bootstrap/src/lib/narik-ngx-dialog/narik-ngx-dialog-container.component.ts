@@ -1,29 +1,13 @@
-import { ComponentLoaderHostDirective } from "narik-common";
-import {
-  DialogAction,
-  DialogContainer,
-  DialogOption,
-  DialogRef
-} from "narik-infrastructure";
-
-import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { NarikDialogContainer, DialogAnimationBody } from "narik-core";
+import { trigger } from "@angular/animations";
 
 @Component({
   templateUrl: "narik-ngx-dialog-container.component.html",
-  styleUrls: ["narik-ngx-dialog-container.component.css"]
+  styleUrls: ["narik-ngx-dialog-container.component.css"],
+  animations: [trigger("openClose", DialogAnimationBody)]
 })
-export class NarikNgxDialogContainer implements DialogContainer, OnInit {
-  @ViewChild(ComponentLoaderHostDirective, { static: true })
-  loaderHost: ComponentLoaderHostDirective;
-  options: DialogOption;
-  title: string;
-  actions: DialogAction[] = [];
-  dialogRef: DialogRef<any>;
-  get contentContainerRef(): ViewContainerRef {
-    return this.loaderHost.viewContainerRef;
-  }
-
-  constructor() {}
-
+export class NarikNgxDialogContainer extends NarikDialogContainer
+  implements OnInit {
   ngOnInit() {}
 }

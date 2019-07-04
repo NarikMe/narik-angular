@@ -5,7 +5,8 @@ import {
   TemplateRef,
   Type,
   ViewContainerRef,
-  StaticProvider
+  StaticProvider,
+  EventEmitter
 } from "@angular/core";
 
 import { EntityField, FieldTypes } from "../interfaces/meta-data.model";
@@ -29,6 +30,8 @@ export interface DialogContainer {
   actions: DialogAction[];
   title: string;
   dialogRef: DialogRef<any>;
+  isOpen: boolean;
+  closeAnimationCompleted: EventEmitter<any>;
 }
 
 /**
@@ -172,7 +175,7 @@ export interface DialogRef<T> {
    */
   dialogResultTransformer: (result: DialogResult<T>) => DialogResult<T>;
   element: ElementRef<any>;
-
+  container: DialogContainer;
   /**
    * close the dialog
    * @param [dialogResult]  result that should be returned
@@ -199,7 +202,7 @@ export abstract class DialogService {
     options?: any
   ): any;
 
-   /**
+  /**
    * show an message
    * @param message  message.
    * @param [title] title of message
@@ -213,7 +216,6 @@ export abstract class DialogService {
     type?: MessageType,
     options?: any
   ): any;
-
 
   /**
    * Shows an component or template inside dialog.
@@ -240,7 +242,6 @@ export abstract class DialogService {
     providers?: StaticProvider[]
   ): DialogRef<T>;
 
-
   /**
    * Shows confirm message
    * @param message message
@@ -256,7 +257,6 @@ export abstract class DialogService {
     onResult?: (dialogresult: DialogResult<any>) => void
   ): DialogRef<any>;
 
-
   /**
    * Shows message box
    * @param message message
@@ -264,7 +264,6 @@ export abstract class DialogService {
    * @returns message box dialog
    */
   abstract showMessageBox(message: string, title?: string): DialogRef<any>;
-
 
   /**
    * Shows input dialog (a dialog that contains dynamic form elements)
@@ -319,7 +318,6 @@ export abstract class DialogService {
    */
   abstract showContent(content: string, title?: string): DialogRef<any>;
 
-
   /**
    * Closes dialog
    * @param dialog  dialog
@@ -331,7 +329,6 @@ export abstract class DialogService {
     dialogResult?: DialogResult<any>,
     eventSource?: "DIALOG" | "CONTENT"
   );
-
 
   /**
    * Closes all open dialogs

@@ -1,39 +1,13 @@
-import { ComponentLoaderHostDirective } from "narik-common";
-import {
-  DialogAction,
-  DialogContainer,
-  DialogOption,
-  DialogRef
-} from "narik-infrastructure";
-
-import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { trigger } from "@angular/animations";
+import { NarikDialogContainer, DialogAnimationBody } from "narik-core";
 
 @Component({
   templateUrl: "narik-mat-dialog-container.component.html",
-  styleUrls: ["narik-mat-dialog-container.component.css"]
+  styleUrls: ["narik-mat-dialog-container.component.css"],
+  animations: [trigger("openClose", DialogAnimationBody)]
 })
-export class NarikMatDialogContainer implements DialogContainer, OnInit {
-  @ViewChild(ComponentLoaderHostDirective, { static: true })
-  loaderHost: ComponentLoaderHostDirective;
-  options: DialogOption;
-  title: string;
-  actions: DialogAction[] = [];
-  dialogRef: DialogRef<any>;
-  get contentContainerRef(): ViewContainerRef {
-    return this.loaderHost.viewContainerRef;
-  }
-
-  constructor() {}
-
+export class NarikMatDialogContainer extends NarikDialogContainer
+  implements OnInit {
   ngOnInit() {}
-
-  actionClick(item: DialogAction) {
-    this.dialogRef.close(
-      {
-        componentInstance: this.dialogRef.componentInstance,
-        dialogResult: item.dialogResult
-      },
-      "DIALOG"
-    );
-  }
 }

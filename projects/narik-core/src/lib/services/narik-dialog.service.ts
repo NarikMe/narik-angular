@@ -51,6 +51,7 @@ import {
 import { ToastrService } from "ngx-toastr";
 import { TranslateService } from "@ngx-translate/core";
 import { OverlayContainer, Overlay } from "@angular/cdk/overlay";
+import { take } from "rxjs/internal/operators/take";
 
 @Injectable({
   providedIn: "root"
@@ -190,6 +191,7 @@ export class NarikDialogService extends DialogService {
     const dialogOverlayContainerRef = containers.overLaycontainer;
 
     const result = new NarikDialogRef<T>("dialog-" + UUID.UUID(), null);
+    result.container = dialogContainerRef.instance;
     if (content instanceof TemplateRef) {
       const dialogContent = dialogContainerRef.instance.contentContainerRef.createEmbeddedView(
         content
@@ -217,7 +219,6 @@ export class NarikDialogService extends DialogService {
       );
 
       result.componentInstance = dialogContent.instance;
-      result.element = dialogOverlayContainerRef.location.nativeElement;
 
       if (data) {
         for (const key in data) {
@@ -228,16 +229,14 @@ export class NarikDialogService extends DialogService {
         }
       }
     }
-
+    result.element = dialogOverlayContainerRef.location.nativeElement;
     const overlayContainer = this.injector.get(OverlayContainer, undefined);
     if (overlayContainer) {
       const host = overlayContainer.getContainerElement();
-      // //Overlay
       const pane = this.document.createElement("div");
       pane.id = `cdk-overlay-dialog-${this.nextUniqueId++}`;
       pane.classList.add("cdk-overlay-pane");
       host.appendChild(pane);
-
       pane.appendChild(dialogOverlayContainerRef.location.nativeElement);
     } else {
       this.document.body.appendChild(
@@ -245,6 +244,9 @@ export class NarikDialogService extends DialogService {
       );
     }
 
+    setTimeout(() => {
+      dialogContainerRef.instance.isOpen = true;
+    }, 100);
     dialogOverlayContainerRef.instance.dialogRef = result;
     dialogContainerRef.instance.dialogRef = result;
 
@@ -405,6 +407,21 @@ export class NarikDialogService extends DialogService {
     } else {
       _dialog = dialog as DialogRef<any>;
     }
+    if (_dialog.container.closeAnimationCompleted) {
+      _dialog.container.closeAnimationCompleted.pipe(take(1)).subscribe(x => {
+        this.doClose(_dialog, dialogResult, eventSource);
+      });
+      _dialog.container.isOpen = false;
+    } else {
+      this.doClose(_dialog, dialogResult, eventSource);
+    }
+  }
+
+  private doClose(
+    _dialog: DialogRef<any>,
+    dialogResult?: DialogResult<any>,
+    eventSource?: "DIALOG" | "CONTENT"
+  ) {
     _dialog.events.next({
       eventType: "CLOSED",
       eventData: dialogResult,
@@ -460,6 +477,7 @@ export class NarikDialogRef<T> implements DialogRef<T> {
   public eventSubject = new ReplaySubject<DialogEvent>(10);
   id: string;
   componentInstance: T;
+  container: DialogContainer;
   dialogOverlayContainerRef: ComponentRef<any>;
   get closed(): Promise<DialogResult<T>> {
     return this._closed;
