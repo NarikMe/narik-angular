@@ -30,7 +30,5 @@ export class NarikNgxButtonComponent extends NarikButton
     super(injector);
   }
 
-  ngOnInit() {}
-
   ngAfterViewInit(): void {}
 }

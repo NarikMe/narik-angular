@@ -28,8 +28,13 @@ export class NarikPrimeButtonComponent extends NarikButton
   }
 
   ngOnInit() {
-    if (!this.cssClass) this.cssClass = this.options.cssClass;
-    if (!this.buttonStyle) this.buttonStyle = this.options.buttonStyle;
+    super.ngOnInit();
+    if (!this.cssClass) {
+      this.cssClass = this.options.cssClass;
+    }
+    if (!this.buttonStyle) {
+      this.buttonStyle = this.options.buttonStyle;
+    }
   }
 
   ngAfterViewInit(): void {}

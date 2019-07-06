@@ -43,8 +43,6 @@ export class NarikMatButtonComponent extends NarikButton
     this.cssClass = this.defaultOptions.cssClass;
   }
 
-  ngOnInit() {}
-
   ngAfterViewInit(): void {
     this.setDisabledState();
   }

@@ -36,6 +36,7 @@ export class NarikNebularButtonComponent extends NarikButton
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.buttonStyle = this.buttonStyle || this.defaultOptions.buttonStyle;
     this.busyFontIcon = this.busyFontIcon || this.defaultOptions.busyFontIcon;
   }

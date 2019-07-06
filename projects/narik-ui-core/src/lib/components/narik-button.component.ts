@@ -1,12 +1,30 @@
+import { NarikInject } from "narik-core";
 import {
   Input,
   Output,
   EventEmitter,
   AfterViewInit,
-  Injector
+  Injector,
+  ElementRef,
+  OnInit
 } from "@angular/core";
 import { NarikUiComponent } from "../base/narik-ui-component";
-export class NarikButton extends NarikUiComponent implements AfterViewInit {
+import { ShortcutService, DialogService } from "narik-infrastructure";
+import { UUID } from "angular2-uuid";
+import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { filter } from "rxjs/internal/operators/filter";
+
+export class NarikButton extends NarikUiComponent
+  implements AfterViewInit, OnInit {
+  @NarikInject(ShortcutService)
+  shortcutService: ShortcutService;
+
+  @NarikInject(DialogService)
+  dialogService: DialogService;
+
+  @NarikInject(ElementRef)
+  element: ElementRef;
+
   get uiKey(): string {
     return "button";
   }
@@ -31,6 +49,9 @@ export class NarikButton extends NarikUiComponent implements AfterViewInit {
   get isBusy(): boolean {
     return this._isBusy;
   }
+
+  @Input()
+  shortcut: string;
 
   @Input()
   cssClass: string;
@@ -69,6 +90,33 @@ export class NarikButton extends NarikUiComponent implements AfterViewInit {
     super(injector);
   }
 
+  ngOnInit() {
+    if (this.shortcut) {
+      const uniqueId = UUID.UUID();
+      this.shortcutService
+        .addShortcut({
+          keys: this.shortcut,
+          description: this.tooltip || this.label,
+          uniqueId: uniqueId
+        })
+        .pipe(
+          takeWhile(x => this.isAlive),
+          filter(
+            (x: any) =>
+              x.uniqueId === uniqueId &&
+              this.dialogService.isElementInActiveDialog(this.element)
+          )
+        )
+        .subscribe(x => {
+          if (!this.disable && !this.isBusy) {
+            this.nClick.emit({
+              sender: this,
+              event: {}
+            });
+          }
+        });
+    }
+  }
   ngAfterViewInit(): void {
     this.setDisabledState(this.isBusy || this.disable);
   }
