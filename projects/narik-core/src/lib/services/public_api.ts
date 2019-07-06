@@ -24,3 +24,5 @@ export * from "./narik-resource-base-authorization.service";
 export * from "./narik-role-base-authorization.service";
 
 export * from "./narik-validation.service";
+
+export * from "./narik-shortcut.service";

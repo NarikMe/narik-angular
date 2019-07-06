@@ -37,7 +37,9 @@ import {
   ComponentFactory,
   NgModuleRef,
   ElementRef,
-  StaticProvider
+  StaticProvider,
+  Renderer2,
+  RendererFactory2
 } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { ReplaySubject } from "rxjs/internal/ReplaySubject";
@@ -77,6 +79,9 @@ export class NarikDialogService extends DialogService {
 
   @NarikGlobalInject(DIALOG_CONTAINER)
   dialogContainerType: Type<DialogContainer>;
+
+  @NarikInject(RendererFactory2)
+  rendererFactory: RendererFactory2;
 
   componentFactories = new Map<
     Type<any>,
@@ -130,6 +135,26 @@ export class NarikDialogService extends DialogService {
       this.injectors.push(injector);
     }
   }
+
+  activeDialogId(): string {
+    const itemKeys = this.openDialogs.entriesArray();
+    if (itemKeys.length > 0) {
+      return itemKeys[itemKeys.length - 1].key;
+    }
+    return undefined;
+  }
+
+  isElementInActiveDialog(el: ElementRef): boolean {
+    const activeDialogId = this.activeDialogId();
+    if (!activeDialogId) {
+      return true;
+    }
+    const parent = el.nativeElement.closest(
+      `[narik-dialog-id="${activeDialogId}"]`
+    );
+    return !!parent;
+  }
+
   error(message: string | string[] | any, title?: string, options?: any) {
     this.showMessage(message, title, MessageType.Error, options);
   }
@@ -191,6 +216,12 @@ export class NarikDialogService extends DialogService {
     const dialogOverlayContainerRef = containers.overLaycontainer;
 
     const result = new NarikDialogRef<T>("dialog-" + UUID.UUID(), null);
+    const renderer = this.rendererFactory.createRenderer(null, null);
+    renderer.setAttribute(
+      dialogContainerRef.location.nativeElement,
+      "narik-dialog-id",
+      result.id
+    );
     result.container = dialogContainerRef.instance;
     if (content instanceof TemplateRef) {
       const dialogContent = dialogContainerRef.instance.contentContainerRef.createEmbeddedView(

@@ -1,9 +1,12 @@
+import { UUID } from "angular2-uuid";
 import {
   MetaDataService,
   MODULE_UI_KEY,
   DefaultMetaDataKeys,
   CommandHost,
-  CommandInfo
+  CommandInfo,
+  ShortcutService,
+  DialogService
 } from "narik-infrastructure";
 import { NarikInject } from "narik-core";
 import {
@@ -12,12 +15,15 @@ import {
   Input,
   OnInit,
   Injector,
-  ViewContainerRef
+  ViewContainerRef,
+  ElementRef
 } from "@angular/core";
 import { isString, isArray } from "narik-common";
 import { evalStringExpression } from "narik-common";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
 import { NarikUiComponent } from "../base/narik-ui-component";
+import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { filter } from "rxjs/internal/operators/filter";
 
 export interface ToolBarInfo {
   key: string;
@@ -34,6 +40,7 @@ export interface ToolBarItem {
   hideExpr?: string;
   disableExpr?: string;
   busyExpr?: string;
+  shortcut?: string;
   items?: (ToolBarItem | string)[];
 }
 export class NarikToolBar extends NarikUiComponent implements OnInit {
@@ -81,6 +88,15 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
   @NarikInject(MODULE_UI_KEY)
   defaultModuleKey: string;
 
+  @NarikInject(ShortcutService)
+  shortcutService: ShortcutService;
+
+  @NarikInject(DialogService)
+  dialogService: DialogService;
+
+  @NarikInject(ElementRef)
+  element: ElementRef;
+
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);
     if (viewContainerRef && viewContainerRef["_view"]) {
@@ -101,6 +117,29 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
         this.host.change.pipe(debounceTime(100)).subscribe(x => {
           this.applyContextExpressions();
         });
+      }
+      const uniqueId = UUID.UUID();
+
+      for (const item of this.items) {
+        if (item.shortcut) {
+          this.shortcutService
+            .addShortcut({
+              keys: item.shortcut,
+              description: item.hint,
+              uniqueId: uniqueId
+            })
+            .pipe(
+              takeWhile(x => this.isAlive),
+              filter(
+                (x: any) =>
+                  x.uniqueId === uniqueId &&
+                  this.dialogService.isElementInActiveDialog(this.element)
+              )
+            )
+            .subscribe(x => {
+              this.itemCommand(item);
+            });
+        }
       }
     }
   }
@@ -158,6 +197,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
         itemType: tItem.itemType || "button",
         hint: tItem.hint || tItem.key + "_command_hint",
         data: tItem.data,
+        shortcut: tItem.shortcut,
         items: tItem.items ? tItem.items.map(x => this.toToolbarItem(x)) : [],
         label: tItem.label || tItem.key,
         hideExpr: tItem.hideExpr

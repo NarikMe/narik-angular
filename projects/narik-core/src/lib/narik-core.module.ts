@@ -22,7 +22,8 @@ import {
   ConfigService,
   JsonService,
   CommandProcessor,
-  ValidationService
+  ValidationService,
+  ShortcutService
 } from "narik-infrastructure";
 import { ToastrModule } from "ngx-toastr";
 
@@ -60,6 +61,7 @@ import { ApiUrlCreator } from "./services/urlCreator/api-url-creator";
 import { ODataUrlCreator } from "./services/urlCreator/odata-url-creator";
 import { NarikEmptyCommandProcessor } from "./services/narik-empty-command-processor.service";
 import { NarikValidationService } from "./services/narik-validation.service";
+import { NarikShortcutService } from "./services/narik-shortcut.service";
 
 @NgModule({
   imports: [ToastrModule.forRoot()],
@@ -241,6 +243,10 @@ export class NarikCoreModule {
           useFactory: initConfig,
           deps: [ConfigService, ModuleManager],
           multi: true
+        },
+        {
+          provide: ShortcutService,
+          useClass: NarikShortcutService
         }
       ]
     };

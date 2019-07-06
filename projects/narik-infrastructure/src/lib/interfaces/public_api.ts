@@ -7,3 +7,4 @@ export * from "./narik-view-field.model";
 export * from "./dataSource";
 export * from "./filter";
 export * from "./narik-form";
+export * from "./shortcut-option";

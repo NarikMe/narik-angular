@@ -190,6 +190,18 @@ export interface DialogRef<T> {
  */
 export abstract class DialogService {
   /**
+   * return active dialog id
+   * @returns active dialog id
+   */
+  abstract activeDialogId(): string;
+
+  /**
+   * check element is inside active dialog
+   * @returns boolean
+   */
+  abstract isElementInActiveDialog(el: ElementRef): boolean;
+
+  /**
    * show an error
    * @param message error message.
    * @param [title] title of error
