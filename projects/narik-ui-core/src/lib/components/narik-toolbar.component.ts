@@ -18,7 +18,7 @@ import {
   ViewContainerRef,
   ElementRef
 } from "@angular/core";
-import { isString, isArray } from "narik-common";
+import { isString, isArray , isElementVisible } from "narik-common";
 import { evalStringExpression } from "narik-common";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
 import { NarikUiComponent } from "../base/narik-ui-component";
@@ -133,6 +133,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
               filter(
                 (x: any) =>
                   x.uniqueId === uniqueId &&
+                  isElementVisible(this.element) &&
                   this.dialogService.isElementInActiveDialog(this.element)
               )
             )

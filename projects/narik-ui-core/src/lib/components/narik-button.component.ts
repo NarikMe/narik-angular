@@ -1,18 +1,21 @@
-import { NarikInject } from "narik-core";
-import {
-  Input,
-  Output,
-  EventEmitter,
-  AfterViewInit,
-  Injector,
-  ElementRef,
-  OnInit
-} from "@angular/core";
-import { NarikUiComponent } from "../base/narik-ui-component";
-import { ShortcutService, DialogService } from "narik-infrastructure";
 import { UUID } from "angular2-uuid";
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { isElementVisible } from "narik-common";
+import { NarikInject } from "narik-core";
+import { DialogService, ShortcutService } from "narik-infrastructure";
 import { filter } from "rxjs/internal/operators/filter";
+import { takeWhile } from "rxjs/internal/operators/takeWhile";
+
+import {
+  AfterViewInit,
+  ElementRef,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output
+} from "@angular/core";
+
+import { NarikUiComponent } from "../base/narik-ui-component";
 
 export class NarikButton extends NarikUiComponent
   implements AfterViewInit, OnInit {
@@ -104,6 +107,7 @@ export class NarikButton extends NarikUiComponent
           filter(
             (x: any) =>
               x.uniqueId === uniqueId &&
+              isElementVisible(this.element) &&
               this.dialogService.isElementInActiveDialog(this.element)
           )
         )
