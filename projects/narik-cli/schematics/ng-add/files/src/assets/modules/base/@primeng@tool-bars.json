@@ -4,22 +4,26 @@
     "items": [
       {
         "key": "new",
-        "icon": "plus"
+        "icon": "plus",
+        "shortcut": "control.alt.n"
       },
       {
         "key": "save",
-        "disableExpr": "host.config.readOnly"
+        "disableExpr": "host.config.readOnly",
+        "shortcut": "control.s"
       },
       {
         "key": "delete",
         "icon": "trash",
-        "disableExpr": "host.config.readOnly || !host.currentEntity || !host.currentEntity.viewModelId"
+        "disableExpr": "host.config.readOnly || !host.currentEntity || !host.currentEntity.viewModelId",
+        "shortcut": "control.d"
       },
       "-",
       {
         "key": "close",
         "icon": "times",
-        "hideExpr": "!host.isInDialog"
+        "hideExpr": "!host.isInDialog",
+        "shortcut": "control.x"
       }
     ]
   },
@@ -29,28 +33,33 @@
       {
         "key": "new",
         "icon": "plus",
-        "disableExpr": "host.config.readOnly"
+        "disableExpr": "host.config.readOnly",
+        "shortcut": "control.alt.n"
       },
       {
         "key": "edit",
         "icon": "circle-off",
-        "disableExpr": "host.config.readOnly || !host.selectedEntity "
+        "disableExpr": "host.config.readOnly || !host.selectedEntity ",
+        "shortcut": "control.e"
       },
       {
         "key": "delete",
         "icon": "trash",
-        "disableExpr": "host.config.readOnly "
+        "disableExpr": "host.config.readOnly ",
+        "shortcut": "control.d"
       },
       "-",
       {
         "key": "refresh",
-        "icon": "refresh"
+        "icon": "refresh",
+        "shortcut": "control.r"
       },
       "-",
       {
         "key": "close",
         "icon": "times",
-        "hideExpr": "!host.isInDialog"
+        "hideExpr": "!host.isInDialog",
+        "shortcut": "control.x"
       }
     ]
   },

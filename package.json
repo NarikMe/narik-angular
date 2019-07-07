@@ -60,7 +60,7 @@
     "ngx-bootstrap": "^4.2.0",
     "ngx-toastr": "^10.0.4",
     "primeicons": "^1.0.0",
-    "primeng": "^8.0.0-rc.1",
+    "primeng": "^8.0.0",
     "rxjs": "^6.5.2",
     "zone.js": "^0.9.1"
   },

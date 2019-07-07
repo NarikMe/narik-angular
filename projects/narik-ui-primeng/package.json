@@ -1,11 +1,11 @@
 {
   "name": "narik-ui-primeng",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
     "primeicons": "^1.0.0",
-    "primeng": "^8.0.0-rc.1",
+    "primeng": "^8.0.0",
     "@angular/flex-layout": "^8.0.0-beta.26"
   },
   "repository": {

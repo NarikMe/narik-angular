@@ -1,53 +1,66 @@
 {
   "detailToolBar": {
     "key": "detailToolBar",
-    "items": [{
+    "items": [
+      {
         "key": "new",
-        "icon": "plus-outline"
+        "icon": "plus-outline",
+        "shortcut": "control.alt.n"
       },
       {
         "key": "save",
-        "disableExpr": "host.config.readOnly"
+        "disableExpr": "host.config.readOnly",
+        "shortcut": "control.s"
       },
       {
         "key": "delete",
-        "icon":"trash-2-outline",
-        "disableExpr": "host.config.readOnly || !host.currentEntity || !host.currentEntity.viewModelId"
+        "icon": "trash-2-outline",
+        "disableExpr": "host.config.readOnly || !host.currentEntity || !host.currentEntity.viewModelId",
+        "shortcut": "control.d"
       },
       {
         "key": "close",
-        "hideExpr": "!host.isInDialog"
+        "hideExpr": "!host.isInDialog",
+        "shortcut": "control.x"
       }
     ]
   },
   "listToolBar": {
     "key": "listToolBar",
-    "items": [{
+    "items": [
+      {
         "key": "new",
         "icon": "plus-outline",
-        "disableExpr": "host.config.readOnly"
+        "disableExpr": "host.config.readOnly",
+        "shortcut": "control.alt.n"
       },
       {
         "key": "edit",
-        "disableExpr": "host.config.readOnly || !host.selectedEntity "
+        "disableExpr": "host.config.readOnly || !host.selectedEntity ",
+        "shortcut": "control.e"
       },
       {
         "key": "delete",
-        "icon":"trash-2-outline",
-        "disableExpr": "host.config.readOnly "
-
+        "icon": "trash-2-outline",
+        "disableExpr": "host.config.readOnly ",
+        "shortcut": "control.d"
       },
       "-",
-      "refresh",
+      {
+        "key": "refresh",
+        "shortcut": "control.r"
+      },
       {
         "key": "close",
-        "hideExpr": "!host.isInDialog"
+        "hideExpr": "!host.isInDialog",
+        "shortcut": "control.x"
       }
     ]
   },
   "addRemoveToolBar": {
     "key": "addRemoveToolBar",
-    "items": [{
+    "items": [
+      {
         "key": "add",
         "icon": "add"
       },

@@ -16,9 +16,10 @@ import {
   OnInit,
   Injector,
   ViewContainerRef,
-  ElementRef
+  ElementRef,
+  HostBinding
 } from "@angular/core";
-import { isString, isArray , isElementVisible } from "narik-common";
+import { isString, isArray, isElementVisible } from "narik-common";
 import { evalStringExpression } from "narik-common";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
 import { NarikUiComponent } from "../base/narik-ui-component";
@@ -96,6 +97,9 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
 
   @NarikInject(ElementRef)
   element: ElementRef;
+
+  @HostBinding("style.display")
+  display = "block";
 
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);
