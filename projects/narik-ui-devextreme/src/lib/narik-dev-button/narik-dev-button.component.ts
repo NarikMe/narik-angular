@@ -1,4 +1,5 @@
 import { NarikInject } from "narik-core";
+import { UUID } from "angular2-uuid";
 import {
   Component,
   OnInit,
@@ -19,6 +20,9 @@ import {
 })
 export class NarikDevButtonComponent extends NarikButton
   implements OnInit, AfterViewInit {
+  showTooltip=false;
+  uniqueId = "";
+
   @NarikInject(BUTTON_DEFAULT_OPTIONS, {
     buttonStyle: "mat-raised-button",
     busyFontIcon: "fa-spinner"
@@ -35,6 +39,7 @@ export class NarikDevButtonComponent extends NarikButton
     this.buttonStyle = this.defaultOptions.buttonStyle;
     this.busyFontIcon = this.defaultOptions.busyFontIcon;
     this.cssClass = this.defaultOptions.cssClass;
+    this.uniqueId =  UUID.UUID();
   }
 
   buttonClick(e) {

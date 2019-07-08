@@ -1,17 +1,22 @@
-import { NgModule } from "@angular/core";
+import { NarikCommonModule } from "narik-common";
 
-import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { NarikNgbToolBar } from "./narik-ngb-toolbar.component";
+import { NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateModule } from "@ngx-translate/core";
+
 import { NarikNgbButtonModule } from "../narik-ngb-button/narik-ngb-button.module";
+import { NarikNgbToolBar } from "./narik-ngb-toolbar.component";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NarikNgbButtonModule,
-    TranslateModule
+    TranslateModule,
+    NgbTooltipModule,
+    NarikCommonModule
   ],
   declarations: [NarikNgbToolBar],
   exports: [NarikNgbToolBar],

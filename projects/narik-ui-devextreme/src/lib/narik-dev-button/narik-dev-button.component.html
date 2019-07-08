@@ -1,4 +1,5 @@
-<dx-button text="{{ isBusy && busyLabel ? busyLabel : label}}" [icon]="icon" [type]="color" [stylingMode]="buttonStyle"
+<dx-button id="bu-{{uniqueId}}" text="{{ isBusy && busyLabel ? busyLabel : label}}" [icon]="icon" [type]="color"
+  (mouseenter)="showTooltip=true" (mouseleave)="showTooltip=false" [stylingMode]="buttonStyle"
   [disabled]="disable || isBusy" (onClick)="buttonClick($event)">
 
   <div *dxTemplate="let data of 'content'">
@@ -7,7 +8,12 @@
     <i *ngIf="icon && !icon.startsWith('fa-')" class="dx-icon dx-icon-{{icon}}"></i>
     <i *ngIf="icon && icon.startsWith('fa-')" class="dx-icon fas {{icon}}"></i>
     <span class='dx-button-text'>{{ isBusy && busyLabel ? busyLabel : label}}</span>
+
+    <dx-tooltip *ngIf="tooltip || (options.appendShortcutToTooltip && shortcut)" target="#bu-{{uniqueId}}"
+      [(visible)]="showTooltip">
+      <div *dxTemplate="let data = data of 'content'">
+        {{ (tooltip ?  (tooltip | translate) : '') + ( options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )}}
+      </div>
+    </dx-tooltip>
   </div>
-
-
 </dx-button>

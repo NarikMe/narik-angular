@@ -1,5 +1,8 @@
-<button ngbTooltip="{{tooltip}}" placement="bottom" (click)="buttonClick($event)" [disabled]="disable || isBusy" class="btn btn-{{buttonStyle}}" type="button"
-[ngClass]='cssClass'>
+<button
+  ngbTooltip="{{(tooltip ?  (tooltip | translate) : '') + ( options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )}}"
+  container="body"
+  placement="bottom" (click)="buttonClick($event)" [disabled]="disable || isBusy" class="btn btn-{{buttonStyle}}"
+  type="button" [ngClass]='cssClass'>
   <span *ngIf="isBusy" class="mx-1 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
   <i *ngIf="icon" class="fa fa-{{icon}}"></i>
   {{ isBusy && busyLabel ? busyLabel : label}}

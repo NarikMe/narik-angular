@@ -12,8 +12,9 @@
       <ng-container *ngIf="item.itemType === 'button'">
         <narik-button
           class="toolbar-btn"
+          tooltipPosition="top"
           *ngIf="!item.hideExpr || !invisibleItems[item.key]"
-          tooltip="{{ item.hint | translate }}"
+          pTooltip="{{ (item.tooltip ?  (item.tooltip  | translate) : '') + ( options.appendShortcutToTooltip &&  item.shortcut ? '(' + (item.shortcut | shortcut ) +')' : '' ) }}"
           [disable]="item.disableExpr && disableItems[item.key]"
           [isBusy]="item.busyExpr && busyItems[item.key]"
           [cssClass]="itemsCssClass"

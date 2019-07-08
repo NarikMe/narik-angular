@@ -6,7 +6,8 @@
           [disable]="item.disableExpr && disableItems[item.key]" [isBusy]="item.busyExpr && busyItems[item.key]"
           [cssClass]="item.cssClass"
           (nClick)="itemCommand(item)" [buttonStyle]='"secondary"' [icon]="item.icon"
-          tooltip="{{ item.hint | translate}}"
+          ngbTooltip="{{ (item.tooltip ?  (item.tooltip  | translate) : '') + ( options.appendShortcutToTooltip &&  item.shortcut ? '(' + (item.shortcut | shortcut ) +')' : '' ) }}"
+          container="body"
           [label]="showLabel ? item.label : ''"></narik-button>
       </ng-container>
     </ng-container>

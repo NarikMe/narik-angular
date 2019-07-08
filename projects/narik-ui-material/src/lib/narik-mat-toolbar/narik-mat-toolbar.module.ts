@@ -1,13 +1,15 @@
-import { NgModule } from "@angular/core";
+import { NarikCommonModule } from "narik-common";
 
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { MatToolbarModule } from "@angular/material";
+import { MatDividerModule } from "@angular/material/divider";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { NarikMatToolBar } from "./narik-mat-toolbar.component";
+
 import { NarikMatButtonModule } from "../narik-mat-button/narik-mat-button.module";
-import { MatDividerModule } from "@angular/material/divider";
+import { NarikMatToolBar } from "./narik-mat-toolbar.component";
 
 @NgModule({
   imports: [
@@ -17,7 +19,8 @@ import { MatDividerModule } from "@angular/material/divider";
     NarikMatButtonModule,
     MatTooltipModule,
     TranslateModule,
-    MatDividerModule
+    MatDividerModule,
+    NarikCommonModule
   ],
   declarations: [NarikMatToolBar],
   exports: [NarikMatToolBar],

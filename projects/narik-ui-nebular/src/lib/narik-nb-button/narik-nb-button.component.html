@@ -1,22 +1,53 @@
-<button *ngIf="buttonStyle==='outline'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
-  outline [ngClass]='cssClass' nbButton>
-  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
-</button>
+<!-- https://github.com/akveo/nebular/issues/1687 -->
+<ng-container *ngIf="tooltip || (options.appendShortcutToTooltip && shortcut)">
+  <button *ngIf="buttonStyle==='outline'" (click)="buttonClick($event)" [disabled]="disable || isBusy"
+    status="{{color}}"
+    nbTooltip="{{ (tooltip ?  (tooltip | translate) : '') + ( options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' ) }}"
+    outline [ngClass]='cssClass' nbButton>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
 
-<button *ngIf="buttonStyle==='hero'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
-  hero [ngClass]='cssClass' nbButton>
-  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
-</button>
+  <button *ngIf="buttonStyle==='hero'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+    nbTooltip="{{ (tooltip ?  (tooltip | translate) : '') + ( options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' ) }}"
+    hero [ngClass]='cssClass' nbButton>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
 
-<button *ngIf="buttonStyle==='ghost'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
-  ghost [ngClass]='cssClass' nbButton>
-  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
-</button>
+  <button *ngIf="buttonStyle==='ghost'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+    nbTooltip="{{ (tooltip ?  (tooltip | translate) : '') + ( options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' ) }}"
+    ghost [ngClass]='cssClass' nbButton>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
 
-<button *ngIf="!buttonStyle" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
-  [ngClass]='cssClass' nbButton>
-  <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
-</button>
+  <button *ngIf="!buttonStyle" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+    nbTooltip="{{ (tooltip ?  (tooltip | translate) : '') + ( options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' ) }}"
+    [ngClass]='cssClass' nbButton>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
+
+</ng-container>
+
+<ng-container *ngIf="!(tooltip || (options.appendShortcutToTooltip && shortcut))">
+  <button *ngIf="buttonStyle==='outline'" (click)="buttonClick($event)" [disabled]="disable || isBusy"
+    status="{{color}}" outline [ngClass]='cssClass' nbButton>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
+
+  <button *ngIf="buttonStyle==='hero'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+    hero [ngClass]='cssClass' nbButton>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
+
+  <button *ngIf="buttonStyle==='ghost'" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+    ghost [ngClass]='cssClass' nbButton>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
+
+  <button *ngIf="!buttonStyle" (click)="buttonClick($event)" [disabled]="disable || isBusy" status="{{color}}"
+    [ngClass]='cssClass' nbButton>
+    <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
+  </button>
+</ng-container>
 
 <ng-template #buttonContent>
   <span *ngIf="isBusy" class="mx-1 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

@@ -10,7 +10,9 @@
     "uiDefaultOptions": [
       "$$uiDefaults.select",
       "$$uiDefaults.data-table",
-      "$$uiDefaults.data-table-select"
+      "$$uiDefaults.data-table-select",
+      "$$uiDefaults.button",
+      "$$uiDefaults.toolbar"
     ],
     "entities": [
       {

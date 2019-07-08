@@ -1,11 +1,17 @@
-import { NgModule } from "@angular/core";
+import { NarikCommonModule } from "narik-common";
 
-import { TranslateModule } from "@ngx-translate/core";
 import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { NarikNebularToolBar } from "./narik-nb-toolbar.component";
+import {
+  NbActionsModule,
+  NbCardModule,
+  NbIconModule,
+  NbTooltipModule
+} from "@nebular/theme";
+import { TranslateModule } from "@ngx-translate/core";
 
-import { NbActionsModule, NbCardModule, NbTooltipModule, NbIconModule } from "@nebular/theme";
+import { NarikNebularToolBar } from "./narik-nb-toolbar.component";
 
 @NgModule({
   imports: [
@@ -15,7 +21,8 @@ import { NbActionsModule, NbCardModule, NbTooltipModule, NbIconModule } from "@n
     NbCardModule,
     NbTooltipModule,
     NbIconModule,
-    TranslateModule
+    TranslateModule,
+    NarikCommonModule
   ],
   declarations: [NarikNebularToolBar],
   exports: [NarikNebularToolBar],

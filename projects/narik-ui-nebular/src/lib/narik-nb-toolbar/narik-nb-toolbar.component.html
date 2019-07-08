@@ -4,7 +4,9 @@
       <nb-actions size="small">
         <nb-action (click)="itemCommand(item)" *ngFor="let item of group"
           [disabled]="item.disableExpr && disableItems[item.key]" [hidden]='item.hideExpr && invisibleItems[item.key]'
-          nbTooltip="{{ item.hint | translate}}" icon="{{item.icon}}"></nb-action>
+          nbTooltip="{{ (item.tooltip ?  (item.tooltip  | translate) : '') + ( options.appendShortcutToTooltip &&  item.shortcut ? '(' + (item.shortcut | shortcut ) +')' : '' ) }}" 
+          icon="{{item.icon}}">
+        </nb-action>
       </nb-actions>
       <nb-icon class="toolbar-separator" icon="more-vertical-outline"></nb-icon>
     </ng-container>

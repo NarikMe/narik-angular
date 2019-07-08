@@ -1,9 +1,9 @@
 {
-  "new_command_hint": "New",
-  "edit_command_hint": "Edit",
-  "save_command_hint": "Save",
-  "delete_command_hint": "Delete",
-  "close_command_hint": "Close",
-  "refresh_command_hint": "Refresh",
-  "list_command_hint":"List"
+  "new_command_tooltip": "New",
+  "edit_command_tooltip": "Edit",
+  "save_command_tooltip": "Save",
+  "delete_command_tooltip": "Delete",
+  "close_command_tooltip": "Close",
+  "refresh_command_tooltip": "Refresh",
+  "list_command_tooltip":"List"
 }

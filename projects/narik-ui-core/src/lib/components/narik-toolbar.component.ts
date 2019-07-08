@@ -35,7 +35,7 @@ export interface ToolBarItem {
   key: string;
   itemType?: string;
   label?: string;
-  hint?: string;
+  tooltip?: string;
   icon?: string;
   data?: any;
   hideExpr?: string;
@@ -49,6 +49,10 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
   invisibleItems: any = {};
   disableItems: any = {};
   busyItems: any = {};
+
+  get uiKey(): string {
+    return "toolbar";
+  }
 
   @Input()
   showLabel: boolean;
@@ -129,7 +133,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
           this.shortcutService
             .addShortcut({
               keys: item.shortcut,
-              description: item.hint,
+              description: item.tooltip,
               uniqueId: uniqueId
             })
             .pipe(
@@ -190,7 +194,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
           key: item as string,
           icon: item as string,
           itemType: (item as string) === "-" ? "divider" : "button",
-          hint: (item as string) + "_command_hint"
+          tooltip: (item as string) + "_command_tooltip"
         };
       }
     } else {
@@ -200,7 +204,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
         key: tItem.key,
         icon: tItem.icon || tItem.key,
         itemType: tItem.itemType || "button",
-        hint: tItem.hint || tItem.key + "_command_hint",
+        tooltip: tItem.tooltip || tItem.key + "_command_tooltip",
         data: tItem.data,
         shortcut: tItem.shortcut,
         items: tItem.items ? tItem.items.map(x => this.toToolbarItem(x)) : [],
