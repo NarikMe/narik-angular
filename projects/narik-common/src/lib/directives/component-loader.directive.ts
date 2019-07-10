@@ -5,7 +5,7 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
   EventEmitter,
-  AfterViewInit
+  OnInit
 } from "@angular/core";
 
 /**
@@ -15,7 +15,7 @@ import {
 @Directive({
   selector: "[narikComponentLoader]"
 })
-export class NarikComponentLoaderDirective implements AfterViewInit {
+export class NarikComponentLoaderDirective implements OnInit {
   /**
    * Type of component.
    */
@@ -30,6 +30,18 @@ export class NarikComponentLoaderDirective implements AfterViewInit {
   @Input("narikComponentLoaderParameters")
   parameters: any;
 
+  /**
+   * Parameters that should be sent to component that should their changed be tracked.
+   */
+  @Input("narikComponentLoaderBindings")
+  bindings: any;
+
+  /**
+   * Source of BindingChanges.
+   */
+  @Input("narikComponentLoaderBindingSource")
+  bindingSource: any;
+
   // tslint:disable-next-line:no-input-rename
 
   /**
@@ -43,7 +55,7 @@ export class NarikComponentLoaderDirective implements AfterViewInit {
     private viewContainerRef: ViewContainerRef
   ) {}
 
-  ngAfterViewInit() {
+  ngOnInit() {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       this.component
     );
@@ -53,11 +65,24 @@ export class NarikComponentLoaderDirective implements AfterViewInit {
       componentFactory
     );
     if (this.parameters) {
-      setTimeout(() => {
-        for (const key of Object.keys(this.parameters)) {
-          (<any>componentRef.instance)[key] = this.parameters[key];
+      for (const key of Object.keys(this.parameters)) {
+        (<any>componentRef.instance)[key] = this.parameters[key];
+      }
+    }
+    if (this.bindings) {
+      for (const key of Object.keys(this.bindings)) {
+        (<any>componentRef.instance)[key] = this.bindings[key];
+        if (
+          this.bindingSource &&
+          <EventEmitter<any>>this.bindingSource[key + "Change"]
+        ) {
+          (<EventEmitter<any>>this.bindingSource[key + "Change"]).subscribe(
+            result => {
+              (<any>componentRef.instance)[key] = result;
+            }
+          );
         }
-      });
+      }
     }
     if (this.events) {
       for (const key of Object.keys(this.events)) {
