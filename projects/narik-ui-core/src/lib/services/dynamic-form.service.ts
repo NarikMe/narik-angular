@@ -3,7 +3,12 @@ import {
   EntityField,
   isNarikViewField
 } from "narik-infrastructure";
-import { Injectable } from "@angular/core";
+import { Injectable, Type } from "@angular/core";
+
+export interface DynamicFormComponent {
+  field: NarikViewField | EntityField;
+  model: any;
+}
 export abstract class DynamicFormService {
   abstract initDynamicFormFields(
     fields: NarikViewField[] | EntityField[]
@@ -12,10 +17,21 @@ export abstract class DynamicFormService {
   abstract createFieldsFromEntityFields(
     fields: EntityField[]
   ): NarikViewField[];
+  abstract getDynamicFormComponentKeys(): string[];
+  abstract getDynamicFormComponent(key: string): Type<DynamicFormComponent>;
+  abstract addDynamicFormComponent(
+    key: string,
+    component: Type<DynamicFormComponent>
+  );
 }
 
 @Injectable()
 export class NarikDynamicFormService extends DynamicFormService {
+  private dynamicFormComponent: Map<
+    string,
+    Type<DynamicFormComponent>
+  > = new Map<string, Type<DynamicFormComponent>>();
+
   initDynamicFormFields(
     fields: NarikViewField[] | EntityField[]
   ): NarikViewField[] {
@@ -46,8 +62,18 @@ export class NarikDynamicFormService extends DynamicFormService {
           hideExpr: x.hideExpr,
           disableExpr: x.disableExpr,
           validators: x.validators,
-          validatorParams: x.validatorParams,
+          validatorParams: x.validatorParams
         }
     );
+  }
+
+  getDynamicFormComponentKeys(): string[] {
+    return this.dynamicFormComponent.keysArray();
+  }
+  getDynamicFormComponent(key: string): Type<DynamicFormComponent> {
+    return this.dynamicFormComponent.get(key);
+  }
+  addDynamicFormComponent(key: string, component: Type<DynamicFormComponent>) {
+    this.dynamicFormComponent.set(key, component);
   }
 }

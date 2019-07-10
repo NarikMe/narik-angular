@@ -23,6 +23,8 @@ import { takeWhile } from "rxjs/internal/operators/takeWhile";
 
 export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   readonly expressionPrefix = "$$$narik";
+  customFormComponentKeys: string[] = [];
+  customFormComponentKeysObject: any = {};
 
   invisibleItems: any = {};
   disableItems: any = {};
@@ -57,6 +59,9 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
 
   @Output()
   formValueChanged = new EventEmitter<any>();
+
+  @Output()
+  modelChange = new EventEmitter<any>();
 
   private _modelsChangedSubject = new ReplaySubject<{
     items: NgModel[];
@@ -96,6 +101,7 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   @Input()
   set model(value: any) {
     this._model = this.dynamicFormService.initDynamicFormModel(value);
+    this.modelChange.emit(this._model);
   }
   get model(): any {
     return this._model;
@@ -107,6 +113,12 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);
 
+    this.customFormComponentKeys = this.dynamicFormService.getDynamicFormComponentKeys();
+    for (const item of this.customFormComponentKeys) {
+      this.customFormComponentKeysObject[
+        item
+      ] = this.dynamicFormService.getDynamicFormComponent(item);
+    }
     if (viewContainerRef && viewContainerRef["_view"]) {
       this.host = viewContainerRef["_view"].component;
     }
