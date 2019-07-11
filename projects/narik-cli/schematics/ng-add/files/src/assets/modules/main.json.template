@@ -64,6 +64,7 @@
         "entity": "branch"
       }
     ],
+    <% if(layoutStr==="ngxadmin") { %>
     "menuItems": [
       {
         "title": "branch",
@@ -79,8 +80,49 @@
           }
         ]
       }
-    ],
+    ]
+    <% } %>
+    <% if(layoutStr==="coreui") { %>
+    "menuItems": [
+      {
+        "title": "branch",
+        "icon": "fa fa-bars",
+        "children": [
+          {
+            "title": "branch_new",
+            "link": "/branch",
+            "icon": "fa fa-file"
+          },
+          {
+            "title": "list_branch",
+            "link": "/branch-list",
+            "icon": "fa fa-list"
+          }
+        ]
+      }
+    ]
+    <% } %>
+    <% if(layoutStr==="architectui") { %>
+    "menuItems": [
+      {
+        "title": "branch",
+        "icon": "fa fa-bars",
+        "children": [
+          {
+            "title": "branch_new",
+            "link": "/branch",
+            "icon": "fa fa-file"
+          },
+          {
+            "title": "list_branch",
+            "link": "/branch-list",
+            "icon": "fa fa-list"
+          }
+        ]
+      }
+    ]
+    <% } %>
 
-    "toolbars": ["$$toolbar.detailToolBar", "$$toolbar.listToolBar"]
+    ,"toolbars": ["$$toolbar.detailToolBar", "$$toolbar.listToolBar"]
   }
 }

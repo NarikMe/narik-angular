@@ -1,11 +1,11 @@
 <narik-busy-indicator>
-  <narik-mat-toolbar  toolbarKey="{{config && config.toolbarKey ? config.toolbarKey : 'listToolBar'}}"></narik-mat-toolbar>
-  <narik-data-table [fields]="fields" [pagingInfo]="config?.pagingInfo" [dataSource]="dataSource"
-    selectMode="Multiple"
-    (rowDoubleClick)="editEntity($event)"
-    (rowCommandClick)="rowCommandClick($event)"
-    [rowCommands]="config?.rowCommands"
-    [rowCommandType]="config?.rowCommandType"
-    [(selectedItem)]="selectedEntity" [(selectedItems)]="selectedItems">
-  </narik-data-table>
+  <div class="p-2 card">
+    <narik-mat-toolbar toolbarKey="{{config && config.toolbarKey ? config.toolbarKey : 'listToolBar'}}">
+    </narik-mat-toolbar>
+    <narik-data-table [fields]="fields" [pagingInfo]="config?.pagingInfo" [dataSource]="dataSource"
+      selectMode="Multiple" (rowDoubleClick)="editEntity($event)" (rowCommandClick)="rowCommandClick($event)"
+      [rowCommands]="config?.rowCommands" [rowCommandType]="config?.rowCommandType" [(selectedItem)]="selectedEntity"
+      [(selectedItems)]="selectedItems">
+    </narik-data-table>
+  </div>
 </narik-busy-indicator>

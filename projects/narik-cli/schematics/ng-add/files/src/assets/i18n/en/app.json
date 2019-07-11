@@ -2,5 +2,9 @@
   "appplication-title": "Narik",
   "search": "Search",
   "management": "Management",
-  "menu": "Menu"
+  "menu": "Menu",
+  "login": {
+    "change_Pass": "Change Password",
+    "logout": "Logout"
+  }
 }

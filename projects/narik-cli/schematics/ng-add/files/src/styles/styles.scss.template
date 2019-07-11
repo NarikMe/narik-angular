@@ -1,0 +1,41 @@
+@import "style-font.css";
+@import "app-style.css";
+
+<% if (layoutStr==="ngxadmin"){ %>
+@import 'themes';
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+}
+<%} %>
+<% if (layoutStr==="architectui"){ %>
+@import "architectui-theme/base.scss";
+ <%} %>
+<% if (layoutStr==="coreui"){ %>
+    @import "~@coreui/coreui/scss/coreui";
+ <%} %>
+<% if (ui==="material"){ %>
+@import 'mat-custom-styles';
+<%} %>
+
+<% if (ui==="devextreme"){ %>
+<%} %>
+
+<% if (ui==="nebular" && layoutStr!=="ngxadmin"){ %>
+@import 'themes';
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+@include nb-theme-global();
+}
+<%} %>
+<% if (ui==="primeng"){ %>
+<%} %>
+
+<% if (ui==="ng-bootstrap"){ %>
+<%} %>
+
+
+
+

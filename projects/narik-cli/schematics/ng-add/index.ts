@@ -29,11 +29,17 @@ import {
 import { normalize } from "@angular-devkit/core";
 import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 
+const layoutStyles: any = {
+  ngxadmin: [
+    "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+    "node_modules/typeface-exo/index.css"
+  ],
+  architectui: [],
+  coreui: ["node_modules/@coreui/icons/css/coreui-icons.css"]
+};
 const commonStyles = [
   "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
   "node_modules/ngx-toastr/toastr.css",
-  "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-  "node_modules/typeface-exo/index.css",
   "src/styles/styles.scss"
 ];
 
@@ -105,18 +111,7 @@ const commonDependencies: any[] = [
     name: "@angular/cdk",
     version: "^8.0.0"
   },
-  {
-    name: "@nebular/theme",
-    version: "^4.0.0"
-  },
-  {
-    name: "eva-icons",
-    version: "^1.1.1"
-  },
-  {
-    name: "@nebular/eva-icons",
-    version: "^4.0.0"
-  },
+
   {
     name: "@ngx-translate/core",
     version: "^11.0.1"
@@ -157,14 +152,7 @@ const commonDependencies: any[] = [
     name: "ng2-validation",
     version: "^4.2.0"
   },
-  {
-    name: "roboto-fontface",
-    version: "^0.10.0"
-  },
-  {
-    name: "typeface-exo",
-    version: "^0.0.61"
-  },
+
   {
     name: "narik-infrastructure",
     version: "^2.0.2"
@@ -198,7 +186,87 @@ const commonDependencies: any[] = [
 const rtlUiDependency: any = {
   "ng-bootstrap": [{ name: "bootstrap-4.1.3-rtl", version: "^1.0.1" }]
 };
-
+const layoutDependency: any = {
+  ngxadmin: [
+    {
+      name: "@nebular/theme",
+      version: "^4.0.0"
+    },
+    {
+      name: "eva-icons",
+      version: "^1.1.1"
+    },
+    {
+      name: "@nebular/eva-icons",
+      version: "^4.0.0"
+    },
+    {
+      name: "roboto-fontface",
+      version: "^0.10.0"
+    },
+    {
+      name: "typeface-exo",
+      version: "^0.0.61"
+    }
+  ],
+  architectui: [
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" },
+    {
+      name: "ngx-perfect-scrollbar",
+      version: "^8.0.0"
+    },
+    {
+      name: "@ngx-loading-bar/core",
+      version: "^4.2.0"
+    },
+    {
+      name: "@ngx-loading-bar/router",
+      version: "^4.2.0"
+    },
+    {
+      name: "redux",
+      version: "4.0.0"
+    },
+    {
+      name: "angular-font-awesome",
+      version: "^3.1.2"
+    },
+    {
+      name: "animate-sass",
+      version: "^0.8.2"
+    },
+    {
+      name: "pe7-icon",
+      version: "^1.0.4"
+    },
+    {
+      name: "@angular-redux/store",
+      version: "^9.0.0"
+    }
+  ],
+  coreui: [
+    {
+      name: "@coreui/angular",
+      version: "^2.5.2"
+    },
+    {
+      name: "@coreui/coreui",
+      version: "^2.1.12"
+    },
+    {
+      name: "@coreui/icons",
+      version: "^0.3.0"
+    },
+    {
+      name: "ngx-perfect-scrollbar",
+      version: "^8.0.0"
+    },
+    {
+      name: "ngx-bootstrap",
+      version: "^4.3.0"
+    }
+  ]
+};
 const uiDependency: any = {
   material: [
     {
@@ -254,14 +322,20 @@ export function ngAdd(_options: any): Rule {
     ? _options.ui
     : (_options as any)["--"] && (_options as any)["--"][1];
 
+  let layout = _options.layout
+    ? _options.layout
+    : (_options as any)["--"] && (_options as any)["--"][2];
+
   const rtl = _options.rtl === true;
 
   ui = ui || "material";
+  layout = layout || "ngxadmin";
+  console.log("layout:" + layout);
   return chain([
-    addPackageJsonDependencies(ui, rtl),
-    addStyles(ui, rtl),
+    addPackageJsonDependencies(ui, rtl, layout),
+    addStyles(ui, rtl, layout),
     addCustomBuilder(),
-    addExtraFiles(ui, rtl),
+    addExtraFiles(ui, rtl, layout),
     updateTsConfig(ui),
     updateIndexhtml(ui, rtl),
     // addModuleImports(ui, rtl),
@@ -316,7 +390,11 @@ function updateAppModule(): Rule {
   };
 }
 
-function addPackageJsonDependencies(ui: string, rtl: boolean): Rule {
+function addPackageJsonDependencies(
+  ui: string,
+  rtl: boolean,
+  layout: string
+): Rule {
   return (host: Tree, context: SchematicContext) => {
     commonDependencies.forEach(dependency => {
       addPackageToPackageJson(host, dependency.name, `${dependency.version}`);
@@ -325,6 +403,13 @@ function addPackageJsonDependencies(ui: string, rtl: boolean): Rule {
 
     if (uiDependency[ui]) {
       for (const dependency of uiDependency[ui]) {
+        addPackageToPackageJson(host, dependency.name, `${dependency.version}`);
+        context.logger.log("info", `✅️ Added "${dependency.name}`);
+      }
+    }
+
+    if (layoutDependency[layout]) {
+      for (const dependency of layoutDependency[layout]) {
         addPackageToPackageJson(host, dependency.name, `${dependency.version}`);
         context.logger.log("info", `✅️ Added "${dependency.name}`);
       }
@@ -835,7 +920,8 @@ export function getProjectMainFile(project: WorkspaceProject): string {
 
 export function addStyles(
   ui: string,
-  rtl: boolean
+  rtl: boolean,
+  layout: string
 ): (host: Tree, context: SchematicContext) => Tree {
   return function(host: Tree, context: SchematicContext): Tree {
     const workspace = getWorkspace(host);
@@ -851,6 +937,11 @@ export function addStyles(
     if (uiStyles[ui]) {
       assets = assets.concat(uiStyles[ui] as string[]);
     }
+
+    if (layoutStyles[layout]) {
+      assets = assets.concat(layoutStyles[layout] as string[]);
+    }
+
     if (rtl) {
       if (rtlUiStyles[ui]) {
         assets = assets.concat(rtlUiStyles[ui] as string[]);
@@ -864,16 +955,44 @@ export function addStyles(
   };
 }
 
+function getLayoutModule(layout: string) {
+  switch (layout) {
+    case "ngxadmin":
+      return "NarikNgxLayout";
+    case "architectui":
+      return "NarikArchitectUiLayout";
+    case "coreui":
+      return "NarikCoreUiLayout";
+  }
+}
+
+function getLayoutModulePath(layout: string) {
+  switch (layout) {
+    case "ngxadmin":
+      return "import { NarikNgxLayout } from './modules/narik-ngx-layout/narik-ngx-layout.module';";
+    case "architectui":
+      return "import { NarikArchitectUiLayout } from './modules/narik-architectui-layout/narik-architectui-layout.module';";
+    case "coreui":
+      return "import { NarikCoreUiLayout } from './modules/narik-coreui-layout/narik-coreui-layout.module';";
+  }
+}
+
 export function addExtraFiles(
   ui: string,
-  rtl: boolean
+  rtl: boolean,
+  layout: string
 ): (host: Tree, context: SchematicContext) => Rule {
   return function(host: Tree, context: SchematicContext): Rule {
     context.logger.log("info", `🔍 Adding  extra...`);
+    const layoutModule = getLayoutModule(layout);
+    const layoutModulePath = getLayoutModulePath(layout);
     const templateSource = apply(url("./files"), [
       applyTemplates({
         direction: rtl ? "RTL" : "LTR",
-        ui: ui
+        ui: ui,
+        layoutStr: layout,
+        layoutModule: layoutModule,
+        layoutModulePath: layoutModulePath
       }),
       forEach((fileEntry: FileEntry) => {
         if (fileEntry.path.indexOf("@") >= 0) {
@@ -889,7 +1008,21 @@ export function addExtraFiles(
               content: fileEntry.content
             } as any;
           }
+        } else if (fileEntry.path.indexOf("#") >= 0) {
+          if (fileEntry.path.indexOf(`#${layout}#`) < 0) {
+            return null;
+          } else {
+            const newFilePath = fileEntry.path.replace(`#${layout}#`, "");
+            if (host.exists(newFilePath)) {
+              host.delete(newFilePath);
+            }
+            return {
+              path: newFilePath,
+              content: fileEntry.content
+            } as any;
+          }
         }
+
         if (host.exists(fileEntry.path)) {
           host.delete(fileEntry.path);
         }

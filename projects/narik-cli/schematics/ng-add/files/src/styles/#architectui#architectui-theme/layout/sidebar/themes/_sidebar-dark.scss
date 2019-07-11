@@ -1,0 +1,83 @@
+// Sidebar Dark
+
+.app-sidebar {
+  &.text-darker {
+    .app-sidebar-content {
+      background: none !important;
+    }
+
+    .app-header__logo {
+      background: rgba(0, 0, 0, .05) !important;
+    }
+
+    .logo-src {
+      background: url('./../assets/images/logo-inverse.png');
+    }
+
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      background: rgba(0, 0, 0, .8) !important;
+    }
+
+    .hamburger-box:hover {
+      .hamburger-inner,
+      .hamburger-inner::before,
+      .hamburger-inner::after {
+        background: rgba(0, 0, 0, 1) !important;
+      }
+    }
+
+    .v-sidebar-menu {
+      .vsm-header {
+        color: rgba(0, 0, 0, 0.6);
+
+        &::before {
+          background: rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      %side-link-hover {
+        background: rgba(0, 0, 0, 0.1);
+        color: rgba(0, 0, 0, 1);
+      }
+
+      & .vsm-item.active-item {
+        & > .vsm-link {
+          @extend %side-link-hover;
+        }
+      }
+
+      .vsm-arrow,
+      .vsm-icon {
+        opacity: .5;
+      }
+
+      & .vsm-link {
+        color: rgba(0, 0, 0, .7);
+
+        &:hover {
+          .vsm-icon {
+            opacity: .65;
+          }
+        }
+      }
+
+      & .vsm-dropdown {
+        &::before {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    perfect-scrollbar > .ps.ps--scrolling-y > .ps__rail-y,
+    .ps .ps__rail-y:hover {
+      background-color: rgba(0,0,0,.05) !important;
+    }
+
+    .ps__thumb-y {
+      background-color: rgba(0,0,0,.15) !important;
+    }
+
+  }
+}

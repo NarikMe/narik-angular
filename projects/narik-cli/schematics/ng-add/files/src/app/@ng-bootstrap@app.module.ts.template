@@ -22,8 +22,10 @@ import { NarikAppCoreModule } from "narik-app-core";
 import { NarikJwtAuthenticationModule } from "narik-jwt-authentication";
 import { NarikClientStorageModule } from "narik-client-storage";
 
-import { NbLayoutDirection, NbThemeModule , NbIconModule} from "@nebular/theme";
+<% if (layoutStr==="ngxadmin"){ %>
+import { NbLayoutDirection, NbThemeModule, NbIconModule } from "@nebular/theme";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
+<% } %>
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { Observable } from "rxjs/internal/Observable";
@@ -31,7 +33,7 @@ import { DemoCommandProcessor } from "./services/command-processor.service";
 
 import { MainComponent } from './main/main.component';
 import { MainViewComponent } from './main-view/main-view.component';
-import { NarikNgxLayout } from './modules/narik-ngx-layout/narik-ngx-layout.module';
+<%= layoutModulePath %>
 import { ShareModule } from "./modules/share/share.module";
 
 const moduleKey = "main";
@@ -64,6 +66,8 @@ const moduleKey = "main";
       tokenStorage: "localStorage",
       loginPageUrl: "/"
     }),
+   
+    <% if (layoutStr==="ngxadmin") { %>
     NbEvaIconsModule,
     NbIconModule,
     NbThemeModule.forRoot(
@@ -72,9 +76,10 @@ const moduleKey = "main";
       undefined,
       NbLayoutDirection.<%= direction %>
     ),
+    <% } %>
     BrowserAnimationsModule,
     NarikClientStorageModule.forRoot(),
-    NarikNgxLayout,
+    <%= layoutModule %>,
     ShareModule
   ],
   providers: [
