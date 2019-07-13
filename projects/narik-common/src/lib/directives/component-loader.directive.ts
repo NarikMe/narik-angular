@@ -5,8 +5,10 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
   EventEmitter,
-  OnInit
+  OnInit,
+  OnDestroy
 } from "@angular/core";
+import { takeWhile } from "rxjs/internal/operators/takeWhile";
 
 /**
  * NarikComponentLoaderDirective
@@ -15,7 +17,9 @@ import {
 @Directive({
   selector: "[narikComponentLoader]"
 })
-export class NarikComponentLoaderDirective implements OnInit {
+export class NarikComponentLoaderDirective implements OnInit, OnDestroy {
+  isAlive = true;
+
   /**
    * Type of component.
    */
@@ -76,11 +80,11 @@ export class NarikComponentLoaderDirective implements OnInit {
           this.bindingSource &&
           <EventEmitter<any>>this.bindingSource[key + "Change"]
         ) {
-          (<EventEmitter<any>>this.bindingSource[key + "Change"]).subscribe(
-            result => {
+          (<EventEmitter<any>>this.bindingSource[key + "Change"])
+            .pipe(takeWhile(x => this.isAlive))
+            .subscribe(result => {
               (<any>componentRef.instance)[key] = result;
-            }
-          );
+            });
         }
       }
     }
@@ -93,5 +97,11 @@ export class NarikComponentLoaderDirective implements OnInit {
         }
       }
     }
+  }
+  ngOnDestroy(): void {
+    this.bindingSource = undefined;
+    this.bindings = undefined;
+    this.parameters = undefined;
+    this.isAlive = false;
   }
 }
