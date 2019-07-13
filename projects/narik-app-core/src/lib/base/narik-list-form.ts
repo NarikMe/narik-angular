@@ -12,7 +12,9 @@ import {
   DialogResult,
   DialogService,
   DataInfo,
-  ConfigService
+  ConfigService,
+  MetaDataService,
+  MODULE_UI_KEY
 } from "narik-infrastructure";
 import { DynamicFormService } from "narik-ui-core";
 import { takeWhile, filter, finalize } from "rxjs/operators";
@@ -63,6 +65,12 @@ export abstract class NarikListForm<TE extends NarikEntity>
 
   @NarikInject(DynamicFormService)
   dynamicFormService: DynamicFormService;
+
+  @NarikInject(MetaDataService)
+  metaDataService: MetaDataService;
+
+  @NarikInject(MODULE_UI_KEY)
+  moduleKey: string;
 
   @NarikInject(DEFAULT_PAGING_INFO, {
     pageSize: 20,
@@ -229,6 +237,8 @@ export abstract class NarikListForm<TE extends NarikEntity>
     this.newOrEditEntity(entity);
   }
   protected newOrEditEntity(selectedEntity?: TE) {
+    const navigationType = this.getDetailNavigationType();
+
     if (this.config.readOnly) {
       return;
     }
@@ -244,18 +254,20 @@ export abstract class NarikListForm<TE extends NarikEntity>
     this.navigationService
       .navigate(
         ["../" + this.config.entityKey],
-        "dialog",
+        navigationType,
         {
           relativeTo: this.route
         },
         data
       )
       .then((d: DialogRef<any>) => {
-        d.events
-          .pipe(filter(x => x.eventType === "ENTITY_UPDATED"))
-          .subscribe(x => {
-            this.refresh();
-          });
+        if (d.events) {
+          d.events
+            .pipe(filter(x => x.eventType === "ENTITY_UPDATED"))
+            .subscribe(x => {
+              this.refresh();
+            });
+        }
       });
   }
 
@@ -318,5 +330,21 @@ export abstract class NarikListForm<TE extends NarikEntity>
         break;
     }
   }
-  protected openDetail() {}
+  protected getDetailNavigationType() {
+    if (
+      this.config &&
+      this.config.options &&
+      this.config.options.detailNavigationType
+    ) {
+      return this.config.options.detailNavigationType;
+    }
+    const viewOptions = this.metaDataService.getValue<any>(
+      this.moduleKey,
+      "viewOptions"
+    );
+    if (viewOptions && viewOptions.detailNavigationType) {
+      return viewOptions.detailNavigationType;
+    }
+    return "dialog";
+  }
 }

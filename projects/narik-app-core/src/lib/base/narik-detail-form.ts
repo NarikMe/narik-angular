@@ -364,6 +364,8 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
               .subscribe(x => {
                 if (this.dialogRef) {
                   this.dialogRef.close();
+                } else {
+                  this.newEntity();
                 }
               });
           }

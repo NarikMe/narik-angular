@@ -3,7 +3,7 @@ import { ParameterResolver } from "narik-infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 
 import { Injectable, Injector, Optional } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { NarikGeneralForm } from "../base/narik-general-form";
 import { map } from "rxjs/internal/operators/map";
@@ -11,9 +11,11 @@ import { merge } from "rxjs/operators";
 
 @Injectable()
 export class NarikParameterResolver implements ParameterResolver {
-
   @NarikInject(ActivatedRoute, null)
   route: ActivatedRoute;
+
+  @NarikInject(Router, null)
+  router: Router;
 
   constructor(
     private injector: Injector,
@@ -27,7 +29,19 @@ export class NarikParameterResolver implements ParameterResolver {
       return this.formComponent.parameters[key];
     }
     if (this.route) {
-      return this.route.snapshot.params[key] || this.route.snapshot.data[key];
+      const value =
+        this.route.snapshot.params[key] || this.route.snapshot.data[key];
+      if (value) {
+        return value;
+      }
+    }
+    if (this.router) {
+      if ((this.router as any).transitions._value) {
+        const extras = (this.router as any).transitions._value.extras;
+        if (extras && extras.data) {
+          return extras.data[key];
+        }
+      }
     }
   }
   listen<T>(key: any): Observable<T> {
