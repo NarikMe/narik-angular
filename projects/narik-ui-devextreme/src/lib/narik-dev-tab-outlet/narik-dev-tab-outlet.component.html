@@ -1,0 +1,21 @@
+<div *ngIf="tabs.length">
+  <dx-tab-panel (onSelectionChanged)="onSelectionChanged($event)" [dataSource]="tabs" [selectedIndex]="selectedIndex"
+    [loop]="false" [animationEnabled]="animationEnabled">
+    <div *dxTemplate="let tab of 'title';let index = index" class="title-container">
+      <span>{{tab.title | translate}}</span>
+      <i (click)="removeTab(index)" class="dx-icon dx-icon-close close-btn">
+      </i>
+    </div>
+    <div *dxTemplate="let tab of 'item'">
+      <div class="p-1">
+        <ng-container *ngIf="tab.component">
+          <ng-container *narikComponentLoader="
+                  tab.component;
+                  parameters:tab.data;
+                    ">
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </dx-tab-panel>
+</div>

@@ -102,8 +102,13 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
   @NarikInject(ElementRef)
   element: ElementRef;
 
+  @Input()
+  displayStyle = "block";
+
   @HostBinding("style.display")
-  display = "block";
+  get displayValue(): string {
+    return this.displayStyle;
+  }
 
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);

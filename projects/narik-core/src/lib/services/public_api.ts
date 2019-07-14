@@ -26,3 +26,5 @@ export * from "./narik-role-base-authorization.service";
 export * from "./narik-validation.service";
 
 export * from "./narik-shortcut.service";
+
+export * from "./navigationProviders/public_api";

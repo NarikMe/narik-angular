@@ -14,3 +14,4 @@ export * from "./narik-auto-complete.component";
 export * from "./narik-treeview.component";
 export * from "./narik-color-picker.component";
 export * from "./narik-data-table-select.component";
+export * from "./narik-tab-outlet.component";

@@ -1,0 +1,17 @@
+<div>
+  <i *ngIf="tabs.length>0" (click)="removeTabItem(selectedIndex)" class="fas fa-times close-btn ">
+  </i>
+  <nb-tabset #tabSet (changeTab)="changeTab($event)">
+    <nb-tab tabTitle="{{tab.title | translate}}" [active]="selectedIndex===index"
+      *ngFor="let tab of tabs; let index = index;trackBy: trackByFn">
+      <div class="p-1">
+        <ng-container *ngIf="tab.component">
+          <ng-container *narikComponentLoader="
+                        tab.component;
+                        parameters:tab.data;
+                          "></ng-container>
+        </ng-container>
+      </div>
+    </nb-tab>
+  </nb-tabset>
+</div>

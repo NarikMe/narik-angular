@@ -15,6 +15,7 @@ import { NarikNgbRadioGroupModule } from "./narik-ngb-radio/narik-ngb-radio.modu
 import { NarikNgbTreeviewModule } from "./narik-ngb-treeview/narik-ngb-treeview.module";
 import { NarikNgbToolbarModule } from "./narik-ngb-toolbar/narik-ngb-toolbar.module";
 import { NarikNgbCoreModule } from "./narik-ngb-core/narik-ngb-core.module";
+import { NarikNgbTabOutletModule } from "./narik-ngb-tab-outlet/narik-ngb-tab-outlet.module";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { NarikNgbCoreModule } from "./narik-ngb-core/narik-ngb-core.module";
     NarikNgbSelectModule,
     NarikNgbToolbarModule,
     NarikNgbTreeviewModule,
-    NarikNgbCoreModule
+    NarikNgbCoreModule,
+    NarikNgbTabOutletModule
   ],
   declarations: [],
   exports: [
@@ -52,7 +54,8 @@ import { NarikNgbCoreModule } from "./narik-ngb-core/narik-ngb-core.module";
     NarikNgbSelectModule,
     NarikNgbToolbarModule,
     NarikNgbTreeviewModule,
-    NarikNgbCoreModule
+    NarikNgbCoreModule,
+    NarikNgbTabOutletModule
   ],
   providers: []
 })

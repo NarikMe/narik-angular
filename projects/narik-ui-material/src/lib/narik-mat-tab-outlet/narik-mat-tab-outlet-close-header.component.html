@@ -1,0 +1,6 @@
+<div class="header-container">
+  {{title | translate}}
+  <mat-icon matTooltip="{{'close' | translate}}"
+  [matTooltipPosition]="'above'"
+   *ngIf="isOver" color="accent" (click)="requestClose()">close</mat-icon>
+</div>

@@ -31,11 +31,11 @@ export class FormContainerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const moduleKey = !this.parameters.routeByDialogService
+    const moduleKey = !this.parameters.routeByCustomProvider
       ? this.activateRoute.snapshot.data.moduleKey
       : this.parameters.moduleKey;
 
-    const viewKey = !this.parameters.routeByDialogService
+    const viewKey = !this.parameters.routeByCustomProvider
       ? this.activateRoute.snapshot.url[0].path
       : this.parameters.path;
     const viewInfo = this.viewManager.getViewInfo(moduleKey, viewKey);

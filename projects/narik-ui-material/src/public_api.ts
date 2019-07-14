@@ -22,3 +22,4 @@ export * from "./lib/narik-mat-dialog/public_api";
 export * from "./lib/narik-mat-data-table/public_api";
 export * from "./lib/narik-mat-core/public_api";
 export * from "./lib/narik-mat-data-table-select/public_api";
+export * from "./lib/narik-mat-tab-outlet/public_api";

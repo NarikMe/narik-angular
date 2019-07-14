@@ -8,3 +8,4 @@ export * from "./dataSource";
 export * from "./filter";
 export * from "./narik-form";
 export * from "./shortcut-option";
+export * from "./narik-outlet";

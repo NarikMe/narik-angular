@@ -1,0 +1,18 @@
+<div *ngIf="tabs.length" [ngClass]="{'w-100': isLabel100Percent}">
+    <mat-tab-group  [animationDuration]="animationDuration" [(selectedIndex)]="selectedIndex">
+      <mat-tab *ngFor="let tab of tabs; let index = index;trackBy: trackByFn">
+        <ng-template mat-tab-label>
+          <narik-mat-tab-header (closeRequest)="removeTab(index);" [title]='tab.title'></narik-mat-tab-header>
+        </ng-template>
+  
+        <ng-container *ngIf="tab.component">
+          <ng-container *narikComponentLoader="
+          tab.component;
+          parameters:tab.data;
+            "></ng-container>
+        </ng-container>
+  
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  

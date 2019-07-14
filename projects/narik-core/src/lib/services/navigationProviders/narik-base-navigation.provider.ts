@@ -1,70 +1,17 @@
 import {
-  DialogOption,
-  DialogRef,
-  DialogService,
-  NavigationProvider
-} from "narik-infrastructure";
-
-import { Inject, Injectable, Type } from "@angular/core";
-import {
-  NavigationExtras,
-  PRIMARY_OUTLET,
-  Route,
   Router,
-  UrlMatchResult,
+  Route,
   UrlSegment,
   UrlSegmentGroup,
-  ActivatedRoute
+  UrlMatchResult
 } from "@angular/router";
+import { Type } from "@angular/core";
+import { NarikOutlet } from "narik-infrastructure";
 
-@Injectable()
-export class NarikDialogNavigationProvider implements NavigationProvider {
-  key = "dialog";
+export class NarikBaseNavigationProvider {
+  outlet: NarikOutlet;
 
-  constructor(private dialogService: DialogService, private router: Router) {}
-  navigate(
-    commands: any[],
-    extras?: NavigationExtras,
-    data?: any,
-    dialogOptions?: DialogOption
-  ): Promise<boolean | DialogRef<any>> {
-    return new Promise<DialogRef<any>>((resolve, reject) => {
-      const tree = this.router.createUrlTree(commands as any[], extras);
-      const primary: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
-
-      const route = this.findRoute(
-        this.router.config,
-        primary.segments,
-        primary
-      );
-      if (route && route.route) {
-        const dialog = this.dialogService.showDialog(
-          route.route.component,
-          data ? data["__dialogTitle"] : undefined,
-          {
-            parameters: {
-              routeByDialogService: true,
-              path: primary.segments[0].path,
-              ...route.route.data,
-              ...data
-            }
-          },
-          [],
-          dialogOptions || {
-            isFullScreen: false,
-            showBackdrop: true,
-            disableAutoClose: true
-          },
-          undefined,
-          undefined,
-          [{ provide: ActivatedRoute, useValue: extras.relativeTo }]
-        );
-        resolve(dialog);
-      } else {
-        reject(false);
-      }
-    });
-  }
+  constructor(protected router: Router) {}
 
   findRoute(
     config: Route[],

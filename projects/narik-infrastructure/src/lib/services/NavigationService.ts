@@ -1,12 +1,11 @@
-import { NavigationExtras } from "@angular/router";
+import { NavigationExtras, UrlTree } from "@angular/router";
 import { DialogOption, DialogRef } from "./DialogService";
-
+import { NarikOutlet } from "../interfaces/narik-outlet";
 
 /**
  * Navigation service
  */
-export abstract class  NavigationService {
-
+export abstract class NavigationService {
   /**
    * Navigates navigation service
    * @param commands
@@ -17,10 +16,16 @@ export abstract class  NavigationService {
    * @returns navigate
    */
   abstract navigate(
-    commands: any[],
+    commands: any[] | string | UrlTree,
     providerKey?: string,
     extras?: NavigationExtras,
     data?: any,
     dialogOptions?: DialogOption
   ): Promise<boolean | DialogRef<any>>;
+
+  abstract setOutlet(providerKey: string, outlet: NarikOutlet);
+  abstract createNavigationCommand(
+    providerKey: string,
+    path: string
+  ): any[] | string | UrlTree;
 }

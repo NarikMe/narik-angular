@@ -16,6 +16,8 @@ import { NarikMatTreeviewModule } from "./narik-mat-treeview/narik-mat-treeview.
 import { NarikMatToolbarModule } from "./narik-mat-toolbar/narik-mat-toolbar.module";
 import { NarikMatCoreModule } from "./narik-mat-core/narik-mat-core.module";
 import { NarikMatDataTableSelectModule } from "./narik-mat-data-table-select/narik-mat-data-table-select.module";
+import { NarikMatTabOutletModule } from "./narik-mat-tab-outlet/narik-mat-tab-outlet.module";
+
 @NgModule({
   imports: [
     TranslateModule,
@@ -34,7 +36,8 @@ import { NarikMatDataTableSelectModule } from "./narik-mat-data-table-select/nar
     NarikMatToolbarModule,
     NarikMatTreeviewModule,
     NarikMatCoreModule,
-    NarikMatDataTableSelectModule
+    NarikMatDataTableSelectModule,
+    NarikMatTabOutletModule
   ],
   declarations: [],
   exports: [
@@ -54,7 +57,8 @@ import { NarikMatDataTableSelectModule } from "./narik-mat-data-table-select/nar
     NarikMatToolbarModule,
     NarikMatTreeviewModule,
     NarikMatCoreModule,
-    NarikMatDataTableSelectModule
+    NarikMatDataTableSelectModule,
+    NarikMatTabOutletModule
   ],
   providers: [],
   entryComponents: []

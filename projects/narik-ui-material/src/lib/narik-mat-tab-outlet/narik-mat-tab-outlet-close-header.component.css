@@ -1,0 +1,13 @@
+.header-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+:host {
+  width: 100%;
+}
+
+
+
+

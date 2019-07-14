@@ -22,3 +22,4 @@ export * from "./lib/narik-dev-select/public_api";
 export * from "./lib/narik-dev-toolbar/public_api";
 export * from "./lib/narik-dev-treeview/public_api";
 export * from "./lib/narik-dev-core/public_api";
+export * from "./lib/narik-dev-tab-outlet/public_api";

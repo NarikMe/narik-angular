@@ -19,3 +19,4 @@ export * from "./lib/narik-nb-treeview/public_api";
 export * from "./lib/narik-nb-dialog/public_api";
 export * from "./lib/narik-nb-data-table/public_api";
 export * from "./lib/narik-nb-core/public_api";
+export * from "./lib/narik-nb-tab-outlet/public_api";

@@ -1,0 +1,13 @@
+<div *ngIf="tabs.length">
+  <p-tabView (onChange)="handleChange($event)" [controlClose]="true" (onClose)="handleClose($event)">
+    <p-tabPanel [closable]="true" *ngFor="let tab of tabs; let index = index;trackBy: trackByFn" [selected]="selectedIndex===index"
+      header="{{tab.title | translate}}">
+      <ng-container *ngIf="tab.component">
+        <ng-container *narikComponentLoader="
+          tab.component;
+          parameters:tab.data;
+            "></ng-container>
+      </ng-container>
+    </p-tabPanel>
+  </p-tabView>
+</div>

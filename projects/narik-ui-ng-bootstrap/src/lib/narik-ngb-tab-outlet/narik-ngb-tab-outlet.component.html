@@ -1,0 +1,26 @@
+<div>
+  <ngb-tabset #tabset>
+    <ngb-tab id="{{tab.uniqueId}}" *ngFor="let tab of tabs; let index = index;trackBy: trackByFn">
+
+      <ng-template ngbTabContent>
+        <div class="p-1">
+          <ng-container *ngIf="tab.component">
+            <ng-container *narikComponentLoader="
+                tab.component;
+                parameters:tab.data;
+                  "></ng-container>
+          </ng-container>
+        </div>
+      </ng-template>
+      <ng-template ngbTabTitle>
+        <div class="title-container">
+          <span>{{tab.title | translate}}</span>
+          <i (click)="removeTabItem(index)" class="fas fa-times close-btn  ml-2">
+          </i>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+
+</div>

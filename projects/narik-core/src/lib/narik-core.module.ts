@@ -23,7 +23,8 @@ import {
   JsonService,
   CommandProcessor,
   ValidationService,
-  ShortcutService
+  ShortcutService,
+  FormTitleResolver
 } from "narik-infrastructure";
 import { ToastrModule } from "ngx-toastr";
 
@@ -46,7 +47,7 @@ import { SessionStorageDataProvider } from "./services/dataProviders/session-sto
 import { HttpErrorInterceptor } from "./services/errorHandlers/narik-http-error-handler";
 import { NarikDataProviderService } from "./services/narik-data-provider.service";
 import { NarikDataStorageService } from "./services/narik-data-storage.service";
-import { NarikDialogNavigationProvider } from "./services/narik-dialog-navigation.provider";
+
 import { NarikDialogService } from "./services/narik-dialog.service";
 import { NarikErrorHandleService } from "./services/narik-error-handle.service";
 import { NarikEventAggregatorService } from "./services/narik-event-aggregator.service";
@@ -54,7 +55,7 @@ import { NarikModuleManager } from "./services/narik-module-manager.service";
 import { NarikNavigationService } from "./services/narik-navigation.service";
 import { NarikRemoteDataProviderService } from "./services/narik-remote-data-provider.service";
 import { NarikRoleBasedAuthorizationService } from "./services/narik-role-base-authorization.service";
-import { NarikRouteNavigationProvider } from "./services/narik-route-navigation.provider";
+
 import { NarikTranslateService } from "./services/narik-translation.service";
 import { NarikUrlCreatorService } from "./services/narik-url-creator.service";
 import { ApiUrlCreator } from "./services/urlCreator/api-url-creator";
@@ -62,6 +63,10 @@ import { ODataUrlCreator } from "./services/urlCreator/odata-url-creator";
 import { NarikEmptyCommandProcessor } from "./services/narik-empty-command-processor.service";
 import { NarikValidationService } from "./services/narik-validation.service";
 import { NarikShortcutService } from "./services/narik-shortcut.service";
+import { NarikDialogNavigationProvider } from "./services/navigationProviders/narik-dialog-navigation.provider";
+import { NarikRouteNavigationProvider } from "./services/navigationProviders/narik-route-navigation.provider";
+import { NarikTabNavigationProvider } from "./services/navigationProviders/narik-tab-navigation.provider";
+import { NarikFormTitleResolver } from "./services/narik-form-title-resolver.service";
 
 @NgModule({
   imports: [ToastrModule.forRoot()],
@@ -146,6 +151,11 @@ import { NarikShortcutService } from "./services/narik-shortcut.service";
       useClass: NarikRouteNavigationProvider,
       multi: true
     },
+    {
+      provide: NavigationProvider,
+      useClass: NarikTabNavigationProvider,
+      multi: true
+    },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
   ]
 })
@@ -219,6 +229,11 @@ export class NarikCoreModule {
         {
           provide: JsonService,
           useClass: (config && config.jsonService) || NarikJsonService
+        },
+        {
+          provide: FormTitleResolver,
+          useClass:
+            (config && config.formTitleResolver) || NarikFormTitleResolver
         },
         {
           provide: CommandProcessor,

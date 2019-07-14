@@ -48,6 +48,8 @@ export abstract class NarikListForm<TE extends NarikEntity>
   _selectedEntity: TE;
   _config: ListFormConfig;
   _selectedItems: any[];
+  viewOptions: any;
+  defaultNavigationProvider = "route";
 
   protected entityKeyField: string;
 
@@ -156,6 +158,15 @@ export abstract class NarikListForm<TE extends NarikEntity>
     super(injector);
     this.entityKeyField =
       this.configService.getConfig("entityKeyField") || "viewModelId";
+
+    this.viewOptions = this.metaDataService.getValue<any>(
+      this.moduleKey,
+      "viewOptions"
+    );
+
+    if (this.viewOptions && this.viewOptions.defaultNavigationProvider) {
+      this.defaultNavigationProvider = this.viewOptions.defaultNavigationProvider;
+    }
   }
 
   ngOnInit() {
@@ -237,7 +248,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
     this.newOrEditEntity(entity);
   }
   protected newOrEditEntity(selectedEntity?: TE) {
-    const navigationType = this.getDetailNavigationType();
+    const navigationType = this.getDetailNavigationProvider();
 
     if (this.config.readOnly) {
       return;
@@ -251,9 +262,13 @@ export abstract class NarikListForm<TE extends NarikEntity>
         }
       : {};
     data["__dialogTitle"] = this.config.entityKey;
+
     this.navigationService
       .navigate(
-        ["../" + this.config.entityKey],
+        this.navigationService.createNavigationCommand(
+          this.defaultNavigationProvider,
+          this.config.entityKey
+        ),
         navigationType,
         {
           relativeTo: this.route
@@ -330,21 +345,21 @@ export abstract class NarikListForm<TE extends NarikEntity>
         break;
     }
   }
-  protected getDetailNavigationType() {
+  protected getDetailNavigationProvider() {
     if (
       this.config &&
       this.config.options &&
-      this.config.options.detailNavigationType
+      this.config.options.detailNavigationProvider
     ) {
-      return this.config.options.detailNavigationType;
+      return this.config.options.detailNavigationProvider === "dialog"
+        ? "dialog"
+        : this.defaultNavigationProvider;
     }
-    const viewOptions = this.metaDataService.getValue<any>(
-      this.moduleKey,
-      "viewOptions"
-    );
-    if (viewOptions && viewOptions.detailNavigationType) {
-      return viewOptions.detailNavigationType;
+
+    if (this.viewOptions) {
+      return this.viewOptions.detailNavigationProvider || "dialog";
     }
+
     return "dialog";
   }
 }

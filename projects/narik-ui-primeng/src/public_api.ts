@@ -20,3 +20,4 @@ export * from "./lib/narik-prime-dialog/public_api";
 export * from "./lib/narik-prime-data-table/public_api";
 export * from "./lib/narik-prime-core/public_api";
 export * from "./lib/data-source/public_api";
+export * from "./lib/narik-prime-tab-outlet/public_api";

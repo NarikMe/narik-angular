@@ -1,0 +1,12 @@
+.close-btn {
+    color: red;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.title-container {
+    display: 'flex';
+    justify-content: space-between;
+}

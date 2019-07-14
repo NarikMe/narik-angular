@@ -23,6 +23,11 @@
   border-left: solid 1px #ccc;
   height: 80%;
 }
+
 .dx-field:last-of-type {
   margin: 0 0 10px 0 !important;
+}
+
+.dx-tab-content {
+  width: 100%;
 }

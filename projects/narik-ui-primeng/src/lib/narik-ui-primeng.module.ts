@@ -15,6 +15,7 @@ import { NarikPrimeRadioGroupModule } from "./narik-prime-radio/narik-prime-radi
 import { NarikPrimeTreeviewModule } from "./narik-prime-treeview/narik-prime-treeview.module";
 import { NarikPrimeToolbarModule } from "./narik-prime-toolbar/narik-prime-toolbar.module";
 import { NarikPrimeCoreModule } from "./narik-prime-core/narik-prime-core.module";
+import { NarikPrimeTabOutletModule } from "./narik-prime-tab-outlet/narik-prime-tab-outlet.module";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { NarikPrimeCoreModule } from "./narik-prime-core/narik-prime-core.module
     NarikPrimeSelectModule,
     NarikPrimeToolbarModule,
     NarikPrimeTreeviewModule,
-    NarikPrimeCoreModule
+    NarikPrimeCoreModule,
+    NarikPrimeTabOutletModule
   ],
   declarations: [],
   exports: [
@@ -52,7 +54,8 @@ import { NarikPrimeCoreModule } from "./narik-prime-core/narik-prime-core.module
     NarikPrimeSelectModule,
     NarikPrimeToolbarModule,
     NarikPrimeTreeviewModule,
-    NarikPrimeCoreModule
+    NarikPrimeCoreModule,
+    NarikPrimeTabOutletModule
   ],
   providers: []
 })

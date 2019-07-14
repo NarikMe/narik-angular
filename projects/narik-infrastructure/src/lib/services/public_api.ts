@@ -23,3 +23,4 @@ export * from "./RemoteMessagingService";
 export * from "./comandProcessor";
 export * from "./ValidationService";
 export * from "./ShortcutService";
+export * from "./FormTitleResolver";

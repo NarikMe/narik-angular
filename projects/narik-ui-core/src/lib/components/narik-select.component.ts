@@ -7,7 +7,8 @@ import {
   CommandHost,
   CommandProcessor,
   DialogRef,
-  NavigationService
+  NavigationService,
+  MODULE_UI_KEY
 } from "narik-infrastructure";
 import { ReplaySubject } from "rxjs/internal/ReplaySubject";
 import { Observable } from "rxjs/internal/Observable";
@@ -18,6 +19,8 @@ import { ActivatedRoute } from "@angular/router";
 export class NarikSelect extends NarikDataDisplayValueComponent
   implements ControlValueAccessor, OnInit, CommandHost {
   private changeSubject = new ReplaySubject(1);
+
+  defaultNavigationProvider = "route";
 
   change: Observable<any>;
 
@@ -86,12 +89,27 @@ export class NarikSelect extends NarikDataDisplayValueComponent
     this.detectChanges();
   }
 
+  ngOnInit() {
+    super.ngOnInit();
+    const moduleUiKey = this.injector.get(MODULE_UI_KEY);
+    const viewOptions = this.metaDataService.getValue<any>(
+      moduleUiKey,
+      "viewOptions"
+    );
+
+    if (viewOptions && viewOptions.defaultNavigationProvider) {
+      this.defaultNavigationProvider = viewOptions.defaultNavigationProvider;
+    }
+  }
   protected showList() {
     const data = {};
     data["__dialogTitle"] = "list_" + (this.dataKey || this.dataInfo.dataKey);
     this.navigationService
       .navigate(
-        ["../" + (this.dataKey || this.dataInfo.dataKey) + "-list"],
+        this.navigationService.createNavigationCommand(
+          this.defaultNavigationProvider,
+          (this.dataKey || this.dataInfo.dataKey) + "-list"
+        ),
         "dialog",
         {
           relativeTo: this.route
@@ -109,7 +127,10 @@ export class NarikSelect extends NarikDataDisplayValueComponent
     data["__dialogTitle"] = this.dataKey || this.dataInfo.dataKey;
     this.navigationService
       .navigate(
-        ["../" + (this.dataKey || this.dataInfo.dataKey)],
+        this.navigationService.createNavigationCommand(
+          this.defaultNavigationProvider,
+          this.dataKey || this.dataInfo.dataKey
+        ),
         "dialog",
         {
           relativeTo: this.route

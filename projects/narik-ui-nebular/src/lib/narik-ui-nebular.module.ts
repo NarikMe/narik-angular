@@ -15,6 +15,7 @@ import { NarikNebularRadioGroupModule } from "./narik-nb-radio/narik-nb-radio.mo
 import { NarikNebularTreeviewModule } from "./narik-nb-treeview/narik-nb-treeview.module";
 import { NarikNebularToolbarModule } from "./narik-nb-toolbar/narik-nb-toolbar.module";
 import { NarikNebularCoreModule } from "./narik-nb-core/narik-nb-core.module";
+import { NarikNebularTabOutletModule } from "./narik-nb-tab-outlet/narik-nb-tab-outlet.module";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { NarikNebularCoreModule } from "./narik-nb-core/narik-nb-core.module";
     NarikNebularSelectModule,
     NarikNebularToolbarModule,
     NarikNebularTreeviewModule,
-    NarikNebularCoreModule
+    NarikNebularCoreModule,
+    NarikNebularTabOutletModule
   ],
   declarations: [],
   exports: [
@@ -52,7 +54,8 @@ import { NarikNebularCoreModule } from "./narik-nb-core/narik-nb-core.module";
     NarikNebularSelectModule,
     NarikNebularToolbarModule,
     NarikNebularTreeviewModule,
-    NarikNebularCoreModule
+    NarikNebularCoreModule,
+    NarikNebularTabOutletModule
   ],
   providers: []
 })
