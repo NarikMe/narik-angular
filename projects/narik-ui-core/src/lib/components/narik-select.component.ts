@@ -96,10 +96,6 @@ export class NarikSelect extends NarikDataDisplayValueComponent
       moduleUiKey,
       "viewOptions"
     );
-
-    if (viewOptions && viewOptions.defaultNavigationProvider) {
-      this.defaultNavigationProvider = viewOptions.defaultNavigationProvider;
-    }
   }
   protected showList() {
     const data = {};

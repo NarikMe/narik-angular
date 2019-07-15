@@ -65,7 +65,6 @@ import { NarikValidationService } from "./services/narik-validation.service";
 import { NarikShortcutService } from "./services/narik-shortcut.service";
 import { NarikDialogNavigationProvider } from "./services/navigationProviders/narik-dialog-navigation.provider";
 import { NarikRouteNavigationProvider } from "./services/navigationProviders/narik-route-navigation.provider";
-import { NarikTabNavigationProvider } from "./services/navigationProviders/narik-tab-navigation.provider";
 import { NarikFormTitleResolver } from "./services/narik-form-title-resolver.service";
 
 @NgModule({
@@ -149,11 +148,6 @@ import { NarikFormTitleResolver } from "./services/narik-form-title-resolver.ser
     {
       provide: NavigationProvider,
       useClass: NarikRouteNavigationProvider,
-      multi: true
-    },
-    {
-      provide: NavigationProvider,
-      useClass: NarikTabNavigationProvider,
       multi: true
     },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }

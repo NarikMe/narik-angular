@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Injector } from "@angular/core";
 
 import { NarikTabOutlet } from "narik-ui-core";
-import { NavigationService } from "narik-infrastructure";
 
 @Component({
   selector: "narik-mat-tab-outlet , narik-tab-outlet",
@@ -16,7 +15,7 @@ export class NarikMatTabOutlet extends NarikTabOutlet implements OnInit {
   /**
    *
    */
-  constructor(injector: Injector, navigationService: NavigationService) {
-    super(injector, navigationService);
+  constructor(injector: Injector) {
+    super(injector);
   }
 }

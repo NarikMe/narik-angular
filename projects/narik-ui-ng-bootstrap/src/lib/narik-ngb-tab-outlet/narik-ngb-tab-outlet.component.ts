@@ -1,7 +1,6 @@
 import { Component, OnInit, Injector, ViewChild, NgZone } from "@angular/core";
 
 import { NarikTabOutlet } from "narik-ui-core";
-import { NavigationService } from "narik-infrastructure";
 import { NgbTabset } from "@ng-bootstrap/ng-bootstrap";
 import { take } from "rxjs/internal/operators/take";
 
@@ -13,12 +12,8 @@ import { take } from "rxjs/internal/operators/take";
 export class NarikNgbTabOutlet extends NarikTabOutlet implements OnInit {
   @ViewChild("tabset", { static: true }) public tabsElement: NgbTabset;
 
-  constructor(
-    injector: Injector,
-    navigationService: NavigationService,
-    private readonly zone: NgZone
-  ) {
-    super(injector, navigationService);
+  constructor(injector: Injector, private readonly zone: NgZone) {
+    super(injector);
   }
 
   removeTabItem(index) {

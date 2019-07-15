@@ -22,6 +22,14 @@ export class NarikRouteReuseStrategy implements RouteReuseStrategy {
     future: ActivatedRouteSnapshot,
     curr: ActivatedRouteSnapshot
   ): boolean {
+    if (future.routeConfig && curr.routeConfig) {
+      if (future.routeConfig.loadChildren && curr.routeConfig.loadChildren) {
+        return future.routeConfig === curr.routeConfig;
+      }
+      if (future.routeConfig.children && curr.routeConfig.children) {
+        return future.routeConfig === curr.routeConfig;
+      }
+    }
     return curr.routeConfig === null && future.routeConfig === null;
   }
 }

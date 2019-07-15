@@ -1,15 +1,14 @@
 import { Component, OnInit, Input, Injector } from "@angular/core";
 
 import { NarikTabOutlet } from "narik-ui-core";
-import { NavigationService } from "narik-infrastructure";
 
 @Component({
   selector: "narik-prime-tab-outlet , narik-tab-outlet",
   templateUrl: "narik-prime-tab-outlet.component.html"
 })
 export class NarikPrimeTabOutlet extends NarikTabOutlet implements OnInit {
-  constructor(injector: Injector, navigationService: NavigationService) {
-    super(injector, navigationService);
+  constructor(injector: Injector) {
+    super(injector);
   }
 
   handleClose(e) {

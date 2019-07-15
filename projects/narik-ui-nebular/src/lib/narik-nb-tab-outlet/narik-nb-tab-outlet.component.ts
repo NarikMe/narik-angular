@@ -1,7 +1,7 @@
-import { Component, OnInit, Injector, NgZone, ViewChild } from "@angular/core";
+import { Component, OnInit, Injector, ViewChild } from "@angular/core";
 
 import { NarikTabOutlet } from "narik-ui-core";
-import { NavigationService } from "narik-infrastructure";
+
 import { NbTabsetComponent } from "@nebular/theme";
 
 @Component({
@@ -13,12 +13,8 @@ export class NarikNebularTabOutlet extends NarikTabOutlet implements OnInit {
   @ViewChild("tabSet", { static: true })
   tabSet: NbTabsetComponent;
 
-  constructor(
-    injector: Injector,
-    navigationService: NavigationService,
-    private readonly zone: NgZone
-  ) {
-    super(injector, navigationService);
+  constructor(injector: Injector) {
+    super(injector);
   }
 
   removeTabItem(index) {

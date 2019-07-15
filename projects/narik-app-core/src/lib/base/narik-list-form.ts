@@ -163,10 +163,6 @@ export abstract class NarikListForm<TE extends NarikEntity>
       this.moduleKey,
       "viewOptions"
     );
-
-    if (this.viewOptions && this.viewOptions.defaultNavigationProvider) {
-      this.defaultNavigationProvider = this.viewOptions.defaultNavigationProvider;
-    }
   }
 
   ngOnInit() {
@@ -357,7 +353,9 @@ export abstract class NarikListForm<TE extends NarikEntity>
     }
 
     if (this.viewOptions) {
-      return this.viewOptions.detailNavigationProvider || "dialog";
+      return this.viewOptions.detailNavigationProvider === "dialog"
+        ? "dialog"
+        : this.defaultNavigationProvider;
     }
 
     return "dialog";
