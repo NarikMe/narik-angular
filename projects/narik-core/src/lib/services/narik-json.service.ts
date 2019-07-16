@@ -20,7 +20,7 @@ export class NarikJsonService extends JsonService {
   }
 
   getJson(path: string): Observable<any> {
-    const jsonData = null; // this.jsons.get(path);
+    const jsonData = this.jsons.get(path);
     return jsonData
       ? of(jsonData)
       : this.httpService.get(path).pipe(
