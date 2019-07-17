@@ -22,8 +22,9 @@
       [dataSource]="tableDataSource" selectMode="Single">
     </narik-data-table>
     <ng-container *ngIf="options.showToolbar">
-      <narik-mat-toolbar cssClass="select-tool-bar" itemsStyle="mat-flat-button" itemsCssClass="select-tool-bar-btn"
-        [moduleKey]="options.toolbarModuleKey" [host]="this" [toolbarKey]="options.toolbarKey"></narik-mat-toolbar>
+      <narik-mat-toolbar [displayStyle]="''" cssClass="select-tool-bar" itemsStyle="mat-flat-button"
+        itemsCssClass="select-tool-bar-btn" [moduleKey]="options.toolbarModuleKey" [host]="this"
+        [toolbarKey]="options.toolbarKey"></narik-mat-toolbar>
     </ng-container>
   </mat-autocomplete>
 

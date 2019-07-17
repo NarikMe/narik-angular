@@ -8,8 +8,12 @@ export class NarikDataTableSelect extends NarikSelect
   get uiKey(): string {
     return "data-table-select";
   }
+
+  @Input()
+  gridOptions: any;
 }
 
 export const NARIK_DATA_TABLE_SELECT_INPUTS: string[] = [
-  ...NARIK_SELECT_INPUTS
+  ...NARIK_SELECT_INPUTS,
+  "gridOptions"
 ];

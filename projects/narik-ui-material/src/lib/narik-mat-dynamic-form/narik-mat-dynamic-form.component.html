@@ -96,6 +96,7 @@
       </ng-container>
       <ng-container *ngIf="item.type == 'table-select'">
         <narik-mat-data-table-select [options]="item.options" [name]="item.name"
+          [gridOptions]="item.options.gridOptions || {}"
           [disabled]="item.disableExpr && disableItems[item.name]" [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}" [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}" [fields]="item.options ? item.options.fields :  undefined"

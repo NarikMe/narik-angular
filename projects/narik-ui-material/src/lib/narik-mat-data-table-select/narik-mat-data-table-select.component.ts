@@ -52,9 +52,20 @@ import { NarikMatDataTable } from "../narik-mat-data-table/narik-mat-data-table.
 })
 export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
   implements OnInit {
-  gridOptions = {
-    showSearchPanel: false
-  };
+  _gridOptions: any;
+  set gridOptions(value: any) {
+    if (value && value.showSearchPanel !== true) {
+      value.showSearchPanel = false;
+    }
+    this._gridOptions = value;
+  }
+  get gridOptions(): any {
+    return (
+      this._gridOptions || {
+        showSearchPanel: false
+      }
+    );
+  }
 
   _selectMode: "Click" | "DblClick" = "Click";
   set selectMode(value: "Click" | "DblClick") {
