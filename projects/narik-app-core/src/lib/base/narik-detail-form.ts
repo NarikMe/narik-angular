@@ -313,7 +313,10 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
       this.isBusy = true;
       this.getEntity(parameterId).subscribe(result => {
         this.afterEntityLoaded(result.data);
-        this.currentEntity = result.data;
+        this.currentEntity = Object.assign(
+          this.entityTypeCreator(),
+          result.data
+        );
         this.isBusy = false;
       });
     } else {
@@ -325,8 +328,14 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
     this.newEntity();
   }
 
+  protected get entityTypeCreator(): () => TE {
+    return () => {
+      return {} as TE;
+    };
+  }
   protected newEntity() {
-    const tempNewEntity = this.createNewEntity();
+    let tempNewEntity = this.createNewEntity();
+    tempNewEntity = Object.assign(this.entityTypeCreator(), tempNewEntity);
     this.doBeforeNewEntitySet(tempNewEntity);
     this.currentEntity = tempNewEntity;
   }

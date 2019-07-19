@@ -66,6 +66,9 @@ export class FormContainerComponent implements OnInit {
       )
     );
 
+    if (!factoryClass) {
+      throw new Error(`colud not find entry for "${viewInfo.component}"`);
+    }
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       factoryClass
     );
