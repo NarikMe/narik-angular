@@ -7,6 +7,15 @@ export function isEquivalent(obj1, obj2, ignoreCase = false): boolean {
   if ((obj1 && !obj2) || (obj2 && !obj1)) {
     return false;
   }
+
+  if (
+    (obj1.constructor && !obj2.constructor) ||
+    (obj2.constructor && !obj1.constructor) ||
+    obj1.constructor.name !== !obj2.constructor.name
+  ) {
+    return false;
+  }
+
   return ignoreCase
     ? JSON.stringify(obj1).toLowerCase() === JSON.stringify(obj2).toLowerCase()
     : JSON.stringify(obj1) === JSON.stringify(obj2);
