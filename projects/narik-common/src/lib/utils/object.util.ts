@@ -11,7 +11,7 @@ export function isEquivalent(obj1, obj2, ignoreCase = false): boolean {
   if (
     (obj1.constructor && !obj2.constructor) ||
     (obj2.constructor && !obj1.constructor) ||
-    obj1.constructor.name !== !obj2.constructor.name
+    obj1.constructor.name !== obj2.constructor.name
   ) {
     return false;
   }
