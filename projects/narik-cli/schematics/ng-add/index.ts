@@ -152,7 +152,14 @@ const commonDependencies: any[] = [
     name: "ng2-validation",
     version: "^4.2.0"
   },
-
+  {
+    name: "class-validator",
+    version: "^0.9.1"
+  },
+  {
+    name: "data-adapter",
+    version: "^0.2.3"
+  },
   {
     name: "narik-infrastructure",
     version: "^2.0.2"

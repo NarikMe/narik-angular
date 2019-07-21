@@ -1,4 +1,7 @@
 import { formatString, isEquivalent } from "narik-common";
+
+import { denormalize } from "data-adapter";
+import { validate, ValidationError } from "class-validator";
 import { NarikInject } from "narik-core";
 import {
   CommandInfo,
@@ -270,34 +273,78 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
 
       return;
     }
-    if (!this.extraValidateBeforeSubmit(this.currentEntity)) {
-      return;
-    }
-    this.isBusy = true;
-    this.queryService
-      .post(
-        {
-          dataKey: this.config.entityKey,
-          dataMethod: this.currentEntity[this.entityKeyField] ? "PUT" : "POST",
-          urlParameters: this.currentEntity[this.entityKeyField]
-        },
-        { Entity: this.currentEntity }
-      )
-      .pipe(
-        finalize(() => {
-          this.isBusy = false;
-        })
-      )
-      .subscribe(result => {
-        this.dialogService.showMessage("info.submit-succeed");
-        if (this.dialogRef) {
-          this.dialogRef.events.next({
-            eventType: "ENTITY_UPDATED"
-          });
+
+    this.validateEntity(this.currentEntity).then(isOk => {
+      if (isOk) {
+        if (!this.extraValidateBeforeSubmit(this.currentEntity)) {
+          return;
         }
-        this.currentEntity = result.data;
-      });
+        this.isBusy = true;
+
+        const denormalizeEntity = denormalize(this.currentEntity);
+        this.queryService
+          .post(
+            {
+              dataKey: this.config.entityKey,
+              dataMethod: this.currentEntity[this.entityKeyField]
+                ? "PUT"
+                : "POST",
+              urlParameters: this.currentEntity[this.entityKeyField]
+            },
+            { Entity: denormalizeEntity }
+          )
+          .pipe(
+            finalize(() => {
+              this.isBusy = false;
+            })
+          )
+          .subscribe(result => {
+            this.dialogService.showMessage("info.submit-succeed");
+            if (this.dialogRef) {
+              this.dialogRef.events.next({
+                eventType: "ENTITY_UPDATED"
+              });
+            }
+            this.currentEntity = result.data;
+          });
+      }
+    });
   }
+
+  protected validateEntity(entity: TE): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      validate(entity).then(errors => {
+        if (errors.length > 0) {
+          this.showEntityValidationErrors(errors);
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  }
+  protected showEntityValidationErrors(errors: ValidationError[]) {
+    const errorItems = errors
+      .map((err: ValidationError) => {
+        return this.getAllFieldValues(err.constraints);
+      })
+      .join("<br>");
+    this.dialogService.error(errorItems, "", {
+      enableHtml: true
+    });
+  }
+
+  // wait to https://github.com/typestack/class-validator/pull/238
+  protected getAllFieldValues(obj) {
+    const result = [];
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        result.push(obj[key]);
+      }
+    }
+    return result.join("<br>");
+  }
+
   getEntity(entityId: any): Observable<ServerResponse<TE>> {
     return this.queryService.get({
       dataKey: this.config.entityKey,
@@ -313,10 +360,11 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
       this.isBusy = true;
       this.getEntity(parameterId).subscribe(result => {
         this.afterEntityLoaded(result.data);
-        this.currentEntity = Object.assign(
-          this.entityTypeCreator(),
-          result.data
-        );
+        const tempEntity = Object.assign(this.entityTypeCreator(), result.data);
+        // if (tempEntity) {
+        //   tempEntity = normalize(tempEntity, tempEntity.constructor) as TE;
+        // }
+        this.currentEntity = tempEntity;
         this.isBusy = false;
       });
     } else {
