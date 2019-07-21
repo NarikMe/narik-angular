@@ -9,7 +9,8 @@ import {
   NarikEntity,
   NarikViewField,
   DialogResult,
-  ConfigService
+  ConfigService,
+  EntityTypeService
 } from "narik-infrastructure";
 import { DynamicFormService, NarikDynamicForm } from "narik-ui-core";
 import { Observable } from "rxjs/internal/Observable";
@@ -64,6 +65,9 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
 
   @NarikInject(TranslateService)
   translateService: TranslateService;
+
+  @NarikInject(EntityTypeService)
+  entityTypeService: EntityTypeService;
 
   @ViewChild("form", { static: false })
   form: NgForm;
@@ -377,6 +381,11 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
   }
 
   protected get entityTypeCreator(): () => TE {
+    if (this.config.entityTypeCreator) {
+      return this.entityTypeService.getTypeCreator(
+        this.config.entityTypeCreator
+      );
+    }
     return () => {
       return {} as TE;
     };

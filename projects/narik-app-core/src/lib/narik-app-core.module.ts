@@ -1,5 +1,9 @@
 import { NarikCommonModule } from "narik-common";
-import { MetaDataService, ViewManagerService } from "narik-infrastructure";
+import {
+  MetaDataService,
+  ViewManagerService,
+  EntityTypeService
+} from "narik-infrastructure";
 
 import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
@@ -25,6 +29,7 @@ import { UserIsAuthorizedGuard } from "./util/user-is-authorized.guard";
 import { QUERY_SERVICE_TYPE } from "./internal-injectionTokens";
 import { NarikQueryService } from "./services/narik-query.service";
 import { QueryService } from "./services/queryService";
+import { NarikEntityTypeService } from "./services/narik-entity-type.service";
 
 @NgModule({
   imports: [CommonModule, NarikCommonModule],
@@ -60,6 +65,11 @@ export class NarikAppCoreModule {
         {
           provide: QUERY_SERVICE_TYPE,
           useValue: (config && config.queryService) || NarikQueryService
+        },
+        {
+          provide: EntityTypeService,
+          useClass:
+            (config && config.entityTypeService) || NarikEntityTypeService
         },
         ModuleLoadCompletelyGuard,
         UserIsAuthenticatedGuard,

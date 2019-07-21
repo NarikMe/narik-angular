@@ -24,3 +24,4 @@ export * from "./comandProcessor";
 export * from "./ValidationService";
 export * from "./ShortcutService";
 export * from "./FormTitleResolver";
+export * from "./EntityTypeService";

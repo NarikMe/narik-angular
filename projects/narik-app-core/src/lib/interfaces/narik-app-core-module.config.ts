@@ -1,4 +1,8 @@
-import { MetaDataService, ViewManagerService } from "narik-infrastructure";
+import {
+  MetaDataService,
+  ViewManagerService,
+  EntityTypeService
+} from "narik-infrastructure";
 
 import { Type } from "@angular/core";
 import { ViewComponentNameResolver } from "./view-component-name-resolver";
@@ -9,4 +13,5 @@ export interface NarikAppCoreModuleConfig {
   metaDataService?: Type<MetaDataService>;
   viewComponentNameResolver?: Type<ViewComponentNameResolver>;
   queryService?: Type<QueryService<any>>;
+  entityTypeService?: Type<EntityTypeService>;
 }

@@ -19,6 +19,7 @@ export interface FormConfig {
 
 export interface DetailFormConfig extends FormConfig {
   entityKey: string;
+  entityTypeCreator?: string;
   defaultEntity?: any;
 }
 
