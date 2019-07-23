@@ -1,4 +1,4 @@
-import { formatString, isEquivalent } from "narik-common";
+import { formatString, isEquivalent, isFunction } from "narik-common";
 
 import { denormalize } from "data-adapter";
 import { validate, ValidationError } from "class-validator";
@@ -285,7 +285,9 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
         }
         this.isBusy = true;
 
-        const denormalizeEntity = denormalize(this.currentEntity);
+        const denormalizeEntity = isFunction((this.currentEntity as any).toJson)
+          ? (this.currentEntity as any).toJson()
+          : denormalize(this.currentEntity);
         this.queryService
           .post(
             {
