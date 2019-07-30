@@ -1,6 +1,8 @@
 # Narik
 
-Narik is a framework that helps you create your angular application more creatively in less time. You will find Narik interesting in many different aspects, once you use it.
+Narik is a framework that helps you create your angular application more creatively in less time. You will find Narik interesting in many different aspects, once you use it.  
+
+[Online Demo](http://narik.me/demo/app)
 
 ## Documentation
 
@@ -12,7 +14,7 @@ and [Narik.me](http://narik.me)
 You can start narik in two ways:
 
 - Using Narik  shematic
-    1. Create new Angular cli project  
+    1. Create new Angular cli project  (make sure version of Angular Cli is higher that 8)
     `
     ng new narik-project
     `
