@@ -14,7 +14,7 @@ and [Narik.me](http://narik.me)
 You can start narik in two ways:
 
 - Using Narik  shematic
-    1. Create new Angular cli project  (make sure version of Angular Cli is higher that 8)
+    1. Create new Angular cli project  (make sure version of Angular Cli is higher that 8)  
     `
     ng new narik-project
     `
