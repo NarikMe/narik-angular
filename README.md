@@ -34,8 +34,10 @@ You can start narik in two ways:
 
 - You can see examples in these Narik samples
 
-    [narik-material-demo](https://github.com/NarikMe/narik-material-demo)  
-    [narik-devextreme-demo](https://github.com/NarikMe/narik-devextreme-demo)  
-    [narik-ng-bootstrap-demo](https://github.com/NarikMe/narik-ng-bootstrap-demo)  
-    [narik-primeng-demo](https://github.com/NarikMe/narik-primeng-demo)  
-    [narik-nebular-demo](https://github.com/NarikMe/narik-nebular-demo)
+    [narik-material-demo](https://github.com/NarikMe/narik-material-demo)([online demo](https://http://narik.me/demo/app))    
+    [narik-devextreme-demo](https://github.com/NarikMe/narik-devextreme-demo)([online demo](https://http://narik.me/demo/app-devextreme/))    
+    [narik-ng-bootstrap-demo](https://github.com/NarikMe/narik-ng-bootstrap-demo)([online demo](https://http://narik.me/demo/app-ng-bootstrap/))  
+    [narik-primeng-demo](https://github.com/NarikMe/narik-primeng-demo)([online demo](https://http://narik.me/demo/app-primeng/))    
+    [narik-nebular-demo](https://github.com/NarikMe/narik-nebular-demo)([online demo](https://http://narik.me/demo/app-nebular/))  
+    [narik-material-architectui-demo](https://github.com/NarikMe/narik-material-demo-architectui-admin-template)([online demo](https://http://narik.me/demo/app-material-architectui/))  
+    [narik-material-coreui-demo](https://github.com/NarikMe/narik-material-demo-coreui-admin-template)([online demo](https://http://narik.me/demo/app-material-coreui/))  
