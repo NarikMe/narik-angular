@@ -66,6 +66,7 @@ import { NarikShortcutService } from "./services/narik-shortcut.service";
 import { NarikDialogNavigationProvider } from "./services/navigationProviders/narik-dialog-navigation.provider";
 import { NarikRouteNavigationProvider } from "./services/navigationProviders/narik-route-navigation.provider";
 import { NarikFormTitleResolver } from "./services/narik-form-title-resolver.service";
+import { AppInjector } from "./util/app-injector";
 
 @NgModule({
   imports: [ToastrModule.forRoot()],
@@ -164,7 +165,7 @@ export class NarikCoreModule {
     if (useDefaultLang) {
       translateService.use(defaultLang);
     }
-    window["$$$_root_injector"] = injector;
+    AppInjector.injector = injector;
   }
   static forRoot(config?: NarikCoreModuleConfig): ModuleWithProviders {
     return {

@@ -1,4 +1,5 @@
 import { Type, InjectionToken, InjectFlags, Injector } from "@angular/core";
+import { AppInjector } from "../util/app-injector";
 
 export function NarikInject<T>(
   token: Type<T> | InjectionToken<T> | any,
@@ -40,7 +41,7 @@ export function NarikInject<T>(
           localInjector = localInjector.parent;
         }
       }
-      const value = (localInjector || window["$$$_root_injector"]).get(
+      const value = (localInjector || AppInjector.injector).get(
         token,
         notFoundValue,
         flags
