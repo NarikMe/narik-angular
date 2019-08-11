@@ -24,7 +24,8 @@ import {
   CommandProcessor,
   ValidationService,
   ShortcutService,
-  FormTitleResolver
+  FormTitleResolver,
+  CONFIG_OPTIONS
 } from "narik-infrastructure";
 import { ToastrModule } from "ngx-toastr";
 
@@ -248,6 +249,7 @@ export class NarikCoreModule {
           useValue: config && config.useDefaultLang
         },
         { provide: CONFIG_PATH, useValue: config && config.configFilePath },
+        { provide: CONFIG_OPTIONS, useValue: config && config.configOptions },
         {
           provide: APP_INITIALIZER,
           useFactory: initConfig,

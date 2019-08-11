@@ -1,4 +1,9 @@
-import { ConfigService, CONFIG_PATH } from "narik-infrastructure";
+import {
+  ConfigService,
+  CONFIG_PATH,
+  CONFIG_OPTIONS,
+  ConfigOptions
+} from "narik-infrastructure";
 import { NarikHttpService } from "./narik-http.service";
 import { Inject, Injectable } from "@angular/core";
 import { tap } from "rxjs/internal/operators/tap";
@@ -14,9 +19,13 @@ export class NarikConfigService extends ConfigService {
 
   constructor(
     private httpService: NarikHttpService,
+    @Inject(CONFIG_OPTIONS) private configOptions: ConfigOptions,
     @Inject(CONFIG_PATH) private configPath: string
   ) {
     super();
+    if (configOptions && configOptions.configFilePath) {
+      this.configPath = configOptions.configFilePath;
+    }
     this.configLoadedSubject = new ReplaySubject(1);
   }
 
@@ -25,7 +34,13 @@ export class NarikConfigService extends ConfigService {
   }
   init(): Promise<any> {
     return this.httpService
-      .get(this.configPath)
+      .get(
+        this.configPath +
+          (this.configOptions &&
+          this.configOptions.addTimeParameterToConfigFilePath
+            ? "?t=" + new Date().getTime()
+            : "")
+      )
       .pipe(
         tap(x => {
           this.configData = x;

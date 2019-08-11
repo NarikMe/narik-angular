@@ -1,5 +1,10 @@
 import { Observable } from "rxjs/internal/Observable";
 
+export interface ConfigOptions {
+  configFilePath: string;
+  addTimeParameterToConfigFilePath?: boolean;
+}
+
 /**
  * Config service
  */

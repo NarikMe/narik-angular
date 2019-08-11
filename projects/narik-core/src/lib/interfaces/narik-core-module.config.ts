@@ -15,9 +15,11 @@ import {
 } from "narik-infrastructure";
 
 import { Type } from "@angular/core";
+import { ConfigOptions } from "narik-infrastructure";
 
 export interface NarikCoreModuleConfig {
   configFilePath?: string;
+  configOptions?: ConfigOptions;
   errorHandleService?: Type<ErrorHandleService>;
   dataProviderService?: Type<DataProviderService>;
   dialogService?: Type<DialogService>;
