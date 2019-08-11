@@ -99,7 +99,7 @@ const devDependencies: any[] = [
   },
   {
     name: "narik-webpack-tools",
-    version: "2.0.1"
+    version: "2.0.2"
   }
 ];
 const commonDependencies: any[] = [
