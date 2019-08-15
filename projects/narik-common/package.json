@@ -1,10 +1,10 @@
 {
   "name": "narik-common",
-  "version": "2.0.8",
+  "version": "2.1.0",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
-    "data-adapter":"^0.2.3"
+    "data-adapter": "^0.2.3"
   },
   "repository": {
     "type": "git",

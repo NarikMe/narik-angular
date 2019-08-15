@@ -162,31 +162,31 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-infrastructure",
-    version: "^2.0.6"
+    version: "~2.1.0"
   },
   {
     name: "narik-common",
-    version: "^2.0.8"
+    version: "~2.1.0"
   },
   {
     name: "narik-core",
-    version: "^2.0.7"
+    version: "~2.1.0"
   },
   {
     name: "narik-app-core",
-    version: "^2.0.8"
+    version: "~2.1.0"
   },
   {
     name: "narik-ui-core",
-    version: "^2.0.9"
+    version: "~2.1.0"
   },
   {
     name: "narik-jwt-authentication",
-    version: "^2.0.0"
+    version: "~2.1.0"
   },
   {
     name: "narik-client-storage",
-    version: "^2.0.0"
+    version: "~2.1.0"
   }
 ];
 
@@ -278,7 +278,7 @@ const uiDependency: any = {
   material: [
     {
       name: "narik-ui-material",
-      version: "^2.0.10"
+      version: "~2.1.0"
     },
     {
       name: "@angular/material",
@@ -288,7 +288,7 @@ const uiDependency: any = {
   devextreme: [
     {
       name: "narik-ui-devextreme",
-      version: "^2.0.8"
+      version: "~2.1.0"
     },
     {
       name: "devextreme",
@@ -304,14 +304,14 @@ const uiDependency: any = {
     }
   ],
   "ng-bootstrap": [
-    { name: "narik-ui-ng-bootstrap", version: "^2.0.9" },
-    { name: "narik-ui-swimlane", version: "^2.0.2" },
+    { name: "narik-ui-ng-bootstrap", version: "~2.1.0" },
+    { name: "narik-ui-swimlane", version: "~2.1.0" },
     { name: "@swimlane/ngx-datatable", version: "^15.0.2" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" }
   ],
   nebular: [
-    { name: "narik-ui-nebular", version: "^2.0.9" },
-    { name: "narik-ui-swimlane", version: "^2.0.2" },
+    { name: "narik-ui-nebular", version: "~2.1.0" },
+    { name: "narik-ui-swimlane", version: "~2.1.0" },
     { name: "@swimlane/ngx-datatable", version: "^15.0.1" },
     { name: "@nebular/theme", version: "^4.0.0" },
     { name: "@nebular/date-fns", version: "^4.0.0" },
@@ -320,7 +320,7 @@ const uiDependency: any = {
   primeng: [
     { name: "primeng", version: "^8.0.0-rc.1" },
     { name: "primeicons", version: "^1.0.0" },
-    { name: "narik-ui-primeng", version: "^2.0.8" }
+    { name: "narik-ui-primeng", version: "~2.1.0" }
   ]
 };
 
