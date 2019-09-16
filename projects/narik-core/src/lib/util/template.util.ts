@@ -1,6 +1,9 @@
 import "reflect-metadata";
 
 export function applyBaseTemplate(cls: any, template: string): any {
+  template =
+    typeof template === "string" ? template : (template as any).default;
+
   const annotations = cls["__annotations__"];
 
   if (annotations) {

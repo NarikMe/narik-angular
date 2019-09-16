@@ -1,19 +1,7 @@
 import { TypeDecorator } from "@angular/core";
 import { applyBaseTemplate } from "../util/template.util";
 
-
-export function NarikBaseTemplate(
-  template:
-    | string
-    | {
-        baseTemplateKey?: string;
-        baseTemplateUrl?: string;
-      }
-) {
-  const templateKey =
-    typeof template === "string"
-      ? template
-      : template.baseTemplateKey || template.baseTemplateUrl;
+export function NarikBaseTemplate(templateKey: string) {
   const typeDecorator: TypeDecorator = <TypeDecorator>(
     // tslint:disable-next-line:no-shadowed-variable
     function TypeDecorator(cls: any) {
