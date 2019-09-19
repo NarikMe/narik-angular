@@ -1,6 +1,6 @@
 import { ValidationService, NarikValidator } from "narik-infrastructure";
 import { Validators } from "@angular/forms";
-import { CustomValidators } from "ng2-validation";
+import { CustomValidators } from "ngx-custom-validators";
 
 export class NarikValidationService extends ValidationService {
   _validators: any = {
@@ -94,9 +94,6 @@ export class NarikValidationService extends ValidationService {
     },
     number: {
       func: CustomValidators.number
-    },
-    phone: {
-      func: CustomValidators.phone
     },
     range: {
       func: CustomValidators.range,

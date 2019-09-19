@@ -149,8 +149,8 @@ const commonDependencies: any[] = [
     version: "^10.0.4"
   },
   {
-    name: "ng2-validation",
-    version: "^4.2.0"
+    name: "ngx-custom-validators",
+    version: "^8.0.0"
   },
   {
     name: "class-validator",
@@ -170,11 +170,11 @@ const commonDependencies: any[] = [
   },
   {
     name: "narik-core",
-    version: "~2.1.0"
+    version: "~2.2.0"
   },
   {
     name: "narik-app-core",
-    version: "~2.1.0"
+    version: "~2.2.0"
   },
   {
     name: "narik-ui-core",
