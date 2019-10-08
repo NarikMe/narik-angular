@@ -1,6 +1,4 @@
 import {
-  NARIK_DATA_DISPLAY_VALUE_INPUTS,
-  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
   NarikAutoComplete
 } from "narik-ui-core";
 
@@ -15,6 +13,10 @@ import { tap } from "rxjs/internal/operators/tap";
 import { finalize } from "rxjs/internal/operators/finalize";
 import { of } from "rxjs/internal/observable/of";
 import { DataProviderService, MODULE_DATA_KEY } from "narik-infrastructure";
+import {
+  NARIK_DATA_DISPLAY_VALUE_INPUTS,
+  NARIK_DATA_DISPLAY_VALUE_OUTPUTS
+} from "../input-output-items";
 
 @Component({
   selector: "narik-ngb-autocomplete  , narik-autocomplete ",

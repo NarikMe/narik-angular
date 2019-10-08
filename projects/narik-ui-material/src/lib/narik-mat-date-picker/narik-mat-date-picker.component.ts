@@ -6,7 +6,7 @@ import {
   Inject,
   Optional
 } from "@angular/core";
-import { NARIK_DATE_PICKER_INPUTS } from "narik-ui-core";
+
 import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
 import { NarikMatDatePickerBase } from "../base/narik-mat-date-picker-base";
 import {
@@ -14,6 +14,9 @@ import {
   MatDateFormats,
   MAT_DATE_FORMATS
 } from "@angular/material/core";
+import { NARIK_DATE_PICKER_INPUTS } from "../input-output-items";
+
+
 
 @Component({
   selector: "narik-mat-date-picker , narik-date-picker",

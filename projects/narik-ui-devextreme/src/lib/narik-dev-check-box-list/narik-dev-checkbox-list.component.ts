@@ -1,9 +1,9 @@
 import {
-  NarikCheckBoxList,
-  NARIK_DATA_DISPLAY_VALUE_INPUTS
+  NarikCheckBoxList
 } from "narik-ui-core";
 import { Component, forwardRef, Injector, Input } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NARIK_DATA_DISPLAY_VALUE_INPUTS } from "../input-output-items";
 
 @Component({
   selector: "narik-dev-checkbox-list , narik-checkbox-list",

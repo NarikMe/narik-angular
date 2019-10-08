@@ -23,6 +23,7 @@
     "build-jwt": "ng build narik-jwt-authentication && node build-tools/copy.js readme.md dist/narik-jwt-authentication",
     "build-signalr": "ng build narik-signalr-client && node build-tools/copy.js readme.md dist/narik-signalr-client",
     "build-client-storage": "ng build narik-client-storage && node build-tools/copy.js readme.md dist/narik-client-storage",
+    "debug-cli":"node --inspect-brk ./node_modules/@angular/cli/bin/ng serve",
     "build-lib": "npm run build-infrastructure && npm run build-common && npm run build-core  && npm run build-ui-core &&    npm run build-app-core && npm run build-ui-material && npm run build-ui-ng-bootstrap && npm run build-ui-ngx-bootstrap && npm run build-ui-devextreme  && npm run build-ui-nebular && npm run build-ui-primeng && npm run build-ui-swimlane && npm run build-jwt && npm run build-client-storage && npm run build-signalr &&  npm run build-cli",
     "version": "node build-tools/version.js",
     "publish": "node build-tools/publish.js"
@@ -67,11 +68,11 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.802.2",
-    "@angular-devkit/build-ng-packagr": "~0.802.2",
-    "@angular/cli": "~8.2.2",
-    "@angular/compiler-cli": "~8.2.2",
-    "@angular/language-service": "~8.2.2",
+    "@angular-devkit/build-angular": "~0.803.8",
+    "@angular-devkit/build-ng-packagr": "~0.803.8",
+    "@angular/cli": "~8.3.8",
+    "@angular/compiler-cli": "~8.2.9",
+    "@angular/language-service": "~8.2.9",
     "@types/jasmine": "~3.4.0",
     "@types/jasminewd2": "~2.0.6",
     "@types/lodash": "~4.14.136",

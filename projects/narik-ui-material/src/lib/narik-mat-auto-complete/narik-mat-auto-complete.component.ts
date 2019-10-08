@@ -1,9 +1,5 @@
 import { DataProviderService, MODULE_DATA_KEY } from "narik-infrastructure";
-import {
-  NARIK_DATA_DISPLAY_VALUE_INPUTS,
-  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
-  NARIK_AUTOCOMPLETE_INPUTS
-} from "narik-ui-core";
+
 import { Observable } from "rxjs/internal/Observable";
 import { of } from "rxjs/internal/observable/of";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
@@ -27,6 +23,12 @@ import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { NarikMatAutoCompleteBase } from "../base/narik-mat-auto-complete-base";
 import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
+import {
+  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
+  NARIK_DATA_DISPLAY_VALUE_INPUTS,
+  NARIK_AUTOCOMPLETE_INPUTS
+} from "../input-output-items";
+
 
 @Component({
   selector: "narik-mat-autocomplete  , narik-autocomplete ",

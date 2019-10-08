@@ -1,10 +1,12 @@
-import { NARIK_INPUT_INPUTS } from "narik-ui-core";
-
 import { Component, forwardRef, Injector, Input } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
 import { NarikMatInputBase } from "../base/narik-mat-input-base";
+import { NARIK_INPUT_INPUTS } from "../input-output-items";
+
+
+
 
 @Component({
   selector: "narik-mat-input , narik-input",

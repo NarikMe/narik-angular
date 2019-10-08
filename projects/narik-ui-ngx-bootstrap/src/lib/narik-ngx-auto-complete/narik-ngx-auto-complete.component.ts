@@ -1,21 +1,13 @@
-import {
-  NARIK_DATA_DISPLAY_VALUE_INPUTS,
-  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
-  NarikAutoComplete
-} from "narik-ui-core";
+import { NarikAutoComplete } from "narik-ui-core";
 
 
 import {
   Component,
-  ElementRef,
   forwardRef,
-  Injector,
-  Input,
-  OnInit,
-  ViewChild,
-  HostBinding
+  OnInit
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_DATA_DISPLAY_VALUE_OUTPUTS } from "../input-output-items";
 
 @Component({
   selector: "narik-ngx-autocomplete  , narik-autocomplete ",

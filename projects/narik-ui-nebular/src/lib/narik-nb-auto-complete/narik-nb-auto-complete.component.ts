@@ -1,8 +1,4 @@
-import {
-  NARIK_DATA_DISPLAY_VALUE_INPUTS,
-  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
-  NarikAutoComplete
-} from "narik-ui-core";
+import { NarikAutoComplete } from "narik-ui-core";
 
 import { Component, forwardRef, Injector, OnInit, Input } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
@@ -15,6 +11,7 @@ import { tap } from "rxjs/internal/operators/tap";
 import { finalize } from "rxjs/internal/operators/finalize";
 import { of } from "rxjs/internal/observable/of";
 import { DataProviderService, MODULE_DATA_KEY } from "narik-infrastructure";
+import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_DATA_DISPLAY_VALUE_OUTPUTS } from "../input-output-items";
 
 @Component({
   selector: "narik-nb-autocomplete  , narik-autocomplete ",
@@ -30,7 +27,8 @@ import { DataProviderService, MODULE_DATA_KEY } from "narik-infrastructure";
     }
   ]
 })
-export class NarikNebularAutoComplete extends NarikAutoComplete implements OnInit {
+export class NarikNebularAutoComplete extends NarikAutoComplete
+  implements OnInit {
   internalChange = false;
   optionData: any[] = [];
   search: any;

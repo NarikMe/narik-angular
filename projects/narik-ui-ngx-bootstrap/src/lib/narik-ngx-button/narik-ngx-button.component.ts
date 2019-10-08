@@ -3,9 +3,7 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  ViewChild,
   Renderer2,
-  HostListener,
   Injector
 } from "@angular/core";
 import {
