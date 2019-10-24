@@ -110,9 +110,9 @@ export class NarikMatDataTable extends NarikDataTable
             x: { filterValue: string; column: any },
             y: { filterValue: string; column: any }
           ) => {
-            if (!x) return false;
-            if (x.filterValue !== y.filterValue) return false;
-            if (!x.column && !y.column) return true;
+            if (!x) { return false; }
+            if (x.filterValue !== y.filterValue) { return false; }
+            if (!x.column && !y.column) { return true; }
             if (x.column && y.column) {
               return (x.column.model = y.column.model);
             }
