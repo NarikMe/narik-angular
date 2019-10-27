@@ -1,9 +1,10 @@
 import { ShortcutService, ShortcutOptions } from "narik-infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { EventManager } from "@angular/platform-browser";
-import { Inject } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 
+@Injectable()
 export class NarikShortcutService extends ShortcutService {
   hotkeys = new Map();
   defaults: Partial<ShortcutOptions> = {
@@ -12,7 +13,7 @@ export class NarikShortcutService extends ShortcutService {
 
   constructor(
     private eventManager: EventManager,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document
   ) {
     super();
   }
@@ -26,7 +27,9 @@ export class NarikShortcutService extends ShortcutService {
     const merged = { ...this.defaults, ...options };
     const event = `keydown.${merged.keys}`;
 
-    merged.description && this.hotkeys.set(merged.keys, merged.description);
+    if (merged.description) {
+      this.hotkeys.set(merged.keys, merged.description);
+    }
 
     return new Observable(observer => {
       const handler = e => {

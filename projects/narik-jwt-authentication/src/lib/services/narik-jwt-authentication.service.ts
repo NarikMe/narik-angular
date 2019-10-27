@@ -18,6 +18,7 @@ import { Observable } from "rxjs/internal/Observable";
 import { TOKEN_STORAGE } from "../injectionTokens";
 import { Router } from "@angular/router";
 
+@Injectable()
 export class NarikJwtAuthentication extends AuthenticationService {
   private _currentUserSubject = new ReplaySubject<ApplicationUser>(1);
   private _currentUserValue: ApplicationUser;
@@ -33,11 +34,7 @@ export class NarikJwtAuthentication extends AuthenticationService {
     private authRefreshEndPoint: string,
     @Inject(LOGIN_PAGE_URL) private loginPageUrl: string,
     @Inject(TOKEN_STORAGE)
-    private tokenStorage:
-      | "memory"
-      | "localStorage"
-      | "sessionStorage"
-      | "clientStorage"
+    private tokenStorage
   ) {
     super();
     this.init();
