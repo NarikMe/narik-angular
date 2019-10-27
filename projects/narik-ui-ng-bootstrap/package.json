@@ -1,6 +1,6 @@
 {
   "name": "narik-ui-ng-bootstrap",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
