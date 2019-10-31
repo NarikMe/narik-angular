@@ -1,9 +1,9 @@
 {
   "name": "narik-client-storage",
-  "version": "3.0.0",
+  "version": "3.0.0-next.2",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
+    "@angular/common": "~9.0.0-next.14",
+    "@angular/core": "~9.0.0-next.14",
     "localforage": "^1.7.3",
     "ngforage": "^4.0.3"
   },

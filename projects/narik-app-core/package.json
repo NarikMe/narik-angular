@@ -1,9 +1,9 @@
 {
   "name": "narik-app-core",
-  "version": "3.0.0",
+  "version": "3.0.0-next.2",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
+    "@angular/common": "~9.0.0-next.14",
+    "@angular/core": "~9.0.0-next.14",
     "lodash": "^4.17.11",
     "data-adapter": "^0.2.3",
     "class-validator": "^0.9.1"
