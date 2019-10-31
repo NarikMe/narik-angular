@@ -83,13 +83,13 @@ export class NarikDialogService extends DialogService {
   @NarikInject(RendererFactory2)
   rendererFactory: RendererFactory2;
 
-  componentFactories = new Map<
-    Type<any>,
-    {
-      factory: ComponentFactory<any>;
-      module?: NgModuleRef<any>;
-    }
-  >();
+  // componentFactories = new Map<
+  //   Type<any>,
+  //   {
+  //     factory: ComponentFactory<any>;
+  //     module?: NgModuleRef<any>;
+  //   }
+  // >();
 
   constructor(
     private injector: Injector,
@@ -124,13 +124,13 @@ export class NarikDialogService extends DialogService {
     componentFactoryResolver: ComponentFactoryResolver,
     injector: Injector
   ) {
-    const factories = componentFactoryResolver["_factories"].entriesArray();
-    for (const factory of factories) {
-      this.componentFactories.set(factory.key, {
-        factory: factory.value,
-        module: moduleRef
-      });
-    }
+    // const factories = componentFactoryResolver["_factories"].entriesArray();
+    // for (const factory of factories) {
+    //   this.componentFactories.set(factory.key, {
+    //     factory: factory.value,
+    //     module: moduleRef
+    //   });
+    // }
     if (injector) {
       this.injectors.push(injector);
     }
@@ -228,23 +228,24 @@ export class NarikDialogService extends DialogService {
         content
       );
     } else if (content instanceof Type) {
-      let factoryModule = this.componentFactories.get(content);
-      if (!factoryModule) {
-        factoryModule = {
-          factory: this.componentFactoryResolver.resolveComponentFactory(
-            content as Type<T>
-          )
-        };
-      }
+      // let factoryModule = this.componentFactories.get(content);
+      // if (!factoryModule) {
+      //   factoryModule = {
+      //     factory: this.componentFactoryResolver.resolveComponentFactory(
+      //       content as Type<T>
+      //     )
+      //   };
+      // }
+
+      const factory = this.componentFactoryResolver.resolveComponentFactory(
+        content as Type<T>
+      );
       providers = providers || [];
       providers.push({ provide: DIALOG_REF, useValue: result });
-      const localInjector = Injector.create(
-        providers,
-        factoryModule.module ? factoryModule.module.injector : this.injector
-      );
+      const localInjector = Injector.create(providers, this.injector);
 
       const dialogContent = dialogContainerRef.instance.contentContainerRef.createComponent(
-        factoryModule.factory,
+        factory,
         undefined,
         localInjector
       );
@@ -473,8 +474,7 @@ export class NarikDialogService extends DialogService {
     container: ComponentRef<DialogContainer>;
   } {
     const overlayRef = this.createOverlay(options);
-    const factory = this.componentFactories.get(this.dialogContainerType)
-      .factory;
+    const factory = this.componentFactoryResolver.resolveComponentFactory(this.dialogContainerType);
 
     const containerRef = overlayRef.instance.contentContainerRef.createComponent(
       factory
