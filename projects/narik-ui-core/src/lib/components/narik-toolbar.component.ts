@@ -9,6 +9,7 @@ import {
   DialogService
 } from "narik-infrastructure";
 import { NarikInject } from "narik-core";
+import { getParnetComponent } from "narik-common";
 import {
   Output,
   EventEmitter,
@@ -112,8 +113,8 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
 
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);
-    if (viewContainerRef && viewContainerRef["_view"]) {
-      this.host = viewContainerRef["_view"].component;
+    if (viewContainerRef) {
+      this.host = getParnetComponent<CommandHost>(viewContainerRef);
     }
   }
 
