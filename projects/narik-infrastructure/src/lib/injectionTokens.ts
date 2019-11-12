@@ -9,7 +9,6 @@ import {
 } from "./services/DialogService";
 import { DataProvider } from "./services/DataProvider";
 import { DataStorage } from "./services/DataStorage";
-import { NarikOutlet } from "./interfaces/narik-outlet";
 import { ConfigOptions } from "./services/ConfigService";
 
 // ِDialog Items
@@ -61,4 +60,9 @@ export const AUTHENTICATION_REFRESH_END_POINT = new InjectionToken<string>(
 );
 export const LOGIN_PAGE_URL = new InjectionToken<string>("LOGIN_PAGE_URL");
 export const CONFIG_PATH = new InjectionToken<string>("CONFIG_PATH");
-export const CONFIG_OPTIONS = new InjectionToken<ConfigOptions>("CONFIG_OPTIONS");
+export const CONFIG_OPTIONS = new InjectionToken<ConfigOptions>(
+  "CONFIG_OPTIONS"
+);
+export const DYNAMIC_COMPONENTS = new InjectionToken<Type<any>[]>(
+  "DYNAMIC_COMPONENTS"
+);

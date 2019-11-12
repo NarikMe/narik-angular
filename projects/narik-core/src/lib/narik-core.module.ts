@@ -1,3 +1,4 @@
+import { NarikComponentTypeResolver } from './services/narik-component-type-resolver.service';
 import { promiseSerial } from "narik-common";
 import { NarikJsonService } from "./services/narik-json.service";
 import { NarikConfigService } from "./services/narik-config.service";
@@ -25,7 +26,8 @@ import {
   ValidationService,
   ShortcutService,
   FormTitleResolver,
-  CONFIG_OPTIONS
+  CONFIG_OPTIONS,
+  ComponentTypeResolver
 } from "narik-infrastructure";
 import { ToastrModule } from "ngx-toastr";
 
@@ -225,6 +227,10 @@ export class NarikCoreModule {
         {
           provide: JsonService,
           useClass: (config && config.jsonService) || NarikJsonService
+        },
+        {
+          provide: ComponentTypeResolver,
+          useClass: (config && config.componentTypeResolver) || NarikComponentTypeResolver
         },
         {
           provide: FormTitleResolver,
