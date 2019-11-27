@@ -237,6 +237,9 @@ export abstract class NarikListForm<TE extends NarikEntity>
     }
   }
 
+  protected getDetailViewKey(entity: TE): string {
+    return this.config.entityKey;
+  }
   public editEntity(entity: TE) {
     if (this.config.allowEdit === false || this.config.readOnly) {
       return;
@@ -263,11 +266,14 @@ export abstract class NarikListForm<TE extends NarikEntity>
       .navigate(
         this.navigationService.createNavigationCommand(
           this.defaultNavigationProvider,
-          this.config.entityKey
+          this.getDetailViewKey(selectedEntity)
         ),
         navigationType,
         {
-          relativeTo: this.route
+          relativeTo: this.route,
+          queryParams: selectedEntity
+            ? { entityId: selectedEntity[this.entityKeyField] }
+            : {}
         },
         data
       )
