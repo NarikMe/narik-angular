@@ -37,6 +37,7 @@ export interface ToolBarItem {
   label?: string;
   tooltip?: string;
   icon?: string;
+  fontIcon?: string;
   data?: any;
   hideExpr?: string;
   disableExpr?: string;
@@ -207,7 +208,8 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
 
       const i = {
         key: tItem.key,
-        icon: tItem.icon || tItem.key,
+        icon: !tItem.icon && !tItem.fontIcon ? tItem.key : tItem.icon,
+        fontIcon: tItem.fontIcon,
         itemType: tItem.itemType || "button",
         tooltip: tItem.tooltip || tItem.key + "_command_tooltip",
         data: tItem.data,
