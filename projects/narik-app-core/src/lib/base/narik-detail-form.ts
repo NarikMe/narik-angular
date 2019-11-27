@@ -255,6 +255,16 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
     return this.translateService.instant(key);
   }
 
+  protected getPostData() {
+    const denormalizeEntity = isFunction((this.currentEntity as any).toJson)
+      ? (this.currentEntity as any).toJson()
+      : denormalize(this.currentEntity);
+    return this.addToPostData({ Entity: denormalizeEntity });
+  }
+
+  protected addToPostData(postData: any) {
+    return postData;
+  }
   submit() {
     if (
       this.config.readOnly ||
@@ -284,10 +294,7 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
           return;
         }
         this.isBusy = true;
-
-        const denormalizeEntity = isFunction((this.currentEntity as any).toJson)
-          ? (this.currentEntity as any).toJson()
-          : denormalize(this.currentEntity);
+        const postData = this.getPostData();
         this.queryService
           .post(
             {
@@ -297,7 +304,7 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
                 : "POST",
               urlParameters: this.currentEntity[this.entityKeyField]
             },
-            { Entity: denormalizeEntity }
+            postData
           )
           .pipe(
             finalize(() => {
