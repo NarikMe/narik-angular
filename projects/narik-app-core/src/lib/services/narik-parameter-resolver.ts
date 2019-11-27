@@ -29,10 +29,18 @@ export class NarikParameterResolver implements ParameterResolver {
       return this.formComponent.parameters[key];
     }
     if (this.route) {
-      const value =
+      let value =
         this.route.snapshot.params[key] || this.route.snapshot.data[key];
       if (value) {
         return value;
+      }
+      if (this.route.snapshot.queryParams) {
+        value =
+          this.route.snapshot.queryParams[key] ||
+          this.route.snapshot.queryParams[key];
+        if (+value) {
+          return +value;
+        }
       }
     }
     if (this.router) {
