@@ -39,7 +39,9 @@ import { NarikEntityTypeService } from "./services/narik-entity-type.service";
   entryComponents: [ENTRY_COMPONENTS]
 })
 export class NarikAppCoreModule {
-  static forRoot(config?: NarikAppCoreModuleConfig): ModuleWithProviders {
+  static forRoot(
+    config?: NarikAppCoreModuleConfig
+  ): ModuleWithProviders<NarikAppCoreModule> {
     return {
       ngModule: NarikAppCoreModule,
       providers: [

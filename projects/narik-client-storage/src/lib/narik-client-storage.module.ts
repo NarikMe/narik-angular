@@ -43,7 +43,7 @@ export class NarikClientStorageModule {
     });
   }
 
-  static forRoot(config?: ClientStorageOptions): ModuleWithProviders {
+  static forRoot(config?: ClientStorageOptions): ModuleWithProviders<NarikClientStorageModule> {
     return {
       ngModule: NarikClientStorageModule,
       providers: [

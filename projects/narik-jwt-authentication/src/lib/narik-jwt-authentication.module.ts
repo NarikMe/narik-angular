@@ -20,7 +20,7 @@ import { AuthErrorInterceptor } from "./services/auth-error.interceptor ";
   providers: []
 })
 export class NarikJwtAuthenticationModule {
-  static forRoot(config: NarikJwtAuthenticationConfig): ModuleWithProviders {
+  static forRoot(config: NarikJwtAuthenticationConfig): ModuleWithProviders<NarikJwtAuthenticationModule> {
     return {
       ngModule: NarikJwtAuthenticationModule,
       providers: [

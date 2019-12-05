@@ -11,7 +11,7 @@ import { RemoteMessagingService } from "narik-infrastructure";
   providers: []
 })
 export class NarikSignalRClientModule {
-  static forRoot(config: NarikSignalRConfig): ModuleWithProviders {
+  static forRoot(config: NarikSignalRConfig): ModuleWithProviders<NarikSignalRClientModule> {
     return {
       ngModule: NarikSignalRClientModule,
       providers: [

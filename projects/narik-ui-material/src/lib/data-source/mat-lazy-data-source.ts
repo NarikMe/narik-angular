@@ -141,7 +141,6 @@ export class MatLazyDataSource<T> implements DataSource<T>, NarikDataSource<T> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<T[]> {
-    console.log("Connecting data source");
     return this.dataSubject.asObservable();
   }
 

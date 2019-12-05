@@ -170,7 +170,7 @@ export class NarikCoreModule {
     }
     AppInjector.injector = injector;
   }
-  static forRoot(config?: NarikCoreModuleConfig): ModuleWithProviders {
+  static forRoot(config?: NarikCoreModuleConfig): ModuleWithProviders<NarikCoreModule> {
     return {
       ngModule: NarikCoreModule,
       providers: [
