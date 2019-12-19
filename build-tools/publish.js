@@ -25,5 +25,5 @@ var root = process.cwd();
 for (var dir of dirs) {
   console.log(dir);
   env.PATH = dir;
-  myExecSync("npm publish", dir);
+  myExecSync("npm publish --tag next", dir);
 }
