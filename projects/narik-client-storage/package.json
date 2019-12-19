@@ -1,6 +1,6 @@
 {
   "name": "narik-client-storage",
-  "version": "3.0.0-next.4",
+  "version": "3.0.0-next.6",
   "peerDependencies": {
     "@angular/common": "~9.0.0-next.14",
     "@angular/core": "~9.0.0-next.14",
@@ -17,5 +17,8 @@
   "keywords": [
     "angular",
     "Narik"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  }
 }
