@@ -1,8 +1,8 @@
-import { CommandHost, CommandInfo } from "narik-infrastructure";
+import { CommandHost, CommandInfo } from "@narik/infrastructure";
 
 import { Input, EventEmitter, Output, Injector } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
-import { isEquivalent } from "narik-common";
+import { isEquivalent } from "@narik/common";
 import { NarikUiComponent } from "../base/narik-ui-component";
 
 export abstract class NarikTreeview extends NarikUiComponent

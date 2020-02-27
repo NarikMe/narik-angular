@@ -8,7 +8,7 @@ import {
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import {
   NarikSelect
-} from "narik-ui-core";
+} from "@narik/ui-core";
 import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_SELECT_INPUTS, NARIK_DATA_DISPLAY_VALUE_OUTPUTS } from "../input-output-items";
 
 @Component({

@@ -1,6 +1,6 @@
-import { NarikDetailForm } from "narik-app-core";
-import { NarikInject } from "narik-core";
-import { NarikEntity } from "narik-infrastructure";
+import { NarikDetailForm } from "@narik/app-core";
+import { NarikInject } from "@narik/core";
+import { NarikEntity } from "@narik/infrastructure";
 
 import { Injector, Renderer2 } from "@angular/core";
 

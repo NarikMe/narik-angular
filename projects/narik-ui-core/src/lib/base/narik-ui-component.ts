@@ -2,10 +2,10 @@ import {
   NarikComponent,
   MetaDataService,
   MODULE_UI_KEY
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Input, Injector } from "@angular/core";
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 
 export class NarikUiComponent extends NarikComponent {
   _options: any = {};

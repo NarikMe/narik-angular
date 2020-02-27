@@ -1,4 +1,4 @@
-import { ParameterResolver, IPagingInfo } from "narik-infrastructure";
+import { ParameterResolver, IPagingInfo } from "@narik/infrastructure";
 
 import { InjectionToken } from "@angular/core";
 

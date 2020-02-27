@@ -1,9 +1,9 @@
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import {
   MetaDataService,
   ViewManagerService,
   EntityTypeService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";

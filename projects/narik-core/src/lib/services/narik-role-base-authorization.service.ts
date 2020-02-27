@@ -1,8 +1,8 @@
-import { isArray, isString } from "narik-common";
+import { isArray, isString } from "@narik/common";
 import {
   AuthenticationService,
   AuthorizationService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { of } from "rxjs/internal/observable/of";
 

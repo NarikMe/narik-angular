@@ -1,4 +1,4 @@
-import { NarikTreeview } from "narik-ui-core";
+import { NarikTreeview } from "@narik/ui-core";
 import { Component, Input, Injector } from "@angular/core";
 
 @Component({

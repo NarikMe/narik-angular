@@ -12,7 +12,9 @@ import {
   FileEntry,
   SchematicsException
 } from "@angular-devkit/schematics";
-import * as ts from "typescript";
+
+import * as ts from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
+
 import { getWorkspace } from "@schematics/angular/utility/config";
 import { getAppModulePath } from "@schematics/angular/utility/ng-ast-utils";
 import {
@@ -22,10 +24,16 @@ import {
   addProviderToModule
 } from "@schematics/angular/utility/ast-utils";
 import { Change, InsertChange } from "@schematics/angular/utility/change";
+// import {
+//   WorkspaceProject,
+//   WorkspaceSchema
+// } from "@angular-devkit/core";
+
 import {
   WorkspaceProject,
   WorkspaceSchema
-} from "@angular-devkit/core/src/workspace";
+} from "@schematics/angular/utility/workspace-models";
+
 import { normalize } from "@angular-devkit/core";
 import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 
@@ -44,77 +52,79 @@ const commonStyles = [
 ];
 
 const uiStyles: any = {
-  material: ["node_modules/narik-ui-material/styles/narik-ui-material.css"],
+  material: ["node_modules/@narik/ui-material/styles/narik-ui-material.css"],
   devextreme: [
     "node_modules/devextreme/dist/css/dx.common.css",
     "node_modules/devextreme/dist/css/dx.light.css",
-    "node_modules/narik-ui-devextreme/styles/narik-ui-devextreme.css"
+    "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.css"
   ],
   "ng-bootstrap": [
     "node_modules/@swimlane/ngx-datatable/release/index.css",
     "node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
     "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
-    "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
-    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.css"
+    "node_modules/@narik/ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css"
   ],
   nebular: [
     "node_modules/@swimlane/ngx-datatable/release/index.css",
     "node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
     "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
-    "node_modules/narik-ui-nebular/styles/narik-ui-nebular.css",
-    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.css"
+    "node_modules/@narik/ui-nebular/styles/narik-ui-nebular.css",
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css"
   ],
   primeng: [
     "node_modules/primeng/resources/themes/nova-light/theme.css",
     "node_modules/primeng/resources/primeng.min.css",
     "node_modules/primeicons/primeicons.css",
-    "node_modules/narik-ui-primeng/styles/narik-ui-prime.css"
+    "node_modules/@narik/ui-primeng/styles/narik-ui-prime.css"
   ]
 };
 
 const rtlUiStyles: any = {
-  material: ["node_modules/narik-ui-material/styles/narik-ui-material.rtl.css"],
+  material: [
+    "node_modules/@narik/ui-material/styles/narik-ui-material.rtl.css"
+  ],
   devextreme: [
-    "node_modules/narik-ui-devextreme/styles/narik-ui-devextreme.rtl.css"
+    "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.rtl.css"
   ],
   "ng-bootstrap": [
-    "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
-    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.rtl.css"
+    "node_modules/@narik/ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.rtl.css"
   ],
   nebular: [
-    "node_modules/narik-ui-nebular/styles/narik-ui-nebular.rtl.css",
-    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.rtl.css"
+    "node_modules/@narik/ui-nebular/styles/narik-ui-nebular.rtl.css",
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.rtl.css"
   ],
-  primeng: ["node_modules/narik-ui-primeng/styles/narik-ui-prime.rtl.css"]
+  primeng: ["node_modules/@narik/ui-primeng/styles/narik-ui-prime.rtl.css"]
 };
 
 const devDependencies: any[] = [
   {
     name: "@angular-builders/custom-webpack",
-    version: "^8.0.2"
+    version: "^9.0.0"
   },
   {
     name: "cheerio",
     version: "^1.0.0-rc.3"
   },
   {
-    name: "narik-webpack-tools",
-    version: "2.0.2"
+    name: "@narik/webpack-tools",
+    version: "3.0.0"
   }
 ];
 const commonDependencies: any[] = [
   {
     name: "@fortawesome/fontawesome-free",
-    version: "^5.9.0"
+    version: "^5.12.1"
   },
   {
     name: "@angular/cdk",
-    version: "^8.0.0"
+    version: "^9.1.0"
   },
 
   {
     name: "@ngx-translate/core",
-    version: "^11.0.1"
+    version: "^12.1.1"
   },
   {
     name: "angular2-text-mask",
@@ -122,7 +132,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "@angular/flex-layout",
-    version: "^8.0.0-beta.26"
+    version: "^9.0.0-beta.29"
   },
   {
     name: "angular2-uuid",
@@ -130,7 +140,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "bootstrap",
-    version: "^4.3.1"
+    version: "^4.4.1"
   },
   {
     name: "localforage",
@@ -138,74 +148,74 @@ const commonDependencies: any[] = [
   },
   {
     name: "lodash",
-    version: "^4.17.11"
+    version: "^4.17.15"
   },
   {
     name: "ngforage",
-    version: "^4.0.3"
+    version: "^5.0.1"
   },
   {
     name: "ngx-toastr",
-    version: "^10.0.4"
+    version: "^12.0.0"
   },
   {
     name: "ngx-custom-validators",
-    version: "^8.0.0"
+    version: "^9.0.0"
   },
   {
     name: "class-validator",
-    version: "^0.9.1"
+    version: "^0.11.0"
   },
   {
     name: "data-adapter",
     version: "^0.2.3"
   },
   {
-    name: "narik-infrastructure",
-    version: "~2.1.0"
+    name: "@narik/infrastructure",
+    version: "^3.0.0"
   },
   {
-    name: "narik-common",
-    version: "~2.1.0"
+    name: "@narik/common",
+    version: "^3.0.0"
   },
   {
-    name: "narik-core",
-    version: "~2.2.0"
+    name: "@narik/core",
+    version: "^3.0.0"
   },
   {
-    name: "narik-app-core",
-    version: "~2.2.0"
+    name: "@narik/app-core",
+    version: "^3.0.0"
   },
   {
-    name: "narik-ui-core",
-    version: "~2.1.0"
+    name: "@narik/ui-core",
+    version: "^3.0.0"
   },
   {
-    name: "narik-jwt-authentication",
-    version: "~2.1.0"
+    name: "@narik/jwt-authentication",
+    version: "^3.0.0"
   },
   {
-    name: "narik-client-storage",
-    version: "~2.1.0"
+    name: "@narik/client-storage",
+    version: "^3.0.0"
   }
 ];
 
 const rtlUiDependency: any = {
-  "ng-bootstrap": [{ name: "bootstrap-4.1.3-rtl", version: "^1.0.1" }]
+  "ng-bootstrap": [{ name: "bootstrap-v4-rtl", version: "^4.4.1-1" }]
 };
 const layoutDependency: any = {
   ngxadmin: [
     {
       name: "@nebular/theme",
-      version: "^4.0.0"
+      version: "^4.6.0"
     },
     {
       name: "eva-icons",
-      version: "^1.1.1"
+      version: "^1.1.2"
     },
     {
       name: "@nebular/eva-icons",
-      version: "^4.0.0"
+      version: "^4.6.0"
     },
     {
       name: "roboto-fontface",
@@ -217,10 +227,10 @@ const layoutDependency: any = {
     }
   ],
   architectui: [
-    { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" },
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.0" },
     {
       name: "ngx-perfect-scrollbar",
-      version: "^8.0.0"
+      version: "^9.0.0"
     },
     {
       name: "@ngx-loading-bar/core",
@@ -232,7 +242,7 @@ const layoutDependency: any = {
     },
     {
       name: "redux",
-      version: "4.0.0"
+      version: "4.0.5"
     },
     {
       name: "angular-font-awesome",
@@ -248,55 +258,55 @@ const layoutDependency: any = {
     },
     {
       name: "@angular-redux/store",
-      version: "^9.0.0"
+      version: "^10.0.0"
     }
   ],
   coreui: [
     {
       name: "@coreui/angular",
-      version: "^2.5.2"
+      version: "^2.9.0"
     },
     {
       name: "@coreui/coreui",
-      version: "^2.1.12"
+      version: "^3.0.0"
     },
     {
       name: "@coreui/icons",
-      version: "^0.3.0"
+      version: "^1.0.1"
     },
     {
       name: "ngx-perfect-scrollbar",
-      version: "^8.0.0"
+      version: "^9.0.0"
     },
     {
       name: "ngx-bootstrap",
-      version: "^4.3.0"
+      version: "^5.3.2"
     }
   ]
 };
 const uiDependency: any = {
   material: [
     {
-      name: "narik-ui-material",
-      version: "~2.1.0"
+      name: "@narik/ui-material",
+      version: "^3.0.0"
     },
     {
       name: "@angular/material",
-      version: "^8.0.0"
+      version: "^9.1.0"
     }
   ],
   devextreme: [
     {
-      name: "narik-ui-devextreme",
-      version: "~2.1.0"
+      name: "@narik/ui-devextreme",
+      version: "^3.0.0"
     },
     {
       name: "devextreme",
-      version: "^19.1.3"
+      version: "^19.2.6"
     },
     {
       name: "devextreme-angular",
-      version: "^19.1.3"
+      version: "^19.2.6"
     },
     {
       name: "stream",
@@ -304,23 +314,23 @@ const uiDependency: any = {
     }
   ],
   "ng-bootstrap": [
-    { name: "narik-ui-ng-bootstrap", version: "~2.1.0" },
-    { name: "narik-ui-swimlane", version: "~2.1.0" },
+    { name: "@narik/ui-ng-bootstrap", version: "^3.0.0" },
+    { name: "@narik/ui-swimlane", version: "^3.0.0" },
     { name: "@swimlane/ngx-datatable", version: "^15.0.2" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" }
   ],
   nebular: [
-    { name: "narik-ui-nebular", version: "~2.1.0" },
-    { name: "narik-ui-swimlane", version: "~2.1.0" },
-    { name: "@swimlane/ngx-datatable", version: "^15.0.1" },
-    { name: "@nebular/theme", version: "^4.0.0" },
-    { name: "@nebular/date-fns", version: "^4.0.0" },
-    { name: "date-fns", version: "^1.30.1" }
+    { name: "@narik/ui-nebular", version: "^3.0.0" },
+    { name: "@narik/ui-swimlane", version: "^3.0.0" },
+    { name: "@swimlane/ngx-datatable", version: "^16.0.3" },
+    { name: "@nebular/theme", version: "^4.6.0" },
+    { name: "@nebular/date-fns", version: "^4.6.0" },
+    { name: "date-fns", version: "^2.10.0" }
   ],
   primeng: [
-    { name: "primeng", version: "^8.0.0-rc.1" },
-    { name: "primeicons", version: "^1.0.0" },
-    { name: "narik-ui-primeng", version: "~2.1.0" }
+    { name: "primeng", version: "^9.0.0" },
+    { name: "primeicons", version: "^2.0.0" },
+    { name: "@narik/ui-primeng", version: "^3.0.0" }
   ]
 };
 
@@ -538,24 +548,24 @@ function updateIndexhtml(ui: string, rtl: boolean) {
 function updateTsConfig(ui: string) {
   const pathItems: any = {
     material: {
-      "narik-ui-lib": ["node_modules/narik-ui-material"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-material/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-material"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-material/*"]
     },
     devextreme: {
-      "narik-ui-lib": ["node_modules/narik-ui-devextreme"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-devextreme/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-devextreme"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-devextreme/*"]
     },
     "ng-bootstrap": {
-      "narik-ui-lib": ["node_modules/narik-ui-ng-bootstrap"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-ng-bootstrap/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-ng-bootstrap"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-ng-bootstrap/*"]
     },
     nebular: {
-      "narik-ui-lib": ["node_modules/narik-ui-nebular"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-nebular/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-nebular"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-nebular/*"]
     },
     primeng: {
-      "narik-ui-lib": ["node_modules/narik-ui-primeng"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-primeng/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-primeng"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-primeng/*"]
     }
   };
 
@@ -663,24 +673,24 @@ function addModuleImports(ui: string, rtl: boolean) {
     },
     {
       moduleName: `NarikCoreModule.forRoot({configFilePath: "assets/app-config.json",defaultLang: "en",useDefaultLang: true})`,
-      link: `narik-core`
+      link: `@narik/core`
     },
     {
       moduleName: "NarikUiCoreModule",
-      link: `narik-ui-core`
+      link: `@narik/ui-core`
     },
     {
       moduleName: "NarikAppCoreModule.forRoot({})",
-      link: `narik-app-core`
+      link: `@narik/app-core`
     },
     {
       moduleName:
         'NarikJwtAuthenticationModule.forRoot({loginEndPoint: "api/account/Authenticate",logoutEndPoint: "api/account/Logout",refreshEndPoint: "api/account/Authenticate",tokenStorage: "localStorage",loginPageUrl: "/"})',
-      link: `narik-jwt-authentication`
+      link: `@narik/jwt-authentication`
     },
     {
       moduleName: "NarikClientStorageModule.forRoot()",
-      link: `narik-client-storage`
+      link: `@narik/client-storage`
     }
   ];
 
@@ -699,7 +709,7 @@ function addModuleImports(ui: string, rtl: boolean) {
     },
     {
       name: "FORM_ITEM_DEFAULT_CLASS",
-      link: `narik-ui-material`,
+      link: `@narik/ui-material`,
       uiKey: "material"
     },
     {
@@ -708,11 +718,11 @@ function addModuleImports(ui: string, rtl: boolean) {
     },
     {
       name: "ConfigService,MODULE_DATA_KEY,MODULE_UI_KEY,ModuleInfo",
-      link: "narik-infrastructure"
+      link: "@narik/infrastructure"
     },
     {
       name: `NarikTranslateLoader,MEMORY_STORAGE_VALIDITY_LEN,NarikModule`,
-      link: "narik-core"
+      link: "@narik/core"
     }
   ];
 
@@ -937,7 +947,7 @@ export function addStyles(
     if (!rtl || ui !== "ng-bootstrap") {
       assets.push("node_modules/bootstrap/dist/css/bootstrap.css");
     } else {
-      assets.push("node_modules/bootstrap-4.1.3-rtl/css/bootstrap.css");
+      assets.push("node_modules/bootstrap-v4-rtl/css/bootstrap.css");
     }
     assets = assets.concat(commonStyles);
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector, ViewChild, NgZone } from "@angular/core";
 
-import { NarikTabOutlet } from "narik-ui-core";
+import { NarikTabOutlet } from "@narik/ui-core";
 import { NgbTabset } from "@ng-bootstrap/ng-bootstrap";
 import { take } from "rxjs/internal/operators/take";
 

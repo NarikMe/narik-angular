@@ -1,6 +1,6 @@
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { forwardRef, Component, Injector, HostBinding } from "@angular/core";
-import {  NarikDatePicker } from "narik-ui-core";
+import {  NarikDatePicker } from "@narik/ui-core";
 import { NARIK_DATE_PICKER_INPUTS } from "../input-output-items";
 
 @Component({

@@ -10,7 +10,7 @@ import {
   DataOption,
   RemoteMessagingService,
   MetaData
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { Inject, Injectable, Injector, Optional } from "@angular/core";
 import { mergeMap, first, tap, merge } from "rxjs/operators";

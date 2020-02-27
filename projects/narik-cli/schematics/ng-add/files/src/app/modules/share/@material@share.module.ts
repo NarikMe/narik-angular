@@ -1,6 +1,6 @@
 import { COMPONENTS } from "./index";
 import { NgModule } from "@angular/core";
-import { NarikUiMaterialModule } from "narik-ui-material";
+import { NarikUiMaterialModule } from "@narik/ui-material";
 import { CommonModule, DatePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { MatCardModule } from "@angular/material/card";
@@ -9,6 +9,10 @@ import {
   NativeDateAdapter,
   DateAdapter
 } from "@angular/material/core";
+import { DYNAMIC_COMPONENTS } from "@narik/infrastructure";
+import { GeneralDetailComponent } from "./general-detail/general-detail.component";
+import { GeneralListComponent } from "./general-list/general-list.component";
+
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: "short", year: "numeric", day: "numeric" } },
@@ -36,7 +40,12 @@ export class PickDateAdapter extends NativeDateAdapter {
   exports: [],
   providers: [
     { provide: DateAdapter, useClass: PickDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+    {
+      provide: DYNAMIC_COMPONENTS,
+      useValue: [GeneralDetailComponent, GeneralListComponent],
+      multi: true
+    }
   ],
   entryComponents: [COMPONENTS]
 })

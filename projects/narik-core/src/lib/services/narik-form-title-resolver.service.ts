@@ -1,4 +1,4 @@
-import { FormTitleResolver } from "narik-infrastructure";
+import { FormTitleResolver } from "@narik/infrastructure";
 import { ActivatedRouteSnapshot } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { Injectable } from "@angular/core";

@@ -1,4 +1,4 @@
-import { DataProviderService, MODULE_DATA_KEY } from "narik-infrastructure";
+import { DataProviderService, MODULE_DATA_KEY } from "@narik/infrastructure";
 
 import { Observable } from "rxjs/internal/Observable";
 import { of } from "rxjs/internal/observable/of";

@@ -3,11 +3,11 @@ import {
   DialogRef,
   NavigationProvider,
   NarikOutlet
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Injectable } from "@angular/core";
 import { NavigationExtras, Router, UrlTree } from "@angular/router";
-import { isArray } from "narik-common";
+import { isArray } from "@narik/common";
 
 @Injectable()
 export class NarikRouteNavigationProvider implements NavigationProvider {

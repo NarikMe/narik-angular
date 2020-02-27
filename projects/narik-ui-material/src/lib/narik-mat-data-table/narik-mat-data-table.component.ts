@@ -1,10 +1,10 @@
-import { isPresent, isString, toFilterFunction, isArray } from "narik-common";
+import { isPresent, isString, toFilterFunction, isArray } from "@narik/common";
 import {
   NarikDataSource,
   FilterItems,
   NarikViewField
-} from "narik-infrastructure";
-import { NarikDataTable } from "narik-ui-core";
+} from "@narik/infrastructure";
+import { NarikDataTable } from "@narik/ui-core";
 import { Subject } from "rxjs/internal/Subject";
 
 import { SelectionModel } from "@angular/cdk/collections";

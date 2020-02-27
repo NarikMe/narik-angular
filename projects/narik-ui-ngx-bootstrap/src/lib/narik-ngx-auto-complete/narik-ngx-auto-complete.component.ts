@@ -1,4 +1,4 @@
-import { NarikAutoComplete } from "narik-ui-core";
+import { NarikAutoComplete } from "@narik/ui-core";
 
 
 import {

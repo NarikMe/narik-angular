@@ -3,7 +3,7 @@ import {
   Entity,
   MetaDataService,
   ComponentTypeResolver
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import {
   Component,
@@ -15,7 +15,7 @@ import {
   NgModuleRef
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ComponentLoaderHostDirective, isArray, isObject } from "narik-common";
+import { ComponentLoaderHostDirective, isArray, isObject } from "@narik/common";
 
 @Component({
   templateUrl: "form-container.component.html"

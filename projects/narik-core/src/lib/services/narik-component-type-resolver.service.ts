@@ -1,7 +1,7 @@
 import {
   ComponentTypeResolver,
   DYNAMIC_COMPONENTS
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Type, Injectable, Inject } from "@angular/core";
 
 @Injectable()

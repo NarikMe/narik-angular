@@ -8,10 +8,10 @@ import {
   AUTHENTICATION_LOGOUT_END_POINT,
   DataStorageService,
   LOGIN_PAGE_URL
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Inject, Injectable } from "@angular/core";
-import { NarikHttpService } from "narik-core";
+import { NarikHttpService } from "@narik/core";
 import { first } from "rxjs/internal/operators/first";
 import { ReplaySubject } from "rxjs/internal/ReplaySubject";
 import { Observable } from "rxjs/internal/Observable";

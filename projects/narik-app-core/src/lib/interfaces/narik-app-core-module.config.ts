@@ -2,7 +2,7 @@ import {
   MetaDataService,
   ViewManagerService,
   EntityTypeService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Type } from "@angular/core";
 import { ViewComponentNameResolver } from "./view-component-name-resolver";

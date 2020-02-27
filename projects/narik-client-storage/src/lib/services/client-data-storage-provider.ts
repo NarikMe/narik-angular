@@ -1,9 +1,9 @@
-import { DataInfo } from "narik-infrastructure";
+import { DataInfo } from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 
 import { Injectable, Injector, Optional, Inject } from "@angular/core";
 
-import { NarikBaseDataStorage, StorageModel } from "narik-core";
+import { NarikBaseDataStorage, StorageModel } from "@narik/core";
 import { NgForage } from "ngforage";
 import { from } from "rxjs/internal/observable/from";
 import { CLIENT_STORAGE_VALIDITY_LEN } from "../injectionTokens";

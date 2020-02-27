@@ -1,6 +1,6 @@
 import { Subscription } from "rxjs/internal/Subscription";
-import { NarikInject } from "narik-core";
-import { NarikViewField, EntityField, CommandHost } from "narik-infrastructure";
+import { NarikInject } from "@narik/core";
+import { NarikViewField, EntityField, CommandHost } from "@narik/infrastructure";
 
 import {
   Injector,
@@ -17,7 +17,7 @@ import { DynamicFormService } from "../services/dynamic-form.service";
 import { NgModel } from "@angular/forms";
 import { Observable, ReplaySubject } from "rxjs";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { evalStringExpression, getParnetComponent } from "narik-common";
+import { evalStringExpression, getParnetComponent } from "@narik/common";
 import { NarikUiComponent } from "../base/narik-ui-component";
 import { takeWhile } from "rxjs/internal/operators/takeWhile";
 

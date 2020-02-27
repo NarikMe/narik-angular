@@ -1,5 +1,5 @@
-import { NarikTranslateService } from "narik-core";
-import { NarikComponent } from "narik-infrastructure";
+import { NarikTranslateService } from "@narik/core";
+import { NarikComponent } from "@narik/infrastructure";
 import { filter } from "rxjs/internal/operators/filter";
 import { map } from "rxjs/internal/operators/map";
 

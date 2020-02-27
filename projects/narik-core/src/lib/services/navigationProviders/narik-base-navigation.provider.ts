@@ -6,7 +6,7 @@ import {
   UrlMatchResult
 } from "@angular/router";
 import { Type } from "@angular/core";
-import { NarikOutlet } from "narik-infrastructure";
+import { NarikOutlet } from "@narik/infrastructure";
 
 export class NarikBaseNavigationProvider {
   outlet: NarikOutlet;

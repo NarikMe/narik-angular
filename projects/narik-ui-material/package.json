@@ -1,14 +1,14 @@
 {
-  "name": "narik-ui-material",
-  "version": "3.0.0-next.6",
+  "name": "@narik/ui-material",
+  "version": "3.0.0",
   "peerDependencies": {
-    "@angular/common": "~9.0.0-next.14",
-    "@angular/core": "~9.0.0-next.14",
-    "@angular/animations": "~9.0.0-next.14",
-    "@angular/cdk": "~9.0.0-next.1",
-    "@angular/material": "~9.0.0-next.1",
+    "@angular/common": "~9.0.2",
+    "@angular/core": "~9.0.2",
+    "@angular/animations": "~9.0.2",
+    "@angular/cdk": "~9.1.0",
+    "@angular/material": "~9.1.0",
     "angular2-text-mask": "^9.0.0",
-    "@angular/flex-layout": "^8.0.0-beta.27"
+    "@angular/flex-layout": "^9.0.0-beta.29"
   },
   "dependencies": {},
   "repository": {

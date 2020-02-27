@@ -2,7 +2,7 @@ import {
   DataInfo,
   DataProvider,
   RemoteDataProviderService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { Subject } from "rxjs/internal/Subject";
 

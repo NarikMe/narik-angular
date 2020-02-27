@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { NarikDialogContainer, DialogAnimationBody } from "narik-core";
+import { NarikDialogContainer, DialogAnimationBody } from "@narik/core";
 import { trigger } from "@angular/animations";
 
 @Component({

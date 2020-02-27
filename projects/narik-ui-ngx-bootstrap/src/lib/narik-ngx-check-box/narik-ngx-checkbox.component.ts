@@ -1,4 +1,4 @@
-import { NarikCheckBox } from "narik-ui-core";
+import { NarikCheckBox } from "@narik/ui-core";
 
 import {
   Component,

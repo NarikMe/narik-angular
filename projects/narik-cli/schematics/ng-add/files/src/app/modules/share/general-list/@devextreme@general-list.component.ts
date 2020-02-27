@@ -1,4 +1,4 @@
-import { NarikUiListForm } from "narik-ui-lib";
+import { NarikUiListForm } from "@narik/ui-lib";
 
 import { Component, Injector } from "@angular/core";
 

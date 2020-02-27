@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { NarikTranslateLoader } from "./translateLoader/narik-translate-loader";
 import { Observable } from "rxjs";
-import { isString } from "narik-common";
+import { isString } from "@narik/common";
 
 @Injectable({
   providedIn: "root"

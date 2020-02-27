@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Injector } from "@angular/core";
 
-import { NarikTabOutlet } from "narik-ui-core";
+import { NarikTabOutlet } from "@narik/ui-core";
 
 
 @Component({

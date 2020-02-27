@@ -1,12 +1,12 @@
 import { Injector, Injectable } from "@angular/core";
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import {
   DataInfo,
   MODULE_DATA_KEY,
   RemoteCallMethodType,
   DataActionType,
   RemoteDataProviderService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 
 import { ServerResponse } from "../interfaces/server-response.model";

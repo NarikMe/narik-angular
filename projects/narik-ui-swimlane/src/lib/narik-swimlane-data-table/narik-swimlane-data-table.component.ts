@@ -1,10 +1,10 @@
-import { isArray, isPresent, isString, toFilterFunction } from "narik-common";
+import { isArray, isPresent, isString, toFilterFunction } from "@narik/common";
 import {
   FilterItems,
   NarikDataSource,
   NarikViewField
-} from "narik-infrastructure";
-import { NarikDataTable } from "narik-ui-core";
+} from "@narik/infrastructure";
+import { NarikDataTable } from "@narik/ui-core";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
 import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
 import { Subject } from "rxjs/internal/Subject";

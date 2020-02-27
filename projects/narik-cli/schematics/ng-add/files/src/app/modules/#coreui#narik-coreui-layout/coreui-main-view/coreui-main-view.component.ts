@@ -1,6 +1,6 @@
 import { Component, OnDestroy, Inject, Input } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
-import { NarikTranslateService } from "narik-core";
+import { NarikTranslateService } from "@narik/core";
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { Title } from "@angular/platform-browser";
 import { filter } from "rxjs/internal/operators/filter";
@@ -10,7 +10,7 @@ import {
   NarikComponent,
   AuthenticationService,
   DialogService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 @Component({
   selector: "main-view",

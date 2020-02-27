@@ -2,13 +2,13 @@ import {
   NarikDataSource,
   PagingParameters,
   DataInfo
-} from "narik-infrastructure";
-import { QueryService, ServerResponse } from "narik-app-core";
+} from "@narik/infrastructure";
+import { QueryService, ServerResponse } from "@narik/app-core";
 import { catchError } from "rxjs/internal/operators/catchError";
 import { of } from "rxjs/internal/observable/of";
 import { map } from "rxjs/internal/operators/map";
 import { finalize } from "rxjs/internal/operators/finalize";
-import { isArray } from "narik-common";
+import { isArray } from "@narik/common";
 import { Observable } from "rxjs/internal/Observable";
 import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
 import { Subject } from "rxjs/internal/Subject";

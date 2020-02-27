@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/narik-jwt-authentication",
+  "dest": "../../dist/jwt-authentication",
   "lib": {
     "entryFile": "src/public_api.ts"
   }

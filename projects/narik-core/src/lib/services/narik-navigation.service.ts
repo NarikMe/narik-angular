@@ -4,7 +4,7 @@ import {
   NavigationProvider,
   NavigationService,
   NarikOutlet
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Inject, Injectable } from "@angular/core";
 import { NavigationExtras, UrlTree } from "@angular/router";

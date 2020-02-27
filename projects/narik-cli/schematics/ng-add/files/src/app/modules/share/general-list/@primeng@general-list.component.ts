@@ -1,7 +1,7 @@
 import { Component, Injector } from "@angular/core";
 
 import { NarikListUi } from "../../../templates/template.decorator";
-import { NarikUiListForm } from "narik-ui-lib";
+import { NarikUiListForm } from "@narik/ui-lib";
 
 @NarikListUi()
 @Component({

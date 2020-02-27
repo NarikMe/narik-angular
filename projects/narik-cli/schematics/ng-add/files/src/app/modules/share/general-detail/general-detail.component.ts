@@ -1,6 +1,6 @@
 import { Component, Injector } from "@angular/core";
-import { NarikUiDetailForm } from "narik-ui-lib";
-import { NarikBaseTemplate } from "narik-core";
+import { NarikUiDetailForm } from "@narik/ui-lib";
+import { NarikBaseTemplate } from "@narik/core";
 
 // @NarikDetailUi()
 @NarikBaseTemplate("NarikDetailUi")

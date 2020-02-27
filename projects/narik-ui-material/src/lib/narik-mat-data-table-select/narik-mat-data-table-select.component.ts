@@ -1,12 +1,12 @@
-import { isArray, isEquivalent } from "narik-common";
-import { NarikInject } from "narik-core";
+import { isArray, isEquivalent } from "@narik/common";
+import { NarikInject } from "@narik/core";
 import {
   DataInfo,
   DataOption,
   DataProviderService,
   NarikDataSource
-} from "narik-infrastructure";
-import { DynamicFormService } from "narik-ui-core";
+} from "@narik/infrastructure";
+import { DynamicFormService } from "@narik/ui-core";
 import { Observable } from "rxjs/internal/Observable";
 
 import {

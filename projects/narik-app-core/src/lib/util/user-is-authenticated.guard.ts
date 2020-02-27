@@ -1,4 +1,4 @@
-import { AuthenticationService, LOGIN_PAGE_URL } from "narik-infrastructure";
+import { AuthenticationService, LOGIN_PAGE_URL } from "@narik/infrastructure";
 
 import { Inject, Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";

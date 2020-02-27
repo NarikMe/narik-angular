@@ -1,4 +1,4 @@
-import { DataInfo } from "narik-infrastructure";
+import { DataInfo } from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { of } from "rxjs/internal/observable/of";
 

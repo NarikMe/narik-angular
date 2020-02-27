@@ -2,8 +2,8 @@ import {
   NarikDataSource,
   NarikViewField,
   IPagingInfo
-} from "narik-infrastructure";
-import { NarikDataTable } from "narik-ui-core";
+} from "@narik/infrastructure";
+import { NarikDataTable } from "@narik/ui-core";
 
 import {
   Component,

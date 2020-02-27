@@ -3,9 +3,9 @@ import {
   DialogOption,
   DialogAction,
   DialogRef
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { EventEmitter, ViewChild, ViewContainerRef } from "@angular/core";
-import { ComponentLoaderHostDirective } from "narik-common";
+import { ComponentLoaderHostDirective } from "@narik/common";
 import { AnimationEvent } from "@angular/animations";
 import {
   state,

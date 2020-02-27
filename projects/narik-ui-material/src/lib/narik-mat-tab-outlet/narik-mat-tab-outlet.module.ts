@@ -5,7 +5,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { NarikMatTabOutlet } from "./narik-mat-tab-outlet.component";
 import { NarikMatTabOutletHeaderComponent } from "./narik-mat-tab-outlet-close-header.component";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({

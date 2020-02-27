@@ -1,4 +1,4 @@
-import { formatString, replaceString } from "narik-common";
+import { formatString, replaceString } from "@narik/common";
 import {
   DataInfo,
   ModuleManager,
@@ -7,7 +7,7 @@ import {
   ModuleDataInfo,
   MetaDataService,
   UrlCreatorService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { first } from "rxjs/internal/operators/first";
 import { ReplaySubject } from "rxjs/internal/ReplaySubject";

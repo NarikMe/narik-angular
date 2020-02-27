@@ -1,5 +1,5 @@
 import { UUID } from "angular2-uuid";
-import { NarikToolBar } from "narik-ui-core";
+import { NarikToolBar } from "@narik/ui-core";
 import { Component, Injector, ViewContainerRef, OnInit } from "@angular/core";
 
 @Component({

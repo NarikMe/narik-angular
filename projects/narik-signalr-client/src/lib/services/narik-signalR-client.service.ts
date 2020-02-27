@@ -12,7 +12,7 @@ import {
 import { Injectable, Inject } from "@angular/core";
 import { SIGNALR_CONFIG } from "../internal-injectionTokens";
 import { NarikSignalRConfig } from "../base/narik-signalR.config";
-import { RemoteMessagingService } from "narik-infrastructure";
+import { RemoteMessagingService } from "@narik/infrastructure";
 
 @Injectable()
 export class NarikSignalRMessagingService extends RemoteMessagingService {

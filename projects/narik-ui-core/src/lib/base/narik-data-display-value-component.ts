@@ -5,7 +5,7 @@ import {
 } from "./narik-data-oriented-component";
 import { Input, Injector } from "@angular/core";
 import { DEFAULT_VALUE_DISPLAY_FIELD_NAMES } from "./../injectionTokens";
-import { isArray } from "narik-common";
+import { isArray } from "@narik/common";
 
 export abstract class NarikDataDisplayValueComponent extends NarikDataOrientedComponent {
   _displayField: string;

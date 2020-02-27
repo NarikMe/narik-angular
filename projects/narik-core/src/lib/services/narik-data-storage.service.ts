@@ -7,7 +7,7 @@ import {
   ModuleManager,
   RemoteMessagingService,
   DEFAULT_DATA_STORAGE_KEY
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Inject, Injectable, Optional } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
 import { Subject } from "rxjs/internal/Subject";

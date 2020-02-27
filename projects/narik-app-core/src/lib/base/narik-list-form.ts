@@ -1,5 +1,5 @@
-import { isEquivalent } from "narik-common";
-import { NarikInject } from "narik-core";
+import { isEquivalent } from "@narik/common";
+import { NarikInject } from "@narik/core";
 import {
   CommandInfo,
   NarikDataSource,
@@ -15,8 +15,8 @@ import {
   ConfigService,
   MetaDataService,
   MODULE_UI_KEY
-} from "narik-infrastructure";
-import { DynamicFormService } from "narik-ui-core";
+} from "@narik/infrastructure";
+import { DynamicFormService } from "@narik/ui-core";
 import { takeWhile, filter, finalize } from "rxjs/operators";
 
 import { Injector, OnInit } from "@angular/core";

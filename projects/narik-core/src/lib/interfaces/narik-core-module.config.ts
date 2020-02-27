@@ -13,10 +13,10 @@ import {
   ValidationService,
   FormTitleResolver,
   ComponentTypeResolver
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Type } from "@angular/core";
-import { ConfigOptions } from "narik-infrastructure";
+import { ConfigOptions } from "@narik/infrastructure";
 
 export interface NarikCoreModuleConfig {
   configFilePath?: string;

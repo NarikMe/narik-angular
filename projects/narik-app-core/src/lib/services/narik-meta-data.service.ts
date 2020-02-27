@@ -6,10 +6,10 @@ import {
   Entity,
   DataInfo,
   DefaultMetaDataKeys
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { cloneDeep } from "lodash";
 
-import { isArray, isObject } from "narik-common";
+import { isArray, isObject } from "@narik/common";
 
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";

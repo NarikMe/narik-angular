@@ -4,9 +4,9 @@ import {
   NarikViewField,
   IPagingInfo,
   NarikDataSource
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Input, Output, EventEmitter } from "@angular/core";
-import { isArray } from "narik-common";
+import { isArray } from "@narik/common";
 export class NarikDataTable extends NarikUiComponent {
   get uiKey(): string {
     return "data-table";

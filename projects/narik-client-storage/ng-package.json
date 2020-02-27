@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/narik-client-storage",
+  "dest": "../../dist/client-storage",
   "lib": {
     "entryFile": "src/public_api.ts"
   }

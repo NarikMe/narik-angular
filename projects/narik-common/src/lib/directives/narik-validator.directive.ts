@@ -5,7 +5,7 @@ import {
   AbstractControl,
   Validators
 } from "@angular/forms";
-import { ValidationService } from "narik-infrastructure";
+import { ValidationService } from "@narik/infrastructure";
 
 @Directive({
   selector: "[narikValidator]",

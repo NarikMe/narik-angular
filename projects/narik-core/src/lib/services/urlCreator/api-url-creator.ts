@@ -1,5 +1,5 @@
-import { formatString } from "narik-common";
-import { UrlCreator, PagingParameters } from "narik-infrastructure";
+import { formatString } from "@narik/common";
+import { UrlCreator, PagingParameters } from "@narik/infrastructure";
 import { Injectable } from "@angular/core";
 
 @Injectable()

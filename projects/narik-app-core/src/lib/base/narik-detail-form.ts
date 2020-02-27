@@ -1,8 +1,8 @@
-import { formatString, isEquivalent, isFunction } from "narik-common";
+import { formatString, isEquivalent, isFunction } from "@narik/common";
 
 import { denormalize } from "data-adapter";
 import { validate, ValidationError } from "class-validator";
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import {
   CommandInfo,
   DialogService,
@@ -11,8 +11,8 @@ import {
   DialogResult,
   ConfigService,
   EntityTypeService
-} from "narik-infrastructure";
-import { DynamicFormService, NarikDynamicForm } from "narik-ui-core";
+} from "@narik/infrastructure";
+import { DynamicFormService, NarikDynamicForm } from "@narik/ui-core";
 import { Observable } from "rxjs/internal/Observable";
 import { finalize } from "rxjs/internal/operators/finalize";
 import { takeWhile } from "rxjs/internal/operators/takeWhile";

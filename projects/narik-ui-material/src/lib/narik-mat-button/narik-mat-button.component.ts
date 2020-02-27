@@ -1,4 +1,4 @@
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import { MatButton } from "@angular/material/button";
 import {
   Component,
@@ -14,7 +14,7 @@ import {
   BUTTON_DEFAULT_OPTIONS,
   ButtonDefaultOptions,
 
-} from "narik-ui-core";
+} from "@narik/ui-core";
 import { NARIK_UI_COMPONENT_INPUTS } from "../input-output-items";
 
 

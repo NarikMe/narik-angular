@@ -1,4 +1,4 @@
-import { formatString, isArray } from "narik-common";
+import { formatString, isArray } from "@narik/common";
 import {
   DataInfo,
   MODULE_DATA_KEY,
@@ -7,7 +7,7 @@ import {
   isDataStorage,
   DataStorage,
   DataOption
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Injector } from "@angular/core";
 import { Subject } from "rxjs/internal/Subject";

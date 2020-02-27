@@ -6,13 +6,13 @@ import {
   DIALOG_CONTAINER,
   DIALOG_INPUT_COMPONENT,
   DIALOG_MESSAGE_COMPONENT
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { NarikMatButtonModule } from "../narik-mat-button/narik-mat-button.module";
 import { NarikMatDynamicFormModule } from "../narik-mat-dynamic-form/narik-mat-dynamic-form.module";
 import { NarikMatDialogContainer } from "./narik-mat-dialog-container.component";
 import { NarikMatInputDialog } from "./narik-mat-input-dialog.component";
 import { NarikMatMessageDialog } from "./narik-mat-message-dialog.component";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatCardModule } from "@angular/material/card";

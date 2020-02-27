@@ -2,7 +2,7 @@ import {
   EntityField,
   DialogInputContent,
   ModuleManager
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { UUID } from "angular2-uuid";
 
 import {
@@ -24,7 +24,7 @@ import {
   DIALOG_INPUT_COMPONENT,
   FieldTypes,
   DIALOG_REF
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import {
   Injectable,
   Type,
@@ -43,7 +43,7 @@ import {
 } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { isString, isArray, isFunction } from "narik-common";
+import { isString, isArray, isFunction } from "@narik/common";
 import { filter } from "rxjs/internal/operators/filter";
 import { first } from "rxjs/internal/operators/first";
 import {

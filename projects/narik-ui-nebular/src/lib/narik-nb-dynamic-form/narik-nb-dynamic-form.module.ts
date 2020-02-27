@@ -11,7 +11,7 @@ import { NarikNebularRadioGroupModule } from "../narik-nb-radio/narik-nb-radio.m
 import { NarikNebularSelectModule } from "../narik-nb-select/narik-nb-select.module";
 import { NarikNebularCheckBoxListModule } from "./../narik-nb-check-box-list/narik-nb-checkbox-list.module";
 import { NarikNebularDynamicForm } from "./narik-nb-dynamic-form.component";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({

@@ -6,13 +6,13 @@ import {
   DIALOG_CONTAINER,
   DIALOG_INPUT_COMPONENT,
   DIALOG_MESSAGE_COMPONENT
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { NarikDevButtonModule } from "../narik-dev-button/narik-dev-button.module";
 import { NarikDevDynamicFormModule } from "../narik-dev-dynamic-form/narik-dev-dynamic-form.module";
 import { NarikDevDialogContainer } from "./narik-dev-dialog-container.component";
 import { NarikDevInputDialog } from "./narik-dev-input-dialog.component";
 import { NarikDevMessageDialog } from "./narik-dev-message-dialog.component";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 
 @NgModule({
   imports: [

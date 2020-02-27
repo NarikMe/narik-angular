@@ -11,7 +11,7 @@ import { throwError } from "rxjs/internal/observable/throwError";
 import { catchError } from "rxjs/internal/operators/catchError";
 import { Observable } from "rxjs/internal/Observable";
 import { Router, RouterStateSnapshot } from "@angular/router";
-import { LOGIN_PAGE_URL } from "narik-infrastructure";
+import { LOGIN_PAGE_URL } from "@narik/infrastructure";
 
 @Injectable()
 export class AuthErrorInterceptor implements HttpInterceptor {

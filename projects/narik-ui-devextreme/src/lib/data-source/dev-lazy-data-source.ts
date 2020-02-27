@@ -4,12 +4,12 @@ import {
   NarikDataSource,
   PagingParameters,
   DataInfo
-} from "narik-infrastructure";
-import { QueryService, ServerResponse } from "narik-app-core";
+} from "@narik/infrastructure";
+import { QueryService, ServerResponse } from "@narik/app-core";
 import { catchError } from "rxjs/internal/operators/catchError";
 import { of } from "rxjs/internal/observable/of";
 import { map } from "rxjs/internal/operators/map";
-import { isArray } from "narik-common";
+import { isArray } from "@narik/common";
 
 export class DevLazyDataSource<T> implements NarikDataSource<T> {
   dataObservable;

@@ -1,5 +1,5 @@
-import { NarikInject } from "narik-core";
-import { ParameterResolver } from "narik-infrastructure";
+import { NarikInject } from "@narik/core";
+import { ParameterResolver } from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 
 import { Injectable, Injector, Optional } from "@angular/core";

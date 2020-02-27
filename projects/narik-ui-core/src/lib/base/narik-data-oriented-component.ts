@@ -1,13 +1,13 @@
 import { Observable } from "rxjs";
 import { Input, OnInit, Injector, Output, EventEmitter } from "@angular/core";
-import { isEquivalent } from "narik-common";
+import { isEquivalent } from "@narik/common";
 import {
   DataInfo,
   RemoteCallMethodType,
   MODULE_DATA_KEY,
   DataProviderService,
   DataOption
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { takeWhile } from "rxjs/internal/operators/takeWhile";
 import {

@@ -1,4 +1,4 @@
-import { NarikDynamicForm } from "narik-ui-core";
+import { NarikDynamicForm } from "@narik/ui-core";
 
 import {
   Component,

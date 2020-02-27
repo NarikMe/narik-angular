@@ -1,5 +1,5 @@
 import { UUID } from "angular2-uuid";
-import { MetaDataService, MODULE_UI_KEY } from "narik-infrastructure";
+import { MetaDataService, MODULE_UI_KEY } from "@narik/infrastructure";
 
 import {
   EventEmitter,
@@ -9,7 +9,7 @@ import {
   Injector
 } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import {
   NarikUiComponent,
   NARIK_UI_COMPONENT_INPUTS

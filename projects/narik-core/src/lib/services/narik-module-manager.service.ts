@@ -6,7 +6,7 @@ import {
   ModuleManager,
   View,
   ConfigService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Subject } from "rxjs/internal/Subject";
 
 import { Injectable, Injector } from "@angular/core";

@@ -1,4 +1,4 @@
-import { ConfigService } from "narik-infrastructure";
+import { ConfigService } from "@narik/infrastructure";
 import { HttpClient } from "@angular/common/http";
 import { TranslateLoader } from "@ngx-translate/core";
 import { first } from "rxjs/internal/operators/first";

@@ -1,11 +1,11 @@
-import { QueryService, ServerResponse } from "narik-app-core";
+import { QueryService, ServerResponse } from "@narik/app-core";
 import {
   DataInfo,
   NarikDataSource,
   FilterItems,
   PagingParameters,
   DataProviderService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
 import { Observable } from "rxjs/internal/Observable";
 import { of } from "rxjs/internal/observable/of";

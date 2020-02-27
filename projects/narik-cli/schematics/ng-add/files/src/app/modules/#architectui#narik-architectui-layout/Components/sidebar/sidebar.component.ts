@@ -3,7 +3,7 @@ import { ThemeOptions } from "../../theme-options";
 import { select } from "@angular-redux/store";
 import { Observable } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
-import { NarikTranslateService } from "narik-core";
+import { NarikTranslateService } from "@narik/core";
 
 @Component({
   selector: "app-sidebar",

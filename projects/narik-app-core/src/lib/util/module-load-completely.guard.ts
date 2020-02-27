@@ -1,6 +1,6 @@
 import {
   EventAggregatorService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { Observer } from "rxjs/internal/types";
 

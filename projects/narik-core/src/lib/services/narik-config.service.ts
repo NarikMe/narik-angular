@@ -3,7 +3,7 @@ import {
   CONFIG_PATH,
   CONFIG_OPTIONS,
   ConfigOptions
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { NarikHttpService } from "./narik-http.service";
 import { Inject, Injectable } from "@angular/core";
 import { tap } from "rxjs/internal/operators/tap";

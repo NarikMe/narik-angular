@@ -4,7 +4,7 @@ import {
   EventInfo,
   MetaDataService,
   MetaData
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { filter } from "rxjs/internal/operators/filter";
 import { pluck, share } from "rxjs/operators";

@@ -6,13 +6,13 @@ import {
   DIALOG_CONTAINER,
   DIALOG_INPUT_COMPONENT,
   DIALOG_MESSAGE_COMPONENT
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { NarikSwimlaneButtonModule } from "../narik-swimlane-button/narik-swimlane-button.module";
 import { NarikSwimlaneDynamicFormModule } from "../narik-swimlane-dynamic-form/narik-swimlane-dynamic-form.module";
 import { NarikSwimlaneDialogContainer } from "./narik-swimlane-dialog-container.component";
 import { NarikSwimlaneInputDialog } from "./narik-swimlane-input-dialog.component";
 import { NarikSwimlaneMessageDialog } from "./narik-swimlane-message-dialog.component";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 
 @NgModule({
   imports: [

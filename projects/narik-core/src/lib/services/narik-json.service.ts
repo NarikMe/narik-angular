@@ -1,6 +1,6 @@
 import { NarikHttpService } from "./narik-http.service";
 import { Injectable } from "@angular/core";
-import { JsonService, FilterItems } from "narik-infrastructure";
+import { JsonService, FilterItems } from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { mergeMap } from "rxjs/internal/operators/mergeMap";
 import { of, forkJoin } from "rxjs";
@@ -10,7 +10,7 @@ import {
   isArray,
   toFilterFunction,
   getNestedValue
-} from "narik-common";
+} from "@narik/common";
 
 @Injectable()
 export class NarikJsonService extends JsonService {

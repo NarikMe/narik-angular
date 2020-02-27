@@ -1,5 +1,5 @@
 import { NarikComponentTypeResolver } from './services/narik-component-type-resolver.service';
-import { promiseSerial } from "narik-common";
+import { promiseSerial } from "@narik/common";
 import { NarikJsonService } from "./services/narik-json.service";
 import { NarikConfigService } from "./services/narik-config.service";
 import {
@@ -28,7 +28,7 @@ import {
   FormTitleResolver,
   CONFIG_OPTIONS,
   ComponentTypeResolver
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { ToastrModule } from "ngx-toastr";
 
 import { HTTP_INTERCEPTORS } from "@angular/common/http";

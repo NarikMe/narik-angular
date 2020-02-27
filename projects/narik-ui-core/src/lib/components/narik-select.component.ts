@@ -9,10 +9,10 @@ import {
   DialogRef,
   NavigationService,
   MODULE_UI_KEY
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { ReplaySubject } from "rxjs/internal/ReplaySubject";
 import { Observable } from "rxjs/internal/Observable";
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import { filter } from "rxjs/internal/operators/filter";
 import { ActivatedRoute } from "@angular/router";
 

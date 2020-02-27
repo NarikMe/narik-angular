@@ -1,4 +1,4 @@
-import { FilterItems, FilterItem } from "narik-infrastructure";
+import { FilterItems, FilterItem } from "@narik/infrastructure";
 import { isPresent, isBlank, isDate, isFunction } from "./object.util";
 import { isString } from "./string.util";
 

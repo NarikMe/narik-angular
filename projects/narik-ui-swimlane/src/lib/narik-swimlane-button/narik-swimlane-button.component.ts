@@ -10,8 +10,8 @@ import {
   NarikButton,
   BUTTON_DEFAULT_OPTIONS,
   ButtonDefaultOptions
-} from "narik-ui-core";
-import { NarikInject } from "narik-core";
+} from "@narik/ui-core";
+import { NarikInject } from "@narik/core";
 
 @Component({
   selector: "narik-swimlane-button , narik-button ",

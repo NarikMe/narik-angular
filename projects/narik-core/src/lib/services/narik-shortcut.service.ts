@@ -1,4 +1,4 @@
-import { ShortcutService, ShortcutOptions } from "narik-infrastructure";
+import { ShortcutService, ShortcutOptions } from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { EventManager } from "@angular/platform-browser";
 import { Inject, Injectable } from "@angular/core";

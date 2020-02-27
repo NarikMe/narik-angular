@@ -3,7 +3,7 @@ import {
   DialogRef,
   DialogService,
   NavigationProvider
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Injectable } from "@angular/core";
 import {
@@ -15,7 +15,7 @@ import {
   UrlTree
 } from "@angular/router";
 import { NarikBaseNavigationProvider } from "./narik-base-navigation.provider";
-import { isArray, isString } from "narik-common";
+import { isArray, isString } from "@narik/common";
 
 @Injectable()
 export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider

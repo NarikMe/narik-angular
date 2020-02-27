@@ -1,4 +1,4 @@
-import { NarikInput } from "narik-ui-core";
+import { NarikInput } from "@narik/ui-core";
 
 import {
   Component,

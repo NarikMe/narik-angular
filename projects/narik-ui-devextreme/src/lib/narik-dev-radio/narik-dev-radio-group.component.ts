@@ -2,7 +2,7 @@ import { Component, forwardRef, Injector, Input, HostBinding } from "@angular/co
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import {
   NarikRadioGroup
-} from "narik-ui-core";
+} from "@narik/ui-core";
 import { NARIK_DATA_DISPLAY_VALUE_INPUTS } from "../input-output-items";
 
 @Component({

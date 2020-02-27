@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector, ViewChild } from "@angular/core";
 
-import { NarikTabOutlet } from "narik-ui-core";
+import { NarikTabOutlet } from "@narik/ui-core";
 
 import { NbTabsetComponent } from "@nebular/theme";
 

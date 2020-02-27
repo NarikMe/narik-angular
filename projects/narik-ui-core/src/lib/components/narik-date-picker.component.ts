@@ -1,4 +1,4 @@
-import { isString } from "narik-common";
+import { isString } from "@narik/common";
 import {
   NarikFormComponent,
   NARIK_UI_FORM_INPUTS

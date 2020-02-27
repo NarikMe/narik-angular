@@ -1,9 +1,9 @@
-import { ComponentLoaderHostDirective } from "narik-common";
+import { ComponentLoaderHostDirective } from "@narik/common";
 import {
   DialogOption,
   DialogOverlayContainer,
   DialogRef
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 

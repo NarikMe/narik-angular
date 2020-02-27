@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ThemeOptions } from "../../../../theme-options";
-import { DialogService, AuthenticationService } from "narik-infrastructure";
+import { DialogService, AuthenticationService } from "@narik/infrastructure";
 
 @Component({
   selector: "app-user-box",

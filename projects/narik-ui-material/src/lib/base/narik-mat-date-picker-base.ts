@@ -1,5 +1,5 @@
-import { Mixin } from "narik-common";
-import { NarikDatePicker } from "narik-ui-core";
+import { Mixin } from "@narik/common";
+import { NarikDatePicker } from "@narik/ui-core";
 
 import { NarikMatFormFieldInput } from "./narik-mat-form-field";
 

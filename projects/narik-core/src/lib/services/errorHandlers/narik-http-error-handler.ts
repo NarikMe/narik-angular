@@ -9,7 +9,7 @@ import {
 import { throwError } from "rxjs/internal/observable/throwError";
 import { catchError } from "rxjs/internal/operators/catchError";
 import { Observable } from "rxjs/internal/Observable";
-import { DialogService } from "narik-infrastructure";
+import { DialogService } from "@narik/infrastructure";
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {

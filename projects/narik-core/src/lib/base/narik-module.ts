@@ -3,7 +3,7 @@ import {
   ModuleManager,
   ConfigService,
   JsonService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Observable } from "rxjs/internal/Observable";
 import { of } from "rxjs/internal/observable/of";
 import { map, first } from "rxjs/operators";
