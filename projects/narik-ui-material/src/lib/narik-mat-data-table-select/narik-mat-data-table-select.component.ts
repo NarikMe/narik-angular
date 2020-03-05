@@ -7,7 +7,7 @@ import {
   NarikDataSource
 } from "@narik/infrastructure";
 import { DynamicFormService } from "@narik/ui-core";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 import {
   Component,

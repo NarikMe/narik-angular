@@ -11,10 +11,10 @@ import {
   RemoteMessagingService,
   MetaData
 } from "@narik/infrastructure";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 import { Inject, Injectable, Injector, Optional } from "@angular/core";
 import { mergeMap, first, tap, merge } from "rxjs/operators";
-import { of } from "rxjs/internal/observable/of";
+import { of } from "rxjs";
 import { empty } from "rxjs";
 
 @Injectable()

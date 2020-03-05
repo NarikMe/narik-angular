@@ -1,45 +1,26 @@
-import { formatString, isEquivalent, isFunction } from "@narik/common";
-
-import { denormalize } from "data-adapter";
-import { validate, ValidationError } from "class-validator";
-import { NarikInject } from "@narik/core";
-import {
-  CommandInfo,
-  DialogService,
-  NarikEntity,
-  NarikViewField,
-  DialogResult,
-  ConfigService,
-  EntityTypeService
-} from "@narik/infrastructure";
-import { DynamicFormService, NarikDynamicForm } from "@narik/ui-core";
-import { Observable } from "rxjs/internal/Observable";
-import { finalize } from "rxjs/internal/operators/finalize";
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
-
-import {
-  ElementRef,
-  Injector,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-  ViewContainerRef
-} from "@angular/core";
+import { ElementRef, Injector, OnInit, QueryList, ViewChild, ViewChildren, ViewContainerRef } from "@angular/core";
 import { NgForm, NgModel } from "@angular/forms";
+import { formatString, isEquivalent, isFunction } from "@narik/common";
+import { NarikInject } from "@narik/core";
+import { CommandInfo, ConfigService, DialogResult, DialogService, EntityTypeService, NarikEntity, NarikViewField } from "@narik/infrastructure";
+import { DynamicFormService, NarikDynamicForm } from "@narik/ui-core";
 import { TranslateService } from "@ngx-translate/core";
-
+import { validate, ValidationError } from "class-validator";
+import { denormalize } from "data-adapter";
+import { Observable } from "rxjs";
+import { debounceTime } from "rxjs/operators";
+import { Subscription } from "rxjs";
+import { finalize, takeWhile } from "rxjs/operators";
 import { DETAIL_DEFAULT_VIEW_OPTION } from "../injectionTokens";
 import { DetailFormConfig } from "../interfaces/form-config.model";
-import {
-  DefaultDetailViewOption,
-  DetailFormViewOption
-} from "../interfaces/form-view-option.model";
+import { DefaultDetailViewOption, DetailFormViewOption } from "../interfaces/form-view-option.model";
 import { ServerResponse } from "../interfaces/server-response.model";
 import { StringConstants } from "../util/constants";
 import { NarikGeneralForm } from "./narik-general-form";
-import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { Subscription } from "rxjs/internal/Subscription";
+
+
+
+
 
 /**
  * Narik detail form

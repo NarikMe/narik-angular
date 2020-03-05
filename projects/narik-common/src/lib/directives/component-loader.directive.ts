@@ -10,7 +10,7 @@ import {
   Injector,
   StaticProvider
 } from "@angular/core";
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { takeWhile } from "rxjs/operators";
 
 /**
  * NarikComponentLoaderDirective

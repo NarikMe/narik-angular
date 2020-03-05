@@ -29,6 +29,17 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
   createNavigationCommand(path: string): any[] | string | UrlTree {
     return [path];
   }
+
+  parentLoadedConfig(snapshot) {
+    for (let s = snapshot.parent; s; s = s.parent) {
+      const route = s.routeConfig;
+      if (route && route._loadedConfig) {
+        return route._loadedConfig;
+      }
+    }
+    return null;
+  }
+
   navigate(
     commands: any[] | string | UrlTree,
     extras?: NavigationExtras,
@@ -53,6 +64,11 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
         primary
       );
       if (route && route.route) {
+        let resolver;
+        const config = this.parentLoadedConfig(extras.relativeTo.snapshot);
+        if (config) {
+          resolver = config.module.componentFactoryResolver;
+        }
         const dialog = this.dialogService.showDialog(
           route.route.component,
           data ? data["__dialogTitle"] : undefined,
@@ -72,7 +88,8 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
           },
           undefined,
           undefined,
-          [{ provide: ActivatedRoute, useValue: extras.relativeTo }]
+          [{ provide: ActivatedRoute, useValue: extras.relativeTo }],
+          resolver
         );
         resolve(dialog);
       } else {

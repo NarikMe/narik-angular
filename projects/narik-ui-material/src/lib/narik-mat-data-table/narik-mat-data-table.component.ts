@@ -5,7 +5,7 @@ import {
   NarikViewField
 } from "@narik/infrastructure";
 import { NarikDataTable } from "@narik/ui-core";
-import { Subject } from "rxjs/internal/Subject";
+import { Subject } from "rxjs";
 
 import { SelectionModel } from "@angular/cdk/collections";
 import {
@@ -26,8 +26,8 @@ import { MatSort } from "@angular/material/sort";
 import { MatLazyDataSource } from "../data-source/mat-lazy-data-source";
 import { MatLocalDataSource } from "../data-source/mat-local-data-source";
 import { takeWhile } from "rxjs/operators";
-import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
+import { debounceTime } from "rxjs/operators";
+import { distinctUntilChanged } from "rxjs/operators";
 
 @Component({
   selector: "narik-mat-data-table , narik-data-table",

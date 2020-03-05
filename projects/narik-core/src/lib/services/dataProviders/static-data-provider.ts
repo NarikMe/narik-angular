@@ -2,7 +2,7 @@ import { DataInfo, ModuleManager } from "@narik/infrastructure";
 
 import { Injectable, Injector } from "@angular/core";
 import { NarikBaseDataProvider } from "../../base/narik-base-data-provider";
-import { of } from "rxjs/internal/observable/of";
+import { of } from "rxjs";
 import { toDtoArray } from "@narik/common";
 import { NarikTranslateService } from "../narik-translation.service";
 

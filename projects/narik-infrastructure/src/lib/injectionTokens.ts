@@ -1,4 +1,4 @@
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 import { InjectionToken, Type } from "@angular/core";
 
 import {
@@ -62,7 +62,4 @@ export const LOGIN_PAGE_URL = new InjectionToken<string>("LOGIN_PAGE_URL");
 export const CONFIG_PATH = new InjectionToken<string>("CONFIG_PATH");
 export const CONFIG_OPTIONS = new InjectionToken<ConfigOptions>(
   "CONFIG_OPTIONS"
-);
-export const DYNAMIC_COMPONENTS = new InjectionToken<Type<any>[]>(
-  "DYNAMIC_COMPONENTS"
 );

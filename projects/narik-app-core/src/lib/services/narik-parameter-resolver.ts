@@ -1,12 +1,12 @@
 import { NarikInject } from "@narik/core";
 import { ParameterResolver } from "@narik/infrastructure";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 import { Injectable, Injector, Optional } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { NarikGeneralForm } from "../base/narik-general-form";
-import { map } from "rxjs/internal/operators/map";
+import { map } from "rxjs/operators";
 import { merge } from "rxjs/operators";
 
 @Injectable()

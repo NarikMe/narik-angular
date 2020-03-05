@@ -12,8 +12,8 @@ import {
   RouterStateSnapshot
 } from "@angular/router";
 import { isArray } from "@narik/common";
-import { of } from "rxjs/internal/observable/of";
-import { tap } from "rxjs/internal/operators/tap";
+import { of } from "rxjs";
+import { tap } from "rxjs/operators";
 
 @Injectable()
 export class UserIsAuthorizedGuard implements CanActivate {

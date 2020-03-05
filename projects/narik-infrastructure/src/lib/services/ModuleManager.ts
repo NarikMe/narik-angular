@@ -1,5 +1,5 @@
 import { ModuleInfo, ModuleEventArg } from "../interfaces/narik-module";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 
 /**

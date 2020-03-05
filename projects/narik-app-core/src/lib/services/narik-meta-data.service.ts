@@ -12,8 +12,8 @@ import { cloneDeep } from "lodash";
 import { isArray, isObject } from "@narik/common";
 
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/internal/Observable";
-import { Subject } from "rxjs/internal/Subject";
+import { Observable } from "rxjs";
+import { Subject } from "rxjs";
 
 @Injectable()
 export class NarikMetaDataService extends MetaDataService {
@@ -93,7 +93,9 @@ export class NarikMetaDataService extends MetaDataService {
     const metaData = this.getMetaData(moduleKey);
     if (metaData) {
       const metaDataItem = this.getMetaData(moduleKey)[informationKey];
-      return metaDataItem && metaDataItem.get  ? metaDataItem.get(itemKey) : null;
+      return metaDataItem && metaDataItem.get
+        ? metaDataItem.get(itemKey)
+        : null;
     } else {
       return null;
     }

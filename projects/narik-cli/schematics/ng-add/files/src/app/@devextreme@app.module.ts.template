@@ -29,7 +29,7 @@ import { NbEvaIconsModule } from "@nebular/eva-icons";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 import { DemoCommandProcessor } from "./services/command-processor.service";
 
 import { MainComponent } from './main/main.component';

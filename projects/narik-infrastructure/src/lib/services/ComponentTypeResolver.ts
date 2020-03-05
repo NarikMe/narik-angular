@@ -1,5 +1,5 @@
-import { Type } from "@angular/core";
+import { Type, NgModuleRef } from "@angular/core";
 
 export abstract class ComponentTypeResolver {
-  abstract resolveComponentType(key: string): Type<any>;
+  abstract resolveComponentType(key: string, notFound?: Type<any>): Type<any>;
 }

@@ -8,10 +8,10 @@ import {
   MetaDataService,
   UrlCreatorService
 } from "@narik/infrastructure";
-import { Observable } from "rxjs/internal/Observable";
-import { first } from "rxjs/internal/operators/first";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { Subject } from "rxjs/internal/Subject";
+import { Observable } from "rxjs";
+import { first } from "rxjs/operators";
+import { ReplaySubject } from "rxjs";
+import { Subject } from "rxjs";
 import { Injectable, Injector } from "@angular/core";
 import { NarikHttpService } from "./narik-http.service";
 

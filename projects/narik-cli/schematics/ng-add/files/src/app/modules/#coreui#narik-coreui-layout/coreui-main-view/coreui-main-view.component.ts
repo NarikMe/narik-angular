@@ -3,9 +3,9 @@ import { DOCUMENT } from "@angular/common";
 import { NarikTranslateService } from "@narik/core";
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { Title } from "@angular/platform-browser";
-import { filter } from "rxjs/internal/operators/filter";
-import { map } from "rxjs/internal/operators/map";
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { filter } from "rxjs/operators";
+import { map } from "rxjs/operators";
+import { takeWhile } from "rxjs/operators";
 import {
   NarikComponent,
   AuthenticationService,

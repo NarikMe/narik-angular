@@ -12,9 +12,9 @@ import {
 
 import { Inject, Injectable } from "@angular/core";
 import { NarikHttpService } from "@narik/core";
-import { first } from "rxjs/internal/operators/first";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { Observable } from "rxjs/internal/Observable";
+import { first } from "rxjs/operators";
+import { ReplaySubject } from "rxjs";
+import { Observable } from "rxjs";
 import { TOKEN_STORAGE } from "../injectionTokens";
 import { Router } from "@angular/router";
 

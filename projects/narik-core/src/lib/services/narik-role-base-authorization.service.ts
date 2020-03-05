@@ -3,8 +3,8 @@ import {
   AuthenticationService,
   AuthorizationService
 } from "@narik/infrastructure";
-import { Observable } from "rxjs/internal/Observable";
-import { of } from "rxjs/internal/observable/of";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
 
 import { Injectable } from "@angular/core";
 

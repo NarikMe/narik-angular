@@ -6,10 +6,10 @@ import {
 } from "@narik/infrastructure";
 import { NarikHttpService } from "./narik-http.service";
 import { Inject, Injectable } from "@angular/core";
-import { tap } from "rxjs/internal/operators/tap";
-import { Subject } from "rxjs/internal/Subject";
-import { Observable } from "rxjs/internal/Observable";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
+import { tap } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { Observable } from "rxjs";
+import { ReplaySubject } from "rxjs";
 
 @Injectable()
 export class NarikConfigService extends ConfigService {

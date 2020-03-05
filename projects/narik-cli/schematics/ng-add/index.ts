@@ -172,19 +172,19 @@ const commonDependencies: any[] = [
   },
   {
     name: "@narik/infrastructure",
-    version: "^3.0.0"
+    version: "^3.0.1"
   },
   {
     name: "@narik/common",
-    version: "^3.0.0"
+    version: "^3.0.1"
   },
   {
     name: "@narik/core",
-    version: "^3.0.0"
+    version: "^3.0.1"
   },
   {
     name: "@narik/app-core",
-    version: "^3.0.0"
+    version: "^3.0.1"
   },
   {
     name: "@narik/ui-core",
@@ -714,7 +714,7 @@ function addModuleImports(ui: string, rtl: boolean) {
     },
     {
       name: "Observable",
-      link: `rxjs/internal/Observable`
+      link: `rxjs`
     },
     {
       name: "ConfigService,MODULE_DATA_KEY,MODULE_UI_KEY,ModuleInfo",

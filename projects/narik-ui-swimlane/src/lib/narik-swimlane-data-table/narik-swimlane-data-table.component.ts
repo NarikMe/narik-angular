@@ -5,9 +5,9 @@ import {
   NarikViewField
 } from "@narik/infrastructure";
 import { NarikDataTable } from "@narik/ui-core";
-import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
-import { Subject } from "rxjs/internal/Subject";
+import { debounceTime } from "rxjs/operators";
+import { distinctUntilChanged } from "rxjs/operators";
+import { Subject } from "rxjs";
 
 import { Component, Injector, Input, OnInit } from "@angular/core";
 

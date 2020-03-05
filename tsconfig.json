@@ -19,94 +19,94 @@
     ],
     "paths": {
       "@narik/core": [
-        "dist/narik-core"
+        "dist/core"
       ],
       "@narik/core/*": [
-        "dist/narik-core/*"
+        "dist/core/*"
       ],
       "@narik/common": [
-        "dist/narik-common"
+        "dist/common"
       ],
       "@narik/common/*": [
-        "dist/narik-common/*"
+        "dist/common/*"
       ],
       "@narik/app-core": [
-        "dist/narik-app-core"
+        "dist/app-core"
       ],
       "@narik/app-core/*": [
-        "dist/narik-app-core/*"
+        "dist/app-core/*"
       ],
       "@narik/infrastructure": [
-        "dist/narik-infrastructure"
+        "dist/infrastructure"
       ],
       "@narik/infrastructure/*": [
-        "dist/narik-infrastructure/*"
+        "dist/infrastructure/*"
       ],
       "@narik/ui-core": [
-        "dist/narik-ui-core"
+        "dist/ui-core"
       ],
       "@narik/ui-core/*": [
-        "dist/narik-ui-core/*"
+        "dist/ui-core/*"
       ],
       "@narik/ui-material": [
-        "dist/narik-ui-material"
+        "dist/ui-material"
       ],
       "@narik/ui-material/*": [
-        "dist/narik-ui-material/*"
+        "dist/ui-material/*"
       ],
       "@narik/ui-primeng": [
-        "dist/narik-ui-primeng"
+        "dist/ui-primeng"
       ],
       "@narik/ui-primeng/*": [
-        "dist/narik-ui-primeng/*"
+        "dist/ui-primeng/*"
       ],
       "@narik/ui-ng-bootstrap": [
-        "dist/narik-ui-ng-bootstrap"
+        "dist/ui-ng-bootstrap"
       ],
       "@narik/ui-ng-bootstrap/*": [
-        "dist/narik-ui-ng-bootstrap/*"
+        "dist/ui-ng-bootstrap/*"
       ],
       "@narik/ui-devextreme": [
-        "dist/narik-ui-devextreme"
+        "dist/ui-devextreme"
       ],
       "@narik/ui-devextreme/*": [
-        "dist/narik-ui-devextreme/*"
+        "dist/ui-devextreme/*"
       ],
       "@narik/jwt-authentication": [
-        "dist/narik-jwt-authentication"
+        "dist/jwt-authentication"
       ],
       "@narik/jwt-authentication/*": [
-        "dist/narik-jwt-authentication/*"
+        "dist/jwt-authentication/*"
       ],
       "@narik/client-storage": [
-        "dist/narik-client-storage"
+        "dist/client-storage"
       ],
       "@narik/client-storage/*": [
-        "dist/narik-client-storage/*"
+        "dist/client-storage/*"
       ],
       "@narik/signalr-client": [
-        "dist/narik-signalr-client"
+        "dist/signalr-client"
       ],
       "@narik/signalr-client/*": [
-        "dist/narik-signalr-client/*"
+        "dist/signalr-client/*"
       ],
       "@narik/ui-ngx-bootstrap": [
-        "dist/narik-ui-ngx-bootstrap"
+        "dist/ui-ngx-bootstrap"
       ],
       "@narik/ui-ngx-bootstrap/*": [
-        "dist/narik-ui-ngx-bootstrap/*"
+        "dist/ui-ngx-bootstrap/*"
       ],
       "@narik/ui-swimlane": [
-        "dist/narik-ui-swimlane"
+        "dist/ui-swimlane"
       ],
       "@narik/ui-swimlane/*": [
-        "dist/narik-ui-swimlane/*"
+        "dist/ui-swimlane/*"
       ],
       "@narik/ui-nebular": [
-        "dist/narik-ui-nebular"
+        "dist/ui-nebular"
       ],
       "@narik/ui-nebular/*": [
-        "dist/narik-ui-nebular/*"
+        "dist/ui-nebular/*"
       ]
     }
   }

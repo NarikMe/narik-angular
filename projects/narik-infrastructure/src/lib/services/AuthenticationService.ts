@@ -1,5 +1,5 @@
 import { LoginModel } from "../interfaces/login.model";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 import { ApplicationUser, LoginResult } from "../interfaces/login.model";
 

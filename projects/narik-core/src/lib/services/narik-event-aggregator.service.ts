@@ -5,14 +5,14 @@ import {
   MetaDataService,
   MetaData
 } from "@narik/infrastructure";
-import { Observable } from "rxjs/internal/Observable";
-import { filter } from "rxjs/internal/operators/filter";
+import { Observable } from "rxjs";
+import { filter } from "rxjs/operators";
 import { pluck, share } from "rxjs/operators";
 
 import { Injectable } from "@angular/core";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { Subject } from "rxjs/internal/Subject";
-import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
+import { ReplaySubject } from "rxjs";
+import { Subject } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class NarikEventAggregatorService extends EventAggregatorService {

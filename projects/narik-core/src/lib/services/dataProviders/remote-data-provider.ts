@@ -3,8 +3,8 @@ import {
   DataProvider,
   RemoteDataProviderService
 } from "@narik/infrastructure";
-import { Observable } from "rxjs/internal/Observable";
-import { Subject } from "rxjs/internal/Subject";
+import { Observable } from "rxjs";
+import { Subject } from "rxjs";
 
 import { Injectable, Injector } from "@angular/core";
 import { NarikBaseDataProvider } from "../../base/narik-base-data-provider";

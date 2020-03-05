@@ -7,10 +7,10 @@ import {
   DataActionType,
   RemoteDataProviderService
 } from "@narik/infrastructure";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 import { ServerResponse } from "../interfaces/server-response.model";
-import { map } from "rxjs/internal/operators/map";
+import { map } from "rxjs/operators";
 import { QueryService } from "./queryService";
 
 @Injectable()

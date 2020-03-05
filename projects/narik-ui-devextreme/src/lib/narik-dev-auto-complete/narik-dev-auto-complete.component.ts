@@ -1,8 +1,8 @@
 import {
   NarikAutoComplete
 } from "@narik/ui-core";
-import { Observable } from "rxjs/internal/Observable";
-import { Subject } from "rxjs/internal/Subject";
+import { Observable } from "rxjs";
+import { Subject } from "rxjs";
 
 import {
   Component,

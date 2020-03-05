@@ -12,7 +12,8 @@ import {
   OnInit,
   Type,
   ViewChild,
-  NgModuleRef
+  NgModuleRef,
+  Injector
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ComponentLoaderHostDirective, isArray, isObject } from "@narik/common";
@@ -30,6 +31,7 @@ export class FormContainerComponent implements OnInit {
   parameters: any = {};
   constructor(
     private activateRoute: ActivatedRoute,
+    private injector: Injector,
     private componentFactoryResolver: ComponentFactoryResolver,
     private componentTypeResolver: ComponentTypeResolver,
     private viewManager: ViewManagerService,
@@ -67,7 +69,7 @@ export class FormContainerComponent implements OnInit {
     );
 
     if (!factoryClass) {
-      throw new Error(`colud not find entry for "${viewInfo.component}"`);
+      throw new Error(`colud not find type for "${viewInfo.component}"`);
     }
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       factoryClass
@@ -75,7 +77,11 @@ export class FormContainerComponent implements OnInit {
     const viewContainerRef = this.loaderHost.viewContainerRef;
     viewContainerRef.clear();
 
-    const cmp = viewContainerRef.createComponent(componentFactory);
+    const cmp = viewContainerRef.createComponent(
+      componentFactory,
+      undefined,
+      this.injector
+    );
 
     if (viewInfo) {
       viewInfo.options = viewInfo.options || {};

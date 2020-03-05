@@ -9,7 +9,7 @@ import {
   DataOption
 } from "@narik/infrastructure";
 
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { takeWhile } from "rxjs/operators";
 import {
   NarikFormComponent,
   NARIK_UI_FORM_INPUTS

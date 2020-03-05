@@ -1,5 +1,5 @@
 import { DataInfo } from "@narik/infrastructure";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 import { ServerResponse } from "../interfaces/server-response.model";
 
 export abstract class QueryService<T> {

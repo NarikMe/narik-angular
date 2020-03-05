@@ -4,11 +4,11 @@ import {
   NarikDataSource,
   PagingParameters
 } from "@narik/infrastructure";
-import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
-import { Observable } from "rxjs/internal/Observable";
-import { of } from "rxjs/internal/observable/of";
-import { catchError } from "rxjs/internal/operators/catchError";
-import { finalize } from "rxjs/internal/operators/finalize";
+import { BehaviorSubject } from "rxjs";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { finalize } from "rxjs/operators";
 
 import { MatTableDataSource } from "@angular/material/table";
 

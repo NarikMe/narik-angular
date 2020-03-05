@@ -1,8 +1,8 @@
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 import { isString } from "@narik/common";
 import { NarikBaseDataProvider } from "./narik-base-data-provider";
 import { DataStorage, DataInfo } from "@narik/infrastructure";
-import { map } from "rxjs/internal/operators/map";
+import { map } from "rxjs/operators";
 
 export abstract class NarikBaseDataStorage extends NarikBaseDataProvider
   implements DataStorage {

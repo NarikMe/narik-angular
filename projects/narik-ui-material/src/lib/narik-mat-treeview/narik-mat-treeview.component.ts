@@ -7,8 +7,8 @@ import {
   MatTreeFlattener
 } from "@angular/material/tree";
 import { FlatTreeControl } from "@angular/cdk/tree";
-import { Observable } from "rxjs/internal/Observable";
-import { of } from "rxjs/internal/observable/of";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
 
 @Component({
   selector: "narik-mat-treeview narik-treeview",

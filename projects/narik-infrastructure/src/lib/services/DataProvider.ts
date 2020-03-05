@@ -1,5 +1,5 @@
 import { DataInfo } from "./../interfaces/data-info.model";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 /**
  * Data provider

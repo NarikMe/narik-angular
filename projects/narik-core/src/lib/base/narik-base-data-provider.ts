@@ -10,10 +10,10 @@ import {
 } from "@narik/infrastructure";
 
 import { Injector } from "@angular/core";
-import { Subject } from "rxjs/internal/Subject";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { first } from "rxjs/internal/operators/first";
-import { Observable } from "rxjs/internal/Observable";
+import { Subject } from "rxjs";
+import { ReplaySubject } from "rxjs";
+import { first } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 export abstract class NarikBaseDataProvider implements DataProvider {
   key: string;

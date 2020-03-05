@@ -12,7 +12,7 @@ import {
   CommandProcessor
 } from "@narik/infrastructure";
 import { ReplaySubject } from "rxjs";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 import {
   ChangeDetectorRef,

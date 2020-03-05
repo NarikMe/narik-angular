@@ -6,9 +6,9 @@ import {
   DataInfo
 } from "@narik/infrastructure";
 import { QueryService, ServerResponse } from "@narik/app-core";
-import { catchError } from "rxjs/internal/operators/catchError";
-import { of } from "rxjs/internal/observable/of";
-import { map } from "rxjs/internal/operators/map";
+import { catchError } from "rxjs/operators";
+import { of } from "rxjs";
+import { map } from "rxjs/operators";
 import { isArray } from "@narik/common";
 
 export class DevLazyDataSource<T> implements NarikDataSource<T> {

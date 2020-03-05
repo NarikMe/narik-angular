@@ -1,10 +1,10 @@
 import { ConfigService } from "@narik/infrastructure";
 import { HttpClient } from "@angular/common/http";
 import { TranslateLoader } from "@ngx-translate/core";
-import { first } from "rxjs/internal/operators/first";
-import { Observable } from "rxjs/internal/Observable";
-import { forkJoin } from "rxjs/internal/observable/forkJoin";
-import { of } from "rxjs/internal/observable/of";
+import { first } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { forkJoin } from "rxjs";
+import { of } from "rxjs";
 
 export class NarikTranslateLoader implements TranslateLoader {
   private root = "";

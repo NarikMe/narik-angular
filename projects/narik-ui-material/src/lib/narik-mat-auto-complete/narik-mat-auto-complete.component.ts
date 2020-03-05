@@ -1,15 +1,15 @@
 import { DataProviderService, MODULE_DATA_KEY } from "@narik/infrastructure";
 
-import { Observable } from "rxjs/internal/Observable";
-import { of } from "rxjs/internal/observable/of";
-import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
-import { finalize } from "rxjs/internal/operators/finalize";
-import { map } from "rxjs/internal/operators/map";
-import { startWith } from "rxjs/internal/operators/startWith";
-import { switchMap } from "rxjs/internal/operators/switchMap";
-import { tap } from "rxjs/internal/operators/tap";
-import { Subject } from "rxjs/internal/Subject";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
+import { debounceTime } from "rxjs/operators";
+import { distinctUntilChanged } from "rxjs/operators";
+import { finalize } from "rxjs/operators";
+import { map } from "rxjs/operators";
+import { startWith } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
+import { Subject } from "rxjs";
 
 import {
   Component,

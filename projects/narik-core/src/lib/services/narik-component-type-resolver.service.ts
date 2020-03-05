@@ -1,21 +1,21 @@
-import {
-  ComponentTypeResolver,
-  DYNAMIC_COMPONENTS
-} from "@narik/infrastructure";
-import { Type, Injectable, Inject } from "@angular/core";
+import { Injectable, Type } from "@angular/core";
+import { ComponentTypeResolver } from "@narik/infrastructure";
+import { DynamicForms } from "./../decorators/dynamic-form.decorator";
 
 @Injectable()
 export class NarikComponentTypeResolver extends ComponentTypeResolver {
-  components: Type<any>[] = [];
-
-  constructor(@Inject(DYNAMIC_COMPONENTS) components: Type<any>[]) {
+  constructor() {
     super();
-    this.components = [].concat.apply([], components);
   }
 
-  resolveComponentType(key: string): Type<any> {
-    return this.components.filter(
-      x => x.name === key || x["COMPONENT_NAME"] === key
-    )[0];
+  resolveComponentType(key: string, notFound?: Type<any>): Type<any> {
+    if (DynamicForms[key]) {
+      return DynamicForms[key];
+    } else {
+      if (notFound) {
+        return notFound;
+      }
+    }
+    throw new Error(`colud not find any type for "${key}". to define a dynamic form use @DynamicForm(key)`);
   }
 }

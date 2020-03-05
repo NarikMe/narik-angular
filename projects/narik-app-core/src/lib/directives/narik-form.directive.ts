@@ -12,8 +12,8 @@ import {
   TemplateRef
 } from "@angular/core";
 import { NgForm, NgModel } from "@angular/forms";
-import { Subscription } from "rxjs/internal/Subscription";
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { Subscription } from "rxjs";
+import { takeWhile } from "rxjs/operators";
 
 @Directive({
   selector: "narik-form"

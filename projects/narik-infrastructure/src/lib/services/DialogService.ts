@@ -1,4 +1,4 @@
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
+import { ReplaySubject } from "rxjs";
 
 import {
   ElementRef,
@@ -6,7 +6,8 @@ import {
   Type,
   ViewContainerRef,
   StaticProvider,
-  EventEmitter
+  EventEmitter,
+  ComponentFactoryResolver
 } from "@angular/core";
 
 import { EntityField, FieldTypes } from "../interfaces/meta-data.model";
@@ -251,7 +252,8 @@ export abstract class DialogService {
       dialogresult: DialogResult<T>
     ) => boolean | Promise<boolean>,
     onClose?: (dialogresult: DialogResult<T>) => void,
-    providers?: StaticProvider[]
+    providers?: StaticProvider[],
+    resolver?: ComponentFactoryResolver
   ): DialogRef<T>;
 
   /**
