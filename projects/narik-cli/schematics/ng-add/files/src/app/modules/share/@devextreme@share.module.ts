@@ -1,6 +1,6 @@
 import { COMPONENTS } from "./index";
 import { NgModule } from "@angular/core";
-import { NarikUiDevextremeModule } from "narik-ui-devextreme";
+import { NarikUiDevextremeModule } from "@narik/ui-devextreme";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 

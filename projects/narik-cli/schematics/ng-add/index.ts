@@ -14,7 +14,8 @@ import {
 } from "@angular-devkit/schematics";
 
 import * as ts from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
-
+import { virtualFs } from "@angular-devkit/core";
+import { Schema as AddSchema } from "./schema";
 import { getWorkspace } from "@schematics/angular/utility/config";
 import { getAppModulePath } from "@schematics/angular/utility/ng-ast-utils";
 import {
@@ -24,11 +25,12 @@ import {
   addProviderToModule
 } from "@schematics/angular/utility/ast-utils";
 import { Change, InsertChange } from "@schematics/angular/utility/change";
-// import {
-//   WorkspaceProject,
-//   WorkspaceSchema
-// } from "@angular-devkit/core";
-
+import { getProjectTargets } from "@schematics/angular/utility/project-targets";
+import {
+  BrowserBuilderTarget,
+  Builders,
+  ServeBuilderTarget
+} from "@schematics/angular/utility/workspace-models";
 import {
   WorkspaceProject,
   WorkspaceSchema
@@ -59,16 +61,16 @@ const uiStyles: any = {
     "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.css"
   ],
   "ng-bootstrap": [
-    "node_modules/@swimlane/ngx-datatable/release/index.css",
-    "node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
-    "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
+    "node_modules/@swimlane/ngx-datatable/index.css",
+    "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
+    "node_modules/@swimlane/ngx-datatable/assets/icons.css",
     "node_modules/@narik/ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
     "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css"
   ],
   nebular: [
-    "node_modules/@swimlane/ngx-datatable/release/index.css",
-    "node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
-    "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
+    "node_modules/@swimlane/ngx-datatable/index.css",
+    "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
+    "node_modules/@swimlane/ngx-datatable/assets/icons.css",
     "node_modules/@narik/ui-nebular/styles/narik-ui-nebular.css",
     "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css"
   ],
@@ -101,15 +103,15 @@ const rtlUiStyles: any = {
 const devDependencies: any[] = [
   {
     name: "@angular-builders/custom-webpack",
-    version: "^9.0.0"
+    version: "~9.0.0"
   },
   {
     name: "cheerio",
-    version: "^1.0.0-rc.3"
+    version: "~1.0.0-rc.3"
   },
   {
     name: "@narik/webpack-tools",
-    version: "3.0.0"
+    version: "~3.0.1"
   }
 ];
 const commonDependencies: any[] = [
@@ -316,8 +318,9 @@ const uiDependency: any = {
   "ng-bootstrap": [
     { name: "@narik/ui-ng-bootstrap", version: "^3.0.0" },
     { name: "@narik/ui-swimlane", version: "^3.0.0" },
-    { name: "@swimlane/ngx-datatable", version: "^15.0.2" },
-    { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" }
+    { name: "@swimlane/ngx-datatable", version: "^16.0.3" },
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.0" },
+    { name: "@angular/localize", version: "^9.0.2" }
   ],
   nebular: [
     { name: "@narik/ui-nebular", version: "^3.0.0" },
@@ -334,20 +337,11 @@ const uiDependency: any = {
   ]
 };
 
-export function ngAdd(_options: any): Rule {
-  let ui = _options.ui
-    ? _options.ui
-    : (_options as any)["--"] && (_options as any)["--"][1];
-
-  let layout = _options.layout
-    ? _options.layout
-    : (_options as any)["--"] && (_options as any)["--"][2];
-
+export function ngAdd(_options: AddSchema): Rule {
   const rtl = _options.rtl === true;
+  const ui = _options.ui || "material";
+  const layout = _options.layout || "ngxadmin";
 
-  ui = ui || "material";
-  layout = layout || "ngxadmin";
-  console.log("layout:" + layout);
   return chain([
     addPackageJsonDependencies(ui, rtl, layout),
     addStyles(ui, rtl, layout),
@@ -355,6 +349,7 @@ export function ngAdd(_options: any): Rule {
     addExtraFiles(ui, rtl, layout),
     updateTsConfig(ui),
     updateIndexhtml(ui, rtl),
+    addLocalization(ui),
     // addModuleImports(ui, rtl),
     // addModuleProvids(ui),
     // updateAppModule(),
@@ -506,6 +501,108 @@ function sortObjectByKeys(obj: { [key: string]: string }) {
       /* tslint:disable-next-line: no-any */
       .reduce((result: any, key: any) => (result[key] = obj[key]) && result, {})
   );
+}
+
+function addLocalization(ui: string) {
+  return (host: Tree, context: SchematicContext) => {
+    if (ui === "ng-bootstrap") {
+      const localizePolyfill = `import '@angular/localize/init';`;
+      const localizeStr = `/***************************************************************************************************
+   * Load \`$localize\` onto the global scope - used if i18n tags appear in Angular templates.
+   */
+  ${localizePolyfill}
+  `;
+
+      const projectName: string = getWorkspace(host).defaultProject!;
+      prendendToTargetOptionFile(
+        host,
+        projectName,
+        "@angular-builders/custom-webpack:browser",
+        "polyfills",
+        localizeStr
+      );
+    }
+
+    return host;
+  };
+}
+
+function getAllOptionValues<T>(
+  host: Tree,
+  projectName: string,
+  builderName: string,
+  optionName: string
+) {
+  const targets = getProjectTargets(host, projectName);
+
+  // Find all targets of a specific build in a project.
+  const builderTargets: (
+    | BrowserBuilderTarget
+    | ServeBuilderTarget
+  )[] = Object.values(targets).filter(
+    (target: BrowserBuilderTarget | ServeBuilderTarget) =>
+      target.builder === builderName
+  );
+
+  console.log(builderTargets);
+  // Get all options contained in target configuration partials.
+  const configurationOptions = builderTargets
+    .filter(t => t.configurations)
+    .map(t => Object.values(t.configurations!))
+    .reduce((acc, cur) => acc.concat(...cur), []);
+
+  // Now we have all option sets. We can use it to find all references to a given property.
+  const allOptions = [
+    ...builderTargets.map(t => t.options),
+    ...configurationOptions
+  ];
+
+  // Get all values for the option name and dedupe them.
+  // Deduping will only work for primitives, but the keys we want here are strings so it's ok.
+  const optionValues: T[] = allOptions
+    .filter(o => o[optionName])
+    .map(o => o[optionName])
+    .reduce((acc, cur) => (!acc.includes(cur) ? acc.concat(cur) : acc), []);
+
+  return optionValues;
+}
+
+function prendendToTargetOptionFile(
+  host: Tree,
+  projectName: string,
+  builderName: string,
+  optionName: string,
+  str: string
+) {
+  // Get all known polyfills for browser builders on this project.
+  const optionValues = getAllOptionValues<string>(
+    host,
+    projectName,
+    builderName,
+    optionName
+  );
+
+  optionValues.forEach(path => {
+    const data = host.read(path);
+    if (!data) {
+      // If the file doesn't exist, just ignore it.
+      return;
+    }
+    const localizePolyfill = `import '@angular/localize/init';`;
+    const content = virtualFs.fileBufferToString(data);
+    if (
+      content.includes(localizePolyfill) ||
+      content.includes(localizePolyfill.replace(/'/g, '"'))
+    ) {
+      // If the file already contains the polyfill (or variations), ignore it too.
+      return;
+    }
+
+    // Add string at the start of the file.
+    const recorder = host.beginUpdate(path);
+    recorder.insertLeft(0, str);
+    host.commitUpdate(recorder);
+  });
 }
 
 function updateIndexhtml(ui: string, rtl: boolean) {
