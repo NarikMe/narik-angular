@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/narik-ui-ng-bootstrap",
+  "dest": "../../dist/ui-ng-bootstrap",
   "lib": {
     "entryFile": "src/public_api.ts"
   }

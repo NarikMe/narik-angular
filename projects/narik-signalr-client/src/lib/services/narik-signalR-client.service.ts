@@ -1,8 +1,8 @@
-import { Observable } from "rxjs/internal/Observable";
-import { Subject } from "rxjs/internal/Subject";
-import { filter } from "rxjs/internal/operators/filter";
-import { pluck } from "rxjs/internal/operators/pluck";
-import { share } from "rxjs/internal/operators/share";
+import { Observable } from "rxjs";
+import { Subject } from "rxjs";
+import { filter } from "rxjs/operators";
+import { pluck } from "rxjs/operators";
+import { share } from "rxjs/operators";
 
 import {
   HubConnection,
@@ -12,7 +12,7 @@ import {
 import { Injectable, Inject } from "@angular/core";
 import { SIGNALR_CONFIG } from "../internal-injectionTokens";
 import { NarikSignalRConfig } from "../base/narik-signalR.config";
-import { RemoteMessagingService } from "narik-infrastructure";
+import { RemoteMessagingService } from "@narik/infrastructure";
 
 @Injectable()
 export class NarikSignalRMessagingService extends RemoteMessagingService {

@@ -3,16 +3,8 @@
   "schematics": {
     "ng-add": {
       "description": "Add Narik to the project.",
-      "factory": "./ng-add/index#ngAdd"
-    },
-    "ng-update": {
-      "description": "Updated Narik Dependencies.",
-      "factory": "./ng-update/index#ngUpdate"
-    },
-    "my-service": {
-      "description": "Generate a service in the project.",
-      "factory": "./my-service/index#myService",
-      "schema": "./my-service/schema.json"
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
     }
   }
 }

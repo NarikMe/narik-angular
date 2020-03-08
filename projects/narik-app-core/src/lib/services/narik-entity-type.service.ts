@@ -1,4 +1,4 @@
-import { EntityTypeService } from "narik-infrastructure";
+import { EntityTypeService } from "@narik/infrastructure";
 import { Injectable } from "@angular/core";
 
 @Injectable()

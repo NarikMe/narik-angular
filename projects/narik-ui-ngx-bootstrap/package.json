@@ -1,9 +1,9 @@
 {
-  "name": "narik-ui-ngx-bootstrap",
-  "version": "2.1.0",
+  "name": "@narik/ui-ngx-bootstrap",
+  "version": "3.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
+    "@angular/common": "~9.0.2",
+    "@angular/core": "~9.0.2"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "keywords": [
     "angular",
     "Narik"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  }
 }

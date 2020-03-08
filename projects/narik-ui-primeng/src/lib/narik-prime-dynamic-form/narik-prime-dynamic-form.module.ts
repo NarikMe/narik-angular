@@ -11,7 +11,7 @@ import { NarikPrimeInputModule } from "../narik-prime-input/narik-prime-input.mo
 import { NarikPrimeRadioGroupModule } from "../narik-prime-radio/narik-prime-radio.module";
 import { NarikPrimeSelectModule } from "../narik-prime-select/narik-prime-select.module";
 import { NarikPrimeDynamicForm } from "./narik-prime-dynamic-form.component";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({

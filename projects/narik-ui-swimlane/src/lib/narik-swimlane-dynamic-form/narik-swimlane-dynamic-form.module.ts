@@ -11,7 +11,7 @@ import { NarikSwimlaneRadioGroupModule } from "../narik-swimlane-radio/narik-swi
 import { NarikSwimlaneSelectModule } from "../narik-swimlane-select/narik-swimlane-select.module";
 import { NarikSwimlaneCheckBoxListModule } from "./../narik-swimlane-check-box-list/narik-swimlane-checkbox-list.module";
 import { NarikSwimlaneDynamicForm } from "./narik-swimlane-dynamic-form.component";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({

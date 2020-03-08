@@ -1,6 +1,6 @@
-import { groupBy } from "narik-common";
-import { EntityField, NarikViewField } from "narik-infrastructure";
-import { NarikDynamicForm } from "narik-ui-core";
+import { groupBy } from "@narik/common";
+import { EntityField, NarikViewField } from "@narik/infrastructure";
+import { NarikDynamicForm } from "@narik/ui-core";
 
 import {
   Component,

@@ -1,12 +1,12 @@
 {
-  "name": "narik-app-core",
-  "version": "2.2.0",
+  "name": "@narik/app-core",
+  "version": "3.0.1",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "lodash": "^4.17.11",
+    "@angular/common": "~9.0.2",
+    "@angular/core": "~9.0.2",
+    "lodash": "^4.17.15",
     "data-adapter": "^0.2.3",
-    "class-validator": "^0.9.1"
+    "class-validator": "^0.11.0"
   },
   "dependencies": {},
   "repository": {
@@ -19,5 +19,8 @@
   "keywords": [
     "angular",
     "Narik"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  }
 }

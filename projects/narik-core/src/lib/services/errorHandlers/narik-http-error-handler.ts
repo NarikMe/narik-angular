@@ -6,10 +6,9 @@ import {
   HttpInterceptor
 } from "@angular/common/http";
 
-import { throwError } from "rxjs/internal/observable/throwError";
-import { catchError } from "rxjs/internal/operators/catchError";
-import { Observable } from "rxjs/internal/Observable";
-import { DialogService } from "narik-infrastructure";
+import { catchError } from "rxjs/operators";
+import { Observable, throwError } from "rxjs";
+import { DialogService } from "@narik/infrastructure";
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {

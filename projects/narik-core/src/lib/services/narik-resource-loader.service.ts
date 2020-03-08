@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, Observer } from "rxjs";
 import { concat, forkJoin } from "rxjs";
-import { ConfigService } from "narik-infrastructure";
+import { ConfigService } from "@narik/infrastructure";
 
 export interface ResourceModel {
   src: string;

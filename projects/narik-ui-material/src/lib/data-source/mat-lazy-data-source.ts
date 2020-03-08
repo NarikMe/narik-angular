@@ -1,20 +1,20 @@
-import { QueryService, ServerResponse } from "narik-app-core";
+import { QueryService, ServerResponse } from "@narik/app-core";
 import {
   DataInfo,
   NarikDataSource,
   FilterItems,
   PagingParameters,
   DataProviderService
-} from "narik-infrastructure";
-import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
-import { Observable } from "rxjs/internal/Observable";
-import { of } from "rxjs/internal/observable/of";
-import { catchError } from "rxjs/internal/operators/catchError";
-import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
-import { finalize } from "rxjs/internal/operators/finalize";
-import { tap } from "rxjs/internal/operators/tap";
-import { Subject } from "rxjs/internal/Subject";
+} from "@narik/infrastructure";
+import { BehaviorSubject } from "rxjs";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { debounceTime } from "rxjs/operators";
+import { distinctUntilChanged } from "rxjs/operators";
+import { finalize } from "rxjs/operators";
+import { tap } from "rxjs/operators";
+import { Subject } from "rxjs";
 
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { MatPaginator } from "@angular/material/paginator";
@@ -141,7 +141,6 @@ export class MatLazyDataSource<T> implements DataSource<T>, NarikDataSource<T> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<T[]> {
-    console.log("Connecting data source");
     return this.dataSubject.asObservable();
   }
 

@@ -1,4 +1,4 @@
-import { NarikTreeview } from "narik-ui-core";
+import { NarikTreeview } from "@narik/ui-core";
 import { Component, Input, Injector } from "@angular/core";
 import { TreeNodeDatabase, TreeNode, NodeItem } from "./tree-node-dataBase";
 
@@ -7,8 +7,8 @@ import {
   MatTreeFlattener
 } from "@angular/material/tree";
 import { FlatTreeControl } from "@angular/cdk/tree";
-import { Observable } from "rxjs/internal/Observable";
-import { of } from "rxjs/internal/observable/of";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
 
 @Component({
   selector: "narik-mat-treeview narik-treeview",

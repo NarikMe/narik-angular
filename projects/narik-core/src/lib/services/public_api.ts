@@ -7,7 +7,7 @@ export * from "./narik-url-creator.service";
 export * from "./narik-dialog.service";
 export * from "./narik-remote-data-provider.service";
 export * from "./narik-module-manager.service";
-
+export * from "./narik-component-type-resolver.service";
 export * from "./translateLoader/narik-translate-loader";
 
 export * from "./dataProviders/static-data-provider";

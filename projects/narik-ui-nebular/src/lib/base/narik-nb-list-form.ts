@@ -1,7 +1,7 @@
-import { NarikEntity, PagingParameters } from "narik-infrastructure";
-import { NarikListForm, ServerResponse } from "narik-app-core";
+import { NarikEntity, PagingParameters } from "@narik/infrastructure";
+import { NarikListForm, ServerResponse } from "@narik/app-core";
 import { OnInit, AfterViewInit, Injector, ViewChild } from "@angular/core";
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import { TranslateService } from "@ngx-translate/core";
 
 export class NarikUiListForm<T extends NarikEntity> extends NarikListForm<T>

@@ -2,8 +2,8 @@ import { Injectable, Inject, inject } from "@angular/core";
 import {
   ErrorHandleService,
   ErrorHandler,
-} from "narik-infrastructure";
-import { groupBy } from "narik-common";
+} from "@narik/infrastructure";
+import { groupBy } from "@narik/common";
 
 @Injectable()
 export class NarikErrorHandleService extends ErrorHandleService {

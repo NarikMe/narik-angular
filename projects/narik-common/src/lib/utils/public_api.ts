@@ -8,3 +8,4 @@ export * from "./route-util";
 export * from "./promise.util";
 export * from "./element.util";
 export * from "./adapt.util";
+export * from "./angular-util";

@@ -3,7 +3,7 @@ import {
   DialogRef,
   DialogService,
   NavigationProvider
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Injectable } from "@angular/core";
 import {
@@ -15,7 +15,7 @@ import {
   UrlTree
 } from "@angular/router";
 import { NarikBaseNavigationProvider } from "./narik-base-navigation.provider";
-import { isArray, isString } from "narik-common";
+import { isArray, isString } from "@narik/common";
 
 @Injectable()
 export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
@@ -29,6 +29,17 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
   createNavigationCommand(path: string): any[] | string | UrlTree {
     return [path];
   }
+
+  parentLoadedConfig(snapshot) {
+    for (let s = snapshot.parent; s; s = s.parent) {
+      const route = s.routeConfig;
+      if (route && route._loadedConfig) {
+        return route._loadedConfig;
+      }
+    }
+    return null;
+  }
+
   navigate(
     commands: any[] | string | UrlTree,
     extras?: NavigationExtras,
@@ -53,6 +64,11 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
         primary
       );
       if (route && route.route) {
+        let resolver;
+        const config = this.parentLoadedConfig(extras.relativeTo.snapshot);
+        if (config) {
+          resolver = config.module.componentFactoryResolver;
+        }
         const dialog = this.dialogService.showDialog(
           route.route.component,
           data ? data["__dialogTitle"] : undefined,
@@ -72,7 +88,8 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
           },
           undefined,
           undefined,
-          [{ provide: ActivatedRoute, useValue: extras.relativeTo }]
+          [{ provide: ActivatedRoute, useValue: extras.relativeTo }],
+          resolver
         );
         resolve(dialog);
       } else {

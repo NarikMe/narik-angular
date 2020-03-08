@@ -1,5 +1,5 @@
 
-import { NarikDataTable } from "narik-ui-core";
+import { NarikDataTable } from "@narik/ui-core";
 
 import {
   Component,

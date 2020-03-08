@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { trigger } from "@angular/animations";
-import { NarikDialogContainer, DialogAnimationBody } from "narik-core";
+import { NarikDialogContainer, DialogAnimationBody } from "@narik/core";
 
 @Component({
   templateUrl: "narik-mat-dialog-container.component.html",

@@ -1,6 +1,6 @@
 import { COMPONENTS } from "./index";
 import { NgModule } from "@angular/core";
-import { NarikUiDevextremeModule } from "narik-ui-devextreme";
+import { NarikUiDevextremeModule } from "@narik/ui-devextreme";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
@@ -8,6 +8,7 @@ import { FormsModule } from "@angular/forms";
   imports: [CommonModule, FormsModule, NarikUiDevextremeModule],
   declarations: [COMPONENTS],
   exports: [],
+  providers: [],
   entryComponents: [COMPONENTS]
 })
 export class ShareModule {}

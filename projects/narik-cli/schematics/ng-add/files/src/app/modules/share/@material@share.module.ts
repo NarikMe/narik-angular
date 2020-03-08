@@ -1,6 +1,6 @@
 import { COMPONENTS } from "./index";
 import { NgModule } from "@angular/core";
-import { NarikUiMaterialModule } from "narik-ui-material";
+import { NarikUiMaterialModule } from "@narik/ui-material";
 import { CommonModule, DatePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { MatCardModule } from "@angular/material/card";

@@ -1,11 +1,8 @@
 import {
-  NARIK_DATA_DISPLAY_VALUE_INPUTS,
-  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
-  NarikAutoComplete,
-  NARIK_AUTOCOMPLETE_INPUTS
-} from "narik-ui-core";
-import { Observable } from "rxjs/internal/Observable";
-import { Subject } from "rxjs/internal/Subject";
+  NarikAutoComplete
+} from "@narik/ui-core";
+import { Observable } from "rxjs";
+import { Subject } from "rxjs";
 
 import {
   Component,
@@ -15,6 +12,7 @@ import {
   HostBinding
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_AUTOCOMPLETE_INPUTS, NARIK_DATA_DISPLAY_VALUE_OUTPUTS } from "../input-output-items";
 
 @Component({
   selector: "narik-dev-autocomplete  , narik-autocomplete ",

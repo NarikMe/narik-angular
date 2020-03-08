@@ -1,4 +1,4 @@
-import { NarikUiPrimeModule } from "narik-ui-primeng";
+import { NarikUiPrimeModule } from "@narik/ui-primeng";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";

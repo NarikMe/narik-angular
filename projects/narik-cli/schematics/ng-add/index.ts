@@ -12,7 +12,10 @@ import {
   FileEntry,
   SchematicsException
 } from "@angular-devkit/schematics";
-import * as ts from "typescript";
+
+import * as ts from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
+import { virtualFs } from "@angular-devkit/core";
+import { Schema as AddSchema } from "./schema";
 import { getWorkspace } from "@schematics/angular/utility/config";
 import { getAppModulePath } from "@schematics/angular/utility/ng-ast-utils";
 import {
@@ -22,10 +25,17 @@ import {
   addProviderToModule
 } from "@schematics/angular/utility/ast-utils";
 import { Change, InsertChange } from "@schematics/angular/utility/change";
+import { getProjectTargets } from "@schematics/angular/utility/project-targets";
+import {
+  BrowserBuilderTarget,
+  Builders,
+  ServeBuilderTarget
+} from "@schematics/angular/utility/workspace-models";
 import {
   WorkspaceProject,
   WorkspaceSchema
-} from "@angular-devkit/core/src/workspace";
+} from "@schematics/angular/utility/workspace-models";
+
 import { normalize } from "@angular-devkit/core";
 import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 
@@ -44,77 +54,79 @@ const commonStyles = [
 ];
 
 const uiStyles: any = {
-  material: ["node_modules/narik-ui-material/styles/narik-ui-material.css"],
+  material: ["node_modules/@narik/ui-material/styles/narik-ui-material.css"],
   devextreme: [
     "node_modules/devextreme/dist/css/dx.common.css",
     "node_modules/devextreme/dist/css/dx.light.css",
-    "node_modules/narik-ui-devextreme/styles/narik-ui-devextreme.css"
+    "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.css"
   ],
   "ng-bootstrap": [
-    "node_modules/@swimlane/ngx-datatable/release/index.css",
-    "node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
-    "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
-    "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
-    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.css"
+    "node_modules/@swimlane/ngx-datatable/index.css",
+    "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
+    "node_modules/@swimlane/ngx-datatable/assets/icons.css",
+    "node_modules/@narik/ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css"
   ],
   nebular: [
-    "node_modules/@swimlane/ngx-datatable/release/index.css",
-    "node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
-    "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
-    "node_modules/narik-ui-nebular/styles/narik-ui-nebular.css",
-    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.css"
+    "node_modules/@swimlane/ngx-datatable/index.css",
+    "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
+    "node_modules/@swimlane/ngx-datatable/assets/icons.css",
+    "node_modules/@narik/ui-nebular/styles/narik-ui-nebular.css",
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css"
   ],
   primeng: [
     "node_modules/primeng/resources/themes/nova-light/theme.css",
     "node_modules/primeng/resources/primeng.min.css",
     "node_modules/primeicons/primeicons.css",
-    "node_modules/narik-ui-primeng/styles/narik-ui-prime.css"
+    "node_modules/@narik/ui-primeng/styles/narik-ui-prime.css"
   ]
 };
 
 const rtlUiStyles: any = {
-  material: ["node_modules/narik-ui-material/styles/narik-ui-material.rtl.css"],
+  material: [
+    "node_modules/@narik/ui-material/styles/narik-ui-material.rtl.css"
+  ],
   devextreme: [
-    "node_modules/narik-ui-devextreme/styles/narik-ui-devextreme.rtl.css"
+    "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.rtl.css"
   ],
   "ng-bootstrap": [
-    "node_modules/narik-ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
-    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.rtl.css"
+    "node_modules/@narik/ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.rtl.css"
   ],
   nebular: [
-    "node_modules/narik-ui-nebular/styles/narik-ui-nebular.rtl.css",
-    "node_modules/narik-ui-swimlane/styles/narik-ui-swimlane.rtl.css"
+    "node_modules/@narik/ui-nebular/styles/narik-ui-nebular.rtl.css",
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.rtl.css"
   ],
-  primeng: ["node_modules/narik-ui-primeng/styles/narik-ui-prime.rtl.css"]
+  primeng: ["node_modules/@narik/ui-primeng/styles/narik-ui-prime.rtl.css"]
 };
 
 const devDependencies: any[] = [
   {
     name: "@angular-builders/custom-webpack",
-    version: "^8.0.2"
+    version: "~9.0.0"
   },
   {
     name: "cheerio",
-    version: "^1.0.0-rc.3"
+    version: "~1.0.0-rc.3"
   },
   {
-    name: "narik-webpack-tools",
-    version: "2.0.2"
+    name: "@narik/webpack-tools",
+    version: "~3.0.1"
   }
 ];
 const commonDependencies: any[] = [
   {
     name: "@fortawesome/fontawesome-free",
-    version: "^5.9.0"
+    version: "^5.12.1"
   },
   {
     name: "@angular/cdk",
-    version: "^8.0.0"
+    version: "^9.1.0"
   },
 
   {
     name: "@ngx-translate/core",
-    version: "^11.0.1"
+    version: "^12.1.1"
   },
   {
     name: "angular2-text-mask",
@@ -122,7 +134,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "@angular/flex-layout",
-    version: "^8.0.0-beta.26"
+    version: "^9.0.0-beta.29"
   },
   {
     name: "angular2-uuid",
@@ -130,7 +142,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "bootstrap",
-    version: "^4.3.1"
+    version: "^4.4.1"
   },
   {
     name: "localforage",
@@ -138,74 +150,74 @@ const commonDependencies: any[] = [
   },
   {
     name: "lodash",
-    version: "^4.17.11"
+    version: "^4.17.15"
   },
   {
     name: "ngforage",
-    version: "^4.0.3"
+    version: "^5.0.1"
   },
   {
     name: "ngx-toastr",
-    version: "^10.0.4"
+    version: "^12.0.0"
   },
   {
     name: "ngx-custom-validators",
-    version: "^8.0.0"
+    version: "^9.0.0"
   },
   {
     name: "class-validator",
-    version: "^0.9.1"
+    version: "^0.11.0"
   },
   {
     name: "data-adapter",
     version: "^0.2.3"
   },
   {
-    name: "narik-infrastructure",
-    version: "~2.1.0"
+    name: "@narik/infrastructure",
+    version: "^3.0.1"
   },
   {
-    name: "narik-common",
-    version: "~2.1.0"
+    name: "@narik/common",
+    version: "^3.0.1"
   },
   {
-    name: "narik-core",
-    version: "~2.2.0"
+    name: "@narik/core",
+    version: "^3.0.1"
   },
   {
-    name: "narik-app-core",
-    version: "~2.2.0"
+    name: "@narik/app-core",
+    version: "^3.0.1"
   },
   {
-    name: "narik-ui-core",
-    version: "~2.1.0"
+    name: "@narik/ui-core",
+    version: "^3.0.0"
   },
   {
-    name: "narik-jwt-authentication",
-    version: "~2.1.0"
+    name: "@narik/jwt-authentication",
+    version: "^3.0.0"
   },
   {
-    name: "narik-client-storage",
-    version: "~2.1.0"
+    name: "@narik/client-storage",
+    version: "^3.0.0"
   }
 ];
 
 const rtlUiDependency: any = {
-  "ng-bootstrap": [{ name: "bootstrap-4.1.3-rtl", version: "^1.0.1" }]
+  "ng-bootstrap": [{ name: "bootstrap-v4-rtl", version: "^4.4.1-1" }]
 };
 const layoutDependency: any = {
   ngxadmin: [
     {
       name: "@nebular/theme",
-      version: "^4.0.0"
+      version: "^4.6.0"
     },
     {
       name: "eva-icons",
-      version: "^1.1.1"
+      version: "^1.1.2"
     },
     {
       name: "@nebular/eva-icons",
-      version: "^4.0.0"
+      version: "^4.6.0"
     },
     {
       name: "roboto-fontface",
@@ -217,10 +229,10 @@ const layoutDependency: any = {
     }
   ],
   architectui: [
-    { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" },
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.0" },
     {
       name: "ngx-perfect-scrollbar",
-      version: "^8.0.0"
+      version: "^9.0.0"
     },
     {
       name: "@ngx-loading-bar/core",
@@ -232,7 +244,7 @@ const layoutDependency: any = {
     },
     {
       name: "redux",
-      version: "4.0.0"
+      version: "4.0.5"
     },
     {
       name: "angular-font-awesome",
@@ -248,55 +260,55 @@ const layoutDependency: any = {
     },
     {
       name: "@angular-redux/store",
-      version: "^9.0.0"
+      version: "^10.0.0"
     }
   ],
   coreui: [
     {
       name: "@coreui/angular",
-      version: "^2.5.2"
+      version: "^2.9.0"
     },
     {
       name: "@coreui/coreui",
-      version: "^2.1.12"
+      version: "^3.0.0"
     },
     {
       name: "@coreui/icons",
-      version: "^0.3.0"
+      version: "^1.0.1"
     },
     {
       name: "ngx-perfect-scrollbar",
-      version: "^8.0.0"
+      version: "^9.0.0"
     },
     {
       name: "ngx-bootstrap",
-      version: "^4.3.0"
+      version: "^5.3.2"
     }
   ]
 };
 const uiDependency: any = {
   material: [
     {
-      name: "narik-ui-material",
-      version: "~2.1.0"
+      name: "@narik/ui-material",
+      version: "^3.0.0"
     },
     {
       name: "@angular/material",
-      version: "^8.0.0"
+      version: "^9.1.0"
     }
   ],
   devextreme: [
     {
-      name: "narik-ui-devextreme",
-      version: "~2.1.0"
+      name: "@narik/ui-devextreme",
+      version: "^3.0.0"
     },
     {
       name: "devextreme",
-      version: "^19.1.3"
+      version: "^19.2.6"
     },
     {
       name: "devextreme-angular",
-      version: "^19.1.3"
+      version: "^19.2.6"
     },
     {
       name: "stream",
@@ -304,40 +316,32 @@ const uiDependency: any = {
     }
   ],
   "ng-bootstrap": [
-    { name: "narik-ui-ng-bootstrap", version: "~2.1.0" },
-    { name: "narik-ui-swimlane", version: "~2.1.0" },
-    { name: "@swimlane/ngx-datatable", version: "^15.0.2" },
-    { name: "@ng-bootstrap/ng-bootstrap", version: "^4.2.1" }
+    { name: "@narik/ui-ng-bootstrap", version: "^3.0.0" },
+    { name: "@narik/ui-swimlane", version: "^3.0.0" },
+    { name: "@swimlane/ngx-datatable", version: "^16.0.3" },
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.0" },
+    { name: "@angular/localize", version: "^9.0.2" }
   ],
   nebular: [
-    { name: "narik-ui-nebular", version: "~2.1.0" },
-    { name: "narik-ui-swimlane", version: "~2.1.0" },
-    { name: "@swimlane/ngx-datatable", version: "^15.0.1" },
-    { name: "@nebular/theme", version: "^4.0.0" },
-    { name: "@nebular/date-fns", version: "^4.0.0" },
-    { name: "date-fns", version: "^1.30.1" }
+    { name: "@narik/ui-nebular", version: "^3.0.0" },
+    { name: "@narik/ui-swimlane", version: "^3.0.0" },
+    { name: "@swimlane/ngx-datatable", version: "^16.0.3" },
+    { name: "@nebular/theme", version: "^4.6.0" },
+    { name: "@nebular/date-fns", version: "^4.6.0" },
+    { name: "date-fns", version: "^2.10.0" }
   ],
   primeng: [
-    { name: "primeng", version: "^8.0.0-rc.1" },
-    { name: "primeicons", version: "^1.0.0" },
-    { name: "narik-ui-primeng", version: "~2.1.0" }
+    { name: "primeng", version: "^9.0.0" },
+    { name: "primeicons", version: "^2.0.0" },
+    { name: "@narik/ui-primeng", version: "^3.0.0" }
   ]
 };
 
-export function ngAdd(_options: any): Rule {
-  let ui = _options.ui
-    ? _options.ui
-    : (_options as any)["--"] && (_options as any)["--"][1];
-
-  let layout = _options.layout
-    ? _options.layout
-    : (_options as any)["--"] && (_options as any)["--"][2];
-
+export function ngAdd(_options: AddSchema): Rule {
   const rtl = _options.rtl === true;
+  const ui = _options.ui || "material";
+  const layout = _options.layout || "ngxadmin";
 
-  ui = ui || "material";
-  layout = layout || "ngxadmin";
-  console.log("layout:" + layout);
   return chain([
     addPackageJsonDependencies(ui, rtl, layout),
     addStyles(ui, rtl, layout),
@@ -345,6 +349,7 @@ export function ngAdd(_options: any): Rule {
     addExtraFiles(ui, rtl, layout),
     updateTsConfig(ui),
     updateIndexhtml(ui, rtl),
+    addLocalization(ui),
     // addModuleImports(ui, rtl),
     // addModuleProvids(ui),
     // updateAppModule(),
@@ -498,6 +503,108 @@ function sortObjectByKeys(obj: { [key: string]: string }) {
   );
 }
 
+function addLocalization(ui: string) {
+  return (host: Tree, context: SchematicContext) => {
+    if (ui === "ng-bootstrap") {
+      const localizePolyfill = `import '@angular/localize/init';`;
+      const localizeStr = `/***************************************************************************************************
+   * Load \`$localize\` onto the global scope - used if i18n tags appear in Angular templates.
+   */
+  ${localizePolyfill}
+  `;
+
+      const projectName: string = getWorkspace(host).defaultProject!;
+      prendendToTargetOptionFile(
+        host,
+        projectName,
+        "@angular-builders/custom-webpack:browser",
+        "polyfills",
+        localizeStr
+      );
+    }
+
+    return host;
+  };
+}
+
+function getAllOptionValues<T>(
+  host: Tree,
+  projectName: string,
+  builderName: string,
+  optionName: string
+) {
+  const targets = getProjectTargets(host, projectName);
+
+  // Find all targets of a specific build in a project.
+  const builderTargets: (
+    | BrowserBuilderTarget
+    | ServeBuilderTarget
+  )[] = Object.values(targets).filter(
+    (target: BrowserBuilderTarget | ServeBuilderTarget) =>
+      target.builder === builderName
+  );
+
+  console.log(builderTargets);
+  // Get all options contained in target configuration partials.
+  const configurationOptions = builderTargets
+    .filter(t => t.configurations)
+    .map(t => Object.values(t.configurations!))
+    .reduce((acc, cur) => acc.concat(...cur), []);
+
+  // Now we have all option sets. We can use it to find all references to a given property.
+  const allOptions = [
+    ...builderTargets.map(t => t.options),
+    ...configurationOptions
+  ];
+
+  // Get all values for the option name and dedupe them.
+  // Deduping will only work for primitives, but the keys we want here are strings so it's ok.
+  const optionValues: T[] = allOptions
+    .filter(o => o[optionName])
+    .map(o => o[optionName])
+    .reduce((acc, cur) => (!acc.includes(cur) ? acc.concat(cur) : acc), []);
+
+  return optionValues;
+}
+
+function prendendToTargetOptionFile(
+  host: Tree,
+  projectName: string,
+  builderName: string,
+  optionName: string,
+  str: string
+) {
+  // Get all known polyfills for browser builders on this project.
+  const optionValues = getAllOptionValues<string>(
+    host,
+    projectName,
+    builderName,
+    optionName
+  );
+
+  optionValues.forEach(path => {
+    const data = host.read(path);
+    if (!data) {
+      // If the file doesn't exist, just ignore it.
+      return;
+    }
+    const localizePolyfill = `import '@angular/localize/init';`;
+    const content = virtualFs.fileBufferToString(data);
+    if (
+      content.includes(localizePolyfill) ||
+      content.includes(localizePolyfill.replace(/'/g, '"'))
+    ) {
+      // If the file already contains the polyfill (or variations), ignore it too.
+      return;
+    }
+
+    // Add string at the start of the file.
+    const recorder = host.beginUpdate(path);
+    recorder.insertLeft(0, str);
+    host.commitUpdate(recorder);
+  });
+}
+
 function updateIndexhtml(ui: string, rtl: boolean) {
   return (host: Tree) => {
     if (host.exists("src/index.html")) {
@@ -538,24 +645,24 @@ function updateIndexhtml(ui: string, rtl: boolean) {
 function updateTsConfig(ui: string) {
   const pathItems: any = {
     material: {
-      "narik-ui-lib": ["node_modules/narik-ui-material"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-material/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-material"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-material/*"]
     },
     devextreme: {
-      "narik-ui-lib": ["node_modules/narik-ui-devextreme"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-devextreme/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-devextreme"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-devextreme/*"]
     },
     "ng-bootstrap": {
-      "narik-ui-lib": ["node_modules/narik-ui-ng-bootstrap"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-ng-bootstrap/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-ng-bootstrap"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-ng-bootstrap/*"]
     },
     nebular: {
-      "narik-ui-lib": ["node_modules/narik-ui-nebular"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-nebular/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-nebular"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-nebular/*"]
     },
     primeng: {
-      "narik-ui-lib": ["node_modules/narik-ui-primeng"],
-      "narik-ui-lib/*": ["node_modules/narik-ui-primeng/*"]
+      "@narik/ui-lib": ["node_modules/@narik/ui-primeng"],
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-primeng/*"]
     }
   };
 
@@ -663,24 +770,24 @@ function addModuleImports(ui: string, rtl: boolean) {
     },
     {
       moduleName: `NarikCoreModule.forRoot({configFilePath: "assets/app-config.json",defaultLang: "en",useDefaultLang: true})`,
-      link: `narik-core`
+      link: `@narik/core`
     },
     {
       moduleName: "NarikUiCoreModule",
-      link: `narik-ui-core`
+      link: `@narik/ui-core`
     },
     {
       moduleName: "NarikAppCoreModule.forRoot({})",
-      link: `narik-app-core`
+      link: `@narik/app-core`
     },
     {
       moduleName:
         'NarikJwtAuthenticationModule.forRoot({loginEndPoint: "api/account/Authenticate",logoutEndPoint: "api/account/Logout",refreshEndPoint: "api/account/Authenticate",tokenStorage: "localStorage",loginPageUrl: "/"})',
-      link: `narik-jwt-authentication`
+      link: `@narik/jwt-authentication`
     },
     {
       moduleName: "NarikClientStorageModule.forRoot()",
-      link: `narik-client-storage`
+      link: `@narik/client-storage`
     }
   ];
 
@@ -699,20 +806,20 @@ function addModuleImports(ui: string, rtl: boolean) {
     },
     {
       name: "FORM_ITEM_DEFAULT_CLASS",
-      link: `narik-ui-material`,
+      link: `@narik/ui-material`,
       uiKey: "material"
     },
     {
       name: "Observable",
-      link: `rxjs/internal/Observable`
+      link: `rxjs`
     },
     {
       name: "ConfigService,MODULE_DATA_KEY,MODULE_UI_KEY,ModuleInfo",
-      link: "narik-infrastructure"
+      link: "@narik/infrastructure"
     },
     {
       name: `NarikTranslateLoader,MEMORY_STORAGE_VALIDITY_LEN,NarikModule`,
-      link: "narik-core"
+      link: "@narik/core"
     }
   ];
 
@@ -937,7 +1044,7 @@ export function addStyles(
     if (!rtl || ui !== "ng-bootstrap") {
       assets.push("node_modules/bootstrap/dist/css/bootstrap.css");
     } else {
-      assets.push("node_modules/bootstrap-4.1.3-rtl/css/bootstrap.css");
+      assets.push("node_modules/bootstrap-v4-rtl/css/bootstrap.css");
     }
     assets = assets.concat(commonStyles);
 

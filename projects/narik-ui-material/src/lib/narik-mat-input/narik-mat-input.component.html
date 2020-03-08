@@ -2,7 +2,7 @@
   <mat-label *ngIf="label">{{label }}</mat-label>
   <input [ngClass]="inputCssClass" *ngIf='type!=="textArea"' [disabled]="disabled" [required]="required" matInput placeholder="{{placeHolder }}" [name]="name"
     [(ngModel)]="value" [type]='type'>
-  <textarea  [ngClass]="inputCssClass" mat-autosize [disabled]="disabled" *ngIf='type==="textArea"' [required]="required" matInput placeholder="{{placeHolder }}"
+  <textarea  [ngClass]="inputCssClass" cdkTextareaAutosize [disabled]="disabled" *ngIf='type==="textArea"' [required]="required" matInput placeholder="{{placeHolder }}"
   [name]="name"
     [(ngModel)]="value"></textarea>
   <mat-icon *ngIf='suffixIcon' matSuffix>{{suffixIcon}}</mat-icon>

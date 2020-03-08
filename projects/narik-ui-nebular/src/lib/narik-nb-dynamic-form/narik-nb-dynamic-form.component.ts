@@ -1,4 +1,4 @@
-import { NarikDynamicForm } from "narik-ui-core";
+import { NarikDynamicForm } from "@narik/ui-core";
 
 import {
   Component,
@@ -6,8 +6,8 @@ import {
   forwardRef,
   ViewContainerRef
 } from "@angular/core";
-import { groupBy } from "narik-common";
-import { NarikViewField, EntityField } from "narik-infrastructure";
+import { groupBy } from "@narik/common";
+import { NarikViewField, EntityField } from "@narik/infrastructure";
 
 @Component({
   selector: "narik-dynamic-form , narik-nb-dynamic-form",

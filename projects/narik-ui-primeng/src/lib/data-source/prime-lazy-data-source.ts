@@ -2,16 +2,15 @@ import {
   NarikDataSource,
   PagingParameters,
   DataInfo
-} from "narik-infrastructure";
-import { QueryService, ServerResponse } from "narik-app-core";
-import { catchError } from "rxjs/internal/operators/catchError";
-import { of } from "rxjs/internal/observable/of";
-import { map } from "rxjs/internal/operators/map";
-import { finalize } from "rxjs/internal/operators/finalize";
-import { isArray } from "narik-common";
-import { Observable } from "rxjs/internal/Observable";
-import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
-import { Subject } from "rxjs/internal/Subject";
+} from "@narik/infrastructure";
+import { QueryService, ServerResponse } from "@narik/app-core";
+import { catchError } from "rxjs/operators";
+import { of } from "rxjs";
+import { map } from "rxjs/operators";
+import { finalize } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
+import { Subject } from "rxjs";
 
 export class PrimeLazyDataSource<T> implements NarikDataSource<T> {
   loadOptions: any;

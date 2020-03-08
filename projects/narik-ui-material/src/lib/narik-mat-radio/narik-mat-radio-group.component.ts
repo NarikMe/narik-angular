@@ -1,10 +1,8 @@
 import { Component, forwardRef, Injector, Input } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import {
-  NarikRadioGroup,
-  NARIK_DATA_DISPLAY_VALUE_INPUTS
-} from "narik-ui-core";
+import { NarikRadioGroup } from "@narik/ui-core";
 import { FORM_ITEM_DEFAULT_CLASS } from "../injectionTokens";
+import { NARIK_DATA_DISPLAY_VALUE_INPUTS } from "../input-output-items";
 
 @Component({
   selector: "narik-mat-radio-group , narik-radio-group",

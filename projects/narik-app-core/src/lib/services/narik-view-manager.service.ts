@@ -1,9 +1,9 @@
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import {
   MetaDataService,
   ViewManagerService,
   View
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Injectable, Injector } from "@angular/core";
 import { ViewComponentNameResolver } from "../interfaces/view-component-name-resolver";

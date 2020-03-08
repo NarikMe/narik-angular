@@ -1,9 +1,9 @@
 import { UUID } from "angular2-uuid";
-import { isElementVisible } from "narik-common";
-import { NarikInject } from "narik-core";
-import { DialogService, ShortcutService } from "narik-infrastructure";
-import { filter } from "rxjs/internal/operators/filter";
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { isElementVisible } from "@narik/common";
+import { NarikInject } from "@narik/core";
+import { DialogService, ShortcutService } from "@narik/infrastructure";
+import { filter } from "rxjs/operators";
+import { takeWhile } from "rxjs/operators";
 
 import {
   AfterViewInit,

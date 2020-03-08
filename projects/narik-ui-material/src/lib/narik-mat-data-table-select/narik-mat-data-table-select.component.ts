@@ -1,18 +1,13 @@
-import { isArray, isEquivalent } from "narik-common";
-import { NarikInject } from "narik-core";
+import { isArray, isEquivalent } from "@narik/common";
+import { NarikInject } from "@narik/core";
 import {
   DataInfo,
   DataOption,
   DataProviderService,
   NarikDataSource
-} from "narik-infrastructure";
-import {
-  NARIK_DATA_DISPLAY_VALUE_INPUTS,
-  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
-  NARIK_DATA_TABLE_SELECT_INPUTS,
-  DynamicFormService
-} from "narik-ui-core";
-import { Observable } from "rxjs/internal/Observable";
+} from "@narik/infrastructure";
+import { DynamicFormService } from "@narik/ui-core";
+import { Observable } from "rxjs";
 
 import {
   Component,
@@ -31,6 +26,10 @@ import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
 import { MatLazyDataSource } from "../data-source/mat-lazy-data-source";
 import { MatLocalDataSource } from "../data-source/mat-local-data-source";
 import { NarikMatDataTable } from "../narik-mat-data-table/narik-mat-data-table.component";
+import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_DATA_TABLE_SELECT_INPUTS, NARIK_DATA_DISPLAY_VALUE_OUTPUTS } from "../input-output-items";
+
+
+
 
 @Component({
   selector: "narik-mat-data-table-select , narik-data-table-select",

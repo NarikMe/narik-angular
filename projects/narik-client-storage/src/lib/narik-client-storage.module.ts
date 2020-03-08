@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders, Inject } from "@angular/core";
 import { ClientStorageDataProvider } from "./services/client-data-storage-provider";
-import { DATA_PROVIDER, DATA_STORAGE } from "narik-infrastructure";
+import { DATA_PROVIDER, DATA_STORAGE } from "@narik/infrastructure";
 import { NgForageConfig, Driver, DriverType } from "ngforage";
 import { ClientStorageOptions } from "./models/client-storage-options";
 import {
@@ -43,7 +43,7 @@ export class NarikClientStorageModule {
     });
   }
 
-  static forRoot(config?: ClientStorageOptions): ModuleWithProviders {
+  static forRoot(config?: ClientStorageOptions): ModuleWithProviders<NarikClientStorageModule> {
     return {
       ngModule: NarikClientStorageModule,
       providers: [

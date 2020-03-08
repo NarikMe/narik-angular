@@ -1,4 +1,4 @@
-import { ValidationService, NarikValidator } from "narik-infrastructure";
+import { ValidationService, NarikValidator } from "@narik/infrastructure";
 import { Validators } from "@angular/forms";
 import { CustomValidators } from "ngx-custom-validators";
 

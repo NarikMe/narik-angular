@@ -1,4 +1,5 @@
-import { promiseSerial } from "narik-common";
+import { NarikComponentTypeResolver } from './services/narik-component-type-resolver.service';
+import { promiseSerial } from "@narik/common";
 import { NarikJsonService } from "./services/narik-json.service";
 import { NarikConfigService } from "./services/narik-config.service";
 import {
@@ -25,8 +26,9 @@ import {
   ValidationService,
   ShortcutService,
   FormTitleResolver,
-  CONFIG_OPTIONS
-} from "narik-infrastructure";
+  CONFIG_OPTIONS,
+  ComponentTypeResolver
+} from "@narik/infrastructure";
 import { ToastrModule } from "ngx-toastr";
 
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -168,7 +170,7 @@ export class NarikCoreModule {
     }
     AppInjector.injector = injector;
   }
-  static forRoot(config?: NarikCoreModuleConfig): ModuleWithProviders {
+  static forRoot(config?: NarikCoreModuleConfig): ModuleWithProviders<NarikCoreModule> {
     return {
       ngModule: NarikCoreModule,
       providers: [
@@ -225,6 +227,10 @@ export class NarikCoreModule {
         {
           provide: JsonService,
           useClass: (config && config.jsonService) || NarikJsonService
+        },
+        {
+          provide: ComponentTypeResolver,
+          useClass: (config && config.componentTypeResolver) || NarikComponentTypeResolver
         },
         {
           provide: FormTitleResolver,

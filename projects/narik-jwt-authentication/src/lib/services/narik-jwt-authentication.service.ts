@@ -8,16 +8,17 @@ import {
   AUTHENTICATION_LOGOUT_END_POINT,
   DataStorageService,
   LOGIN_PAGE_URL
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Inject, Injectable } from "@angular/core";
-import { NarikHttpService } from "narik-core";
-import { first } from "rxjs/internal/operators/first";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { Observable } from "rxjs/internal/Observable";
+import { NarikHttpService } from "@narik/core";
+import { first } from "rxjs/operators";
+import { ReplaySubject } from "rxjs";
+import { Observable } from "rxjs";
 import { TOKEN_STORAGE } from "../injectionTokens";
 import { Router } from "@angular/router";
 
+@Injectable()
 export class NarikJwtAuthentication extends AuthenticationService {
   private _currentUserSubject = new ReplaySubject<ApplicationUser>(1);
   private _currentUserValue: ApplicationUser;
@@ -33,11 +34,7 @@ export class NarikJwtAuthentication extends AuthenticationService {
     private authRefreshEndPoint: string,
     @Inject(LOGIN_PAGE_URL) private loginPageUrl: string,
     @Inject(TOKEN_STORAGE)
-    private tokenStorage:
-      | "memory"
-      | "localStorage"
-      | "sessionStorage"
-      | "clientStorage"
+    private tokenStorage
   ) {
     super();
     this.init();

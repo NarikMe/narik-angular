@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "add",
+  "title": "Add Narik app",
+  "type": "object",
+  "properties": {
+    "ui": {
+      "description": "The ui component of the app.",
+      "type": "string",
+      "x-prompt": {
+        "message": "What UI library would you like to use for the application?",
+        "type": "list",
+        "default": "material",
+        "enum": [
+          "material",
+          "devextreme",
+          "ng-bootstrap",
+          "nebular",
+          "primeng"
+        ],
+        "items": [
+          {
+            "value": "material",
+            "label": "Angular Material [https://material.angular.io/]"
+          },
+          {
+            "value": "devextreme",
+            "label": "DevExtreme   [https://js.devexpress.com/Overview/Angular/]"
+          },
+          {
+            "value": "ng-bootstrap",
+            "label": "ng-bootstrap   [https://ng-bootstrap.github.io/]"
+          },
+          {
+            "value": "nebular",
+            "label": "Nebular   [https://akveo.github.io/nebular/]"
+          },
+          {
+            "value": "primeng",
+            "label": "PrimeNG   [https://www.primefaces.org/primeng/]"
+          }
+        ]
+      }
+    },
+    "layout": {
+      "description": "The layout of the app.",
+      "type": "string",
+      "x-prompt": {
+        "message": "What Layout would you like to use for the application?",
+        "type": "list",
+        "default": "ngxadmin",
+        "enum": ["ngxadmin", "coreui", "architectui"],
+        "items": [
+          {
+            "value": "ngxadmin",
+            "label": "ngx-admin [https://akveo.github.io/ngx-admin/]"
+          },
+          {
+            "value": "coreui",
+            "label": "coreui   [https://coreui.io/angular/]"
+          },
+          {
+            "value": "architectui",
+            "label": "architectui   [https://angular.architectui.com/]"
+          }
+        ]
+      }
+    },
+    "rtl": {
+      "description": "The direction of the app.",
+      "type": "boolean",
+      "default": false,
+      "x-prompt": {
+        "message": "Would you like that the application to be RTL?",
+        "type": "confirmation"
+      }
+    }
+  },
+  "required": ["ui", "layout", "rtl"]
+}

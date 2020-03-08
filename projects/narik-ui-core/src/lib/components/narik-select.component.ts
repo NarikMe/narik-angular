@@ -9,11 +9,11 @@ import {
   DialogRef,
   NavigationService,
   MODULE_UI_KEY
-} from "narik-infrastructure";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { Observable } from "rxjs/internal/Observable";
-import { NarikInject } from "narik-core";
-import { filter } from "rxjs/internal/operators/filter";
+} from "@narik/infrastructure";
+import { ReplaySubject } from "rxjs";
+import { Observable } from "rxjs";
+import { NarikInject } from "@narik/core";
+import { filter } from "rxjs/operators";
 import { ActivatedRoute } from "@angular/router";
 
 export class NarikSelect extends NarikDataDisplayValueComponent

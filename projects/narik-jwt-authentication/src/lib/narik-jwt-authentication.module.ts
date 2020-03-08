@@ -6,7 +6,7 @@ import {
   AUTHENTICATION_REFRESH_END_POINT,
   AuthenticationService,
   LOGIN_PAGE_URL
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { TOKEN_STORAGE } from "./injectionTokens";
 import { NarikJwtAuthentication } from "./services/narik-jwt-authentication.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -20,7 +20,7 @@ import { AuthErrorInterceptor } from "./services/auth-error.interceptor ";
   providers: []
 })
 export class NarikJwtAuthenticationModule {
-  static forRoot(config: NarikJwtAuthenticationConfig): ModuleWithProviders {
+  static forRoot(config: NarikJwtAuthenticationConfig): ModuleWithProviders<NarikJwtAuthenticationModule> {
     return {
       ngModule: NarikJwtAuthenticationModule,
       providers: [

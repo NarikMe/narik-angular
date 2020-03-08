@@ -7,11 +7,11 @@ import {
 } from "@angular/common/http";
 
 import { NarikJwtAuthentication } from "./narik-jwt-authentication.service";
-import { throwError } from "rxjs/internal/observable/throwError";
-import { catchError } from "rxjs/internal/operators/catchError";
-import { Observable } from "rxjs/internal/Observable";
+import { throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { Router, RouterStateSnapshot } from "@angular/router";
-import { LOGIN_PAGE_URL } from "narik-infrastructure";
+import { LOGIN_PAGE_URL } from "@narik/infrastructure";
 
 @Injectable()
 export class AuthErrorInterceptor implements HttpInterceptor {

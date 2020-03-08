@@ -1,13 +1,13 @@
 import {
   EventAggregatorService
-} from "narik-infrastructure";
-import { Observable } from "rxjs/internal/Observable";
-import { Observer } from "rxjs/internal/types";
+} from "@narik/infrastructure";
+import { Observable } from "rxjs";
+import { Observer } from "rxjs";
 
 import { Inject, Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot } from "@angular/router";
-import { filter } from "rxjs/internal/operators/filter";
-import { first } from "rxjs/internal/operators/first";
+import { filter } from "rxjs/operators";
+import { first } from "rxjs/operators";
 
 @Injectable()
 export class ModuleLoadCompletelyGuard implements CanActivate {

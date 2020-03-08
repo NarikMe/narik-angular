@@ -10,20 +10,18 @@ import {
   EventEmitter
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import {
-  NARIK_DATA_DISPLAY_VALUE_INPUTS,
-  NARIK_SELECT_INPUTS,
-  NARIK_DATA_DISPLAY_VALUE_OUTPUTS
-} from "narik-ui-core";
+
 import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
 import { NarikMatSelectBase } from "../base/narik-mat-select-base";
-import { Observable } from "rxjs/internal/Observable";
-import { Subject } from "rxjs/internal/Subject";
-import { startWith } from "rxjs/internal/operators/startWith";
-import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
-import { map } from "rxjs/internal/operators/map";
+import { Observable } from "rxjs";
+import { Subject } from "rxjs";
+import { startWith } from "rxjs/operators";
+import { debounceTime } from "rxjs/operators";
+import { distinctUntilChanged } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { SPACE, ENTER } from "@angular/cdk/keycodes";
+import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_SELECT_INPUTS, NARIK_DATA_DISPLAY_VALUE_OUTPUTS } from "../input-output-items";
+
 
 @Component({
   selector: "narik-mat-select , narik-select",

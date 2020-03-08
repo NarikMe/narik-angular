@@ -3,9 +3,9 @@ import {
   ModuleManager,
   ConfigService,
   JsonService
-} from "narik-infrastructure";
-import { Observable } from "rxjs/internal/Observable";
-import { of } from "rxjs/internal/observable/of";
+} from "@narik/infrastructure";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
 import { map, first } from "rxjs/operators";
 
 import { Injector, NgModuleRef } from "@angular/core";

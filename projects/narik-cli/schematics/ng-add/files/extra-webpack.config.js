@@ -1,4 +1,4 @@
-var NarikCompilerPlugin = require("narik-webpack-tools/narik-compiler-plugin");
+var NarikCompilerPlugin = require("@narik/webpack-tools/narik-compiler-plugin");
 var TemplateResolver = require("./build-tools/template-resolver");
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: "narik-webpack-tools",
+            loader: "@narik/webpack-tools",
             options: {
               resolver: new TemplateResolver()
             }

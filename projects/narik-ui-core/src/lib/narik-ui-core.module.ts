@@ -1,8 +1,8 @@
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import {
   DIALOG_OVERLAY_CONTAINER,
   NarikInfrastructureModule
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";

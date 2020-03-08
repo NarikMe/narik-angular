@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { formatString } from "narik-common";
-import { View, ViewTypes } from "narik-infrastructure";
+import { formatString } from "@narik/common";
+import { View, ViewTypes } from "@narik/infrastructure";
 
 export abstract class ViewComponentNameResolver {
   abstract resolveComponentName(view: View): string;

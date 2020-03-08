@@ -1,5 +1,5 @@
-import { NarikInject } from "narik-core";
-import { NarikOutlet, FormTitleResolver } from "narik-infrastructure";
+import { NarikInject } from "@narik/core";
+import { NarikOutlet, FormTitleResolver } from "@narik/infrastructure";
 
 import {
   Injector,

@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input } from "@angular/core";
-import { BusyIndicator } from "narik-app-core";
+import { BusyIndicator } from "@narik/app-core";
 
 @Component({
   selector: "narik-dev-busy-indicator , narik-busy-indicator",

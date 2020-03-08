@@ -10,17 +10,17 @@ import {
   MODULE_DATA_KEY,
   MODULE_UI_KEY,
   ModuleInfo
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import {
   NarikCoreModule,
   NarikTranslateLoader,
   MEMORY_STORAGE_VALIDITY_LEN,
   NarikModule
-} from "narik-core";
-import { NarikUiCoreModule } from "narik-ui-core";
-import { NarikAppCoreModule } from "narik-app-core";
-import { NarikJwtAuthenticationModule } from "narik-jwt-authentication";
-import { NarikClientStorageModule } from "narik-client-storage";
+} from "@narik/core";
+import { NarikUiCoreModule } from "@narik/ui-core";
+import { NarikAppCoreModule } from "@narik/app-core";
+import { NarikJwtAuthenticationModule } from "@narik/jwt-authentication";
+import { NarikClientStorageModule } from "@narik/client-storage";
 
 <% if (layoutStr==="ngxadmin"){ %>
 import { NbLayoutDirection, NbThemeModule, NbIconModule } from "@nebular/theme";
@@ -29,7 +29,7 @@ import { NbEvaIconsModule } from "@nebular/eva-icons";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 import { DemoCommandProcessor } from "./services/command-processor.service";
 
 import { MainComponent } from './main/main.component';

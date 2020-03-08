@@ -4,19 +4,18 @@ import {
   ModuleEventArg,
   ModuleEventType,
   ModuleManager,
-  View,
   ConfigService
-} from "narik-infrastructure";
-import { Subject } from "rxjs/internal/Subject";
+} from "@narik/infrastructure";
+import { Subject } from "rxjs";
 
 import { Injectable, Injector } from "@angular/core";
 
 import { NarikInject } from "../decorators/narik-inject.decorator";
 import { NarikHttpService } from "./narik-http.service";
 import { NarikTranslateService } from "./narik-translation.service";
-import { tap } from "rxjs/internal/operators/tap";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { Observable } from "rxjs/internal/Observable";
+import { tap } from "rxjs/operators";
+import { ReplaySubject } from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class NarikModuleManager extends ModuleManager {
@@ -60,6 +59,7 @@ export class NarikModuleManager extends ModuleManager {
         );
       }
     }
+
     this.modulesChangedSubject.next({
       moduleEventType: isExists ? ModuleEventType.Update : ModuleEventType.Add,
       moduleKey: key,

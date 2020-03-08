@@ -1,4 +1,4 @@
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import {
   CommandInfo,
   DIALOG_REF,
@@ -10,9 +10,9 @@ import {
   NarikComponent,
   MODULE_UI_KEY,
   CommandProcessor
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { ReplaySubject } from "rxjs";
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 import {
   ChangeDetectorRef,

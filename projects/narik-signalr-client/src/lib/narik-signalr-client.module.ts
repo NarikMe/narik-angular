@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from "@angular/core";
 import { NarikSignalRConfig } from "./base/narik-signalR.config";
 import { SIGNALR_CONFIG } from "./internal-injectionTokens";
 import { NarikSignalRMessagingService } from "./services/narik-signalR-client.service";
-import { RemoteMessagingService } from "narik-infrastructure";
+import { RemoteMessagingService } from "@narik/infrastructure";
 
 @NgModule({
   imports: [],
@@ -11,7 +11,7 @@ import { RemoteMessagingService } from "narik-infrastructure";
   providers: []
 })
 export class NarikSignalRClientModule {
-  static forRoot(config: NarikSignalRConfig): ModuleWithProviders {
+  static forRoot(config: NarikSignalRConfig): ModuleWithProviders<NarikSignalRClientModule> {
     return {
       ngModule: NarikSignalRClientModule,
       providers: [

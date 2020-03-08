@@ -6,7 +6,7 @@ import {
   HostListener,
   Injector
 } from "@angular/core";
-import { NarikButton } from "narik-ui-core";
+import { NarikButton } from "@narik/ui-core";
 
 @Component({
   selector: "narik-prime-buuton , narik-button ",

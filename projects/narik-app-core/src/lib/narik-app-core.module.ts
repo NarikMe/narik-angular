@@ -1,9 +1,9 @@
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import {
   MetaDataService,
   ViewManagerService,
   EntityTypeService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
@@ -39,7 +39,9 @@ import { NarikEntityTypeService } from "./services/narik-entity-type.service";
   entryComponents: [ENTRY_COMPONENTS]
 })
 export class NarikAppCoreModule {
-  static forRoot(config?: NarikAppCoreModuleConfig): ModuleWithProviders {
+  static forRoot(
+    config?: NarikAppCoreModuleConfig
+  ): ModuleWithProviders<NarikAppCoreModule> {
     return {
       ngModule: NarikAppCoreModule,
       providers: [

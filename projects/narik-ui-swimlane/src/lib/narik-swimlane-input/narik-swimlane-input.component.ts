@@ -1,4 +1,4 @@
-import { NARIK_INPUT_INPUTS, NarikInput } from "narik-ui-core";
+import { NarikInput } from "@narik/ui-core";
 
 import {
   Component,
@@ -8,6 +8,7 @@ import {
   Input
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NARIK_INPUT_INPUTS } from "../input-output-items";
 
 @Component({
   selector: "narik-swimlane-input , narik-input",

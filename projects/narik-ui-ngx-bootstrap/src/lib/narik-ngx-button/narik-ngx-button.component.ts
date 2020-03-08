@@ -1,18 +1,16 @@
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import {
   Component,
   OnInit,
   AfterViewInit,
-  ViewChild,
   Renderer2,
-  HostListener,
   Injector
 } from "@angular/core";
 import {
   NarikButton,
   BUTTON_DEFAULT_OPTIONS,
   ButtonDefaultOptions
-} from "narik-ui-core";
+} from "@narik/ui-core";
 
 @Component({
   selector: "narik-ngx-buuton , narik-button ",

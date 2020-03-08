@@ -1,4 +1,4 @@
-import { NarikToolBar } from "narik-ui-core";
+import { NarikToolBar } from "@narik/ui-core";
 import { Component, Injector, ViewContainerRef } from "@angular/core";
 
 @Component({

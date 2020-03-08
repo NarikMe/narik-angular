@@ -1,8 +1,8 @@
-import { NarikDataTable } from "narik-ui-core";
+import { NarikDataTable } from "@narik/ui-core";
 
 import { Component, Injector, Input } from "@angular/core";
-import { NarikDataSource } from "narik-infrastructure";
-import { isArray } from "narik-common";
+import { NarikDataSource } from "@narik/infrastructure";
+import { isArray } from "@narik/common";
 import { PrimeLazyDataSource } from "../data-source/prime-lazy-data-source";
 
 @Component({

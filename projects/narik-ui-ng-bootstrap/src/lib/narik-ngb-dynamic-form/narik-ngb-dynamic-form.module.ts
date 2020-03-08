@@ -11,7 +11,7 @@ import { NarikNgbRadioGroupModule } from "../narik-ngb-radio/narik-ngb-radio.mod
 import { NarikNgbSelectModule } from "../narik-ngb-select/narik-ngb-select.module";
 import { NarikNgbCheckBoxListModule } from "./../narik-ngb-check-box-list/narik-ngb-checkbox-list.module";
 import { NarikNgbDynamicForm } from "./narik-ngb-dynamic-form.component";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({

@@ -1,6 +1,6 @@
-import { DataInfo, DataProvider, DataStorage } from "narik-infrastructure";
-import { Observable } from "rxjs/internal/Observable";
-import { of } from "rxjs/internal/observable/of";
+import { DataInfo, DataProvider, DataStorage } from "@narik/infrastructure";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
 
 import { Inject, Injectable, Injector, Optional } from "@angular/core";
 

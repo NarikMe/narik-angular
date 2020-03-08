@@ -1,11 +1,11 @@
 {
-  "name": "narik-ui-swimlane",
-  "version": "2.1.0",
+  "name": "@narik/ui-swimlane",
+  "version": "3.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@swimlane/ngx-datatable": "^15.0.1",
-    "@angular/flex-layout": "^8.0.0-beta.26"
+    "@angular/common": "~9.0.2",
+    "@angular/core": "~9.0.2",
+    "@swimlane/ngx-datatable": "^16.0.3",
+    "@angular/flex-layout": "^9.0.0-beta.29"
   },
   "dependencies": {},
   "repository": {
@@ -18,5 +18,8 @@
   "keywords": [
     "angular",
     "Narik"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  }
 }

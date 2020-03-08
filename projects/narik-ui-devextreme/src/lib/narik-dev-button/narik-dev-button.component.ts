@@ -1,4 +1,4 @@
-import { NarikInject } from "narik-core";
+import { NarikInject } from "@narik/core";
 import { UUID } from "angular2-uuid";
 import {
   Component,
@@ -12,7 +12,7 @@ import {
   NarikButton,
   BUTTON_DEFAULT_OPTIONS,
   ButtonDefaultOptions
-} from "narik-ui-core";
+} from "@narik/ui-core";
 
 @Component({
   selector: "narik-dev-buuton , narik-button ",

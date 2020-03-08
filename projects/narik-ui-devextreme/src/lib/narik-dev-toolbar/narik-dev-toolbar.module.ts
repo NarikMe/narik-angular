@@ -1,5 +1,5 @@
 import { DxTooltipModule } from "devextreme-angular/ui/tooltip";
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";

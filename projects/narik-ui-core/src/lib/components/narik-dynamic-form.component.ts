@@ -1,6 +1,6 @@
-import { Subscription } from "rxjs/internal/Subscription";
-import { NarikInject } from "narik-core";
-import { NarikViewField, EntityField } from "narik-infrastructure";
+import { Subscription } from "rxjs";
+import { NarikInject } from "@narik/core";
+import { NarikViewField, EntityField, CommandHost } from "@narik/infrastructure";
 
 import {
   Injector,
@@ -16,10 +16,10 @@ import {
 import { DynamicFormService } from "../services/dynamic-form.service";
 import { NgModel } from "@angular/forms";
 import { Observable, ReplaySubject } from "rxjs";
-import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { evalStringExpression } from "narik-common";
+import { debounceTime } from "rxjs/operators";
+import { evalStringExpression, getParnetComponent } from "@narik/common";
 import { NarikUiComponent } from "../base/narik-ui-component";
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { takeWhile } from "rxjs/operators";
 
 export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   readonly expressionPrefix = "$$$narik";
@@ -119,8 +119,8 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
         item
       ] = this.dynamicFormService.getDynamicFormComponent(item);
     }
-    if (viewContainerRef && viewContainerRef["_view"]) {
-      this.host = viewContainerRef["_view"].component;
+    if (viewContainerRef) {
+      this.host = getParnetComponent<CommandHost>(viewContainerRef);
     }
   }
 

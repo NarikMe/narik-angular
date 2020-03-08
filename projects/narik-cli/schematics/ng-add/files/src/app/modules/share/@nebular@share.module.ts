@@ -2,8 +2,8 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
-import { NarikUiNebularModule } from "narik-ui-nebular";
-import { NarikSwimlaneDataTableModule } from "narik-ui-swimlane";
+import { NarikUiNebularModule } from "@narik/ui-nebular";
+import { NarikSwimlaneDataTableModule } from "@narik/ui-swimlane";
 import { NbCardModule } from "@nebular/theme";
 import { COMPONENTS } from "./index";
 

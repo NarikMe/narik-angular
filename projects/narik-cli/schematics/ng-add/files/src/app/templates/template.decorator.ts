@@ -1,5 +1,5 @@
 import { TypeDecorator } from "@angular/core";
-import { applyBaseTemplate } from "narik-core";
+import { applyBaseTemplate } from "@narik/core";
 
 export function NarikListUi() {
   const typeDecorator: TypeDecorator = <TypeDecorator>(

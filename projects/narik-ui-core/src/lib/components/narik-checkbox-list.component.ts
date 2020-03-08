@@ -1,4 +1,4 @@
-import { isEquivalent } from "narik-common";
+import { isEquivalent } from "@narik/common";
 
 import { AfterViewInit, QueryList, ViewChildren } from "@angular/core";
 

@@ -1,11 +1,11 @@
 {
-  "name": "narik-client-storage",
-  "version": "2.1.0",
+  "name": "@narik/client-storage",
+  "version": "3.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
+    "@angular/common": "~9.0.2",
+    "@angular/core": "~9.0.2",
     "localforage": "^1.7.3",
-    "ngforage": "^4.0.3"
+    "ngforage": "^5.0.1"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,8 @@
   "keywords": [
     "angular",
     "Narik"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  }
 }

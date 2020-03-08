@@ -1,4 +1,4 @@
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 import { ButtonModule } from "primeng/button";
 import { TooltipModule } from "primeng/tooltip";
 

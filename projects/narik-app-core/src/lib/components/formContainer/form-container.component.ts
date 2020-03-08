@@ -1,8 +1,9 @@
 import {
   ViewManagerService,
   Entity,
-  MetaDataService
-} from "narik-infrastructure";
+  MetaDataService,
+  ComponentTypeResolver
+} from "@narik/infrastructure";
 
 import {
   Component,
@@ -10,10 +11,12 @@ import {
   Inject,
   OnInit,
   Type,
-  ViewChild
+  ViewChild,
+  NgModuleRef,
+  Injector
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ComponentLoaderHostDirective } from "narik-common";
+import { ComponentLoaderHostDirective, isArray, isObject } from "@narik/common";
 
 @Component({
   templateUrl: "form-container.component.html"
@@ -22,10 +25,15 @@ export class FormContainerComponent implements OnInit {
   @ViewChild(ComponentLoaderHostDirective, { static: true })
   loaderHost: ComponentLoaderHostDirective;
 
+  viewTypes: Map<string, Type<any>> = new Map<string, Type<any>>();
+
+  objects: any[] = [];
   parameters: any = {};
   constructor(
     private activateRoute: ActivatedRoute,
+    private injector: Injector,
     private componentFactoryResolver: ComponentFactoryResolver,
+    private componentTypeResolver: ComponentTypeResolver,
     private viewManager: ViewManagerService,
     private metaDataManager: MetaDataService
   ) {}
@@ -55,19 +63,13 @@ export class FormContainerComponent implements OnInit {
         entityInfo.key
       );
     }
-    const factories = Array.from(
-      this.componentFactoryResolver["_factories"].keys()
-    );
-    const factoryClass = <Type<any>>(
-      factories.find(
-        (x: any) =>
-          x.name === viewInfo.component ||
-          x["COMPONENT_NAME"] === viewInfo.component
-      )
+
+    const factoryClass = this.componentTypeResolver.resolveComponentType(
+      viewInfo.component
     );
 
     if (!factoryClass) {
-      throw new Error(`colud not find entry for "${viewInfo.component}"`);
+      throw new Error(`colud not find type for "${viewInfo.component}"`);
     }
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       factoryClass
@@ -75,7 +77,11 @@ export class FormContainerComponent implements OnInit {
     const viewContainerRef = this.loaderHost.viewContainerRef;
     viewContainerRef.clear();
 
-    const cmp = viewContainerRef.createComponent(componentFactory);
+    const cmp = viewContainerRef.createComponent(
+      componentFactory,
+      undefined,
+      this.injector
+    );
 
     if (viewInfo) {
       viewInfo.options = viewInfo.options || {};

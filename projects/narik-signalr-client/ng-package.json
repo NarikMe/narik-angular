@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/narik-signalr-client",
+  "dest": "../../dist/signalr-client",
   "lib": {
     "entryFile": "src/public_api.ts"
   }

@@ -2,7 +2,7 @@ import {
   NarikViewField,
   EntityField,
   isNarikViewField
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { Injectable, Type } from "@angular/core";
 
 export interface DynamicFormComponent {

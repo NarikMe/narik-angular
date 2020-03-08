@@ -1,9 +1,9 @@
-import { NarikCommonModule } from "narik-common";
+import { NarikCommonModule } from "@narik/common";
 
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { MatToolbarModule } from "@angular/material";
+import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";

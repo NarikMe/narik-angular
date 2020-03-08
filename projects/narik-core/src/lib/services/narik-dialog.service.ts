@@ -2,7 +2,7 @@ import {
   EntityField,
   DialogInputContent,
   ModuleManager
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import { UUID } from "angular2-uuid";
 
 import {
@@ -24,7 +24,7 @@ import {
   DIALOG_INPUT_COMPONENT,
   FieldTypes,
   DIALOG_REF
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 import {
   Injectable,
   Type,
@@ -42,10 +42,10 @@ import {
   RendererFactory2
 } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
-import { ReplaySubject } from "rxjs/internal/ReplaySubject";
-import { isString, isArray, isFunction } from "narik-common";
-import { filter } from "rxjs/internal/operators/filter";
-import { first } from "rxjs/internal/operators/first";
+import { ReplaySubject } from "rxjs";
+import { isString, isArray, isFunction } from "@narik/common";
+import { filter } from "rxjs/operators";
+import { first } from "rxjs/operators";
 import {
   NarikInject,
   NarikGlobalInject
@@ -53,7 +53,7 @@ import {
 import { ToastrService } from "ngx-toastr";
 import { TranslateService } from "@ngx-translate/core";
 import { OverlayContainer, Overlay } from "@angular/cdk/overlay";
-import { take } from "rxjs/internal/operators/take";
+import { take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -82,14 +82,6 @@ export class NarikDialogService extends DialogService {
 
   @NarikInject(RendererFactory2)
   rendererFactory: RendererFactory2;
-
-  componentFactories = new Map<
-    Type<any>,
-    {
-      factory: ComponentFactory<any>;
-      module?: NgModuleRef<any>;
-    }
-  >();
 
   constructor(
     private injector: Injector,
@@ -124,13 +116,6 @@ export class NarikDialogService extends DialogService {
     componentFactoryResolver: ComponentFactoryResolver,
     injector: Injector
   ) {
-    const factories = componentFactoryResolver["_factories"].entriesArray();
-    for (const factory of factories) {
-      this.componentFactories.set(factory.key, {
-        factory: factory.value,
-        module: moduleRef
-      });
-    }
     if (injector) {
       this.injectors.push(injector);
     }
@@ -208,7 +193,8 @@ export class NarikDialogService extends DialogService {
       dialogresult: DialogResult<T>
     ) => boolean | Promise<boolean>,
     onClose?: (dialogresult: DialogResult<T>) => void,
-    providers?: StaticProvider[]
+    providers?: StaticProvider[],
+    resolver?: ComponentFactoryResolver
   ): DialogRef<T> {
     options = options || {};
     const containers = this.createDialogContainer(options, actions, title);
@@ -228,23 +214,26 @@ export class NarikDialogService extends DialogService {
         content
       );
     } else if (content instanceof Type) {
-      let factoryModule = this.componentFactories.get(content);
-      if (!factoryModule) {
-        factoryModule = {
-          factory: this.componentFactoryResolver.resolveComponentFactory(
-            content as Type<T>
-          )
-        };
+      if (!resolver) {
+        resolver = this.componentFactoryResolver;
       }
+      const factory = resolver.resolveComponentFactory(content as Type<T>);
       providers = providers || [];
       providers.push({ provide: DIALOG_REF, useValue: result });
-      const localInjector = Injector.create(
-        providers,
-        factoryModule.module ? factoryModule.module.injector : this.injector
-      );
+      let parentInjector: Injector = this.injector;
+
+      if ((resolver as any).ngModule) {
+        parentInjector = ((resolver as any).ngModule as NgModuleRef<any>)
+          .injector;
+      }
+
+      const localInjector = Injector.create({
+        providers: providers,
+        parent: parentInjector
+      });
 
       const dialogContent = dialogContainerRef.instance.contentContainerRef.createComponent(
-        factoryModule.factory,
+        factory,
         undefined,
         localInjector
       );
@@ -473,8 +462,9 @@ export class NarikDialogService extends DialogService {
     container: ComponentRef<DialogContainer>;
   } {
     const overlayRef = this.createOverlay(options);
-    const factory = this.componentFactories.get(this.dialogContainerType)
-      .factory;
+    const factory = this.componentFactoryResolver.resolveComponentFactory(
+      this.dialogContainerType
+    );
 
     const containerRef = overlayRef.instance.contentContainerRef.createComponent(
       factory

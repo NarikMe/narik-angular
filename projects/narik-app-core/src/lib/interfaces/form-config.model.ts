@@ -3,7 +3,7 @@ import {
   IPagingInfo,
   DataInfo,
   ListRowCommand
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 export interface FormConfig {
   title?: string;

@@ -11,11 +11,12 @@ import {
   JsonService,
   CommandProcessor,
   ValidationService,
-  FormTitleResolver
-} from "narik-infrastructure";
+  FormTitleResolver,
+  ComponentTypeResolver
+} from "@narik/infrastructure";
 
 import { Type } from "@angular/core";
-import { ConfigOptions } from "narik-infrastructure";
+import { ConfigOptions } from "@narik/infrastructure";
 
 export interface NarikCoreModuleConfig {
   configFilePath?: string;
@@ -33,6 +34,7 @@ export interface NarikCoreModuleConfig {
   formTitleResolver?: Type<FormTitleResolver>;
   commandProcessor?: Type<CommandProcessor>;
   validationService?: Type<ValidationService>;
+  componentTypeResolver?: Type<ComponentTypeResolver>;
   defaultLang?: string;
   useDefaultLang?: boolean;
 }

@@ -2,7 +2,7 @@ import {
   LOGIN_PAGE_URL,
   DialogService,
   AuthorizationService
-} from "narik-infrastructure";
+} from "@narik/infrastructure";
 
 import { Inject, Injectable } from "@angular/core";
 import {
@@ -11,9 +11,9 @@ import {
   Router,
   RouterStateSnapshot
 } from "@angular/router";
-import { isArray } from "narik-common";
-import { of } from "rxjs/internal/observable/of";
-import { tap } from "rxjs/internal/operators/tap";
+import { isArray } from "@narik/common";
+import { of } from "rxjs";
+import { tap } from "rxjs/operators";
 
 @Injectable()
 export class UserIsAuthorizedGuard implements CanActivate {

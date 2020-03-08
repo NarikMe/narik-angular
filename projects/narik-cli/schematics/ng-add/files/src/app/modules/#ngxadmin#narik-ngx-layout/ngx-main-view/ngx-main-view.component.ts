@@ -1,13 +1,13 @@
-import { NarikTranslateService } from "narik-core";
-import { NarikComponent } from "narik-infrastructure";
-import { filter } from "rxjs/internal/operators/filter";
-import { map } from "rxjs/internal/operators/map";
+import { NarikTranslateService } from "@narik/core";
+import { NarikComponent } from "@narik/infrastructure";
+import { filter } from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 import { Component, Input, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { NbMenuItem } from "@nebular/theme";
-import { takeWhile } from "rxjs/internal/operators/takeWhile";
+import { takeWhile } from "rxjs/operators";
 
 @Component({
   selector: "main-view",

@@ -1,4 +1,4 @@
-import { Observable } from "rxjs/internal/Observable";
+import { Observable } from "rxjs";
 
 import { DataInfo } from "../interfaces/data-info.model";
 
