@@ -3,7 +3,7 @@
 Narik is a framework that helps you create your angular application more creatively in less time. You will find Narik interesting in many different aspects, once you use it.  
 
 
-Narik version 3 is ready. Compatible with Angular 9 .
+**Narik version 3 is ready. Compatible with Angular 9.**
 
 [Migration From Version 2 to Version 3
 ](https://github.com/NarikMe/narik-angular/wiki/Migration-From-Version-2--to-Version-3)  
