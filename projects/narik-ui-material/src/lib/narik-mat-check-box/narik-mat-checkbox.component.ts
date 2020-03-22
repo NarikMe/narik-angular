@@ -24,13 +24,13 @@ export class NarikMatCheckBox extends NarikCheckBox {
   _cssClass: string;
   _labelPosition: "before" | "after";
   _indeterminate: boolean;
-  _color: "primary" | "warn";
+  _color: "primary" | "warn" | "accent" = "primary";
 
   @Input()
-  set color(value: "primary" | "warn") {
+  set color(value: "primary" | "warn" | "accent") {
     this._color = value;
   }
-  get color(): "primary" | "warn" {
+  get color(): "primary" | "warn" | "accent" {
     return this._color;
   }
 
