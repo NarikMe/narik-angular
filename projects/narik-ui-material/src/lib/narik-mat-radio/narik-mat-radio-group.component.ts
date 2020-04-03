@@ -17,6 +17,7 @@ import { NARIK_DATA_DISPLAY_VALUE_INPUTS } from "../input-output-items";
   ]
 })
 export class NarikMatRadioGroup extends NarikRadioGroup {
+  displayErrorMode = "icon";
   _cssClass: string;
   itemsData: any[] = [];
   _layoutDirection: "vertical" | "horizontal" = "vertical";

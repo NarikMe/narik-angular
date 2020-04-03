@@ -74,8 +74,9 @@ export class NarikMatDatePicker extends NarikMatDatePickerBase {
     this.textValue = value;
   }
 
-  onBlur() {
+  onBlur(event) {
     this.onModelChange(this.value);
+    super.onBlur(event);
   }
 
   protected valueChanged(newValue, oldValue) {

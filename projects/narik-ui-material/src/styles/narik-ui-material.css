@@ -147,3 +147,21 @@
   padding: 0 5px !important;
 }
 
+.narik-mat-form-field-invalid .mat-input-element {
+  caret-color: #f44336;
+}
+
+.mat-form-field.narik-mat-form-field-invalid .mat-form-field-label {
+  color: #f44336;
+}
+
+.mat-form-field.narik-mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+  color: #f44336;
+}
+.mat-form-field.narik-mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.narik-mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background-color: #f44336;
+}
+.tooltip-red {
+  background: #b71c1c;
+}
+

@@ -8,6 +8,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NarikMatDatePicker } from "./narik-mat-date-picker.component";
 import { TextMaskModule } from "angular2-text-mask";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { TextMaskModule } from "angular2-text-mask";
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTooltipModule,
     TextMaskModule
   ],
   declarations: [NarikMatDatePicker],

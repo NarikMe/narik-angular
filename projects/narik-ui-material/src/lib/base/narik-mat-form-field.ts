@@ -1,3 +1,5 @@
+import { MetaDataService, MODULE_UI_KEY } from "@narik/infrastructure";
+import { NarikInject } from "@narik/core";
 import { FORM_ITEM_DEFAULT_CLASS } from "./../injectionTokens";
 import { Input, Injector } from "@angular/core";
 import {
@@ -20,6 +22,8 @@ export class NarikMatFormFieldInput {
   _suffixContent: any;
   _prefixContent: any;
   _prefixIcon: any;
+
+  displayErrorMode: "hint" | "icon" | "none" = "icon";
 
   @Input()
   set prefixIcon(value: any) {
@@ -116,6 +120,19 @@ export class NarikMatFormFieldInput {
       _defaultLabelOption && _defaultLabelOption.float
         ? _defaultLabelOption.float
         : "auto";
+
+    const metaDataService = injector.get(MetaDataService, undefined);
+    const containerModuleKey = injector.get(MODULE_UI_KEY, "narik");
+
+    const dfOptions = metaDataService.getInformation<any>(
+      "uiDefaultOptions",
+      containerModuleKey,
+      "form-field"
+    );
+
+    if (dfOptions && dfOptions.value && dfOptions.value.displayErrorMode) {
+      this.displayErrorMode = dfOptions.value.displayErrorMode;
+    }
   }
 }
 

@@ -6,6 +6,7 @@ import { NarikMatInput } from "./narik-mat-input.component";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     FormsModule,
     MatInputModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTooltipModule
   ],
   declarations: [NarikMatInput],
   exports: [NarikMatInput],

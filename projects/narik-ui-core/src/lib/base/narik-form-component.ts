@@ -1,3 +1,5 @@
+import { TranslateService } from "@ngx-translate/core";
+import { formatString } from "@narik/common";
 import { UUID } from "angular2-uuid";
 import { MetaDataService, MODULE_UI_KEY } from "@narik/infrastructure";
 
@@ -6,9 +8,16 @@ import {
   Input,
   Output,
   HostBinding,
-  Injector
+  Injector,
+  ViewChild,
+  AfterViewInit
 } from "@angular/core";
-import { ControlValueAccessor } from "@angular/forms";
+import {
+  ControlValueAccessor,
+  FormControl,
+  NgModel,
+  FormControlName
+} from "@angular/forms";
 import { NarikInject } from "@narik/core";
 import {
   NarikUiComponent,
@@ -16,7 +25,7 @@ import {
 } from "./narik-ui-component";
 
 export class NarikFormComponent extends NarikUiComponent
-  implements ControlValueAccessor {
+  implements ControlValueAccessor, AfterViewInit {
   _value: any;
   _id: string;
   identifier: string;
@@ -26,11 +35,29 @@ export class NarikFormComponent extends NarikUiComponent
   _placeHolder: string;
   _disabled: any;
   _required: boolean;
-
+  errors: string;
   uiKey: string;
+
+  @NarikInject(NgModel, undefined)
+  ngModel: NgModel;
+
+  @ViewChild(FormControlName, { static: false })
+  formControl: FormControlName;
+
+  get control(): FormControl {
+    if (this.formControl) {
+      return this.formControl.control;
+    } else if (this.ngModel) {
+      return this.ngModel.control;
+    }
+    return undefined;
+  }
 
   @NarikInject(MetaDataService)
   metaDataService: MetaDataService;
+
+  @NarikInject(TranslateService, undefined)
+  translateService: TranslateService;
 
   @NarikInject(MODULE_UI_KEY)
   moduleUiKey: string;
@@ -40,6 +67,10 @@ export class NarikFormComponent extends NarikUiComponent
 
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
+
+  onBlur(event) {
+    this.onModelTouched();
+  }
 
   @Input()
   set placeHolder(value: string) {
@@ -118,6 +149,23 @@ export class NarikFormComponent extends NarikUiComponent
     super(injector);
     this.createIdentifier();
   }
+
+  ngAfterViewInit() {
+    if (this.control) {
+      const originalMarkAsTouched = this.control.markAsTouched.bind(
+        this.control
+      );
+      this.control.markAsTouched = opts => {
+        originalMarkAsTouched(opts);
+        this.setValidationErrors();
+      };
+
+      this.control.statusChanges.subscribe(() => {
+        this.setValidationErrors();
+      });
+    }
+  }
+
   createIdentifier() {
     if (!this._id) {
       this._id = "input" + UUID.UUID();
@@ -141,6 +189,36 @@ export class NarikFormComponent extends NarikUiComponent
     return value;
   }
   protected valueChanged(newValue, oldValue) {}
+
+  setValidationErrors() {
+    if (this.control) {
+      const errors = [];
+      if (!this.control.valid && this.control.touched) {
+        errors.push(...this.getMessage());
+      }
+      this.errors = errors[0] ? errors.join() : undefined;
+    }
+  }
+
+  getMessage(): string[] {
+    const errors = this.control.errors;
+
+    const result = [];
+    for (const error in errors) {
+      if (errors.hasOwnProperty(error)) {
+        const parameters: any[] = Object.entries(errors[error]).map(x => x[1]);
+        result.push(
+          formatString(
+            this.translateService.instant("errors." + error),
+            this.label,
+            ...parameters
+          )
+        );
+      }
+    }
+
+    return result;
+  }
 }
 
 export const NARIK_UI_FORM_INPUTS: string[] = [

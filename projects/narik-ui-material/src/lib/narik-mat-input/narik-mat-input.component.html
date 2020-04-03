@@ -1,16 +1,50 @@
-<mat-form-field [ngClass]="cssClass" [floatLabel]='floatLabel' [appearance]='appearance' [hintLabel]='hintLabel'>
-  <mat-label *ngIf="label">{{label }}</mat-label>
-  <input [ngClass]="inputCssClass" *ngIf='type!=="textArea"' [disabled]="disabled" [required]="required" matInput placeholder="{{placeHolder }}" [name]="name"
-    [(ngModel)]="value" [type]='type'>
-  <textarea  [ngClass]="inputCssClass" cdkTextareaAutosize [disabled]="disabled" *ngIf='type==="textArea"' [required]="required" matInput placeholder="{{placeHolder }}"
-  [name]="name"
-    [(ngModel)]="value"></textarea>
-  <mat-icon *ngIf='suffixIcon' matSuffix>{{suffixIcon}}</mat-icon>
-  <mat-icon *ngIf='prefixIcon' matPrefix>{{prefixIcon}}</mat-icon>
-  <mat-hint *ngIf='startHint'>{{startHint}}</mat-hint>
-  <mat-hint *ngIf='endHint' align="end">{{endHint}}</mat-hint>
+<mat-form-field
+  [class]="cssClass"
+  [floatLabel]="floatLabel"
+  [appearance]="appearance"
+  [hintLabel]="hintLabel"
+  [ngClass]="{ 'narik-mat-form-field-invalid': !!errors }"
+>
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <input
+    [ngClass]="inputCssClass"
+    *ngIf="type !== 'textArea'"
+    [disabled]="disabled"
+    [required]="required"
+    matInput
+    placeholder="{{ placeHolder }}"
+    [name]="name"
+    [(ngModel)]="value"
+    [type]="type"
+    (blur)="onBlur($event)"
+  />
+  <textarea
+    [ngClass]="inputCssClass"
+    cdkTextareaAutosize
+    [disabled]="disabled"
+    *ngIf="type === 'textArea'"
+    [required]="required"
+    matInput
+    placeholder="{{ placeHolder }}"
+    [name]="name"
+    [(ngModel)]="value"
+  ></textarea>
+  <mat-icon *ngIf="suffixIcon" matSuffix>{{ suffixIcon }}</mat-icon>
+  <mat-icon *ngIf="prefixIcon" matPrefix>{{ prefixIcon }}</mat-icon>
+  <mat-hint *ngIf="startHint"> </mat-hint>
+  <mat-hint *ngIf="!!errors && displayErrorMode === 'hint'">
+    <span class="mat-error">{{ errors }}</span>
+  </mat-hint>
+  <mat-icon
+    *ngIf="!!errors && displayErrorMode === 'icon'"
+    color="error"
+    matTooltip="{{ errors }}"
+    matSuffix
+    matTooltipClass="tooltip-red"
+    >error_outline</mat-icon
+  >
+  <mat-hint *ngIf="endHint" align="end">{{ endHint }}</mat-hint>
 
-  <span *ngIf='prefixContent' matPrefix>{{prefixContent}}</span>
-  <span *ngIf='suffixContent' matSuffix>{{suffixContent}}</span>
-
+  <span *ngIf="prefixContent" matPrefix>{{ prefixContent }}</span>
+  <span *ngIf="suffixContent" matSuffix>{{ suffixContent }}</span>
 </mat-form-field>

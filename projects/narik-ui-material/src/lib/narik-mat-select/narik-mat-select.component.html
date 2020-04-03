@@ -1,8 +1,9 @@
 <mat-form-field
-  [ngClass]="cssClass"
+  [class]="cssClass"
   [floatLabel]="floatLabel"
   [appearance]="appearance"
   [hintLabel]="hintLabel"
+  [ngClass]="{ 'narik-mat-form-field-invalid': !!errors }"
 >
   <mat-label *ngIf="label">{{ label }}</mat-label>
   <mat-select
@@ -23,11 +24,12 @@
           (keydown)="onKeydown($event)"
           (keyup)="keyUp($event)"
           type="text"
+          (blur)="onBlur($event)"
         />
       </div>
     </ng-container>
     <mat-option
-      *ngFor="let item of (filteredData | async)"
+      *ngFor="let item of filteredData | async"
       [value]="item[valueField]"
     >
       {{ item[displayField] }}
@@ -62,9 +64,26 @@
     >clear</mat-icon
   >
 
-  <mat-icon (click)="iconClick('suffix')" *ngIf="suffixIcon" matSuffix>{{ suffixIcon }}</mat-icon>
-  <mat-icon (click)="iconClick('prefix')" *ngIf="prefixIcon" matPrefix>{{ prefixIcon }}</mat-icon>
-  <mat-hint *ngIf="startHint">{{ startHint }}</mat-hint>
+  <mat-icon (click)="iconClick('suffix')" *ngIf="suffixIcon" matSuffix>{{
+    suffixIcon
+  }}</mat-icon>
+  <mat-icon (click)="iconClick('prefix')" *ngIf="prefixIcon" matPrefix>{{
+    prefixIcon
+  }}</mat-icon>
+  <mat-hint *ngIf="startHint">
+    {{ startHint }}
+  </mat-hint>
+  <mat-hint *ngIf="!!errors && displayErrorMode === 'hint'">
+    <span class="mat-error">{{ errors }}</span>
+  </mat-hint>
+  <mat-icon
+    *ngIf="!!errors && displayErrorMode === 'icon'"
+    color="error"
+    matTooltip="{{ errors }}"
+    matSuffix
+    matTooltipClass="tooltip-red"
+    >error_outline</mat-icon
+  >
   <mat-hint *ngIf="endHint" align="end">{{ endHint }}</mat-hint>
 
   <span *ngIf="prefixContent" matPrefix>{{ prefixContent }}</span>

@@ -1,7 +1,6 @@
 import { NarikMatAutoComplete } from "./narik-mat-auto-complete.component";
 import { NgModule } from "@angular/core";
 
-
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 import { MatIconModule } from "@angular/material/icon";
@@ -11,6 +10,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   imports: [
@@ -20,7 +20,8 @@ import { FormsModule } from "@angular/forms";
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   declarations: [NarikMatAutoComplete],
   exports: [NarikMatAutoComplete],

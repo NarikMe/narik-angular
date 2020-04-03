@@ -12,6 +12,7 @@ export class NarikCheckBoxList extends NarikDataDisplayValueComponent
   @ViewChildren(NarikCheckBox) checkBoxItems!: QueryList<NarikCheckBox>;
 
   ngAfterViewInit() {
+    super.ngAfterViewInit();
     if (this.value) {
       this.applyValueToItems();
     }
