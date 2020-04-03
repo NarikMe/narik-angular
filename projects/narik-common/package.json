@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@angular/common": "~9.0.2",
     "@angular/core": "~9.0.2",
-    "data-adapter": "^0.2.3"
+    "data-adapter": "~0.2.3",
+    "@angular/cdk":"~9.1.0"
   },
   "repository": {
     "type": "git",

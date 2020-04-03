@@ -35,9 +35,7 @@ export class NarikParameterResolver implements ParameterResolver {
         return value;
       }
       if (this.route.snapshot.queryParams) {
-        value =
-          this.route.snapshot.queryParams[key] ||
-          this.route.snapshot.queryParams[key];
+        value = this.route.snapshot.queryParams[key];
         if (+value) {
           return +value;
         }
