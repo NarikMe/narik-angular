@@ -41,7 +41,7 @@ export class CoreUiMainViewComponent extends NarikComponent
     return this._menuItems;
   }
 
-  public sidebarMinimized = true;
+  public sidebarMinimized = false;
   private changes: MutationObserver;
   public element: HTMLElement;
   constructor(
@@ -111,6 +111,11 @@ export class CoreUiMainViewComponent extends NarikComponent
 
   changePassword() {}
   logout() {}
+
+  toggleMinimize(e) {
+    this.sidebarMinimized = e;
+  }
+
   ngOnDestroy(): void {
     this.changes.disconnect();
     super.ngOnDestroy();

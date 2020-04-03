@@ -49,7 +49,7 @@
         "message": "What Layout would you like to use for the application?",
         "type": "list",
         "default": "ngxadmin",
-        "enum": ["ngxadmin", "coreui", "architectui"],
+        "enum": ["ngxadmin", "coreui"],
         "items": [
           {
             "value": "ngxadmin",
@@ -58,10 +58,6 @@
           {
             "value": "coreui",
             "label": "coreui   [https://coreui.io/angular/]"
-          },
-          {
-            "value": "architectui",
-            "label": "architectui   [https://angular.architectui.com/]"
           }
         ]
       }

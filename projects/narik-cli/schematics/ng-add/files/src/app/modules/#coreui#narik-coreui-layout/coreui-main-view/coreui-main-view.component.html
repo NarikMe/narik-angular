@@ -1,7 +1,21 @@
-<app-header [navbarBrandRouterLink]="['/dashboard']" [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/images/brand/logo.png', width: 89, height: 25, alt: 'CoreUI Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/images/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
-  [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
+<app-header
+  [navbarBrandRouterLink]="['/dashboard']"
+  [fixed]="true"
+  [navbarBrandFull]="{
+    src: 'assets/images/brand/logo.png',
+    width: 89,
+    height: 25,
+    alt: 'CoreUI Logo'
+  }"
+  [navbarBrandMinimized]="{
+    src: 'assets/images/brand/sygnet.svg',
+    width: 30,
+    height: 30,
+    alt: 'CoreUI Logo'
+  }"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="'lg'"
+>
   <ul class="nav navbar-nav d-md-down-none">
     <!-- <li class="nav-item px-3">
       <a class="nav-link" href="#">Dashboard</a>
@@ -15,7 +29,10 @@
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item d-md-down-none">
-      <a class="nav-link" href="#"><i class="fa fa-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
+      <a class="nav-link" href="#"
+        ><i class="fa fa-bell"></i
+        ><span class="badge badge-pill badge-danger">5</span></a
+      >
     </li>
     <li class="nav-item d-md-down-none">
       <a class="nav-link" href="#"><i class="fa fa-list"></i></a>
@@ -24,23 +41,47 @@
       <a class="nav-link" href="#"><i class="fa fa-map-marker"></i></a>
     </li>
     <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle
-        (click)="false">
-        <img src="assets/images/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com" />
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        dropdownToggle
+        (click)="(false)"
+      >
+        <img
+          src="assets/images/avatars/6.jpg"
+          class="img-avatar"
+          alt="admin@bootstrapmaster.com"
+        />
       </a>
-      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+      <div
+        class="dropdown-menu dropdown-menu-right"
+        *dropdownMenu
+        aria-labelledby="simple-dropdown"
+      >
         <div class="dropdown-header text-center"><strong>Account</strong></div>
-        <a class="dropdown-item" (click)="changePassword()"><i class="fa fa-key"></i>
-          {{"login.change_Pass" | translate}}</a>
+        <a class="dropdown-item" (click)="changePassword()"
+          ><i class="fa fa-key"></i> {{ "login.change_Pass" | translate }}</a
+        >
         <div class="divider"></div>
-        <a class="dropdown-item" (click)="logout()"><i class="fa fa-lock"></i> {{"login.logout" |  translate}}</a>
+        <a class="dropdown-item" (click)="logout()"
+          ><i class="fa fa-lock"></i> {{ "login.logout" | translate }}</a
+        >
       </div>
     </li>
   </ul>
 </app-header>
 <div class="app-body">
-  <app-sidebar [fixed]="true" [display]="'lg'">
-    <app-sidebar-nav [navItems]="menuItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized"
+  (minimizedChange)="toggleMinimize($event)"
+  >
+    <app-sidebar-nav
+      [navItems]="menuItems"
+      [perfectScrollbar]
+      [disabled]="appSidebar.minimized"
+    ></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
   <!-- Main content -->
@@ -49,9 +90,8 @@
 
     <div class="container-fluid pt-4">
       <router-outlet></router-outlet>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </main>
-  <app-aside [fixed]="true" [display]="false">
-
-  </app-aside>
+  <app-aside [fixed]="true" [display]="false"> </app-aside>
 </div>

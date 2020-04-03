@@ -45,7 +45,7 @@ const layoutStyles: any = {
     "node_modules/typeface-exo/index.css"
   ],
   architectui: [],
-  coreui: ["node_modules/@coreui/icons/css/coreui-icons.css"]
+  coreui: ["node_modules/@coreui/icons/css/free.css"]
 };
 const commonStyles = [
   "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
@@ -270,7 +270,7 @@ const layoutDependency: any = {
     },
     {
       name: "@coreui/coreui",
-      version: "^3.0.0"
+      version: "^2.1.16"
     },
     {
       name: "@coreui/icons",
