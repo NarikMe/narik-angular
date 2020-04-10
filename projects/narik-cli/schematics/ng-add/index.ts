@@ -103,7 +103,7 @@ const rtlUiStyles: any = {
 const devDependencies: any[] = [
   {
     name: "@angular-builders/custom-webpack",
-    version: "~9.0.0"
+    version: "^9.1.0"
   },
   {
     name: "cheerio",
@@ -111,22 +111,22 @@ const devDependencies: any[] = [
   },
   {
     name: "@narik/webpack-tools",
-    version: "~3.0.1"
+    version: "^3.1.0"
   }
 ];
 const commonDependencies: any[] = [
   {
     name: "@fortawesome/fontawesome-free",
-    version: "^5.12.1"
+    version: "^5.13.0"
   },
   {
     name: "@angular/cdk",
-    version: "^9.1.0"
+    version: "^9.2.0"
   },
 
   {
     name: "@ngx-translate/core",
-    version: "^12.1.1"
+    version: "^12.1.2"
   },
   {
     name: "angular2-text-mask",
@@ -158,15 +158,15 @@ const commonDependencies: any[] = [
   },
   {
     name: "ngx-toastr",
-    version: "^12.0.0"
+    version: "^12.0.1"
   },
   {
     name: "ngx-custom-validators",
-    version: "^9.0.0"
+    version: "^9.1.0"
   },
   {
     name: "class-validator",
-    version: "^0.11.0"
+    version: "^0.11.1"
   },
   {
     name: "data-adapter",
@@ -174,31 +174,31 @@ const commonDependencies: any[] = [
   },
   {
     name: "@narik/infrastructure",
-    version: "^3.0.1"
+    version: "^3.1.0"
   },
   {
     name: "@narik/common",
-    version: "^3.0.1"
+    version: "^3.1.0"
   },
   {
     name: "@narik/core",
-    version: "^3.0.1"
+    version: "^3.1.0"
   },
   {
     name: "@narik/app-core",
-    version: "^3.0.1"
+    version: "^3.1.0"
   },
   {
     name: "@narik/ui-core",
-    version: "^3.0.0"
+    version: "^3.1.0"
   },
   {
     name: "@narik/jwt-authentication",
-    version: "^3.0.0"
+    version: "^3.1.0"
   },
   {
     name: "@narik/client-storage",
-    version: "^3.0.0"
+    version: "^3.1.0"
   }
 ];
 
@@ -209,15 +209,15 @@ const layoutDependency: any = {
   ngxadmin: [
     {
       name: "@nebular/theme",
-      version: "^4.6.0"
+      version: "^5.0.0"
     },
     {
       name: "eva-icons",
-      version: "^1.1.2"
+      version: "^1.1.3"
     },
     {
       name: "@nebular/eva-icons",
-      version: "^4.6.0"
+      version: "^5.0.0"
     },
     {
       name: "roboto-fontface",
@@ -229,7 +229,7 @@ const layoutDependency: any = {
     }
   ],
   architectui: [
-    { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.0" },
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.2" },
     {
       name: "ngx-perfect-scrollbar",
       version: "^9.0.0"
@@ -282,7 +282,7 @@ const layoutDependency: any = {
     },
     {
       name: "ngx-bootstrap",
-      version: "^5.3.2"
+      version: "^5.6.1"
     }
   ]
 };
@@ -290,25 +290,25 @@ const uiDependency: any = {
   material: [
     {
       name: "@narik/ui-material",
-      version: "^3.0.0"
+      version: "^3.1.0"
     },
     {
       name: "@angular/material",
-      version: "^9.1.0"
+      version: "^9.2.0"
     }
   ],
   devextreme: [
     {
       name: "@narik/ui-devextreme",
-      version: "^3.0.0"
+      version: "^3.1.0"
     },
     {
       name: "devextreme",
-      version: "^19.2.6"
+      version: "^19.2.7"
     },
     {
       name: "devextreme-angular",
-      version: "^19.2.6"
+      version: "^19.2.7"
     },
     {
       name: "stream",
@@ -316,24 +316,24 @@ const uiDependency: any = {
     }
   ],
   "ng-bootstrap": [
-    { name: "@narik/ui-ng-bootstrap", version: "^3.0.0" },
-    { name: "@narik/ui-swimlane", version: "^3.0.0" },
+    { name: "@narik/ui-ng-bootstrap", version: "^3.1.0" },
+    { name: "@narik/ui-swimlane", version: "^3.1.0" },
     { name: "@swimlane/ngx-datatable", version: "^16.0.3" },
-    { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.0" },
+    { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.2" },
     { name: "@angular/localize", version: "^9.0.2" }
   ],
   nebular: [
-    { name: "@narik/ui-nebular", version: "^3.0.0" },
-    { name: "@narik/ui-swimlane", version: "^3.0.0" },
+    { name: "@narik/ui-nebular", version: "^3.1.0" },
+    { name: "@narik/ui-swimlane", version: "^3.1.0" },
     { name: "@swimlane/ngx-datatable", version: "^16.0.3" },
-    { name: "@nebular/theme", version: "^4.6.0" },
-    { name: "@nebular/date-fns", version: "^4.6.0" },
+    { name: "@nebular/theme", version: "^5.0.0" },
+    { name: "@nebular/date-fns", version: "^5.0.0" },
     { name: "date-fns", version: "^2.10.0" }
   ],
   primeng: [
-    { name: "primeng", version: "^9.0.0" },
+    { name: "primeng", version: "^9.0.5" },
     { name: "primeicons", version: "^2.0.0" },
-    { name: "@narik/ui-primeng", version: "^3.0.0" }
+    { name: "@narik/ui-primeng", version: "^3.1.0" }
   ]
 };
 
