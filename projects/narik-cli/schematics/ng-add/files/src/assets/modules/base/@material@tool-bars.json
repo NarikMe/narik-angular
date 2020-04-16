@@ -1,6 +1,6 @@
 {
-  "detailToolBar": {
-    "key": "detailToolBar",
+  "editToolBar": {
+    "key": "editToolBar",
     "items": [{
         "key": "new",
         "icon": "add",

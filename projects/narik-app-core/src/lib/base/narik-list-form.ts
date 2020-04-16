@@ -237,7 +237,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
     }
   }
 
-  protected getDetailViewKey(entity: TE): string {
+  protected getEditViewKey(entity: TE): string {
     return this.config.entityKey;
   }
   public editEntity(entity: TE) {
@@ -247,7 +247,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
     this.newOrEditEntity(entity);
   }
   protected newOrEditEntity(selectedEntity?: TE) {
-    const navigationType = this.getDetailNavigationProvider();
+    const navigationType = this.getEditNavigationProvider();
 
     if (this.config.readOnly) {
       return;
@@ -266,7 +266,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
       .navigate(
         this.navigationService.createNavigationCommand(
           this.defaultNavigationProvider,
-          this.getDetailViewKey(selectedEntity)
+          this.getEditViewKey(selectedEntity)
         ),
         navigationType,
         {
@@ -347,19 +347,19 @@ export abstract class NarikListForm<TE extends NarikEntity>
         break;
     }
   }
-  protected getDetailNavigationProvider() {
+  protected getEditNavigationProvider() {
     if (
       this.config &&
       this.config.options &&
-      this.config.options.detailNavigationProvider
+      this.config.options.editNavigationProvider
     ) {
-      return this.config.options.detailNavigationProvider === "dialog"
+      return this.config.options.editNavigationProvider === "dialog"
         ? "dialog"
         : this.defaultNavigationProvider;
     }
 
     if (this.viewOptions) {
-      return this.viewOptions.detailNavigationProvider === "dialog"
+      return this.viewOptions.editNavigationProvider === "dialog"
         ? "dialog"
         : this.defaultNavigationProvider;
     }

@@ -11,8 +11,8 @@ export class NarikViewComponentNameResolver extends ViewComponentNameResolver {
   resolveComponentName(view: View): string {
     if (!view.component) {
       switch (view.viewType) {
-        case ViewTypes.Detail:
-          return "GeneralDetailComponent";
+        case ViewTypes.Edit:
+          return "GeneralEditComponent";
         case ViewTypes.List:
           return "GeneralListComponent";
         case ViewTypes.General:
@@ -22,8 +22,8 @@ export class NarikViewComponentNameResolver extends ViewComponentNameResolver {
       }
     } else if (view.component === "*") {
       switch (view.viewType) {
-        case ViewTypes.Detail:
-          return formatString("{0}DetailComponent", view.entity);
+        case ViewTypes.Edit:
+          return formatString("{0}EditComponent", view.entity);
         case ViewTypes.List:
           return formatString("{0}ListComponent", view.entity);
         case ViewTypes.General:

@@ -46,7 +46,7 @@ export interface View {
   entity?: string;
 
   /**
-   * Type of view like `List` , `Detail` and ...
+   * Type of view like `List` , `Edit` and ...
    */
   viewType?: ViewTypes;
 
@@ -152,10 +152,10 @@ export interface EntityField {
   required?: boolean;
   fieldType?: FieldTypes;
   showInList?: boolean;
-  showInDetail?: boolean;
+  showInEdit?: boolean;
   order?: number;
   orderInList?: number;
-  orderInDetail?: number;
+  orderInEdit?: number;
   dataInfo?: DataInfo;
   options?: any;
   hideExpr?: string;
@@ -179,7 +179,7 @@ export abstract class MetaData {
  */
 export enum ViewTypes {
   List = "List",
-  Detail = "Detail",
+  Edit = "Edit",
   General = "General"
 }
 

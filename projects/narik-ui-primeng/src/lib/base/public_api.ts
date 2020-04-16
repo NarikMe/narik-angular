@@ -1,3 +1,3 @@
 export * from "./narik-prime-list-form";
-export * from "./narik-prime-detail-form";
+export * from "./narik-prime-edit-form";
 

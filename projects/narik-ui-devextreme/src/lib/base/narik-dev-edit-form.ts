@@ -1,9 +1,9 @@
 import { NarikEntity } from "@narik/infrastructure";
-import { NarikDetailForm } from "@narik/app-core";
+import { NarikEditForm } from "@narik/app-core";
 import { Injector } from "@angular/core";
-export class NarikUiDetailForm<
+export class NarikUiEditForm<
   T extends NarikEntity
-> extends NarikDetailForm<T> {
+> extends NarikEditForm<T> {
   constructor(injector: Injector) {
     super(injector);
   }

@@ -6,10 +6,10 @@ class TemplateResolver {
           template: "",
           templateUrl: "./src/app/templates/list-template.html"
         };
-      case "NarikDetailUi":
+      case "NarikEditUi":
         return {
           template: "",
-          templateUrl: "./src/app/templates/detail-template.html"
+          templateUrl: "./src/app/templates/edit-template.html"
         };
 
       default:

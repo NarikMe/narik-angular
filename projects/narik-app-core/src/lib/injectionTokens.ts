@@ -3,13 +3,13 @@ import { ParameterResolver, IPagingInfo } from "@narik/infrastructure";
 import { InjectionToken } from "@angular/core";
 
 import {
-  DetailFormViewOption,
+  EditFormViewOption,
   ListFormViewOption
 } from "./interfaces/form-view-option.model";
 
-export const DETAIL_DEFAULT_VIEW_OPTION = new InjectionToken<
-  DetailFormViewOption
->("DetailDefaultOption");
+export const EDIT_DEFAULT_VIEW_OPTION = new InjectionToken<
+  EditFormViewOption
+>("EditDefaultOption");
 export const LIST_DEFAULT_VIEW_OPTION = new InjectionToken<ListFormViewOption>(
   "ListDefaultOption"
 );

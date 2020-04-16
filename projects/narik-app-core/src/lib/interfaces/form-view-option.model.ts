@@ -2,11 +2,11 @@ export interface FormViewOption {
   id?: number;
 }
 
-export interface DetailFormViewOption extends FormViewOption {
+export interface EditFormViewOption extends FormViewOption {
   ddd?: string;
 }
 
-export const DefaultDetailViewOption: DetailFormViewOption = {};
+export const DefaultEditViewOption: EditFormViewOption = {};
 export interface ListFormViewOption extends FormViewOption {
   ddd?: string;
 }

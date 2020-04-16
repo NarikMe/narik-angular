@@ -55,7 +55,7 @@
     "views": [
       {
         "key": "branch",
-        "viewType": "Detail",
+        "viewType": "Edit",
         "entity": "branch"
       },
       {
@@ -123,6 +123,6 @@
     ]
     <% } %>
 
-    ,"toolbars": ["$$toolbar.detailToolBar", "$$toolbar.listToolBar"]
+    ,"toolbars": ["$$toolbar.editToolBar", "$$toolbar.listToolBar"]
   }
 }

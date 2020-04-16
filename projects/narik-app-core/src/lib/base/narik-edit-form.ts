@@ -11,9 +11,9 @@ import { Observable } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { Subscription } from "rxjs";
 import { finalize, takeWhile } from "rxjs/operators";
-import { DETAIL_DEFAULT_VIEW_OPTION } from "../injectionTokens";
-import { DetailFormConfig } from "../interfaces/form-config.model";
-import { DefaultDetailViewOption, DetailFormViewOption } from "../interfaces/form-view-option.model";
+import { EDIT_DEFAULT_VIEW_OPTION } from "../injectionTokens";
+import { EditFormConfig } from "../interfaces/form-config.model";
+import { DefaultEditViewOption, EditFormViewOption } from "../interfaces/form-view-option.model";
 import { ServerResponse } from "../interfaces/server-response.model";
 import { StringConstants } from "../util/constants";
 import { NarikGeneralForm } from "./narik-general-form";
@@ -23,9 +23,9 @@ import { NarikGeneralForm } from "./narik-general-form";
 
 
 /**
- * Narik detail form
+ * Narik edit form
  */
-export abstract class NarikDetailForm<TE extends NarikEntity>
+export abstract class NarikEditForm<TE extends NarikEntity>
   extends NarikGeneralForm<TE>
   implements OnInit {
   private _models = new Map<string, { model: NgModel; sub: Subscription }>();
@@ -35,8 +35,8 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
 
   protected entityKeyField: string;
 
-  @NarikInject(DETAIL_DEFAULT_VIEW_OPTION, DefaultDetailViewOption)
-  defaultOption: DetailFormViewOption;
+  @NarikInject(EDIT_DEFAULT_VIEW_OPTION, DefaultEditViewOption)
+  defaultOption: EditFormViewOption;
 
   @NarikInject(DialogService)
   dialogService: DialogService;
@@ -60,7 +60,7 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
   formElement: ElementRef;
 
   _currentEntity: TE = <any>{};
-  _config: DetailFormConfig;
+  _config: EditFormConfig;
 
   fields: NarikViewField[];
 
@@ -97,10 +97,10 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
     this._lastModelNames = modelNameArray;
   }
 
-  set config(value: DetailFormConfig) {
+  set config(value: EditFormConfig) {
     this._config = value;
   }
-  get config(): DetailFormConfig {
+  get config(): EditFormConfig {
     return this._config;
   }
 
@@ -164,11 +164,11 @@ export abstract class NarikDetailForm<TE extends NarikEntity>
     if (this.config && this.config.isDynamic) {
       this.fields = this.dynamicFormService
         .createFieldsFromEntityFields(this.config.fields)
-        .filter(x => x.showInDetail)
+        .filter(x => x.showInEdit)
         .sort(function(obj1, obj2) {
           return (
-            (obj1.orderInDetail || obj1.order) -
-            (obj2.orderInDetail || obj2.order)
+            (obj1.orderInEdit || obj1.order) -
+            (obj2.orderInEdit || obj2.order)
           );
         });
     }

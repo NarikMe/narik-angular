@@ -11,10 +11,10 @@ export interface NarikViewField {
   dataInfo?: DataInfo;
   options?: any;
   showInList?: boolean;
-  showInDetail?: boolean;
+  showInEdit?: boolean;
   order?: number;
   orderInList?: number;
-  orderInDetail?: number;
+  orderInEdit?: number;
   required?: boolean;
   hideExpr?: string;
   disableExpr?: string;

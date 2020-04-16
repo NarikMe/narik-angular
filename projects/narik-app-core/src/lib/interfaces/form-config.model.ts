@@ -17,7 +17,7 @@ export interface FormConfig {
   allowDelete?: boolean;
 }
 
-export interface DetailFormConfig extends FormConfig {
+export interface EditFormConfig extends FormConfig {
   entityKey: string;
   entityTypeCreator?: string;
   defaultEntity?: any;

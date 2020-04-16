@@ -174,31 +174,31 @@ const commonDependencies: any[] = [
   },
   {
     name: "@narik/infrastructure",
-    version: "^3.1.0"
+    version: "^3.1.3"
   },
   {
     name: "@narik/common",
-    version: "^3.1.0"
+    version: "^3.1.3"
   },
   {
     name: "@narik/core",
-    version: "^3.1.0"
+    version: "^3.1.3"
   },
   {
     name: "@narik/app-core",
-    version: "^3.1.0"
+    version: "^3.1.3"
   },
   {
     name: "@narik/ui-core",
-    version: "^3.1.0"
+    version: "^3.1.3"
   },
   {
     name: "@narik/jwt-authentication",
-    version: "^3.1.0"
+    version: "^3.1.3"
   },
   {
     name: "@narik/client-storage",
-    version: "^3.1.0"
+    version: "^3.1.3"
   }
 ];
 
@@ -290,7 +290,7 @@ const uiDependency: any = {
   material: [
     {
       name: "@narik/ui-material",
-      version: "^3.1.0"
+      version: "^3.1.3"
     },
     {
       name: "@angular/material",
@@ -300,7 +300,7 @@ const uiDependency: any = {
   devextreme: [
     {
       name: "@narik/ui-devextreme",
-      version: "^3.1.0"
+      version: "^3.1.3"
     },
     {
       name: "devextreme",
@@ -316,15 +316,15 @@ const uiDependency: any = {
     }
   ],
   "ng-bootstrap": [
-    { name: "@narik/ui-ng-bootstrap", version: "^3.1.0" },
-    { name: "@narik/ui-swimlane", version: "^3.1.0" },
+    { name: "@narik/ui-ng-bootstrap", version: "^3.1.3" },
+    { name: "@narik/ui-swimlane", version: "^3.1.3" },
     { name: "@swimlane/ngx-datatable", version: "^16.0.3" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^6.0.2" },
     { name: "@angular/localize", version: "^9.0.2" }
   ],
   nebular: [
-    { name: "@narik/ui-nebular", version: "^3.1.0" },
-    { name: "@narik/ui-swimlane", version: "^3.1.0" },
+    { name: "@narik/ui-nebular", version: "^3.1.3" },
+    { name: "@narik/ui-swimlane", version: "^3.1.3" },
     { name: "@swimlane/ngx-datatable", version: "^16.0.3" },
     { name: "@nebular/theme", version: "^5.0.0" },
     { name: "@nebular/date-fns", version: "^5.0.0" },
@@ -333,7 +333,7 @@ const uiDependency: any = {
   primeng: [
     { name: "primeng", version: "^9.0.5" },
     { name: "primeicons", version: "^2.0.0" },
-    { name: "@narik/ui-primeng", version: "^3.1.0" }
+    { name: "@narik/ui-primeng", version: "^3.1.3" }
   ]
 };
 
