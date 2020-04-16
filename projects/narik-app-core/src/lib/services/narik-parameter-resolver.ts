@@ -53,8 +53,8 @@ export class NarikParameterResolver implements ParameterResolver {
   listen<T>(key: any): Observable<T> {
     if (this.route) {
       return this.route.params.pipe(
-        map(params => params[key]),
-        merge(this.route.data.pipe(map(dataItem => dataItem[key])))
+        map((params) => params[key]),
+        merge(this.route.data.pipe(map((dataItem) => dataItem[key])))
       );
     }
   }

@@ -1,14 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { DialogInputContent } from "@narik/infrastructure";
+import { Component, OnInit, Inject } from "@angular/core";
+import { DialogInputContent, PARAMETERS } from "@narik/infrastructure";
 
 @Component({
-  templateUrl: "narik-swimlane-input-dialog.component.html"
+  templateUrl: "narik-swimlane-input-dialog.component.html",
 })
-export class NarikSwimlaneInputDialog
-  implements OnInit, DialogInputContent {
+export class NarikSwimlaneInputDialog implements OnInit, DialogInputContent {
   entity: any = {};
   fields: any[] = [];
-  constructor() {}
+  constructor(@Inject(PARAMETERS) parameters: any) {
+    if (parameters) {
+      this.entity = parameters.entity;
+      this.fields = parameters.fields;
+    }
+  }
 
   ngOnInit() {}
 }

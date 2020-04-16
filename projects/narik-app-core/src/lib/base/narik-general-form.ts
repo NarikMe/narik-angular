@@ -9,7 +9,8 @@ import {
   MODULE_DATA_KEY,
   NarikComponent,
   MODULE_UI_KEY,
-  CommandProcessor
+  CommandProcessor,
+  PARAMETERS
 } from "@narik/infrastructure";
 import { ReplaySubject } from "rxjs";
 import { Observable } from "rxjs";
@@ -21,7 +22,7 @@ import {
   OnChanges,
   SimpleChanges,
   ViewChild,
-  Type
+  Type,
 } from "@angular/core";
 
 import { PARAMETER_RESOLVER } from "../injectionTokens";
@@ -37,7 +38,6 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
   implements CommandHost, OnChanges {
   private changeSubject = new ReplaySubject(1);
 
-  _parameters: any = {};
   change: Observable<any>;
   get isInDialog(): boolean {
     return !!this.dialogRef;
@@ -64,6 +64,11 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
   @NarikInject(MODULE_UI_KEY)
   moduleUiKey: string;
 
+  @NarikInject(PARAMETERS, null)
+  parameters: any;
+
+
+
   _isBusy: boolean;
   set isBusy(value: boolean) {
     if (this.busyIndicator) {
@@ -73,14 +78,6 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
   }
   get isBusy(): boolean {
     return this._isBusy;
-  }
-
-  @Input()
-  set parameters(value: any) {
-    this._parameters = value;
-  }
-  get parameters(): any {
-    return this._parameters;
   }
 
   @ViewChild(BusyIndicator, { static: true }) busyIndicator: BusyIndicator;
@@ -94,13 +91,13 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
         {
           provide: PARAMETER_RESOLVER,
           useClass: NarikParameterResolver,
-          deps: [Injector, NarikGeneralForm]
+          deps: [Injector, NarikGeneralForm],
         },
         {
           provide: QueryService,
           useClass: this.queryServiceType,
-          deps: [Injector]
-        }
+          deps: [Injector],
+        },
       ],
       injector
     );
@@ -120,7 +117,7 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
       this.dialogRef.close(
         {
           componentInstance: this,
-          dialogResult: "close"
+          dialogResult: "close",
         },
         "CONTENT"
       );

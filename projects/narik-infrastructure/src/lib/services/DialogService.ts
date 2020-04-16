@@ -7,7 +7,7 @@ import {
   ViewContainerRef,
   StaticProvider,
   EventEmitter,
-  ComponentFactoryResolver
+  ComponentFactoryResolver,
 } from "@angular/core";
 
 import { EntityField, FieldTypes } from "../interfaces/meta-data.model";
@@ -19,7 +19,7 @@ export enum MessageType {
   Success = "Success",
   Error = "Error",
   Warn = "Warn",
-  Info = "Info"
+  Info = "Info",
 }
 
 /**
@@ -74,6 +74,11 @@ export interface DialogAction {
  * Dialog option
  */
 export interface DialogOption {
+  /**
+   * a css class that added to dialog ui root element
+   */
+  dialogCssClass?: string;
+
   /**
    * width of dialog
    */
@@ -136,6 +141,7 @@ export interface DialogResult<T> {
  */
 export interface DialogInputContent {
   entity: any;
+  fields: any[] ;
 }
 
 /**

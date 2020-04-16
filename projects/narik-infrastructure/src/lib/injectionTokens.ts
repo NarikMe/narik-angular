@@ -5,7 +5,8 @@ import {
   DialogContainer,
   DialogOverlayContainer,
   DialogRef,
-  DialogInputContent
+  DialogInputContent,
+  DialogOption,
 } from "./services/DialogService";
 import { DataProvider } from "./services/DataProvider";
 import { DataStorage } from "./services/DataStorage";
@@ -32,8 +33,10 @@ export const DIALOG_OVERLAY_CONTAINER = new InjectionToken<
 
 export const DIALOG_REF = new InjectionToken<DialogRef<any>>("Dialog Ref");
 
+
 export const DATA_PROVIDER = new InjectionToken<DataProvider>("DataProvider");
 export const DATA_STORAGE = new InjectionToken<DataStorage>("DataStorage");
+
 
 export const DEFAULT_DATA_STORAGE_KEY = new InjectionToken<string>(
   "DefaultDataStorageKey"
@@ -63,3 +66,5 @@ export const CONFIG_PATH = new InjectionToken<string>("CONFIG_PATH");
 export const CONFIG_OPTIONS = new InjectionToken<ConfigOptions>(
   "CONFIG_OPTIONS"
 );
+
+export const PARAMETERS = new InjectionToken<any>("PARAMETERS");

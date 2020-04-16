@@ -1,18 +1,33 @@
-<div [@openClose]="isOpen ? 'open' : 'closed'" (@openClose.done)="_onAnimationDone($event)"
-  class="mat-dialog-container p-4" cdkDrag [tab-guard]="true">
+<div
+  [@openClose]="isOpen ? 'open' : 'closed'"
+  [class]="options.dialogCssClass"
+  (@openClose.done)="_onAnimationDone($event)"
+  class="mat-dialog-container p-4"
+  cdkDrag
+  [tab-guard]="true"
+>
   <h5 cdkDragHandle class="dialog-header">{{ title | translate }}</h5>
   <mat-dialog-content>
     <ng-template narik-loader-host></ng-template>
   </mat-dialog-content>
-  <mat-divider *ngIf="actions && actions.length!==0"></mat-divider>
-  <mat-dialog-actions [auto-focus]="true" [autoFocusContainerName]="options.defaultAction"
-    *ngIf="actions && actions.length!==0" align="end">
+  <mat-divider *ngIf="actions && actions.length !== 0"></mat-divider>
+  <mat-dialog-actions
+    [auto-focus]="true"
+    [autoFocusContainerName]="options.defaultAction"
+    *ngIf="actions && actions.length !== 0"
+    align="end"
+  >
     <ng-container *ngFor="let item of actions">
       <ng-container>
-        <narik-button [attr.narik-form-item-key]="item.dialogResult" class="mr-2" (nClick)="actionClick(item)"
-          [color]="item.color" [icon]="item.icon" label="{{'dialog-buttons.'+item.label | translate}}"></narik-button>
+        <narik-button
+          [attr.narik-form-item-key]="item.dialogResult"
+          class="mr-2"
+          (nClick)="actionClick(item)"
+          [color]="item.color"
+          [icon]="item.icon"
+          label="{{ 'dialog-buttons.' + item.label | translate }}"
+        ></narik-button>
       </ng-container>
     </ng-container>
   </mat-dialog-actions>
-
 </div>

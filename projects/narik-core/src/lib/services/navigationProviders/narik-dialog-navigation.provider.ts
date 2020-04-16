@@ -2,7 +2,7 @@ import {
   DialogOption,
   DialogRef,
   DialogService,
-  NavigationProvider
+  NavigationProvider,
 } from "@narik/infrastructure";
 
 import { Injectable } from "@angular/core";
@@ -12,7 +12,7 @@ import {
   Router,
   UrlSegmentGroup,
   ActivatedRoute,
-  UrlTree
+  UrlTree,
 } from "@angular/router";
 import { NarikBaseNavigationProvider } from "./narik-base-navigation.provider";
 import { isArray, isString } from "@narik/common";
@@ -73,18 +73,16 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
           route.route.component,
           data ? data["__dialogTitle"] : undefined,
           {
-            parameters: {
-              routeByCustomProvider: true,
-              path: primary.segments[0].path,
-              ...route.route.data,
-              ...data
-            }
+            routeByCustomProvider: true,
+            path: primary.segments[0].path,
+            ...route.route.data,
+            ...data
           },
           [],
           dialogOptions || {
             isFullScreen: false,
             showBackdrop: true,
-            disableAutoClose: true
+            disableAutoClose: true,
           },
           undefined,
           undefined,
