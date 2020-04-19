@@ -3,13 +3,15 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
-import { COMPONENTS } from "./index";
+import { COMPONENTS, DYNAMIC_COMPONENTS } from "./index";
 
 @NgModule({
   imports: [CommonModule, FormsModule, NarikUiPrimeModule],
   declarations: [COMPONENTS],
   exports: [],
-  providers: [],
-  entryComponents: [COMPONENTS]
+  providers: []
 })
-export class ShareModule {}
+export class ShareModule {
+  // https://github.com/angular/angular/issues/35314
+  static dynamicComponents = [...DYNAMIC_COMPONENTS];
+}

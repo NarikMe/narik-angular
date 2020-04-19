@@ -1,4 +1,4 @@
-import { COMPONENTS } from "./index";
+import { COMPONENTS, DYNAMIC_COMPONENTS } from "./index";
 import { NgModule } from "@angular/core";
 import { NarikUiMaterialModule } from "@narik/ui-material";
 import { CommonModule, DatePipe } from "@angular/common";
@@ -7,7 +7,7 @@ import { MatCardModule } from "@angular/material/card";
 import {
   MAT_DATE_FORMATS,
   NativeDateAdapter,
-  DateAdapter
+  DateAdapter,
 } from "@angular/material/core";
 
 export const PICK_FORMATS = {
@@ -16,8 +16,8 @@ export const PICK_FORMATS = {
     dateInput: "input",
     monthYearLabel: { year: "numeric", month: "short" },
     dateA11yLabel: { year: "numeric", month: "long", day: "numeric" },
-    monthYearA11yLabel: { year: "numeric", month: "long" }
-  }
+    monthYearA11yLabel: { year: "numeric", month: "long" },
+  },
 };
 
 export class PickDateAdapter extends NativeDateAdapter {
@@ -36,8 +36,10 @@ export class PickDateAdapter extends NativeDateAdapter {
   exports: [],
   providers: [
     { provide: DateAdapter, useClass: PickDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
-  ],
-  entryComponents: [COMPONENTS]
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+  ]
 })
-export class ShareModule {}
+export class ShareModule {
+  // https://github.com/angular/angular/issues/35314
+  static dynamicComponents = [...DYNAMIC_COMPONENTS];
+}

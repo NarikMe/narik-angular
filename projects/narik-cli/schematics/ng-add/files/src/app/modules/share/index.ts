@@ -6,3 +6,7 @@ export const COMPONENTS: Provider[] = [
   GeneralEditComponent,
   GeneralListComponent
 ];
+export const DYNAMIC_COMPONENTS: Provider[] = [
+  GeneralEditComponent,
+  GeneralListComponent
+];

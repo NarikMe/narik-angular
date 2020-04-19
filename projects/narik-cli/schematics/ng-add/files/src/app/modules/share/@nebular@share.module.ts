@@ -5,7 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { NarikUiNebularModule } from "@narik/ui-nebular";
 import { NarikSwimlaneDataTableModule } from "@narik/ui-swimlane";
 import { NbCardModule } from "@nebular/theme";
-import { COMPONENTS } from "./index";
+import { COMPONENTS, DYNAMIC_COMPONENTS } from "./index";
 
 @NgModule({
   imports: [
@@ -13,11 +13,13 @@ import { COMPONENTS } from "./index";
     FormsModule,
     NarikUiNebularModule,
     NarikSwimlaneDataTableModule,
-    NbCardModule
+    NbCardModule,
   ],
   declarations: [COMPONENTS],
   exports: [],
-  providers: [],
-  entryComponents: [COMPONENTS]
+  providers: []
 })
-export class ShareModule {}
+export class ShareModule {
+  // https://github.com/angular/angular/issues/35314
+  static dynamicComponents = [...DYNAMIC_COMPONENTS];
+}
