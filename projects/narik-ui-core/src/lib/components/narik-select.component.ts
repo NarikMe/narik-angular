@@ -8,7 +8,7 @@ import {
   CommandProcessor,
   DialogRef,
   NavigationService,
-  MODULE_UI_KEY
+  MODULE_UI_KEY,
 } from "@narik/infrastructure";
 import { ReplaySubject } from "rxjs";
 import { Observable } from "rxjs";
@@ -91,11 +91,6 @@ export class NarikSelect extends NarikDataDisplayValueComponent
 
   ngOnInit() {
     super.ngOnInit();
-    const moduleUiKey = this.injector.get(MODULE_UI_KEY);
-    const viewOptions = this.metaDataService.getValue<any>(
-      moduleUiKey,
-      "viewOptions"
-    );
   }
   protected showList() {
     const data = {};
@@ -108,7 +103,7 @@ export class NarikSelect extends NarikDataDisplayValueComponent
         ),
         "dialog",
         {
-          relativeTo: this.route
+          relativeTo: this.route,
         },
         data
       )
@@ -117,7 +112,7 @@ export class NarikSelect extends NarikDataDisplayValueComponent
   protected newOrEditEntity(value?: any) {
     const data = value
       ? {
-          entityId: value
+          entityId: value,
         }
       : {};
     data["__dialogTitle"] = this.dataKey || this.dataInfo.dataKey;
@@ -129,14 +124,14 @@ export class NarikSelect extends NarikDataDisplayValueComponent
         ),
         "dialog",
         {
-          relativeTo: this.route
+          relativeTo: this.route,
         },
         data
       )
       .then((d: DialogRef<any>) => {
         d.events
-          .pipe(filter(x => x.eventType === "ENTITY_UPDATED"))
-          .subscribe(x => {
+          .pipe(filter((x) => x.eventType === "ENTITY_UPDATED"))
+          .subscribe((x) => {
             this.reLoadData();
           });
       });

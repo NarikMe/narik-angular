@@ -2,7 +2,7 @@ import {
   EntityField,
   IPagingInfo,
   DataInfo,
-  ListRowCommand
+  ListRowCommand,
 } from "@narik/infrastructure";
 
 export interface FormConfig {
@@ -21,6 +21,7 @@ export interface EditFormConfig extends FormConfig {
   entityKey: string;
   entityTypeCreator?: string;
   defaultEntity?: any;
+  isReactiveForm?: boolean;
 }
 
 export interface ListFormConfig extends FormConfig {

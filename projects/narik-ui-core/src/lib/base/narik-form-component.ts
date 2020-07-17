@@ -10,18 +10,18 @@ import {
   HostBinding,
   Injector,
   ViewChild,
-  AfterViewInit
+  AfterViewInit,
 } from "@angular/core";
 import {
   ControlValueAccessor,
   FormControl,
   NgModel,
-  FormControlName
+  FormControlName,
 } from "@angular/forms";
 import { NarikInject } from "@narik/core";
 import {
   NarikUiComponent,
-  NARIK_UI_COMPONENT_INPUTS
+  NARIK_UI_COMPONENT_INPUTS,
 } from "./narik-ui-component";
 
 export class NarikFormComponent extends NarikUiComponent
@@ -41,12 +41,20 @@ export class NarikFormComponent extends NarikUiComponent
   @NarikInject(NgModel, undefined)
   ngModel: NgModel;
 
-  @ViewChild(FormControlName, { static: false })
-  formControl: FormControlName;
+  @NarikInject(FormControlName, undefined)
+  formControlName: FormControlName;
+
+  @NarikInject(FormControl, undefined)
+  formControl: FormControl;
+
+  // @ViewChild(FormControlName, { static: false })
+  // formControl: FormControlName;
 
   get control(): FormControl {
     if (this.formControl) {
-      return this.formControl.control;
+      return this.formControl;
+    } else if (this.formControlName) {
+      return this.formControlName.control;
     } else if (this.ngModel) {
       return this.ngModel.control;
     }
@@ -155,7 +163,7 @@ export class NarikFormComponent extends NarikUiComponent
       const originalMarkAsTouched = this.control.markAsTouched.bind(
         this.control
       );
-      this.control.markAsTouched = opts => {
+      this.control.markAsTouched = (opts) => {
         originalMarkAsTouched(opts);
         this.setValidationErrors();
       };
@@ -206,7 +214,9 @@ export class NarikFormComponent extends NarikUiComponent
     const result = [];
     for (const error in errors) {
       if (errors.hasOwnProperty(error)) {
-        const parameters: any[] = Object.entries(errors[error]).map(x => x[1]);
+        const parameters: any[] = Object.entries(errors[error]).map(
+          (x) => x[1]
+        );
         result.push(
           formatString(
             this.translateService.instant("errors." + error),
@@ -229,5 +239,5 @@ export const NARIK_UI_FORM_INPUTS: string[] = [
   "required",
   "readOnly",
   "placeHolder",
-  ...NARIK_UI_COMPONENT_INPUTS
+  ...NARIK_UI_COMPONENT_INPUTS,
 ];

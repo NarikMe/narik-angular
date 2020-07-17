@@ -62,7 +62,7 @@
   cursor: pointer;
 }
 
-.mat-toolbar>.mat-divider-vertical {
+.mat-toolbar > .mat-divider-vertical {
   height: 30px;
   margin-right: 4px !important;
   margin-left: 8px !important;
@@ -123,7 +123,8 @@
 }
 
 .mat-dialog-container {
-  box-shadow: 20px 20px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 20px 20px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
   background: white;
   color: rgba(0, 0, 0, 0.87);
   border-radius: 8px;
@@ -134,7 +135,7 @@
   z-index: 1000 !important;
 }
 
-.narik-mat-table-select-arrow-wrapper{
+.narik-mat-table-select-arrow-wrapper {
   position: absolute;
   right: 0px;
   top: 15px;
@@ -155,13 +156,28 @@
   color: #f44336;
 }
 
-.mat-form-field.narik-mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+.mat-form-field.narik-mat-form-field-invalid
+  .mat-form-field-label
+  .mat-form-field-required-marker {
   color: #f44336;
 }
-.mat-form-field.narik-mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.narik-mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+.mat-form-field.narik-mat-form-field-invalid .mat-form-field-ripple,
+.mat-form-field.narik-mat-form-field-invalid .mat-form-field-ripple.mat-accent {
   background-color: #f44336;
 }
 .tooltip-red {
   background: #b71c1c;
 }
 
+.mat-form-field-appearance-legacy.narik-mat-form-field-invalid:not(.mat-focused)
+  .mat-form-field-ripple {
+  height: 1px;
+}
+
+.mat-form-field.narik-mat-form-field-invalid .mat-form-field-ripple {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 100ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
