@@ -103,7 +103,7 @@ const rtlUiStyles: any = {
 const devDependencies: any[] = [
   {
     name: "@angular-builders/custom-webpack",
-    version: "^9.2.0"
+    version: "^10.0.0"
   },
   {
     name: "cheerio",
@@ -121,7 +121,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "@angular/cdk",
-    version: "^10.0.2"
+    version: "^10.1.3"
   },
 
   {
@@ -146,11 +146,11 @@ const commonDependencies: any[] = [
   },
   {
     name: "localforage",
-    version: "^1.7.4"
+    version: "^1.9.0"
   },
   {
     name: "lodash",
-    version: "^4.17.19"
+    version: "^4.17.20"
   },
   {
     name: "ngforage",
@@ -182,7 +182,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "@narik/core",
-    version: "^4.0.0"
+    version: "^4.0.1"
   },
   {
     name: "@narik/app-core",
@@ -190,7 +190,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "@narik/ui-core",
-    version: "^3.1.3"
+    version: "^4.0.0"
   },
   {
     name: "@narik/jwt-authentication",
@@ -209,7 +209,7 @@ const layoutDependency: any = {
   ngxadmin: [
     {
       name: "@nebular/theme",
-      version: "^5.1.0"
+      version: "^6.0.0"
     },
     {
       name: "eva-icons",
@@ -217,7 +217,7 @@ const layoutDependency: any = {
     },
     {
       name: "@nebular/eva-icons",
-      version: "^5.1.0"
+      version: "^6.0.0"
     },
     {
       name: "roboto-fontface",
@@ -294,7 +294,7 @@ const uiDependency: any = {
     },
     {
       name: "@angular/material",
-      version: "^10.0.2"
+      version: "^10.1.3"
     }
   ],
   devextreme: [
@@ -304,11 +304,11 @@ const uiDependency: any = {
     },
     {
       name: "devextreme",
-      version: "^20.1.5"
+      version: "^20.1.6"
     },
     {
       name: "devextreme-angular",
-      version: "^20.1.5"
+      version: "^20.1.6"
     },
     {
       name: "stream",
@@ -320,14 +320,14 @@ const uiDependency: any = {
     { name: "@narik/ui-swimlane", version: "^4.0.0" },
     { name: "@swimlane/ngx-datatable", version: "^17.1.0" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^7.0.0" },
-    { name: "@angular/localize", version: "^10.0.4" }
+    { name: "@angular/localize", version: "^10.0.9" }
   ],
   nebular: [
     { name: "@narik/ui-nebular", version: "^4.0.0" },
     { name: "@narik/ui-swimlane", version: "^4.0.0" },
     { name: "@swimlane/ngx-datatable", version: "^17.1.0" },
-    { name: "@nebular/theme", version: "^5.1.0" },
-    { name: "@nebular/date-fns", version: "^5.1.0" },
+    { name: "@nebular/theme", version: "^6.0.0" },
+    { name: "@nebular/date-fns", version: "^6.0.0" },
     { name: "date-fns", version: "^2.14.0" }
   ],
   primeng: [
