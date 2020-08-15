@@ -1,10 +1,21 @@
-<div [tab-guard]="activeTabGuard" [auto-focus]="activeAutoFocus" [autoFocusContainerName]="defaultFocusField"
-  fxLayout="{{columnsCount === 1 ? 'column' : 'row wrap'}} " fxLayout.xs="column" fxLayoutGap.xs="0"
-  fxLayoutGap="{{ layoutGap }}px" fxLayoutAlign="flex-start">
+<div
+  [tab-guard]="activeTabGuard"
+  [auto-focus]="activeAutoFocus"
+  [autoFocusContainerName]="defaultFocusField"
+  fxLayout="{{ columnsCount === 1 ? 'column' : 'row wrap' }} "
+  fxLayout.xs="column"
+  fxLayoutGap.xs="0"
+  fxLayoutGap="{{ layoutGap }}px"
+  fxLayoutAlign="flex-start"
+>
   <ng-container *ngIf="!groupFields">
-    <div fxFlex.lt-sm="100%" fxFlex.lt-xl="0 1 calc({{ columnWidth }}% - {{ layoutGap }}px)"
-      fxFlex.lt-md="0 1 calc({{ columnWidth }}% - {{ layoutGap }}px)" *ngFor="let item of fields; let i = index">
-      <ng-container *ngTemplateOutlet="
+    <div
+      fxFlex.gt-xs="0 1 calc({{ columnWidth }}% - {{ layoutGap }}px)"
+      fxFlex="100%"
+      *ngFor="let item of fields; let i = index"
+    >
+      <ng-container
+        *ngTemplateOutlet="
           fieldContainer;
           context: {
             $implicit: item,
@@ -12,16 +23,20 @@
             disableItems: disableItems,
             model: model
           }
-        "></ng-container>
+        "
+      ></ng-container>
     </div>
   </ng-container>
   <ng-container *ngIf="groupFields">
-    <div fxFlex.lt-sm="100%" fxFlex.lt-xl="0 1 calc({{ columnWidth }}% - {{ layoutGap }}px)"
-      fxFlex.lt-md="0 1 calc({{ columnWidth }}% - {{ layoutGap }}px)"
-      *ngFor="let item of [].constructor(groupCount); let i = index">
+    <div
+      fxFlex.gt-xs="0 1 calc({{ columnWidth }}% - {{ layoutGap }}px)"
+      fxFlex="100%"
+      *ngFor="let item of [].constructor(groupCount); let i = index"
+    >
       <div fxLayout="column" class="narik-mat-form-group">
         <div *ngFor="let item of fieldsArray.get(i); let j = index">
-          <ng-container *ngTemplateOutlet="
+          <ng-container
+            *ngTemplateOutlet="
               fieldContainer;
               context: {
                 $implicit: item,
@@ -29,92 +44,160 @@
                 disableItems: disableItems,
                 model: model
               }
-            "></ng-container>
+            "
+          ></ng-container>
         </div>
       </div>
     </div>
   </ng-container>
 </div>
 
-<ng-template #fieldContainer let-item let-invisibleItems="invisibleItems" let-model="model"
-  let-disableItems="disableItems">
+<ng-template
+  #fieldContainer
+  let-item
+  let-invisibleItems="invisibleItems"
+  let-model="model"
+  let-disableItems="disableItems"
+>
   <ng-container *ngIf="!item.hideExpr || !invisibleItems[item.name]">
-    <ng-container *ngIf="!customFormComponentKeysObject[item.type|| 'text']">
-      <ng-container *ngIf="
-        !item.type ||
-        item.type == 'text' ||
-        item.type == 'number' ||
-        item.type == 'time' ||
-        item.type == 'textArea' ||
-        item.type == 'password'
-      ">
-        <narik-mat-input [name]="item.name" [disabled]="item.disableExpr && disableItems[item.name]"
-          [required]="item.required" placeHolder="{{ item.options.placeHolder | translate }}"
-          [type]="item.type || 'text'" label="{{ item.label | translate }}" [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators" [narikValidatorParams]="item.validatorParams" [options]="item.options">
+    <ng-container *ngIf="!customFormComponentKeysObject[item.type || 'text']">
+      <ng-container
+        *ngIf="
+          !item.type ||
+          item.type == 'text' ||
+          item.type == 'number' ||
+          item.type == 'time' ||
+          item.type == 'textArea' ||
+          item.type == 'password'
+        "
+      >
+        <narik-mat-input
+          [name]="item.name"
+          [disabled]="item.disableExpr && disableItems[item.name]"
+          [required]="item.required"
+          placeHolder="{{ item.options.placeHolder | translate }}"
+          [type]="item.type || 'text'"
+          label="{{ item.label | translate }}"
+          [(ngModel)]="model[item.model]"
+          [narikValidator]="item.validators"
+          [narikValidatorParams]="item.validatorParams"
+          [options]="item.options"
+        >
         </narik-mat-input>
       </ng-container>
       <ng-container *ngIf="item.type == 'boolean'">
-        <narik-mat-checkbox [name]="item.name" [disabled]="item.disableExpr && disableItems[item.name]"
-          [options]="item.options" [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams" label="{{ item.label | translate }}"></narik-mat-checkbox>
+        <narik-mat-checkbox
+          [name]="item.name"
+          [disabled]="item.disableExpr && disableItems[item.name]"
+          [options]="item.options"
+          [(ngModel)]="model[item.model]"
+          [narikValidator]="item.validators"
+          [narikValidatorParams]="item.validatorParams"
+          label="{{ item.label | translate }}"
+        ></narik-mat-checkbox>
       </ng-container>
       <ng-container *ngIf="item.type == 'date'">
-        <narik-mat-date-picker [options]="item.options" [disabled]="item.disableExpr && disableItems[item.name]"
-          [name]="item.name" [required]="item.required" placeHolder="{{ item.options.placeHolder | translate }}"
-          [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams" label="{{ item.label | translate }}"></narik-mat-date-picker>
+        <narik-mat-date-picker
+          [options]="item.options"
+          [disabled]="item.disableExpr && disableItems[item.name]"
+          [name]="item.name"
+          [required]="item.required"
+          placeHolder="{{ item.options.placeHolder | translate }}"
+          [(ngModel)]="model[item.model]"
+          [narikValidator]="item.validators"
+          [narikValidatorParams]="item.validatorParams"
+          label="{{ item.label | translate }}"
+        ></narik-mat-date-picker>
       </ng-container>
       <ng-container *ngIf="item.type == 'select'">
-        <narik-mat-select [options]="item.options" [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]" [required]="item.required"
-          placeHolder="{{ item.options.placeHolder | translate }}" [dataInfo]="item.dataInfo"
-          label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"></narik-mat-select>
+        <narik-mat-select
+          [options]="item.options"
+          [name]="item.name"
+          [disabled]="item.disableExpr && disableItems[item.name]"
+          [required]="item.required"
+          placeHolder="{{ item.options.placeHolder | translate }}"
+          [dataInfo]="item.dataInfo"
+          label="{{ item.label | translate }}"
+          [(ngModel)]="model[item.model]"
+          [narikValidator]="item.validators"
+          [narikValidatorParams]="item.validatorParams"
+        ></narik-mat-select>
       </ng-container>
       <ng-container *ngIf="item.type == 'autoComplete'">
-        <narik-mat-autocomplete [options]="item.options" [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]" [required]="item.required"
-          placeHolder="{{ item.options.placeHolder | translate }}" [minSearchLength]="item.options.minSearchLength || 0"
-          [isLazyLoadData]="item.options.isLazyLoadData" [dataInfo]="item.dataInfo" label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"></narik-mat-autocomplete>
+        <narik-mat-autocomplete
+          [options]="item.options"
+          [name]="item.name"
+          [disabled]="item.disableExpr && disableItems[item.name]"
+          [required]="item.required"
+          placeHolder="{{ item.options.placeHolder | translate }}"
+          [minSearchLength]="item.options.minSearchLength || 0"
+          [isLazyLoadData]="item.options.isLazyLoadData"
+          [dataInfo]="item.dataInfo"
+          label="{{ item.label | translate }}"
+          [(ngModel)]="model[item.model]"
+          [narikValidator]="item.validators"
+          [narikValidatorParams]="item.validatorParams"
+        ></narik-mat-autocomplete>
       </ng-container>
       <ng-container *ngIf="item.type == 'radio'">
-        <narik-mat-radio-group [options]="item.options" [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]" [required]="item.required"
-          placeHolder="{{ item.options.placeHolder | translate }}" [dataInfo]="item.dataInfo"
-          label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"></narik-mat-radio-group>
+        <narik-mat-radio-group
+          [options]="item.options"
+          [name]="item.name"
+          [disabled]="item.disableExpr && disableItems[item.name]"
+          [required]="item.required"
+          placeHolder="{{ item.options.placeHolder | translate }}"
+          [dataInfo]="item.dataInfo"
+          label="{{ item.label | translate }}"
+          [(ngModel)]="model[item.model]"
+          [narikValidator]="item.validators"
+          [narikValidatorParams]="item.validatorParams"
+        ></narik-mat-radio-group>
       </ng-container>
       <ng-container *ngIf="item.type == 'checkList'">
-        <narik-mat-checkbox-list [options]="item.options" [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]" [required]="item.required"
-          placeHolder="{{ item.options.placeHolder | translate }}" [dataInfo]="item.dataInfo"
-          label="{{ item.label | translate }}" [(ngModel)]="model[item.model]" [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"></narik-mat-checkbox-list>
+        <narik-mat-checkbox-list
+          [options]="item.options"
+          [name]="item.name"
+          [disabled]="item.disableExpr && disableItems[item.name]"
+          [required]="item.required"
+          placeHolder="{{ item.options.placeHolder | translate }}"
+          [dataInfo]="item.dataInfo"
+          label="{{ item.label | translate }}"
+          [(ngModel)]="model[item.model]"
+          [narikValidator]="item.validators"
+          [narikValidatorParams]="item.validatorParams"
+        ></narik-mat-checkbox-list>
       </ng-container>
       <ng-container *ngIf="item.type == 'table-select'">
-        <narik-mat-data-table-select [options]="item.options" [name]="item.name"
+        <narik-mat-data-table-select
+          [options]="item.options"
+          [name]="item.name"
           [gridOptions]="item.options.gridOptions || {}"
-          [disabled]="item.disableExpr && disableItems[item.name]" [required]="item.required"
-          placeHolder="{{ item.options.placeHolder | translate }}" [dataInfo]="item.dataInfo"
-          label="{{ item.label | translate }}" [fields]="item.options ? item.options.fields :  undefined"
-          [isLazyLoadData]="item.options.isLazyLoadData" [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators" [narikValidatorParams]="item.validatorParams">
+          [disabled]="item.disableExpr && disableItems[item.name]"
+          [required]="item.required"
+          placeHolder="{{ item.options.placeHolder | translate }}"
+          [dataInfo]="item.dataInfo"
+          label="{{ item.label | translate }}"
+          [fields]="item.options ? item.options.fields : undefined"
+          [isLazyLoadData]="item.options.isLazyLoadData"
+          [(ngModel)]="model[item.model]"
+          [narikValidator]="item.validators"
+          [narikValidatorParams]="item.validatorParams"
+        >
         </narik-mat-data-table-select>
       </ng-container>
     </ng-container>
 
     <ng-container *ngIf="customFormComponentKeysObject[item.type || 'text']">
-      <ng-container *narikComponentLoader="
+      <ng-container
+        *narikComponentLoader="
         customFormComponentKeysObject[item.type || 'text'];
         bindings: {
           field:item,
           model:model
         };
         bindingSource:this
-      "></ng-container>
+      "
+      ></ng-container>
     </ng-container>
   </ng-container>
 </ng-template>
