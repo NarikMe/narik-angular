@@ -10,7 +10,7 @@ import {
   mergeWith,
   forEach,
   FileEntry,
-  SchematicsException
+  SchematicsException,
 } from "@angular-devkit/schematics";
 
 import * as ts from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
@@ -22,18 +22,18 @@ import {
   addImportToModule,
   insertImport,
   isImported,
-  addProviderToModule
+  addProviderToModule,
 } from "@schematics/angular/utility/ast-utils";
 import { Change, InsertChange } from "@schematics/angular/utility/change";
 import { getProjectTargets } from "@schematics/angular/utility/project-targets";
 import {
   BrowserBuilderTarget,
   Builders,
-  ServeBuilderTarget
+  ServeBuilderTarget,
 } from "@schematics/angular/utility/workspace-models";
 import {
   WorkspaceProject,
-  WorkspaceSchema
+  WorkspaceSchema,
 } from "@schematics/angular/utility/workspace-models";
 
 import { normalize } from "@angular-devkit/core";
@@ -42,15 +42,15 @@ import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 const layoutStyles: any = {
   ngxadmin: [
     "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-    "node_modules/typeface-exo/index.css"
+    "node_modules/typeface-exo/index.css",
   ],
   architectui: [],
-  coreui: ["node_modules/@coreui/icons/css/free.css"]
+  coreui: ["node_modules/@coreui/icons/css/free.css"],
 };
 const commonStyles = [
   "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
   "node_modules/ngx-toastr/toastr.css",
-  "src/styles/styles.scss"
+  "src/styles/styles.scss",
 ];
 
 const uiStyles: any = {
@@ -58,269 +58,269 @@ const uiStyles: any = {
   devextreme: [
     "node_modules/devextreme/dist/css/dx.common.css",
     "node_modules/devextreme/dist/css/dx.light.css",
-    "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.css"
+    "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.css",
   ],
   "ng-bootstrap": [
     "node_modules/@swimlane/ngx-datatable/index.css",
     "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
     "node_modules/@swimlane/ngx-datatable/assets/icons.css",
     "node_modules/@narik/ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.css",
-    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css"
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css",
   ],
   nebular: [
     "node_modules/@swimlane/ngx-datatable/index.css",
     "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
     "node_modules/@swimlane/ngx-datatable/assets/icons.css",
     "node_modules/@narik/ui-nebular/styles/narik-ui-nebular.css",
-    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css"
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css",
   ],
   primeng: [
     "node_modules/primeng/resources/themes/nova-light/theme.css",
     "node_modules/primeng/resources/primeng.min.css",
     "node_modules/primeicons/primeicons.css",
-    "node_modules/@narik/ui-primeng/styles/narik-ui-prime.css"
-  ]
+    "node_modules/@narik/ui-primeng/styles/narik-ui-prime.css",
+  ],
 };
 
 const rtlUiStyles: any = {
   material: [
-    "node_modules/@narik/ui-material/styles/narik-ui-material.rtl.css"
+    "node_modules/@narik/ui-material/styles/narik-ui-material.rtl.css",
   ],
   devextreme: [
-    "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.rtl.css"
+    "node_modules/@narik/ui-devextreme/styles/narik-ui-devextreme.rtl.css",
   ],
   "ng-bootstrap": [
     "node_modules/@narik/ui-ng-bootstrap/styles/narik-ui-ng-bootstrap.rtl.css",
-    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.rtl.css"
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.rtl.css",
   ],
   nebular: [
     "node_modules/@narik/ui-nebular/styles/narik-ui-nebular.rtl.css",
-    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.rtl.css"
+    "node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.rtl.css",
   ],
-  primeng: ["node_modules/@narik/ui-primeng/styles/narik-ui-prime.rtl.css"]
+  primeng: ["node_modules/@narik/ui-primeng/styles/narik-ui-prime.rtl.css"],
 };
 
 const devDependencies: any[] = [
   {
     name: "@angular-builders/custom-webpack",
-    version: "^10.0.0"
+    version: "^10.0.0",
   },
   {
     name: "cheerio",
-    version: "~1.0.0-rc.3"
+    version: "~1.0.0-rc.3",
   },
   {
     name: "@narik/webpack-tools",
-    version: "^4.0.0"
-  }
+    version: "^4.0.0",
+  },
 ];
 const commonDependencies: any[] = [
   {
     name: "@fortawesome/fontawesome-free",
-    version: "^5.14.0"
+    version: "^5.14.0",
   },
   {
     name: "@angular/cdk",
-    version: "^10.1.3"
+    version: "^10.1.3",
   },
 
   {
     name: "@ngx-translate/core",
-    version: "^13.0.0"
+    version: "^13.0.0",
   },
   {
     name: "angular2-text-mask",
-    version: "^9.0.0"
+    version: "^9.0.0",
   },
   {
     name: "@angular/flex-layout",
-    version: "^10.0.0-beta.32"
+    version: "^10.0.0-beta.32",
   },
   {
     name: "angular2-uuid",
-    version: "^1.1.1"
+    version: "^1.1.1",
   },
   {
     name: "bootstrap",
-    version: "^4.5.0"
+    version: "^4.5.0",
   },
   {
     name: "localforage",
-    version: "^1.9.0"
+    version: "^1.9.0",
   },
   {
     name: "lodash",
-    version: "^4.17.20"
+    version: "^4.17.20",
   },
   {
     name: "ngforage",
-    version: "^6.0.0"
+    version: "^6.0.0",
   },
   {
     name: "ngx-toastr",
-    version: "^13.0.0"
+    version: "^13.0.0",
   },
   {
     name: "ngx-custom-validators",
-    version: "^9.1.0"
+    version: "^9.1.0",
   },
   {
     name: "class-validator",
-    version: "^0.12.2"
+    version: "^0.12.2",
   },
   {
     name: "data-adapter",
-    version: "^0.2.3"
+    version: "^0.2.3",
   },
   {
     name: "@narik/infrastructure",
-    version: "^4.0.0"
+    version: "^4.0.0",
   },
   {
     name: "@narik/common",
-    version: "^4.0.0"
+    version: "^4.0.0",
   },
   {
     name: "@narik/core",
-    version: "^4.0.1"
+    version: "^4.0.1",
   },
   {
     name: "@narik/app-core",
-    version: "^4.0.0"
+    version: "^4.0.0",
   },
   {
     name: "@narik/ui-core",
-    version: "^4.0.0"
+    version: "^4.0.0",
   },
   {
     name: "@narik/jwt-authentication",
-    version: "^4.0.0"
+    version: "^4.0.0",
   },
   {
     name: "@narik/client-storage",
-    version: "^4.0.0"
-  }
+    version: "^4.0.0",
+  },
 ];
 
 const rtlUiDependency: any = {
-  "ng-bootstrap": [{ name: "bootstrap-v4-rtl", version: "^4.4.1-2" }]
+  "ng-bootstrap": [{ name: "bootstrap-v4-rtl", version: "^4.4.1-2" }],
 };
 const layoutDependency: any = {
   ngxadmin: [
     {
       name: "@nebular/theme",
-      version: "^6.0.0"
+      version: "^6.0.0",
     },
     {
       name: "eva-icons",
-      version: "^1.1.3"
+      version: "^1.1.3",
     },
     {
       name: "@nebular/eva-icons",
-      version: "^6.0.0"
+      version: "^6.0.0",
     },
     {
       name: "roboto-fontface",
-      version: "^0.10.0"
+      version: "^0.10.0",
     },
     {
       name: "typeface-exo",
-      version: "^0.0.61"
-    }
+      version: "^0.0.61",
+    },
   ],
   architectui: [
     { name: "@ng-bootstrap/ng-bootstrap", version: "^7.0.0" },
     {
       name: "ngx-perfect-scrollbar",
-      version: "^9.0.0"
+      version: "^9.0.0",
     },
     {
       name: "@ngx-loading-bar/core",
-      version: "^5.1.0"
+      version: "^5.1.0",
     },
     {
       name: "@ngx-loading-bar/router",
-      version: "^5.1.0"
+      version: "^5.1.0",
     },
     {
       name: "redux",
-      version: "4.0.5"
+      version: "4.0.5",
     },
     {
       name: "angular-font-awesome",
-      version: "^3.1.2"
+      version: "^3.1.2",
     },
     {
       name: "animate-sass",
-      version: "^0.8.2"
+      version: "^0.8.2",
     },
     {
       name: "pe7-icon",
-      version: "^1.0.4"
+      version: "^1.0.4",
     },
     {
       name: "@angular-redux/store",
-      version: "^10.0.0"
-    }
+      version: "^10.0.0",
+    },
   ],
   coreui: [
     {
       name: "@coreui/angular",
-      version: "^2.9.0"
+      version: "^2.9.0",
     },
     {
       name: "@coreui/coreui",
-      version: "^2.1.16"
+      version: "^2.1.16",
     },
     {
       name: "@coreui/icons",
-      version: "^1.0.1"
+      version: "^1.0.1",
     },
     {
       name: "ngx-perfect-scrollbar",
-      version: "^9.0.0"
+      version: "^9.0.0",
     },
     {
       name: "ngx-bootstrap",
-      version: "^5.6.1"
-    }
-  ]
+      version: "^5.6.1",
+    },
+  ],
 };
 const uiDependency: any = {
   material: [
     {
       name: "@narik/ui-material",
-      version: "^4.0.0"
+      version: "^4.0.0",
     },
     {
       name: "@angular/material",
-      version: "^10.1.3"
-    }
+      version: "^10.1.3",
+    },
   ],
   devextreme: [
     {
       name: "@narik/ui-devextreme",
-      version: "^4.0.0"
+      version: "^4.0.0",
     },
     {
       name: "devextreme",
-      version: "^20.1.6"
+      version: "^20.1.6",
     },
     {
       name: "devextreme-angular",
-      version: "^20.1.6"
+      version: "^20.1.6",
     },
     {
       name: "stream",
-      version: "0.0.2"
-    }
+      version: "0.0.2",
+    },
   ],
   "ng-bootstrap": [
     { name: "@narik/ui-ng-bootstrap", version: "^4.0.0" },
     { name: "@narik/ui-swimlane", version: "^4.0.0" },
     { name: "@swimlane/ngx-datatable", version: "^17.1.0" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^7.0.0" },
-    { name: "@angular/localize", version: "^10.0.9" }
+    { name: "@angular/localize", version: "^10.0.9" },
   ],
   nebular: [
     { name: "@narik/ui-nebular", version: "^4.0.0" },
@@ -328,13 +328,13 @@ const uiDependency: any = {
     { name: "@swimlane/ngx-datatable", version: "^17.1.0" },
     { name: "@nebular/theme", version: "^6.0.0" },
     { name: "@nebular/date-fns", version: "^6.0.0" },
-    { name: "date-fns", version: "^2.14.0" }
+    { name: "date-fns", version: "^2.14.0" },
   ],
   primeng: [
     { name: "primeng", version: "^9.1.3" },
     { name: "primeicons", version: "^4.0.0" },
-    { name: "@narik/ui-primeng", version: "^4.0.0" }
-  ]
+    { name: "@narik/ui-primeng", version: "^4.0.0" },
+  ],
 };
 
 export function ngAdd(_options: AddSchema): Rule {
@@ -353,7 +353,7 @@ export function ngAdd(_options: AddSchema): Rule {
     // addModuleImports(ui, rtl),
     // addModuleProvids(ui),
     // updateAppModule(),
-    installPackageJsonDependencies()
+    installPackageJsonDependencies(),
   ]);
 }
 
@@ -408,7 +408,7 @@ function addPackageJsonDependencies(
   layout: string
 ): Rule {
   return (host: Tree, context: SchematicContext) => {
-    commonDependencies.forEach(dependency => {
+    commonDependencies.forEach((dependency) => {
       addPackageToPackageJson(host, dependency.name, `${dependency.version}`);
       context.logger.log("info", `✅️ Added "${dependency.name}`);
     });
@@ -434,7 +434,7 @@ function addPackageJsonDependencies(
       }
     }
 
-    devDependencies.forEach(dependency => {
+    devDependencies.forEach((dependency) => {
       addPackageToPackageJson(
         host,
         dependency.name,
@@ -547,21 +547,21 @@ function getAllOptionValues<T>(
   console.log(builderTargets);
   // Get all options contained in target configuration partials.
   const configurationOptions = builderTargets
-    .filter(t => t.configurations)
-    .map(t => Object.values(t.configurations!))
+    .filter((t) => t.configurations)
+    .map((t) => Object.values(t.configurations!))
     .reduce((acc, cur) => acc.concat(...cur), []);
 
   // Now we have all option sets. We can use it to find all references to a given property.
   const allOptions = [
-    ...builderTargets.map(t => t.options),
-    ...configurationOptions
+    ...builderTargets.map((t) => t.options),
+    ...configurationOptions,
   ];
 
   // Get all values for the option name and dedupe them.
   // Deduping will only work for primitives, but the keys we want here are strings so it's ok.
   const optionValues: T[] = allOptions
-    .filter(o => o[optionName])
-    .map(o => o[optionName])
+    .filter((o) => o[optionName])
+    .map((o) => o[optionName])
     .reduce((acc, cur) => (!acc.includes(cur) ? acc.concat(cur) : acc), []);
 
   return optionValues;
@@ -582,7 +582,7 @@ function prendendToTargetOptionFile(
     optionName
   );
 
-  optionValues.forEach(path => {
+  optionValues.forEach((path) => {
     const data = host.read(path);
     if (!data) {
       // If the file doesn't exist, just ignore it.
@@ -646,29 +646,30 @@ function updateTsConfig(ui: string) {
   const pathItems: any = {
     material: {
       "@narik/ui-lib": ["node_modules/@narik/ui-material"],
-      "@narik/ui-lib/*": ["node_modules/@narik/ui-material/*"]
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-material/*"],
     },
     devextreme: {
       "@narik/ui-lib": ["node_modules/@narik/ui-devextreme"],
-      "@narik/ui-lib/*": ["node_modules/@narik/ui-devextreme/*"]
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-devextreme/*"],
     },
     "ng-bootstrap": {
       "@narik/ui-lib": ["node_modules/@narik/ui-ng-bootstrap"],
-      "@narik/ui-lib/*": ["node_modules/@narik/ui-ng-bootstrap/*"]
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-ng-bootstrap/*"],
     },
     nebular: {
       "@narik/ui-lib": ["node_modules/@narik/ui-nebular"],
-      "@narik/ui-lib/*": ["node_modules/@narik/ui-nebular/*"]
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-nebular/*"],
     },
     primeng: {
       "@narik/ui-lib": ["node_modules/@narik/ui-primeng"],
-      "@narik/ui-lib/*": ["node_modules/@narik/ui-primeng/*"]
-    }
+      "@narik/ui-lib/*": ["node_modules/@narik/ui-primeng/*"],
+    },
   };
 
-  return (host: Tree) => {
-    if (host.exists("tsconfig.json")) {
-      const sourceText = host.read("tsconfig.json")!.toString("utf-8");
+  return (host: Tree, context: SchematicContext) => {
+    if (host.exists("tsconfig.base.json")) {
+      let sourceText = host.read("tsconfig.base.json")!.toString("utf-8");
+      sourceText = sourceText.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, "");
       const json = JSON.parse(sourceText);
 
       if (!json.compilerOptions.paths) {
@@ -683,7 +684,8 @@ function updateTsConfig(ui: string) {
           }
         }
       }
-      host.overwrite("tsconfig.json", JSON.stringify(json, null, 2));
+      host.overwrite("tsconfig.base.json", JSON.stringify(json, null, 2));
+      context.logger.log("info", `🔍 Apply path in  tsconfig.base.json`);
     }
 
     return host;
@@ -694,21 +696,21 @@ function addModuleProvids(ui: string) {
   const provids: any[] = [
     {
       key: `{provide: MODULE_DATA_KEY,useValue: moduleKey}`,
-      link: undefined
+      link: undefined,
     },
     {
       key: `{
         provide: MODULE_UI_KEY,
         useValue: moduleKey
       }`,
-      link: undefined
+      link: undefined,
     },
     {
       key: `{
         provide: MEMORY_STORAGE_VALIDITY_LEN,
         useValue: 1
       }`,
-      link: undefined
+      link: undefined,
     },
     {
       key: ` {
@@ -716,8 +718,8 @@ function addModuleProvids(ui: string) {
         useValue: "item-full-width"
       }`,
       link: undefined,
-      uiKey: "material"
-    }
+      uiKey: "material",
+    },
   ];
 
   return (host: Tree) => {
@@ -757,70 +759,70 @@ function addModuleImports(ui: string, rtl: boolean) {
     {
       moduleName:
         "TranslateModule.forRoot({loader: {provide: TranslateLoader,useFactory: HttpLoaderFactory,deps: [HttpClient, ConfigService]}})",
-      link: `@ngx-translate/core`
+      link: `@ngx-translate/core`,
     },
     {
       moduleName:
         'NbThemeModule.forRoot({name: "default" },undefined,undefined,NbLayoutDirection.LTR)',
-      link: `@nebular/theme`
+      link: `@nebular/theme`,
     },
     {
       moduleName: "HttpClientModule",
-      link: `@angular/common/http`
+      link: `@angular/common/http`,
     },
     {
       moduleName: `NarikCoreModule.forRoot({configFilePath: "assets/app-config.json",defaultLang: "en",useDefaultLang: true})`,
-      link: `@narik/core`
+      link: `@narik/core`,
     },
     {
       moduleName: "NarikUiCoreModule",
-      link: `@narik/ui-core`
+      link: `@narik/ui-core`,
     },
     {
       moduleName: "NarikAppCoreModule.forRoot({})",
-      link: `@narik/app-core`
+      link: `@narik/app-core`,
     },
     {
       moduleName:
         'NarikJwtAuthenticationModule.forRoot({loginEndPoint: "api/account/Authenticate",logoutEndPoint: "api/account/Logout",refreshEndPoint: "api/account/Authenticate",tokenStorage: "localStorage",loginPageUrl: "/"})',
-      link: `@narik/jwt-authentication`
+      link: `@narik/jwt-authentication`,
     },
     {
       moduleName: "NarikClientStorageModule.forRoot()",
-      link: `@narik/client-storage`
-    }
+      link: `@narik/client-storage`,
+    },
   ];
 
   const otherImports: any[] = [
     {
       name: "TranslateLoader",
-      link: `@ngx-translate/core`
+      link: `@ngx-translate/core`,
     },
     {
       name: "HttpClient",
-      link: `@angular/common/http`
+      link: `@angular/common/http`,
     },
     {
       name: "NbLayoutDirection",
-      link: `@nebular/theme`
+      link: `@nebular/theme`,
     },
     {
       name: "FORM_ITEM_DEFAULT_CLASS",
       link: `@narik/ui-material`,
-      uiKey: "material"
+      uiKey: "material",
     },
     {
       name: "Observable",
-      link: `rxjs`
+      link: `rxjs`,
     },
     {
       name: "ConfigService,MODULE_DATA_KEY,MODULE_UI_KEY,ModuleInfo",
-      link: "@narik/infrastructure"
+      link: "@narik/infrastructure",
     },
     {
       name: `NarikTranslateLoader,MEMORY_STORAGE_VALIDITY_LEN,NarikModule`,
-      link: "@narik/core"
-    }
+      link: "@narik/core",
+    },
   ];
 
   return (host: Tree) => {
@@ -1037,7 +1039,7 @@ export function addStyles(
   rtl: boolean,
   layout: string
 ): (host: Tree, context: SchematicContext) => Tree {
-  return function(host: Tree, context: SchematicContext): Tree {
+  return function (host: Tree, context: SchematicContext): Tree {
     const workspace = getWorkspace(host);
     const project = workspace.projects[workspace.defaultProject!];
     let assets: string[] = [];
@@ -1096,7 +1098,7 @@ export function addExtraFiles(
   rtl: boolean,
   layout: string
 ): (host: Tree, context: SchematicContext) => Rule {
-  return function(host: Tree, context: SchematicContext): Rule {
+  return function (host: Tree, context: SchematicContext): Rule {
     context.logger.log("info", `🔍 Adding  extra...`);
     const layoutModule = getLayoutModule(layout);
     const layoutModulePath = getLayoutModulePath(layout);
@@ -1106,7 +1108,7 @@ export function addExtraFiles(
         ui: ui,
         layoutStr: layout,
         layoutModule: layoutModule,
-        layoutModulePath: layoutModulePath
+        layoutModulePath: layoutModulePath,
       }),
       forEach((fileEntry: FileEntry) => {
         if (fileEntry.path.indexOf("@") >= 0) {
@@ -1119,7 +1121,7 @@ export function addExtraFiles(
             }
             return {
               path: newFilePath,
-              content: fileEntry.content
+              content: fileEntry.content,
             } as any;
           }
         } else if (fileEntry.path.indexOf("#") >= 0) {
@@ -1132,7 +1134,7 @@ export function addExtraFiles(
             }
             return {
               path: newFilePath,
-              content: fileEntry.content
+              content: fileEntry.content,
             } as any;
           }
         }
@@ -1142,7 +1144,7 @@ export function addExtraFiles(
         }
         return fileEntry;
       }),
-      move(normalize(""))
+      move(normalize("")),
     ]);
 
     context.logger.log("info", `🔍 Added  extra...`);
@@ -1154,7 +1156,7 @@ export function addCustomBuilder(): (
   host: Tree,
   context: SchematicContext
 ) => Tree {
-  return function(host: Tree, context: SchematicContext): Tree {
+  return function (host: Tree, context: SchematicContext): Tree {
     const workspace = getWorkspace(host);
     const project = workspace.projects[workspace.defaultProject!];
     const buildTargetOptions = getProjectTarget(project, "build");
@@ -1166,8 +1168,8 @@ export function addCustomBuilder(): (
       mergeStrategies: {
         module: "prepend",
         "module.rules": "prepend",
-        plugins: "prepend"
-      }
+        plugins: "prepend",
+      },
     };
 
     const serveTargetOptions = getProjectTarget(project, "serve");
