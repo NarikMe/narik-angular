@@ -24,7 +24,8 @@ import {
   NARIK_UI_COMPONENT_INPUTS,
 } from "./narik-ui-component";
 
-export class NarikFormComponent extends NarikUiComponent
+export class NarikFormComponent
+  extends NarikUiComponent
   implements ControlValueAccessor, AfterViewInit {
   _value: any;
   _id: string;
@@ -36,7 +37,6 @@ export class NarikFormComponent extends NarikUiComponent
   _disabled: any;
   _required: boolean;
   errors: string;
-  uiKey: string;
 
   @NarikInject(NgModel, undefined)
   ngModel: NgModel;

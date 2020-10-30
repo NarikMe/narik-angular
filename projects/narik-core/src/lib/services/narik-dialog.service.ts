@@ -2,7 +2,7 @@ import {
   EntityField,
   DialogInputContent,
   ModuleManager,
-  PARAMETERS
+  PARAMETERS,
 } from "@narik/infrastructure";
 import { UUID } from "angular2-uuid";
 
@@ -212,7 +212,8 @@ export class NarikDialogService extends DialogService {
     result.container = dialogContainerRef.instance;
     if (content instanceof TemplateRef) {
       const dialogContent = dialogContainerRef.instance.contentContainerRef.createEmbeddedView(
-        content
+        content,
+        data || {}
       );
     } else if (content instanceof Type) {
       if (!resolver) {
@@ -222,6 +223,7 @@ export class NarikDialogService extends DialogService {
       providers = providers || [];
       providers.push({ provide: DIALOG_REF, useValue: result });
       providers.push({ provide: PARAMETERS, useValue: data });
+
       let parentInjector: Injector = this.injector;
 
       if ((resolver as any).ngModule) {
@@ -239,6 +241,15 @@ export class NarikDialogService extends DialogService {
         undefined,
         localInjector
       );
+
+      // apply data on component inputs
+      if (data) {
+        for (const input of factory.inputs) {
+          if (Object.prototype.hasOwnProperty.call(data, input.propName)) {
+            dialogContent.instance[input.propName] = data[input.propName];
+          }
+        }
+      }
 
       result.componentInstance = dialogContent.instance;
     }

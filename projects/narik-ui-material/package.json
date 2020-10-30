@@ -1,6 +1,6 @@
 {
   "name": "@narik/ui-material",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "peerDependencies": {
     "@angular/common": "~10.0.9",
     "@angular/core": "~10.0.9",

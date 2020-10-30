@@ -4,7 +4,7 @@ import {
   DataInfo,
   DataOption,
   DataProviderService,
-  NarikDataSource
+  NarikDataSource,
 } from "@narik/infrastructure";
 import { DynamicFormService } from "@narik/ui-core";
 import { Observable } from "rxjs";
@@ -16,7 +16,7 @@ import {
   Injector,
   Input,
   OnInit,
-  ViewChild
+  ViewChild,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { MatAutocompleteTrigger } from "@angular/material/autocomplete";
@@ -26,10 +26,11 @@ import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
 import { MatLazyDataSource } from "../data-source/mat-lazy-data-source";
 import { MatLocalDataSource } from "../data-source/mat-local-data-source";
 import { NarikMatDataTable } from "../narik-mat-data-table/narik-mat-data-table.component";
-import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_DATA_TABLE_SELECT_INPUTS, NARIK_DATA_DISPLAY_VALUE_OUTPUTS } from "../input-output-items";
-
-
-
+import {
+  NARIK_DATA_DISPLAY_VALUE_INPUTS,
+  NARIK_DATA_TABLE_SELECT_INPUTS,
+  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
+} from "../input-output-items";
 
 @Component({
   selector: "narik-mat-data-table-select , narik-data-table-select",
@@ -38,20 +39,22 @@ import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_DATA_TABLE_SELECT_INPUTS, NARIK_
   inputs: [
     ...NARIK_MAT_FORM_INPUTS,
     ...NARIK_DATA_DISPLAY_VALUE_INPUTS,
-    ...NARIK_DATA_TABLE_SELECT_INPUTS
+    ...NARIK_DATA_TABLE_SELECT_INPUTS,
   ],
   outputs: [...NARIK_DATA_DISPLAY_VALUE_OUTPUTS],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NarikMatDataTableSelect),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
-export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
+export class NarikMatDataTableSelect
+  extends NarikMatDataTableSelectBase
   implements OnInit {
   _gridOptions: any;
+
   set gridOptions(value: any) {
     if (value && value.showSearchPanel !== true) {
       value.showSearchPanel = false;
@@ -61,7 +64,7 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
   get gridOptions(): any {
     return (
       this._gridOptions || {
-        showSearchPanel: false
+        showSearchPanel: false,
       }
     );
   }
@@ -127,8 +130,8 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
       model: "title",
       name: "title",
       options: {},
-      type: "text"
-    }
+      type: "text",
+    },
   ];
 
   @Input()
@@ -144,8 +147,8 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
           model: "title",
           name: "title",
           options: {},
-          type: "text"
-        }
+          type: "text",
+        },
       ];
     }
   }
@@ -178,7 +181,7 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
     this.gridPagingInfo = this.isLazyLoadData
       ? {
           pageSize: 20,
-          availablePageSizes: [10, 20, 50, 100]
+          availablePageSizes: [10, 20, 50, 100],
         }
       : undefined;
     if (this.isLazyLoadData) {
@@ -240,7 +243,7 @@ export class NarikMatDataTableSelect extends NarikMatDataTableSelectBase
   setDisplayText() {
     if (this.value) {
       const data = this.tableDataSource.currentData;
-      const item = data.filter(x => x[this.valueField] === this.value)[0];
+      const item = data.filter((x) => x[this.valueField] === this.value)[0];
       this.input.nativeElement.value = item
         ? item[this.displayField]
         : this.displayText || "";

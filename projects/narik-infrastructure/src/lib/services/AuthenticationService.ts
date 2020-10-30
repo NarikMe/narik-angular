@@ -10,14 +10,14 @@ export abstract class AuthenticationService {
   /**
    * Current user value of authentication service
    */
-  readonly currentUserValue: ApplicationUser;
+  abstract get currentUserValue(): ApplicationUser;
 
   /**
    * Current user of authentication service
    *
    * An `Observable` that emit whenever currentUser changed.
    */
-  readonly currentUser: Observable<ApplicationUser>;
+  abstract get currentUser(): Observable<ApplicationUser>;
 
   /**
    * Logins authentication service
@@ -26,13 +26,11 @@ export abstract class AuthenticationService {
    */
   abstract login(loginmodel: LoginModel): Promise<LoginResult>;
 
-
   /**
    * Logouts authentication service
    * @returns logout
    */
   abstract logout(): Promise<boolean>;
-
 
   /**
    * Refresh authentication service

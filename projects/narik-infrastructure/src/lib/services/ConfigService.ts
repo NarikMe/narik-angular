@@ -13,7 +13,7 @@ export abstract class ConfigService {
    * Config loaded of config service
    * An `Observable` that emit whenever config loaded.
    */
-  readonly configLoaded: Observable<any>;
+  abstract get configLoaded(): Observable<any>;
   abstract init(): Promise<any>;
   /**
    * Gets config

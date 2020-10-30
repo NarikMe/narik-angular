@@ -1,16 +1,14 @@
 import { ModuleInfo, ModuleEventArg } from "../interfaces/narik-module";
 import { Observable } from "rxjs";
 
-
 /**
  * Module manager
  */
 export abstract class ModuleManager {
-
   /**
    * Narik loaded of module manager
    */
-  readonly narikLoaded: Observable<any>;
+  abstract get narikLoaded(): Observable<any>;
 
   /**
    * Modules changed of module manager

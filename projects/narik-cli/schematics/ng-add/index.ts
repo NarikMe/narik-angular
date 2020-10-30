@@ -162,7 +162,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "ngx-custom-validators",
-    version: "^9.1.0",
+    version: "^10.0.0",
   },
   {
     name: "class-validator",
@@ -225,7 +225,7 @@ const layoutDependency: any = {
     },
     {
       name: "typeface-exo",
-      version: "^0.0.61",
+      version: "^1.1.13",
     },
   ],
   architectui: [
@@ -282,7 +282,7 @@ const layoutDependency: any = {
     },
     {
       name: "ngx-bootstrap",
-      version: "^5.6.1",
+      version: "^6.1.0",
     },
   ],
 };
@@ -318,7 +318,7 @@ const uiDependency: any = {
   "ng-bootstrap": [
     { name: "@narik/ui-ng-bootstrap", version: "^4.0.0" },
     { name: "@narik/ui-swimlane", version: "^4.0.0" },
-    { name: "@swimlane/ngx-datatable", version: "^17.1.0" },
+    { name: "@swimlane/ngx-datatable", version: "^18.0.0" },
     { name: "@ng-bootstrap/ng-bootstrap", version: "^7.0.0" },
     { name: "@angular/localize", version: "^10.0.9" },
   ],
@@ -331,7 +331,7 @@ const uiDependency: any = {
     { name: "date-fns", version: "^2.14.0" },
   ],
   primeng: [
-    { name: "primeng", version: "^9.1.3" },
+    { name: "primeng", version: "^10.0.3" },
     { name: "primeicons", version: "^4.0.0" },
     { name: "@narik/ui-primeng", version: "^4.0.0" },
   ],
