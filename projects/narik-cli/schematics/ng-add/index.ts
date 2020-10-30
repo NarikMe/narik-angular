@@ -667,8 +667,8 @@ function updateTsConfig(ui: string) {
   };
 
   return (host: Tree, context: SchematicContext) => {
-    if (host.exists("tsconfig.base.json")) {
-      let sourceText = host.read("tsconfig.base.json")!.toString("utf-8");
+    if (host.exists("tsconfig.json")) {
+      let sourceText = host.read("tsconfig.json")!.toString("utf-8");
       sourceText = sourceText.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, "");
       const json = JSON.parse(sourceText);
 
@@ -684,8 +684,8 @@ function updateTsConfig(ui: string) {
           }
         }
       }
-      host.overwrite("tsconfig.base.json", JSON.stringify(json, null, 2));
-      context.logger.log("info", `🔍 Apply path in  tsconfig.base.json`);
+      host.overwrite("tsconfig.json", JSON.stringify(json, null, 2));
+      context.logger.log("info", `🔍 Apply path in  tsconfig.json`);
     }
 
     return host;
