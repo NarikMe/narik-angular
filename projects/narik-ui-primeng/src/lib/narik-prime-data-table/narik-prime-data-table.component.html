@@ -1,52 +1,73 @@
-<p-table [value]="rows" #dt1
-[columns]="fields"
-selectionMode="single"
-[scrollable]="true"
-[lazy]="isServerSide"
-(onLazyLoad)="refreshServerData($event)"
-[totalRecords]="totalRecords"
-[reorderableColumns]="true"
-[paginator]="!!pagingInfo" [rows]="pagingInfo ? pagingInfo.pageSize : undefined"
-scrollHeight="{{options.scrollHeight}}"
-[(selection)]="selectedItem">
+<p-table
+  [value]="rows"
+  #dt1
+  [columns]="fields"
+  selectionMode="single"
+  [scrollable]="true"
+  [lazy]="isServerSide"
+  (onLazyLoad)="refreshServerData($event)"
+  [totalRecords]="totalRecords"
+  [reorderableColumns]="true"
+  [paginator]="!!pagingInfo"
+  [rows]="pagingInfo ? pagingInfo.pageSize : undefined"
+  scrollHeight="{{ options.scrollHeight }}"
+  [(selection)]="selectedItem"
+>
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
-        {{col.header}}
+      <th
+        *ngFor="let col of columns"
+        [pSortableColumn]="col.field"
+        pResizableColumn
+        pReorderableColumn
+      >
+        {{ col.header }}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
     </tr>
     <tr>
       <th *ngFor="let col of columns" [ngSwitch]="col.field" class="ui-fluid">
-        <ng-container <div [ngSwitch]="col.type">
+        <ng-container [ngSwitch]="col.type">
           <ng-container *ngSwitchCase="'boolean'">
-            <p-triStateCheckbox (onChange)="dt1.filter($event.value,col.field,'equals')"></p-triStateCheckbox>
+            <p-triStateCheckbox
+              (onChange)="dt1.filter($event.value, col.field, 'equals')"
+            ></p-triStateCheckbox>
           </ng-container>
           <ng-container *ngSwitchDefault>
-            <input pInputText class="text-filter-input" type="text"
-              (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)"
-              [value]="dt1.filters[col.field]?.value">
+            <input
+              pInputText
+              class="text-filter-input"
+              type="text"
+              (input)="
+                dt1.filter($event.target.value, col.field, col.filterMatchMode)
+              "
+              [value]="dt1.filters[col.field]?.value"
+            />
           </ng-container>
         </ng-container>
       </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
-    <tr [pSelectableRow]="rowData" (dblclick)="rowDblClick(rowData);">
+    <tr [pSelectableRow]="rowData" (dblclick)="rowDblClick(rowData)">
       <td *ngFor="let col of columns">
-
         <div [ngSwitch]="col.type">
           <ng-container *ngSwitchCase="'boolean'">
-            <i [ngClass]="{'fa': true , 'fa-check' : rowData[col.field] ,'fa-times' : !rowData[col.field] }"
-              class="fa fa-check" aria-hidden="true"></i>
+            <i
+              [ngClass]="{
+                fa: true,
+                'fa-check': rowData[col.field],
+                'fa-times': !rowData[col.field]
+              }"
+              class="fa fa-check"
+              aria-hidden="true"
+            ></i>
           </ng-container>
           <ng-container *ngSwitchCase="'date'">
-            {{ rowData[col.field] | date: col.options.format || 'mediumDate' }}
+            {{ rowData[col.field] | date: col.options.format || "mediumDate" }}
           </ng-container>
-          <ng-container *ngSwitchDefault>{{rowData[col.field]}}</ng-container>
-
+          <ng-container *ngSwitchDefault>{{ rowData[col.field] }}</ng-container>
         </div>
-
       </td>
     </tr>
   </ng-template>

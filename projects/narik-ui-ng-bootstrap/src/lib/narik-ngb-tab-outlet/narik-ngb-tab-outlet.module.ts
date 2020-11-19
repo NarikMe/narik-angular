@@ -3,11 +3,11 @@ import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
 import { NarikCommonModule } from "@narik/common";
 import { NarikNgbTabOutlet } from "./narik-ngb-tab-outlet.component";
-import { NgbTabsetModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
-  imports: [CommonModule, TranslateModule, NarikCommonModule, NgbTabsetModule],
+  imports: [CommonModule, TranslateModule, NarikCommonModule, NgbNavModule],
   declarations: [NarikNgbTabOutlet],
   exports: [NarikNgbTabOutlet],
-  providers: []
+  providers: [],
 })
 export class NarikNgbTabOutletModule {}

@@ -2,13 +2,11 @@ import { MetaDataService, MODULE_UI_KEY } from "@narik/infrastructure";
 import { NarikInject } from "@narik/core";
 import { FORM_ITEM_DEFAULT_CLASS } from "./../injectionTokens";
 import { Input, Injector } from "@angular/core";
+
 import {
   FloatLabelType,
-  MAT_LABEL_GLOBAL_OPTIONS
-} from "@angular/material/core";
-import {
   MatFormFieldAppearance,
-  MAT_FORM_FIELD_DEFAULT_OPTIONS
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from "@angular/material/form-field";
 
 export class NarikMatFormFieldInput {
@@ -107,7 +105,8 @@ export class NarikMatFormFieldInput {
   }
 
   constructor(injector: Injector) {
-    const _defaultLabelOption = injector.get(MAT_LABEL_GLOBAL_OPTIONS, null);
+    // const _defaultLabelOption = injector.get(MAT_LABEL_GLOBAL_OPTIONS, null);
+
     const _defaultFormItemClass = injector.get(FORM_ITEM_DEFAULT_CLASS, null);
     const _defaults = injector.get(MAT_FORM_FIELD_DEFAULT_OPTIONS, null);
 
@@ -116,10 +115,9 @@ export class NarikMatFormFieldInput {
     }
     this.appearance =
       _defaults && _defaults.appearance ? _defaults.appearance : "legacy";
+
     this.floatLabel =
-      _defaultLabelOption && _defaultLabelOption.float
-        ? _defaultLabelOption.float
-        : "auto";
+      _defaults && _defaults.floatLabel ? _defaults.floatLabel : "auto";
 
     const metaDataService = injector.get(MetaDataService, undefined);
     const containerModuleKey = injector.get(MODULE_UI_KEY, "narik");
@@ -146,5 +144,5 @@ export const NARIK_MAT_FORM_INPUTS: string[] = [
   "floatLabel",
   "appearance",
   "hintLabel",
-  "suffixIcon"
+  "suffixIcon",
 ];
