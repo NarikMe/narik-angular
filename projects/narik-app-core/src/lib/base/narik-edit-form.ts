@@ -1,27 +1,17 @@
+import { ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 import {
-  ElementRef,
-  Injector,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-  ViewContainerRef,
-} from "@angular/core";
-import {
-  NgForm,
-  NgModel,
   FormGroup,
-  FormControl,
   FormBuilder,
-} from "@angular/forms";
+  Validators,
+  ValidatorFn,
+} from '@angular/forms';
 import {
   formatString,
   isEquivalent,
   isFunction,
-  isObject,
-  isPresent,
-} from "@narik/common";
-import { NarikInject } from "@narik/core";
+  NarikValidators,
+} from '@narik/common';
+import { NarikInject } from '@narik/core';
 import {
   CommandInfo,
   ConfigService,
@@ -32,24 +22,24 @@ import {
   NarikViewField,
   MetaDataService,
   MODULE_UI_KEY,
-} from "@narik/infrastructure";
-import { DynamicFormService, NarikDynamicForm } from "@narik/ui-core";
-import { TranslateService } from "@ngx-translate/core";
-import { validate, ValidationError } from "class-validator";
-import { denormalize } from "data-adapter";
-import { Observable } from "rxjs";
-import { debounceTime } from "rxjs/operators";
-import { Subscription } from "rxjs";
-import { finalize, takeWhile } from "rxjs/operators";
-import { EDIT_DEFAULT_VIEW_OPTION } from "../injectionTokens";
-import { EditFormConfig } from "../interfaces/form-config.model";
+  EntityField,
+  ValidationService,
+} from '@narik/infrastructure';
+import { DynamicFormService } from '@narik/ui-core';
+import { TranslateService } from '@ngx-translate/core';
+import { validate, ValidationError } from 'class-validator';
+import { denormalize } from 'data-adapter';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { debounceTime, filter, finalize } from 'rxjs/operators';
+import { EDIT_DEFAULT_VIEW_OPTION } from '../injectionTokens';
+import { EditFormConfig } from '../interfaces/form-config.model';
 import {
   DefaultEditViewOption,
   EditFormViewOption,
-} from "../interfaces/form-view-option.model";
-import { ServerResponse } from "../interfaces/server-response.model";
-import { StringConstants } from "../util/constants";
-import { NarikGeneralForm } from "./narik-general-form";
+} from '../interfaces/form-view-option.model';
+import { ServerResponse } from '../interfaces/server-response.model';
+import { StringConstants } from '../util/constants';
+import { NarikGeneralForm } from './narik-general-form';
 
 /**
  * Narik edit form
@@ -57,15 +47,25 @@ import { NarikGeneralForm } from "./narik-general-form";
 export abstract class NarikEditForm<TE extends NarikEntity>
   extends NarikGeneralForm<TE>
   implements OnInit {
-  private _models = new Map<string, { model: NgModel; sub: Subscription }>();
-  private _lastModelNames = [];
-  private _lastModelValues = new Map<string, any>();
-  private _dynamicForms = new Map<NarikDynamicForm, Subscription>();
-
   protected entityKeyField: string;
-  public isReactiveForm = false;
 
   formsOptions: any;
+  generalValidators: any;
+
+  private currentEntityChangedSubject: Subject<{
+    oldEntity: TE;
+    newEntity: TE;
+  }> = new Subject();
+
+  currentEntityChanged$ = this.currentEntityChangedSubject.asObservable();
+
+  private formBuiltSubject: BehaviorSubject<FormGroup> = new BehaviorSubject(
+    undefined
+  );
+
+  formBuilt$ = this.formBuiltSubject
+    .asObservable()
+    .pipe(filter((form) => !!form));
 
   @NarikInject(EDIT_DEFAULT_VIEW_OPTION, DefaultEditViewOption)
   defaultOption: EditFormViewOption;
@@ -75,6 +75,9 @@ export abstract class NarikEditForm<TE extends NarikEntity>
 
   @NarikInject(ConfigService)
   configService: ConfigService;
+
+  @NarikInject(ValidationService)
+  validationService: ValidationService;
 
   @NarikInject(MetaDataService)
   metaDataService: MetaDataService;
@@ -91,22 +94,9 @@ export abstract class NarikEditForm<TE extends NarikEntity>
   @NarikInject(FormBuilder)
   formBuilder: FormBuilder;
 
-  form: FormGroup = new FormGroup({});
-  _ngForm: NgForm;
+  form: FormGroup;
 
-  @ViewChild(NgForm, { static: false })
-  set ngForm(value: NgForm) {
-    this._ngForm = value;
-    if (value) {
-      this.form = value.form;
-    }
-  }
-
-  get ngForm() {
-    return this._ngForm;
-  }
-
-  @ViewChild("formElement", { read: ElementRef, static: false })
+  @ViewChild('formElement', { read: ElementRef, static: false })
   formElement: ElementRef;
 
   _currentEntity: TE = <any>{};
@@ -116,36 +106,6 @@ export abstract class NarikEditForm<TE extends NarikEntity>
 
   @NarikInject(DynamicFormService)
   dynamicFormService: DynamicFormService;
-
-  @ViewChildren(NarikDynamicForm)
-  set dynamicForm(values: QueryList<NarikDynamicForm>) {
-    if (values) {
-      const valueArray = values.toArray();
-      for (const value of valueArray) {
-        if (!this._dynamicForms.has(value)) {
-          const sub = value.modelsChaned
-            .pipe(takeWhile((x) => this.isAlive))
-            .subscribe((result) => {
-              if (result) {
-                this.applyNgModels(result.items, result.removed);
-              }
-            });
-          this._dynamicForms.set(value, sub);
-        }
-      }
-    }
-  }
-
-  @ViewChildren(NgModel)
-  public set models(value: QueryList<NgModel>) {
-    const modelArray = value.toArray();
-    const modelNameArray = modelArray.map((t) => t.name);
-    const removed = this._lastModelNames.filter(
-      (x) => modelNameArray.indexOf(x) < 0
-    );
-    this.applyNgModels(modelArray, removed);
-    this._lastModelNames = modelNameArray;
-  }
 
   set config(value: EditFormConfig) {
     this._config = value;
@@ -159,6 +119,10 @@ export abstract class NarikEditForm<TE extends NarikEntity>
       const oldValue = this._currentEntity;
       this._currentEntity = value;
       this.currentEntityChanged(oldValue, value);
+      this.currentEntityChangedSubject.next({
+        oldEntity: oldValue,
+        newEntity: value,
+      });
       this.detectChanges();
     }
   }
@@ -169,58 +133,21 @@ export abstract class NarikEditForm<TE extends NarikEntity>
   constructor(injector: Injector) {
     super(injector);
     this.entityKeyField =
-      this.configService.getConfig("entityKeyField") || "viewModelId";
+      this.configService.getConfig('entityKeyField') || 'viewModelId';
 
     this.formsOptions = this.metaDataService.getValue<any>(
       this.moduleKey,
-      "formsOptions"
+      'formsOptions'
     );
 
-    if (this.formsOptions && isPresent(this.formsOptions.isReactiveForm)) {
-      this.isReactiveForm = this.formsOptions.isReactiveForm;
-    }
+    this.generalValidators = this.validationService.validators();
   }
 
-  private applyNgModels(ngModels: NgModel[], removed: string[]) {
-    ngModels.forEach((model) => {
-      if (!this._models.has(model.name)) {
-        this.ngForm.addControl(model);
-        const modelName = model.name;
-        const sub = model.update
-          .pipe(
-            takeWhile(() => this.isAlive),
-            debounceTime(100)
-          )
-          .subscribe((newValue) => {
-            this.onModelValueChanged(
-              modelName,
-              newValue,
-              this._lastModelValues.get(modelName)
-            );
-            this.detectChanges();
-            this._lastModelValues.set(modelName, newValue);
-          });
-        this._models.set(model.name, {
-          model: model,
-          sub: sub,
-        });
-      }
-    });
-
-    for (const item of removed) {
-      const removeItem = this._models.get(item);
-      if (removeItem) {
-        this.ngForm.removeControl(removeItem.model);
-        removeItem.sub.unsubscribe();
-        this._models.delete(item);
-      }
-    }
-  }
   ngOnInit() {
     this.config =
       this.config ||
       this.parameterResolver.get(StringConstants.Prameter_Config);
-    if (this.config && this.config.isDynamic) {
+    if (this.config?.isDynamic) {
       this.fields = this.dynamicFormService
         .createFieldsFromEntityFields(this.config.fields)
         .filter((x) => x.showInEdit)
@@ -231,23 +158,18 @@ export abstract class NarikEditForm<TE extends NarikEntity>
         });
     }
 
-    if (isPresent(this.config.isReactiveForm)) {
-      this.isReactiveForm = this.config.isReactiveForm;
-    }
-    if (this.isReactiveForm) {
-      this.form = this.createForm();
+    this.form = this.buildForm();
+    this.formBuiltSubject.next(this.form);
+    if (this.config?.isDynamic) {
+      this.form.valueChanges.pipe(debounceTime(100)).subscribe(() => {
+        this.detectChanges();
+      });
     }
     this.getOrNewEntity();
     this.detectChanges();
   }
 
-  protected onModelValueChanged(
-    modelName: string,
-    newValue: any,
-    oldValue: any
-  ) {}
-
-  showFormErrors(form: FormGroup, formElement: ElementRef) {
+  showFormElementErrors(form: FormGroup, formElement: ElementRef) {
     const errors = [];
     for (const key in form.controls) {
       if (form.controls[key].errors) {
@@ -261,14 +183,14 @@ export abstract class NarikEditForm<TE extends NarikEntity>
         }
       }
     }
-    let errMessage = "";
+    let errMessage = '';
     for (const item of errors) {
       const label =
         formElement && item.key
           ? this.findLabel(formElement, item.key)
           : item.key
           ? this.translateService.instant(item.key)
-          : "";
+          : '';
       const errorDataArray = [];
       if (item.errData) {
         for (const key in item.errData) {
@@ -279,21 +201,21 @@ export abstract class NarikEditForm<TE extends NarikEntity>
       }
       errMessage +=
         formatString(
-          this.translateService.instant("errors." + item.errKey),
+          this.translateService.instant('errors.' + item.errKey),
           label,
           ...errorDataArray
-        ) + "<br>";
+        ) + '<br>';
     }
-    this.dialogService.error(errMessage, "", {
+    this.dialogService.error(errMessage, '', {
       enableHtml: true,
     });
   }
   findLabel(formElement: ElementRef, key: string) {
     const element = formElement.nativeElement.querySelector(
-      "[narik-form-item-key=" + key + "]"
+      '[narik-form-item-key=' + key + ']'
     );
     if (element) {
-      const labelAttr = element.attributes["narik-form-item-label"];
+      const labelAttr = element.attributes['narik-form-item-label'];
       if (labelAttr) {
         return this.translateService.instant(labelAttr.value);
       }
@@ -302,9 +224,7 @@ export abstract class NarikEditForm<TE extends NarikEntity>
   }
 
   protected getPostData() {
-    const denormalizeEntity = isFunction((this.currentEntity as any).toJson)
-      ? (this.currentEntity as any).toJson()
-      : denormalize(this.currentEntity);
+    const denormalizeEntity = this.denormalizeEntity(this.currentEntity);
     return this.addToPostData({ Entity: denormalizeEntity });
   }
 
@@ -322,19 +242,13 @@ export abstract class NarikEditForm<TE extends NarikEntity>
       return;
     }
 
-    if (this.isReactiveForm) {
-      this.currentEntity = { ...this.currentEntity, ...this.form.value };
-    }
+    this.applyFormOnEntity(this.currentEntity, this.form);
+
     this.completeEntityBeforeSubmit(this.currentEntity);
 
     if (this.form && !this.form.valid) {
       this.form.markAllAsTouched();
-      if (this.formElement) {
-        this.showFormErrors(this.form, this.formElement);
-      } else {
-        this.dialogService.error("errors.invalid_form");
-      }
-
+      this.showFormErrors(this.form, this.formElement);
       return;
     }
 
@@ -350,8 +264,8 @@ export abstract class NarikEditForm<TE extends NarikEntity>
             {
               dataKey: this.config.entityKey,
               dataMethod: this.currentEntity[this.entityKeyField]
-                ? "PUT"
-                : "POST",
+                ? 'PUT'
+                : 'POST',
               urlParameters: this.currentEntity[this.entityKeyField],
             },
             postData
@@ -362,16 +276,24 @@ export abstract class NarikEditForm<TE extends NarikEntity>
             })
           )
           .subscribe((result) => {
-            this.dialogService.showMessage("info.submit-succeed");
+            this.dialogService.showMessage('info.submit-succeed');
             if (this.dialogRef) {
               this.dialogRef.events.next({
-                eventType: "ENTITY_UPDATED",
+                eventType: 'ENTITY_UPDATED',
               });
             }
             this.currentEntity = result.data;
           });
       }
     });
+  }
+  protected applyFormOnEntity(currentEntity: TE, form: FormGroup) {
+    this.currentEntity = Object.assign(currentEntity, form.value);
+  }
+  protected showFormErrors(form: FormGroup, formElement: ElementRef<any>) {
+    if (formElement) {
+      this.showFormElementErrors(form, formElement);
+    }
   }
 
   protected validateEntity(entity: TE): Promise<boolean> {
@@ -391,8 +313,8 @@ export abstract class NarikEditForm<TE extends NarikEntity>
       .map((err: ValidationError) => {
         return this.getAllFieldValues(err.constraints);
       })
-      .join("<br>");
-    this.dialogService.error(errorItems, "", {
+      .join('<br>');
+    this.dialogService.error(errorItems, '', {
       enableHtml: true,
     });
   }
@@ -405,7 +327,7 @@ export abstract class NarikEditForm<TE extends NarikEntity>
         result.push(obj[key]);
       }
     }
-    return result.join("<br>");
+    return result.join('<br>');
   }
 
   getEntity(entityId: any): Observable<ServerResponse<TE>> {
@@ -425,11 +347,12 @@ export abstract class NarikEditForm<TE extends NarikEntity>
         this.afterEntityLoaded(result.data);
         const tempEntity = Object.assign(this.entityTypeCreator(), result.data);
         this.currentEntity = tempEntity;
-        if (this.isReactiveForm) {
-          this.form.patchValue(this.currentEntity, {
-            emitEvent: false,
-          });
-        }
+
+        const denormalizeEntity = this.denormalizeEntity(this.currentEntity);
+        this.form.patchValue(denormalizeEntity, {
+          emitEvent: false,
+        });
+
         this.isBusy = false;
       });
     } else {
@@ -441,6 +364,11 @@ export abstract class NarikEditForm<TE extends NarikEntity>
     this.newEntity();
   }
 
+  protected denormalizeEntity(entity: TE): TE {
+    return isFunction((this.currentEntity as any).toJson)
+      ? (this.currentEntity as any).toJson()
+      : denormalize(this.currentEntity);
+  }
   protected get entityTypeCreator(): () => TE {
     if (this.config.entityTypeCreator) {
       return this.entityTypeService.getTypeCreator(
@@ -456,11 +384,10 @@ export abstract class NarikEditForm<TE extends NarikEntity>
     tempNewEntity = Object.assign(this.entityTypeCreator(), tempNewEntity);
     this.doBeforeNewEntitySet(tempNewEntity);
     this.currentEntity = tempNewEntity;
-    if (this.isReactiveForm) {
-      this.form.reset(this.currentEntity, {
-        emitEvent: false,
-      });
-    }
+    const denormalizeEntity = this.denormalizeEntity(this.currentEntity);
+    this.form.reset(denormalizeEntity, {
+      emitEvent: false,
+    });
   }
   protected currentEntityChanged(oldValue: TE, newValue: TE) {}
   protected createNewEntity(): TE {
@@ -481,9 +408,9 @@ export abstract class NarikEditForm<TE extends NarikEntity>
     }
     if (this.currentEntity) {
       this.dialogService
-        .showConfirm("info.delete-confirm", "info.confirm")
+        .showConfirm('info.delete-confirm', 'info.confirm')
         .closed.then((confirmResult: DialogResult<any>) => {
-          if (confirmResult.dialogResult === "yes") {
+          if (confirmResult.dialogResult === 'yes') {
             this.isBusy = true;
             const data = [{ id: this.currentEntity[this.entityKeyField] }];
             this.queryService
@@ -506,25 +433,45 @@ export abstract class NarikEditForm<TE extends NarikEntity>
   }
 
   processCommand(cmd: CommandInfo) {
-    if (cmd.commandKey === "save") {
+    if (cmd.commandKey === 'save') {
       this.submit();
     }
-    if (cmd.commandKey === "delete") {
+    if (cmd.commandKey === 'delete') {
       this.deleteEntity();
-    } else if (cmd.commandKey === "new") {
+    } else if (cmd.commandKey === 'new') {
       this.reset();
     } else {
       super.processCommand(cmd);
     }
   }
 
-  protected createForm(): FormGroup {
+  protected buildForm(): FormGroup {
     const controls = {};
     if (this.config.fields) {
       for (const field of this.config.fields) {
-        controls[field.name] = [undefined];
+        controls[field.name] = [
+          undefined,
+          Validators.compose(this.createValidators(field)),
+        ];
       }
     }
     return this.formBuilder.group(controls);
+  }
+  createValidators(field: EntityField): (ValidatorFn | null | undefined)[] {
+    const validators = [];
+
+    if (field.required) {
+      validators.push(Validators.required);
+    }
+    if (field.validators) {
+      validators.push(
+        NarikValidators.GeneralValidator(
+          this.generalValidators,
+          field.validators,
+          field.validatorParams
+        )
+      );
+    }
+    return validators;
   }
 }

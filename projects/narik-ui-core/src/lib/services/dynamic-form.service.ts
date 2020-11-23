@@ -1,13 +1,15 @@
 import {
   NarikViewField,
   EntityField,
-  isNarikViewField
-} from "@narik/infrastructure";
-import { Injectable, Type } from "@angular/core";
+  isNarikViewField,
+} from '@narik/infrastructure';
+import { Injectable, Type } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 export interface DynamicFormComponent {
   field: NarikViewField | EntityField;
   model: any;
+  form: FormGroup;
 }
 export abstract class DynamicFormService {
   abstract initDynamicFormFields(
@@ -62,7 +64,7 @@ export class NarikDynamicFormService extends DynamicFormService {
           hideExpr: x.hideExpr,
           disableExpr: x.disableExpr,
           validators: x.validators,
-          validatorParams: x.validatorParams
+          validatorParams: x.validatorParams,
         }
     );
   }

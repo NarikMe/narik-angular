@@ -21,7 +21,8 @@
             $implicit: item,
             invisibleItems: invisibleItems,
             disableItems: disableItems,
-            model: model
+            model: model,
+            form: form
           }
         "
       ></ng-container>
@@ -42,7 +43,8 @@
                 $implicit: item,
                 invisibleItems: invisibleItems,
                 disableItems: disableItems,
-                model: model
+                model: model,
+                form: form
               }
             "
           ></ng-container>
@@ -57,9 +59,13 @@
   let-item
   let-invisibleItems="invisibleItems"
   let-model="model"
+  let-form="form"
   let-disableItems="disableItems"
 >
-  <ng-container *ngIf="!item.hideExpr || !invisibleItems[item.name]">
+  <ng-container
+    [formGroup]="form"
+    *ngIf="!item.hideExpr || !invisibleItems[item.name]"
+  >
     <ng-container *ngIf="!customFormComponentKeysObject[item.type || 'text']">
       <ng-container
         *ngIf="
@@ -78,9 +84,7 @@
           placeHolder="{{ item.options.placeHolder | translate }}"
           [type]="item.type || 'text'"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
           [options]="item.options"
         >
         </narik-mat-input>
@@ -90,9 +94,7 @@
           [name]="item.name"
           [disabled]="item.disableExpr && disableItems[item.name]"
           [options]="item.options"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
           label="{{ item.label | translate }}"
         ></narik-mat-checkbox>
       </ng-container>
@@ -103,9 +105,7 @@
           [name]="item.name"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
           label="{{ item.label | translate }}"
         ></narik-mat-date-picker>
       </ng-container>
@@ -118,9 +118,7 @@
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         ></narik-mat-select>
       </ng-container>
       <ng-container *ngIf="item.type == 'autoComplete'">
@@ -134,9 +132,7 @@
           [isLazyLoadData]="item.options.isLazyLoadData"
           [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         ></narik-mat-autocomplete>
       </ng-container>
       <ng-container *ngIf="item.type == 'radio'">
@@ -148,9 +144,7 @@
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         ></narik-mat-radio-group>
       </ng-container>
       <ng-container *ngIf="item.type == 'checkList'">
@@ -162,9 +156,7 @@
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         ></narik-mat-checkbox-list>
       </ng-container>
       <ng-container *ngIf="item.type == 'table-select'">
@@ -179,9 +171,7 @@
           label="{{ item.label | translate }}"
           [fields]="item.options ? item.options.fields : undefined"
           [isLazyLoadData]="item.options.isLazyLoadData"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         >
         </narik-mat-data-table-select>
       </ng-container>
@@ -190,13 +180,16 @@
     <ng-container *ngIf="customFormComponentKeysObject[item.type || 'text']">
       <ng-container
         *narikComponentLoader="
-        customFormComponentKeysObject[item.type || 'text'];
-        bindings: {
-          field:item,
-          model:model
-        };
-        bindingSource:this
-      "
+          customFormComponentKeysObject[item.type || 'text'];
+          bindings: {
+            field: item,
+            model: model
+          };
+          bindingSource: this;
+          parameters: {
+            form: form
+          }
+        "
       ></ng-container>
     </ng-container>
   </ng-container>

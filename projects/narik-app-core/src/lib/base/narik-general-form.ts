@@ -18,7 +18,6 @@ import { Observable } from "rxjs";
 import {
   ChangeDetectorRef,
   Injector,
-  Input,
   OnChanges,
   SimpleChanges,
   ViewChild,

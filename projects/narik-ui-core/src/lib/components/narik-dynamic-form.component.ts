@@ -1,37 +1,31 @@
-import { Subscription } from "rxjs";
-import { NarikInject } from "@narik/core";
-import { NarikViewField, EntityField, CommandHost } from "@narik/infrastructure";
-
+import { NarikInject } from '@narik/core';
 import {
-  Injector,
-  Input,
-  ViewChildren,
-  QueryList,
-  ViewContainerRef,
-  OnInit,
-  Output,
-  EventEmitter
-} from "@angular/core";
+  NarikViewField,
+  EntityField,
+  CommandHost,
+} from '@narik/infrastructure';
 
-import { DynamicFormService } from "../services/dynamic-form.service";
-import { NgModel } from "@angular/forms";
-import { Observable, ReplaySubject } from "rxjs";
-import { debounceTime } from "rxjs/operators";
-import { evalStringExpression, getParnetComponent } from "@narik/common";
-import { NarikUiComponent } from "../base/narik-ui-component";
-import { takeWhile } from "rxjs/operators";
+import { Injector, Input, ViewContainerRef, OnInit } from '@angular/core';
+
+import { DynamicFormService } from '../services/dynamic-form.service';
+import { AbstractControl, FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+import { evalStringExpression, getParnetComponent } from '@narik/common';
+import { NarikUiComponent } from '../base/narik-ui-component';
 
 export class NarikDynamicForm extends NarikUiComponent implements OnInit {
-  readonly expressionPrefix = "$$$narik";
+  readonly expressionPrefix = '$$$narik';
   customFormComponentKeys: string[] = [];
   customFormComponentKeysObject: any = {};
 
   invisibleItems: any = {};
   disableItems: any = {};
-  private _lastModelNames = [];
 
   @Input()
   activeTabGuard = true;
+
+  @Input()
+  form: FormGroup;
 
   @Input()
   activeAutoFocus = true;
@@ -53,41 +47,6 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
 
   _model: any;
   _fields: NarikViewField[] | EntityField[];
-  private _models = new Map<string, { model: NgModel; sub: Subscription }>();
-
-  private _lastModelValues = new Map<string, any>();
-
-  @Output()
-  formValueChanged = new EventEmitter<any>();
-
-  @Output()
-  modelChange = new EventEmitter<any>();
-
-  private _modelsChangedSubject = new ReplaySubject<{
-    items: NgModel[];
-    removed: string[];
-  }>(1);
-
-  get modelsChaned(): Observable<{ items: NgModel[]; removed: string[] }> {
-    return this._modelsChangedSubject.asObservable();
-  }
-
-  @ViewChildren(NgModel)
-  set models(value: QueryList<NgModel>) {
-    const modelArray = value.toArray();
-    const modelNameArray = modelArray.map(t => t.name);
-    const removed = this._lastModelNames.filter(
-      x => modelNameArray.indexOf(x) < 0
-    );
-    this._lastModelNames = modelNameArray;
-
-    this.manupulateModels(modelArray, removed);
-
-    this._modelsChangedSubject.next({
-      items: modelArray,
-      removed: removed
-    });
-  }
 
   @Input()
   set fields(value: NarikViewField[] | EntityField[]) {
@@ -101,7 +60,6 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   @Input()
   set model(value: any) {
     this._model = this.dynamicFormService.initDynamicFormModel(value);
-    this.modelChange.emit(this._model);
   }
   get model(): any {
     return this._model;
@@ -126,49 +84,19 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
 
   ngOnInit() {
     if (this.host && this.host.change) {
-      this.host.change.pipe(debounceTime(100)).subscribe(x => {
+      this.host.change.pipe(debounceTime(100)).subscribe(() => {
         this.applyContextExpressions();
       });
     }
   }
 
-  manupulateModels(modelArray: NgModel[], removed: string[]) {
-    for (const model of modelArray) {
-      if (!this._models.has(model.name)) {
-        const sub = model.update
-          .pipe(
-            takeWhile(() => this.isAlive),
-            debounceTime(100)
-          )
-          .subscribe(newValue => {
-            this.formValueChanged.emit({
-              name: model.name,
-              newValue,
-              oldValue: this._lastModelValues.get(model.name)
-            });
-            this._lastModelValues.set(model.name, newValue);
-          });
-        this._models.set(model.name, {
-          model: model,
-          sub: sub
-        });
-      }
-    }
-    for (const item of removed) {
-      const removeItem = this._models.get(item);
-      if (removeItem) {
-        removeItem.sub.unsubscribe();
-        this._models.delete(item);
-      }
-    }
-  }
   initExpression(fields: NarikViewField[] | EntityField[]) {
     for (const field of fields) {
       field.hideExpr = field.hideExpr
-        ? evalStringExpression(field.hideExpr, ["host"])
+        ? evalStringExpression(field.hideExpr, ['host'])
         : null;
       field.disableExpr = field.disableExpr
-        ? evalStringExpression(field.disableExpr, ["host"])
+        ? evalStringExpression(field.disableExpr, ['host'])
         : null;
 
       if (field.disableExpr) {
@@ -190,7 +118,7 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
 
   applyExpressionsOnObject(obj: any) {
     for (const key in obj) {
-      if (!key.startsWith("$$$") && obj.hasOwnProperty(key)) {
+      if (!key.startsWith('$$$') && obj.hasOwnProperty(key)) {
         obj[key] = obj[this.expressionPrefix + key].apply(null, [this.host]);
       }
     }

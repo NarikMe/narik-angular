@@ -1,27 +1,27 @@
-import { Directive, Input } from "@angular/core";
+import { Directive, Input } from '@angular/core';
 import {
   NG_VALIDATORS,
   Validator,
   AbstractControl,
-  Validators
-} from "@angular/forms";
-import { ValidationService } from "@narik/infrastructure";
+  Validators,
+} from '@angular/forms';
+import { ValidationService } from '@narik/infrastructure';
 
 @Directive({
-  selector: "[narikValidator]",
+  selector: '[narikValidator]',
   providers: [
     {
       provide: NG_VALIDATORS,
       useExisting: NarikValidatorDirective,
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class NarikValidatorDirective implements Validator {
-  @Input("narikValidator")
+  @Input('narikValidator')
   narikValidator: string[];
 
-  @Input("narikValidatorParams")
+  @Input('narikValidatorParams')
   narikValidatorParams: any = {};
 
   validators: any = {};
@@ -38,7 +38,7 @@ export class NarikValidatorDirective implements Validator {
           if (validatorItem.params && validatorItem.params.length) {
             this.narikValidatorParams = this.narikValidatorParams || {};
             const paramArray = validatorItem.params.map(
-              p => this.narikValidatorParams[p]
+              (p) => this.narikValidatorParams[p]
             );
             func = validatorItem.func(...paramArray);
           } else {

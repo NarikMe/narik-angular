@@ -1,4 +1,4 @@
-import { NarikDynamicForm } from "@narik/ui-core";
+import { NarikDynamicForm } from '@narik/ui-core';
 import {
   Directive,
   ElementRef,
@@ -9,14 +9,14 @@ import {
   QueryList,
   OnDestroy,
   AfterContentInit,
-  TemplateRef
-} from "@angular/core";
-import { NgForm, NgModel } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { takeWhile } from "rxjs/operators";
+  TemplateRef,
+} from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 @Directive({
-  selector: "narik-form"
+  selector: 'narik-form',
 })
 export class NarikForm
   implements OnInit, AfterViewInit, OnDestroy, AfterContentInit {
@@ -28,29 +28,8 @@ export class NarikForm
 
   @ContentChildren(NarikDynamicForm) contentList: QueryList<NarikDynamicForm>;
 
-  @ContentChild("form", { static: false })
+  @ContentChild('form', { static: false })
   form: NgForm;
-
-  @ContentChildren(NarikDynamicForm, { descendants: true })
-  set dynamicForm(values: QueryList<NarikDynamicForm>) {
-    this.children = values;
-    if (values) {
-      values.changes.subscribe(res => {});
-      const valueArray = values.toArray();
-      for (const value of valueArray) {
-        if (!this._dynamicForms.has(value)) {
-          const sub = value.modelsChaned
-            .pipe(takeWhile(x => this.isAlive))
-            .subscribe(result => {
-              if (result) {
-                this.applyNgModels(result.items, result.removed);
-              }
-            });
-          this._dynamicForms.set(value, sub);
-        }
-      }
-    }
-  }
 
   @ContentChildren(NgModel, { descendants: true })
   public set models(value: QueryList<NgModel>) {
