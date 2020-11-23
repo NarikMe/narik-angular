@@ -7,30 +7,24 @@ import {
   ViewChild,
   Renderer2,
   HostListener,
-  Injector
+  Injector,
 } from "@angular/core";
 import {
   NarikButton,
   BUTTON_DEFAULT_OPTIONS,
   ButtonDefaultOptions,
-
 } from "@narik/ui-core";
 import { NARIK_UI_COMPONENT_INPUTS } from "../input-output-items";
-
-
 
 @Component({
   selector: "narik-mat-button , narik-button ",
   templateUrl: "narik-mat-button.component.html",
-  inputs: [...NARIK_UI_COMPONENT_INPUTS]
+  inputs: [...NARIK_UI_COMPONENT_INPUTS],
 })
-export class NarikMatButtonComponent extends NarikButton
-  implements OnInit, AfterViewInit {
-  @ViewChild("contentButton", { static: false }) button: MatButton;
-
+export class NarikMatButtonComponent extends NarikButton implements OnInit {
   @NarikInject(BUTTON_DEFAULT_OPTIONS, {
     buttonStyle: "mat-raised-button",
-    busyFontIcon: "fa-spinner"
+    busyFontIcon: "fa-spinner",
   })
   defaultOptions: ButtonDefaultOptions;
 
@@ -46,31 +40,11 @@ export class NarikMatButtonComponent extends NarikButton
     this.cssClass = this.defaultOptions.cssClass;
   }
 
-  ngAfterViewInit(): void {
-    this.setDisabledState();
-  }
-
-  setDisabledState() {
-    if (this.button) {
-      if (this.disable || this.isBusy) {
-        this.renderer.setAttribute(
-          this.button._elementRef.nativeElement,
-          "disabled",
-          ""
-        );
-      } else {
-        this.renderer.removeAttribute(
-          this.button._elementRef.nativeElement,
-          "disabled"
-        );
-      }
-    }
-  }
   buttonClick(e) {
     if (!this.disable && !this.isBusy) {
       this.nClick.emit({
         sender: this,
-        event: e
+        event: e,
       });
     }
   }
