@@ -1,23 +1,23 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { TranslateModule } from "@ngx-translate/core";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { NarikNgbAutoCompleteModule } from "../narik-ngb-auto-complete/narik-ngb-auto-complete.module";
-import { NarikNgbCheckBoxModule } from "../narik-ngb-check-box/narik-ngb-checkbox.module";
-import { NarikNgbDatePickerModule } from "../narik-ngb-date-picker/public_api";
-import { NarikNgbInputModule } from "../narik-ngb-input/narik-ngb-input.module";
-import { NarikNgbRadioGroupModule } from "../narik-ngb-radio/narik-ngb-radio.module";
-import { NarikNgbSelectModule } from "../narik-ngb-select/narik-ngb-select.module";
-import { NarikNgbCheckBoxListModule } from "./../narik-ngb-check-box-list/narik-ngb-checkbox-list.module";
-import { NarikNgbDynamicForm } from "./narik-ngb-dynamic-form.component";
-import { NarikCommonModule } from "@narik/common";
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { NarikNgbAutoCompleteModule } from '../narik-ngb-auto-complete/narik-ngb-auto-complete.module';
+import { NarikNgbCheckBoxModule } from '../narik-ngb-check-box/narik-ngb-checkbox.module';
+import { NarikNgbDatePickerModule } from '../narik-ngb-date-picker/public_api';
+import { NarikNgbInputModule } from '../narik-ngb-input/narik-ngb-input.module';
+import { NarikNgbRadioGroupModule } from '../narik-ngb-radio/narik-ngb-radio.module';
+import { NarikNgbSelectModule } from '../narik-ngb-select/narik-ngb-select.module';
+import { NarikNgbCheckBoxListModule } from './../narik-ngb-check-box-list/narik-ngb-checkbox-list.module';
+import { NarikNgbDynamicForm } from './narik-ngb-dynamic-form.component';
+import { NarikCommonModule } from '@narik/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     TranslateModule,
     NarikNgbInputModule,
     NarikNgbSelectModule,
@@ -27,10 +27,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     NarikNgbDatePickerModule,
     NarikNgbCheckBoxListModule,
     NarikCommonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   declarations: [NarikNgbDynamicForm],
   exports: [NarikNgbDynamicForm],
-  providers: []
+  providers: [],
 })
 export class NarikNgbDynamicFormModule {}

@@ -1,7 +1,7 @@
-import { TranslateService } from "@ngx-translate/core";
-import { formatString } from "@narik/common";
-import { UUID } from "angular2-uuid";
-import { MetaDataService, MODULE_UI_KEY } from "@narik/infrastructure";
+import { TranslateService } from '@ngx-translate/core';
+import { formatString } from '@narik/common';
+import { UUID } from 'angular2-uuid';
+import { MetaDataService, MODULE_UI_KEY } from '@narik/infrastructure';
 
 import {
   EventEmitter,
@@ -11,18 +11,18 @@ import {
   Injector,
   ViewChild,
   AfterViewInit,
-} from "@angular/core";
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   NgModel,
   FormControlName,
-} from "@angular/forms";
-import { NarikInject } from "@narik/core";
+} from '@angular/forms';
+import { NarikInject } from '@narik/core';
 import {
   NarikUiComponent,
   NARIK_UI_COMPONENT_INPUTS,
-} from "./narik-ui-component";
+} from './narik-ui-component';
 
 export class NarikFormComponent
   extends NarikUiComponent
@@ -97,7 +97,7 @@ export class NarikFormComponent
   }
 
   @Input()
-  @HostBinding("attr.narik-form-item-label")
+  @HostBinding('attr.narik-form-item-label')
   set label(value: string) {
     this._label = value;
   }
@@ -115,7 +115,7 @@ export class NarikFormComponent
   }
 
   @Input()
-  @HostBinding("attr.narik-form-item-key")
+  @HostBinding('attr.narik-form-item-key')
   set name(value: string) {
     this._name = value;
   }
@@ -176,7 +176,7 @@ export class NarikFormComponent
 
   createIdentifier() {
     if (!this._id) {
-      this._id = "input" + UUID.UUID();
+      this._id = 'input' + UUID.UUID();
     }
   }
 
@@ -219,7 +219,7 @@ export class NarikFormComponent
         );
         result.push(
           formatString(
-            this.translateService.instant("errors." + error),
+            this.translateService.instant('errors.' + error),
             this.label,
             ...parameters
           )
@@ -232,12 +232,12 @@ export class NarikFormComponent
 }
 
 export const NARIK_UI_FORM_INPUTS: string[] = [
-  "id",
-  "name",
-  "label",
-  "disabled",
-  "required",
-  "readOnly",
-  "placeHolder",
+  'id',
+  'name',
+  'label',
+  'disabled',
+  'required',
+  'readOnly',
+  'placeHolder',
   ...NARIK_UI_COMPONENT_INPUTS,
 ];
