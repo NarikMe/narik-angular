@@ -1,17 +1,17 @@
-import { MetaDataService, MODULE_UI_KEY } from "@narik/infrastructure";
-import { NarikInject } from "@narik/core";
-import { FORM_ITEM_DEFAULT_CLASS } from "./../injectionTokens";
-import { Input, Injector } from "@angular/core";
+import { MetaDataService, MODULE_UI_KEY } from '@narik/infrastructure';
+import { NarikInject } from '@narik/core';
+import { FORM_ITEM_DEFAULT_CLASS } from './../injectionTokens';
+import { Input, Injector } from '@angular/core';
 
 import {
   FloatLabelType,
   MatFormFieldAppearance,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
-} from "@angular/material/form-field";
+} from '@angular/material/form-field';
 
 export class NarikMatFormFieldInput {
   _cssClass: string;
-  _floatLabel: FloatLabelType = "auto";
+  _floatLabel: FloatLabelType = 'auto';
   _appearance: MatFormFieldAppearance;
   _hintLabel: string;
   _suffixIcon: string;
@@ -21,7 +21,7 @@ export class NarikMatFormFieldInput {
   _prefixContent: any;
   _prefixIcon: any;
 
-  displayErrorMode: "hint" | "icon" | "none" = "icon";
+  displayErrorMode: 'hint' | 'icon' | 'none' = 'icon';
 
   @Input()
   set prefixIcon(value: any) {
@@ -114,18 +114,18 @@ export class NarikMatFormFieldInput {
       this.cssClass = _defaultFormItemClass;
     }
     this.appearance =
-      _defaults && _defaults.appearance ? _defaults.appearance : "legacy";
+      _defaults && _defaults.appearance ? _defaults.appearance : 'legacy';
 
     this.floatLabel =
-      _defaults && _defaults.floatLabel ? _defaults.floatLabel : "auto";
+      _defaults && _defaults.floatLabel ? _defaults.floatLabel : 'auto';
 
     const metaDataService = injector.get(MetaDataService, undefined);
-    const containerModuleKey = injector.get(MODULE_UI_KEY, "narik");
+    const containerModuleKey = injector.get(MODULE_UI_KEY, 'narik');
 
     const dfOptions = metaDataService.getInformation<any>(
-      "uiDefaultOptions",
+      'uiDefaultOptions',
       containerModuleKey,
-      "form-field"
+      'form-field'
     );
 
     if (dfOptions && dfOptions.value && dfOptions.value.displayErrorMode) {
@@ -135,14 +135,14 @@ export class NarikMatFormFieldInput {
 }
 
 export const NARIK_MAT_FORM_INPUTS: string[] = [
-  "prefixIcon",
-  "prefixContent",
-  "suffixContent",
-  "endHint",
-  "startHint",
-  "cssClass",
-  "floatLabel",
-  "appearance",
-  "hintLabel",
-  "suffixIcon",
+  'prefixIcon',
+  'prefixContent',
+  'suffixContent',
+  'endHint',
+  'startHint',
+  'cssClass',
+  'floatLabel',
+  'appearance',
+  'hintLabel',
+  'suffixIcon',
 ];

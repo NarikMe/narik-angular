@@ -79,7 +79,6 @@
       >
         <narik-mat-input
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [type]="item.type || 'text'"
@@ -92,7 +91,6 @@
       <ng-container *ngIf="item.type == 'boolean'">
         <narik-mat-checkbox
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
           [options]="item.options"
           [formControlName]="item.model"
           label="{{ item.label | translate }}"
@@ -101,7 +99,6 @@
       <ng-container *ngIf="item.type == 'date'">
         <narik-mat-date-picker
           [options]="item.options"
-          [disabled]="item.disableExpr && disableItems[item.name]"
           [name]="item.name"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
@@ -113,7 +110,6 @@
         <narik-mat-select
           [options]="item.options"
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
@@ -125,7 +121,6 @@
         <narik-mat-autocomplete
           [options]="item.options"
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [minSearchLength]="item.options.minSearchLength || 0"
@@ -139,7 +134,6 @@
         <narik-mat-radio-group
           [options]="item.options"
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
@@ -151,7 +145,6 @@
         <narik-mat-checkbox-list
           [options]="item.options"
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
@@ -164,7 +157,6 @@
           [options]="item.options"
           [name]="item.name"
           [gridOptions]="item.options.gridOptions || {}"
-          [disabled]="item.disableExpr && disableItems[item.name]"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"

@@ -20,7 +20,7 @@
           "
           [options]="item.options"
           placeHolder="{{ item.options.placeHolder | translate }}"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           [type]="item.type || 'text'"
           label="{{ item.label | translate }}"
           [formControlName]="item.model"
@@ -31,7 +31,7 @@
           [name]="item.name"
           [options]="item.options"
           *ngIf="item.type == 'boolean'"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           label="{{ item.label | translate }}"
           [formControlName]="item.model"
         ></narik-checkbox>
@@ -40,7 +40,7 @@
           [name]="item.name"
           [options]="item.options"
           [required]="item.required"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           *ngIf="item.type == 'date'"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [formControlName]="item.model"
@@ -51,7 +51,7 @@
           [name]="item.name"
           [options]="item.options"
           [required]="item.required"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           *ngIf="item.type == 'select'"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
@@ -63,7 +63,7 @@
           [name]="item.name"
           [options]="item.options"
           [required]="item.required"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           *ngIf="item.type == 'autoComplete'"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [minSearchLength]="item.options.minSearchLength || 0"
@@ -78,7 +78,7 @@
           [name]="item.name"
           [options]="item.options"
           [required]="item.required"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           *ngIf="item.type == 'radio'"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
@@ -90,7 +90,7 @@
           [name]="item.name"
           [options]="item.options"
           [required]="item.required"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           *ngIf="item.type == 'checkList'"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"

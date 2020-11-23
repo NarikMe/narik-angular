@@ -9,7 +9,6 @@ import {
   Output,
   HostBinding,
   Injector,
-  ViewChild,
   AfterViewInit,
 } from '@angular/core';
 import {

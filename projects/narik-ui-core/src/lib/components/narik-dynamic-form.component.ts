@@ -2,15 +2,17 @@ import { NarikInject } from '@narik/core';
 import {
   NarikViewField,
   EntityField,
-  CommandHost,
+  FormHost,
+  HOST_TOKEN,
+  IsHost,
 } from '@narik/infrastructure';
 
-import { Injector, Input, ViewContainerRef, OnInit } from '@angular/core';
+import { Injector, Input, OnInit, ViewContainerRef } from '@angular/core';
 
 import { DynamicFormService } from '../services/dynamic-form.service';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { evalStringExpression, getParnetComponent } from '@narik/common';
+import { evalStringExpression, getParentComponent } from '@narik/common';
 import { NarikUiComponent } from '../base/narik-ui-component';
 
 export class NarikDynamicForm extends NarikUiComponent implements OnInit {
@@ -43,7 +45,7 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   layoutGap = 5;
 
   @Input()
-  host: any;
+  host: FormHost;
 
   _model: any;
   _fields: NarikViewField[] | EntityField[];
@@ -77,13 +79,16 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
         item
       ] = this.dynamicFormService.getDynamicFormComponent(item);
     }
-    if (viewContainerRef) {
-      this.host = getParnetComponent<CommandHost>(viewContainerRef);
+
+    this.host = injector.get(HOST_TOKEN, undefined);
+
+    if (!this.host && viewContainerRef) {
+      this.host = getParentComponent<FormHost>(viewContainerRef);
     }
   }
 
   ngOnInit() {
-    if (this.host && this.host.change) {
+    if (IsHost(this.host)) {
       this.host.change.pipe(debounceTime(100)).subscribe(() => {
         this.applyContextExpressions();
       });
@@ -113,7 +118,24 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
   }
   applyContextExpressions(): any {
     this.applyExpressionsOnObject(this.invisibleItems);
+    const disableItems = { ...this.disableItems };
     this.applyExpressionsOnObject(this.disableItems);
+
+    for (const key in this.disableItems) {
+      if (
+        !key.startsWith('$$$') &&
+        Object.prototype.hasOwnProperty.call(this.disableItems, key)
+      ) {
+        if (disableItems[key] !== this.disableItems[key]) {
+          const formControl = this.form?.get(key);
+          if (this.disableItems[key] === false) {
+            formControl?.enable();
+          } else {
+            formControl?.disable();
+          }
+        }
+      }
+    }
   }
 
   applyExpressionsOnObject(obj: any) {
