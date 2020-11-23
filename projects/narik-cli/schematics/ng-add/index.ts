@@ -134,7 +134,7 @@ const commonDependencies: any[] = [
   },
   {
     name: "@angular/flex-layout",
-    version: "^10.0.0-beta.32",
+    version: "^11.0.0-beta.33",
   },
   {
     name: "angular2-uuid",

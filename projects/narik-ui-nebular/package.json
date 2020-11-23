@@ -2,10 +2,10 @@
   "name": "@narik/ui-nebular",
   "version": "4.0.2",
   "peerDependencies": {
-    "@angular/common": "~10.0.9",
-    "@angular/core": "~10.0.9",
-    "@nebular/theme": "^7.0.0",
-    "@angular/flex-layout": "^10.0.0-beta.32"
+    "@angular/common": "~11.0.2",
+    "@angular/core": "~11.0.2",
+    "@nebular/theme": "~6.2.1",
+    "@angular/flex-layout": "^11.0.0-beta.33"
   },
   "dependencies": {},
   "repository": {
