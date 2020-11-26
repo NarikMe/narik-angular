@@ -1,26 +1,29 @@
 <div>
-  <ngb-tabset #tabset [destroyOnHide]="false">
-    <ngb-tab id="{{tab.uniqueId}}" *ngFor="let tab of tabs; let index = index;trackBy: trackByFn">
-      <ng-template ngbTabContent>
+  <nav ngbNav #nav="ngbNav" [destroyOnHide]="false" class="nav-tabs">
+    <ng-container
+      ngbNavItem="tab.uniqueId"
+      *ngFor="let tab of tabs; let index = index; trackBy: trackByFn"
+    >
+      <ng-template ngbNavContent>
         <div class="p-1">
           <ng-container *ngIf="tab.component">
-            <ng-container *narikComponentLoader="
+            <ng-container
+              *narikComponentLoader="
                 tab.component;
-                parameters:tab.data;
-                providers:tab.providers
-                  "></ng-container>
+                parameters: tab.data;
+                providers: tab.providers
+              "
+            ></ng-container>
           </ng-container>
         </div>
       </ng-template>
-      <ng-template ngbTabTitle>
+      <ng-template ngbNavLink>
         <div class="title-container">
-          <span>{{tab.title | translate}}</span>
-          <i (click)="removeTabItem(index)" class="fas fa-times close-btn  ml-2">
+          <span>{{ tab.title | translate }}</span>
+          <i (click)="removeTabItem(index)" class="fas fa-times close-btn ml-2">
           </i>
         </div>
       </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
-
-
+    </ng-container>
+  </nav>
 </div>

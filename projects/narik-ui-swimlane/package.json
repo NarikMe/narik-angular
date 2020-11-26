@@ -1,11 +1,11 @@
 {
   "name": "@narik/ui-swimlane",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "peerDependencies": {
-    "@angular/common": "~10.0.9",
-    "@angular/core": "~10.0.9",
-    "@swimlane/ngx-datatable": "^17.1.0",
-    "@angular/flex-layout": "^10.0.0-beta.32"
+    "@angular/common": "~11.0.2",
+    "@angular/core": "~11.0.2",
+    "@swimlane/ngx-datatable": "~18.0.0",
+    "@angular/flex-layout": "^11.0.0-beta.33"
   },
   "dependencies": {},
   "repository": {

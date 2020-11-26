@@ -1,28 +1,28 @@
-<button #contentButton matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + ( options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass'
-  [color]="color" (click)="buttonClick($event)" *ngIf="!buttonStyle || buttonStyle === 'mat-button'" mat-button>
+<button  matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + ( options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass'
+  [color]="color" [disabled]="disable || isBusy" (click)="buttonClick($event)" *ngIf="!buttonStyle || buttonStyle === 'mat-button'" mat-button>
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
-<button #contentButton matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
+<button  [disabled]="disable || isBusy" matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
   (click)="buttonClick($event)" *ngIf="buttonStyle === 'mat-raised-button'" mat-raised-button>
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
-<button #contentButton matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
+<button  [disabled]="disable || isBusy" matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
   (click)="buttonClick($event)" *ngIf="buttonStyle === 'mat-stroked-button'" mat-stroked-button>
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
-<button #contentButton matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
+<button  [disabled]="disable || isBusy" matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
   (click)="buttonClick($event)" *ngIf="buttonStyle === 'mat-flat-button'" mat-flat-button>
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
-<button #contentButton matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
+<button  [disabled]="disable || isBusy" matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
   (click)="buttonClick($event)" *ngIf="buttonStyle === 'mat-icon-button'" mat-icon-button>
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
-<button #contentButton matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
+<button  [disabled]="disable || isBusy" matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
   (click)="buttonClick($event)" *ngIf="buttonStyle === 'mat-fab'" mat-fab>
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>
-<button #contentButton matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
+<button  [disabled]="disable || isBusy" matTooltip="{{ (tooltip ?  (tooltip | translate) : '') + (options.appendShortcutToTooltip && shortcut ? '(' + (shortcut | shortcut) +')' : '' )  }}" [ngClass]='cssClass' [color]="color"
   (click)="buttonClick($event)" *ngIf="buttonStyle === 'mat-mini-fab'" mat-mini-fab>
   <ng-container *ngTemplateOutlet="buttonContent"></ng-container>
 </button>

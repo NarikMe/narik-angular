@@ -21,7 +21,8 @@
             $implicit: item,
             invisibleItems: invisibleItems,
             disableItems: disableItems,
-            model: model
+            model: model,
+            form: form
           }
         "
       ></ng-container>
@@ -42,7 +43,8 @@
                 $implicit: item,
                 invisibleItems: invisibleItems,
                 disableItems: disableItems,
-                model: model
+                model: model,
+                form: form
               }
             "
           ></ng-container>
@@ -73,99 +75,85 @@
       >
         <narik-input
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [type]="item.type || 'text'"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
+          [formControlName]="item.model"
           [options]="item.options"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
         >
         </narik-input>
       </ng-container>
       <ng-container *ngIf="item.type == 'boolean'">
         <narik-checkbox
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           [options]="item.options"
-          [(ngModel)]="model[item.model]"
+          [formControlName]="item.model"
           label="{{ item.label | translate }}"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
         >
         </narik-checkbox>
       </ng-container>
       <ng-container *ngIf="item.type == 'date'">
         <narik-date-picker
           [options]="item.options"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           [name]="item.name"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
-          [(ngModel)]="model[item.model]"
+          [formControlName]="item.model"
           label="{{ item.label | translate }}"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
         ></narik-date-picker>
       </ng-container>
       <ng-container *ngIf="item.type == 'select'">
         <narik-select
           [options]="item.options"
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         ></narik-select>
       </ng-container>
       <ng-container *ngIf="item.type == 'autoComplete'">
         <narik-autocomplete
           [options]="item.options"
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [minSearchLength]="item.options.minSearchLength || 0"
           [isLazyLoadData]="item.options.isLazyLoadData"
           [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         ></narik-autocomplete>
       </ng-container>
       <ng-container *ngIf="item.type == 'radio'">
         <narik-radio-group
           [options]="item.options"
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         ></narik-radio-group>
       </ng-container>
       <ng-container *ngIf="item.type == 'checkList'">
         <narik-checkbox-list
           [options]="item.options"
           [name]="item.name"
-          [disabled]="item.disableExpr && disableItems[item.name]"
+          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
           label="{{ item.label | translate }}"
-          [(ngModel)]="model[item.model]"
-          [narikValidator]="item.validators"
-          [narikValidatorParams]="item.validatorParams"
+          [formControlName]="item.model"
         ></narik-checkbox-list>
       </ng-container>
       <ng-container *ngIf="item.type == 'table-select'"> </ng-container>
@@ -175,10 +163,13 @@
         *narikComponentLoader="
           customFormComponentKeysObject[item.type || 'text'];
           bindings: {
-            field:item,
-            model:model
+            field: item,
+            model: model
           };
-          bindingSource:this
+          bindingSource: this;
+          parameters: {
+            form: form
+          }
         "
       ></ng-container>
     </ng-container>

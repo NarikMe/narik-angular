@@ -8,16 +8,16 @@ import {
   OnInit,
   OnDestroy,
   Injector,
-  StaticProvider
-} from "@angular/core";
-import { takeWhile } from "rxjs/operators";
+  StaticProvider,
+} from '@angular/core';
+import { takeWhile } from 'rxjs/operators';
 
 /**
  * NarikComponentLoaderDirective
  * Uses to load a component dynamically.
  */
 @Directive({
-  selector: "[narikComponentLoader]"
+  selector: '[narikComponentLoader]',
 })
 export class NarikComponentLoaderDirective implements OnInit, OnDestroy {
   isAlive = true;
@@ -25,7 +25,7 @@ export class NarikComponentLoaderDirective implements OnInit, OnDestroy {
   /**
    * Type of component.
    */
-  @Input("narikComponentLoader")
+  @Input('narikComponentLoader')
   component: Type<any>;
 
   // tslint:disable-next-line:no-input-rename
@@ -33,22 +33,22 @@ export class NarikComponentLoaderDirective implements OnInit, OnDestroy {
   /**
    * Parameters that should be sent to component.
    */
-  @Input("narikComponentLoaderParameters")
+  @Input('narikComponentLoaderParameters')
   parameters: any;
 
   /**
    * Parameters that should be sent to component that should their changed be tracked.
    */
-  @Input("narikComponentLoaderBindings")
+  @Input('narikComponentLoaderBindings')
   bindings: any;
 
   /**
    * Source of BindingChanges.
    */
-  @Input("narikComponentLoaderBindingSource")
+  @Input('narikComponentLoaderBindingSource')
   bindingSource: any;
 
-  @Input("narikComponentLoaderProviders")
+  @Input('narikComponentLoaderProviders')
   providers: StaticProvider[];
 
   // tslint:disable-next-line:no-input-rename
@@ -56,7 +56,7 @@ export class NarikComponentLoaderDirective implements OnInit, OnDestroy {
   /**
    * event that should be subscribed on component.
    */
-  @Input("narikComponentLoaderEvents")
+  @Input('narikComponentLoaderEvents')
   events: any;
 
   constructor(
@@ -87,11 +87,11 @@ export class NarikComponentLoaderDirective implements OnInit, OnDestroy {
         (<any>componentRef.instance)[key] = this.bindings[key];
         if (
           this.bindingSource &&
-          <EventEmitter<any>>this.bindingSource[key + "Change"]
+          <EventEmitter<any>>this.bindingSource[key + 'Change']
         ) {
-          (<EventEmitter<any>>this.bindingSource[key + "Change"])
-            .pipe(takeWhile(x => this.isAlive))
-            .subscribe(result => {
+          (<EventEmitter<any>>this.bindingSource[key + 'Change'])
+            .pipe(takeWhile((x) => this.isAlive))
+            .subscribe((result) => {
               (<any>componentRef.instance)[key] = result;
             });
         }

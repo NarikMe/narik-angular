@@ -1,11 +1,11 @@
 import {
   NarikFormComponent,
-  NARIK_UI_FORM_INPUTS
-} from "./../base/narik-form-component";
-import { Input, Injector } from "@angular/core";
+  NARIK_UI_FORM_INPUTS,
+} from './../base/narik-form-component';
+import { Input, Injector } from '@angular/core';
 
 export class NarikInput extends NarikFormComponent {
-  _type = "text";
+  _type = 'text';
   _maxlength: number;
   _mask: any;
   _icon: string;
@@ -57,10 +57,10 @@ export class NarikInput extends NarikFormComponent {
 }
 
 export const NARIK_INPUT_INPUTS: string[] = [
-  "maxlength",
-  "type",
-  "mask",
-  "icon",
-  "displayStatus",
-  ...NARIK_UI_FORM_INPUTS
+  'maxlength',
+  'type',
+  'mask',
+  'icon',
+  'displayStatus',
+  ...NARIK_UI_FORM_INPUTS,
 ];

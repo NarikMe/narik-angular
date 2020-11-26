@@ -1,4 +1,4 @@
-import { UUID } from "angular2-uuid";
+import { UUID } from 'angular2-uuid';
 import {
   MetaDataService,
   MODULE_UI_KEY,
@@ -6,10 +6,11 @@ import {
   CommandHost,
   CommandInfo,
   ShortcutService,
-  DialogService
-} from "@narik/infrastructure";
-import { NarikInject } from "@narik/core";
-import { getParnetComponent } from "@narik/common";
+  DialogService,
+  HOST_TOKEN,
+} from '@narik/infrastructure';
+import { NarikInject } from '@narik/core';
+import { getParentComponent } from '@narik/common';
 import {
   Output,
   EventEmitter,
@@ -18,14 +19,14 @@ import {
   Injector,
   ViewContainerRef,
   ElementRef,
-  HostBinding
-} from "@angular/core";
-import { isString, isArray, isElementVisible } from "@narik/common";
-import { evalStringExpression } from "@narik/common";
-import { debounceTime } from "rxjs/operators";
-import { NarikUiComponent } from "../base/narik-ui-component";
-import { takeWhile } from "rxjs/operators";
-import { filter } from "rxjs/operators";
+  HostBinding,
+} from '@angular/core';
+import { isString, isArray, isElementVisible } from '@narik/common';
+import { evalStringExpression } from '@narik/common';
+import { debounceTime } from 'rxjs/operators';
+import { NarikUiComponent } from '../base/narik-ui-component';
+import { takeWhile } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 export interface ToolBarInfo {
   key: string;
@@ -47,13 +48,13 @@ export interface ToolBarItem {
   items?: (ToolBarItem | string)[];
 }
 export class NarikToolBar extends NarikUiComponent implements OnInit {
-  readonly expressionPrefix = "$$$narik";
+  readonly expressionPrefix = '$$$narik';
   invisibleItems: any = {};
   disableItems: any = {};
   busyItems: any = {};
 
   get uiKey(): string {
-    return "toolbar";
+    return 'toolbar';
   }
 
   @Input()
@@ -105,17 +106,20 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
   element: ElementRef;
 
   @Input()
-  displayStyle = "block";
+  displayStyle = 'block';
 
-  @HostBinding("style.display")
+  @HostBinding('style.display')
   get displayValue(): string {
     return this.displayStyle;
   }
 
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);
-    if (viewContainerRef) {
-      this.host = getParnetComponent<CommandHost>(viewContainerRef);
+
+    this.host = injector.get(HOST_TOKEN, undefined) as CommandHost;
+
+    if (!this.host && viewContainerRef) {
+      this.host = getParentComponent<CommandHost>(viewContainerRef);
     }
   }
 
@@ -129,7 +133,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
       }
       this.items = info.items;
       if (this.host && this.host.change) {
-        this.host.change.pipe(debounceTime(100)).subscribe(x => {
+        this.host.change.pipe(debounceTime(100)).subscribe((x) => {
           this.applyContextExpressions();
         });
       }
@@ -141,10 +145,10 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
             .addShortcut({
               keys: item.shortcut,
               description: item.tooltip,
-              uniqueId: uniqueId
+              uniqueId: uniqueId,
             })
             .pipe(
-              takeWhile(x => this.isAlive),
+              takeWhile((x) => this.isAlive),
               filter(
                 (x: any) =>
                   x.uniqueId === uniqueId &&
@@ -152,7 +156,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
                   this.dialogService.isElementInActiveDialog(this.element)
               )
             )
-            .subscribe(x => {
+            .subscribe((x) => {
               this.itemCommand(item);
             });
         }
@@ -183,7 +187,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
     }
     return {
       items: items,
-      showLabel: toolBarInfo && !!toolBarInfo.showLable
+      showLabel: toolBarInfo && !!toolBarInfo.showLable,
     };
   }
 
@@ -191,17 +195,17 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
     item: ToolBarItem | string
   ): ToolBarItem | ToolBarItem[] {
     if (isString(item)) {
-      if ((item as string).startsWith("&&")) {
+      if ((item as string).startsWith('&&')) {
         return this.createToolbarItems(
           this.moduleKey,
-          (item as string).replace("&&", "")
+          (item as string).replace('&&', '')
         ).items;
       } else {
         return {
           key: item as string,
           icon: item as string,
-          itemType: (item as string) === "-" ? "divider" : "button",
-          tooltip: (item as string) + "_command_tooltip"
+          itemType: (item as string) === '-' ? 'divider' : 'button',
+          tooltip: (item as string) + '_command_tooltip',
         };
       }
     } else {
@@ -211,21 +215,21 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
         key: tItem.key,
         icon: !tItem.icon && !tItem.fontIcon ? tItem.key : tItem.icon,
         fontIcon: tItem.fontIcon,
-        itemType: tItem.itemType || "button",
-        tooltip: tItem.tooltip || tItem.key + "_command_tooltip",
+        itemType: tItem.itemType || 'button',
+        tooltip: tItem.tooltip || tItem.key + '_command_tooltip',
         data: tItem.data,
         shortcut: tItem.shortcut,
-        items: tItem.items ? tItem.items.map(x => this.toToolbarItem(x)) : [],
+        items: tItem.items ? tItem.items.map((x) => this.toToolbarItem(x)) : [],
         label: tItem.label || tItem.key,
         hideExpr: tItem.hideExpr
-          ? evalStringExpression(tItem.hideExpr, ["host"])
+          ? evalStringExpression(tItem.hideExpr, ['host'])
           : null,
         disableExpr: tItem.disableExpr
-          ? evalStringExpression(tItem.disableExpr, ["host"])
+          ? evalStringExpression(tItem.disableExpr, ['host'])
           : null,
         busyExpr: tItem.busyExpr
-          ? evalStringExpression(tItem.busyExpr, ["host"])
-          : null
+          ? evalStringExpression(tItem.busyExpr, ['host'])
+          : null,
       };
       if (i.busyExpr) {
         this.busyItems[i.key] = false;
@@ -245,7 +249,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
 
   applyExpressionsOnObject(obj: any) {
     for (const key in obj) {
-      if (!key.startsWith("$$$") && obj.hasOwnProperty(key)) {
+      if (!key.startsWith('$$$') && obj.hasOwnProperty(key)) {
         obj[key] = obj[this.expressionPrefix + key].apply(null, [this.host]);
       }
     }
@@ -258,18 +262,18 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
   }
   itemCommand(data: ToolBarItem) {
     if (data.disableExpr && this.disableItems[data.key]) {
-      console.log("disabled toolbar item clicked!!" + data.key);
+      console.log('disabled toolbar item clicked!!' + data.key);
       return;
     }
     if (this.host && !this.alwaysCallCommand) {
       this.host.processCommand({
         commandKey: data.key,
-        commandData: data.data
+        commandData: data.data,
       });
     } else {
       this.command.emit({
         commandKey: data.key,
-        commandData: data.data
+        commandData: data.data,
       });
     }
   }

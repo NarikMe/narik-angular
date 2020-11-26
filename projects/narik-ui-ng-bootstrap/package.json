@@ -1,11 +1,11 @@
 {
   "name": "@narik/ui-ng-bootstrap",
-  "version": "4.0.2",
+  "version": "5.0.0",
   "peerDependencies": {
-    "@angular/common": "~10.0.9",
-    "@angular/core": "~10.0.9",
-    "@ng-bootstrap/ng-bootstrap": "^7.0.0",
-    "@angular/flex-layout": "^10.0.0-beta.32"
+    "@angular/common": "~11.0.2",
+    "@angular/core": "~11.0.2",
+    "@ng-bootstrap/ng-bootstrap": "~8.0.0",
+    "@angular/flex-layout": "^11.0.0-beta.33"
   },
   "repository": {
     "type": "git",
