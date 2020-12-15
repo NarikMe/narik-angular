@@ -9,6 +9,8 @@ import {
   OnDestroy,
   Injector,
   StaticProvider,
+  ComponentFactory,
+  NgModuleRef,
 } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
 
@@ -26,7 +28,7 @@ export class NarikComponentLoaderDirective implements OnInit, OnDestroy {
    * Type of component.
    */
   @Input('narikComponentLoader')
-  component: Type<any>;
+  component: Type<any> | ComponentFactory<any>;
 
   // tslint:disable-next-line:no-input-rename
 
@@ -66,12 +68,23 @@ export class NarikComponentLoaderDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      this.component
-    );
+    const componentFactory =
+      this.component instanceof ComponentFactory
+        ? this.component
+        : this.componentFactoryResolver.resolveComponentFactory(this.component);
     this.viewContainerRef.clear();
 
-    const localInjector = Injector.create(this.providers || [], this.injector);
+    let parentInjector = this.injector;
+    if ((componentFactory as any).ngModule) {
+      parentInjector = ((componentFactory as any).ngModule as NgModuleRef<any>)
+        .injector;
+    }
+
+    const localInjector = Injector.create({
+      parent: parentInjector,
+      providers: this.providers || [],
+    });
+
     const componentRef = this.viewContainerRef.createComponent(
       componentFactory,
       undefined,

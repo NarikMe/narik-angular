@@ -8,10 +8,11 @@
   margin-left: initial !important;
 }
 
-
 p-radiobutton {
   margin-right: initial;
   margin-left: 6px;
 }
-
-
+.toolbar-separator {
+  margin-left: initial;
+  margin-right: 2px;
+}

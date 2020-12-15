@@ -1,7 +1,7 @@
 <div [ngClass]="{ 'vertical-content': layoutDirection == 'vertical' }">
   <narik-dev-checkbox
     *ngFor="let item of itemsData"
-    (Change)="addOrRemove(valueField ? item[valueField] : item)"
+    (change)="addOrRemove(valueField ? item[valueField] : item)"
     labelPosition="after"
     color=""
 

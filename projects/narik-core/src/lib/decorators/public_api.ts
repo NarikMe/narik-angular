@@ -1,2 +1,2 @@
-export * from "./narik-inject.decorator";
-export * from "./dynamic-form.decorator";
+export * from './narik-inject.decorator';
+export * from './dynamic-component.decorator';

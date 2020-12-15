@@ -1,15 +1,15 @@
-import { NarikUiPrimeModule } from "@narik/ui-primeng";
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { NarikUiPrimeModule } from '@narik/ui-primeng';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { COMPONENTS, DYNAMIC_COMPONENTS } from "./index";
+import { COMPONENTS, DYNAMIC_COMPONENTS } from './index';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NarikUiPrimeModule],
+  imports: [CommonModule, ReactiveFormsModule, NarikUiPrimeModule],
   declarations: [COMPONENTS],
   exports: [],
-  providers: []
+  providers: [],
 })
 export class ShareModule {
   // https://github.com/angular/angular/issues/35314

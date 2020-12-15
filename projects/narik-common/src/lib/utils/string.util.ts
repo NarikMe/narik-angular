@@ -1,16 +1,16 @@
 export function formatString(str, ...replacements: string[]) {
   const args = arguments;
-  return str.replace(/{(\d+)}/g, function(match, number) {
-    return typeof args[+number + 1] !== "undefined" ? args[+number + 1] : match;
+  return str.replace(/{(\d+)}/g, function (match, number) {
+    return typeof args[+number + 1] !== 'undefined' ? args[+number + 1] : match;
   });
 }
 
 export function replaceString(
   str,
   data,
-  prefixStr = "",
-  stratContainerStr = "",
-  endContainerStr = ""
+  prefixStr = '',
+  stratContainerStr = '',
+  endContainerStr = ''
 ) {
   if (str && data) {
     for (const key in data) {
@@ -20,7 +20,7 @@ export function replaceString(
             prepareForRegx(
               stratContainerStr + prefixStr + key + endContainerStr
             ),
-            "g"
+            'g'
           ),
           data[key]
         );
@@ -32,13 +32,13 @@ export function replaceString(
 
 function prepareForRegx(str: string) {
   if (str) {
-    const escapeItems = ["?"];
+    const escapeItems = ['?'];
     for (const st of escapeItems) {
-      str = str.replace(new RegExp("\\" + st, "g"), "\\" + st);
+      str = str.replace(new RegExp('\\' + st, 'g'), '\\' + st);
     }
   }
   return str;
 }
-export function isString(obj: any): boolean {
-  return typeof obj === "string";
+export function isString(obj: any): obj is string {
+  return typeof obj === 'string';
 }

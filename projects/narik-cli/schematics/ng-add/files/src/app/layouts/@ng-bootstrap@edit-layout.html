@@ -2,7 +2,7 @@
   <div class="p-2 form-container">
     <narik-toolbar toolbarKey="{{config && config.toolbarKey ? config.toolbarKey : 'editToolBar'}}"> </narik-toolbar>
     <div class="input-container mt-1">
-      <form #form="ngForm" novalidate name="frmEdit">
+      <form *ngIf="form" [formGroup]="form" novalidate #formElement>
         <div narik-section="formContent"></div>
       </form>
     </div>

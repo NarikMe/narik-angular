@@ -1,7 +1,7 @@
-import { Mixin } from "@narik/common";
-import { NarikSelect } from "@narik/ui-core";
+import { Mixin } from '@narik/common';
+import { NarikSelect } from '@narik/ui-core';
 
-import { NarikMatFormFieldInput } from "./narik-mat-form-field";
+import { NarikMatFormFieldInput } from './narik-mat-form-field';
 
 export interface INarikMatSelectBase
   extends NarikMatFormFieldInput,

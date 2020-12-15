@@ -3,7 +3,7 @@
     <narik-mat-toolbar toolbarKey="{{config && config.toolbarKey ? config.toolbarKey : 'editToolBar'}}">
     </narik-mat-toolbar>
     <mat-card>
-      <form #form="ngForm" novalidate name="frmEdit">
+      <form *ngIf="form" [formGroup]="form" novalidate #formElement>
         <div narik-section="formContent"></div>
       </form>
     </mat-card>

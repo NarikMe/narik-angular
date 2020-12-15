@@ -5,7 +5,7 @@
     }}">
     </narik-toolbar>
     <div class="card">
-      <form #form="ngForm" novalidate name="frmEdit">
+      <form *ngIf="form" [formGroup]="form" novalidate #formElement>
         <div narik-section="formContent"></div>
       </form>
     </div>

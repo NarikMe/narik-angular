@@ -1,43 +1,44 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, Injector } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, Injector } from '@angular/core';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import {
   ConfigService,
   MODULE_DATA_KEY,
   MODULE_UI_KEY,
   ModuleInfo
-} from "@narik/infrastructure";
+} from '@narik/infrastructure';
 import {
   NarikCoreModule,
   NarikTranslateLoader,
   MEMORY_STORAGE_VALIDITY_LEN,
   NarikModule
-} from "@narik/core";
-import { NarikUiCoreModule } from "@narik/ui-core";
-import { NarikAppCoreModule } from "@narik/app-core";
-import { NarikJwtAuthenticationModule } from "@narik/jwt-authentication";
-import { NarikClientStorageModule } from "@narik/client-storage";
+} from '@narik/core';
+import { NarikUiCoreModule } from '@narik/ui-core';
+import { NarikAppCoreModule } from '@narik/app-core';
+import { NarikJwtAuthenticationModule } from '@narik/jwt-authentication';
+import { NarikClientStorageModule } from '@narik/client-storage';
 
-<% if (layoutStr==="ngxadmin"){ %>
-import { NbLayoutDirection, NbThemeModule, NbIconModule } from "@nebular/theme";
-import { NbEvaIconsModule } from "@nebular/eva-icons";
+<% if (layoutStr==='ngxadmin'){ %>
+import { NbLayoutDirection, NbThemeModule, NbIconModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 <% } %>
 
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FORM_ITEM_DEFAULT_CLASS } from "@narik/ui-material";
-import { Observable } from "rxjs";
-import { DemoCommandProcessor } from "./services/command-processor.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FORM_ITEM_DEFAULT_CLASS } from '@narik/ui-material';
+import { Observable } from 'rxjs';
+import { DemoCommandProcessor } from './services/command-processor.service';
 
 import { MainComponent } from './main/main.component';
 import { MainViewComponent } from './main-view/main-view.component';
 <%= layoutModulePath %>
-import { ShareModule } from "./modules/share/share.module";
+import { ShareModule } from './modules/share/share.module';
+import 'reflect-metadata';
 
-const moduleKey = "main";
+const moduleKey = 'main';
 
 @NgModule({
   declarations: [AppComponent , MainComponent , MainViewComponent],
@@ -53,26 +54,29 @@ const moduleKey = "main";
       }
     }),
     NarikCoreModule.forRoot({
-      configFilePath: "assets/app-config.json",
-      defaultLang: "en",
+      configFilePath: 'assets/app-config.json',
+      defaultLang: 'en',
       useDefaultLang: true,
-      commandProcessor: DemoCommandProcessor
+      commandProcessor: DemoCommandProcessor,
+      toastrOption: {
+        positionClass: <%= direction==="RTL" ?  "'toast-top-left'":"'toast-top-right'" %> 
+      }
     }),
     NarikUiCoreModule,
     NarikAppCoreModule.forRoot({}),
     NarikJwtAuthenticationModule.forRoot({
-      loginEndPoint: "api/account/Authenticate",
-      logoutEndPoint: "api/account/Logout",
-      refreshEndPoint: "api/account/Authenticate",
-      tokenStorage: "localStorage",
-      loginPageUrl: "/"
+      loginEndPoint: 'api/account/Authenticate',
+      logoutEndPoint: 'api/account/Logout',
+      refreshEndPoint: 'api/account/Authenticate',
+      tokenStorage: 'localStorage',
+      loginPageUrl: '/'
     }),
    
-     <% if (layoutStr==="ngxadmin") { %>
+     <% if (layoutStr==='ngxadmin') { %>
     NbEvaIconsModule,
     NbIconModule,
     NbThemeModule.forRoot(
-      { name: "default" },
+      { name: 'default' },
       undefined,
       undefined,
       NbLayoutDirection.<%= direction %>
@@ -98,7 +102,7 @@ const moduleKey = "main";
     },
     {
       provide: FORM_ITEM_DEFAULT_CLASS,
-      useValue: "item-full-width"
+      useValue: 'item-full-width'
     }
   ],
   bootstrap: [AppComponent]
@@ -120,5 +124,5 @@ export function HttpLoaderFactory(
   http: HttpClient,
   configService: ConfigService
 ) {
-  return new NarikTranslateLoader(http, configService, ["app"]);
+  return new NarikTranslateLoader(http, configService, ['app']);
 }

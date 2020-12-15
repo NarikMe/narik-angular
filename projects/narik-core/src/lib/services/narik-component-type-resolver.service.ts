@@ -1,6 +1,6 @@
-import { Injectable, Type } from "@angular/core";
-import { ComponentTypeResolver } from "@narik/infrastructure";
-import { DynamicForms } from "./../decorators/dynamic-form.decorator";
+import { Injectable, Type } from '@angular/core';
+import { ComponentTypeResolver } from '@narik/infrastructure';
+import { DynamicComponents } from '../decorators/dynamic-component.decorator';
 
 @Injectable()
 export class NarikComponentTypeResolver extends ComponentTypeResolver {
@@ -9,13 +9,15 @@ export class NarikComponentTypeResolver extends ComponentTypeResolver {
   }
 
   resolveComponentType(key: string, notFound?: Type<any>): Type<any> {
-    if (DynamicForms[key]) {
-      return DynamicForms[key];
+    if (DynamicComponents[key]) {
+      return DynamicComponents[key];
     } else {
       if (notFound) {
         return notFound;
       }
     }
-    throw new Error(`colud not find any type for "${key}". to define a dynamic form use @DynamicForm(key)`);
+    throw new Error(
+      `Could not find any type for "${key}". To define a dynamic component use @DynamicComponent(key)`
+    );
   }
 }

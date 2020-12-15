@@ -1,8 +1,8 @@
 import { COMPONENTS, DYNAMIC_COMPONENTS } from './index';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { NarikUiMaterialModule } from '@narik/ui-material';
 import { CommonModule, DatePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import {
   MAT_DATE_FORMATS,
@@ -19,7 +19,7 @@ export const PICK_FORMATS = {
     monthYearA11yLabel: { year: 'numeric', month: 'long' },
   },
 };
-
+@Injectable()
 export class PickDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: any): string {
     if (displayFormat === 'input') {
@@ -31,7 +31,12 @@ export class PickDateAdapter extends NativeDateAdapter {
 }
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NarikUiMaterialModule, MatCardModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NarikUiMaterialModule,
+    MatCardModule,
+  ],
   declarations: [COMPONENTS],
   exports: [],
   providers: [

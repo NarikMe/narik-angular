@@ -2,7 +2,7 @@
   <label for="{{id}}">{{label}}</label>
   <div class="form-check-container p-1 pl-2">
     <div [ngClass]="{ 'vertical-content': layoutDirection == 'vertical' }">
-      <narik-checkbox *ngFor="let item of itemsData" (Change)="addOrRemove(valueField ? item[valueField] : item)"
+      <narik-checkbox *ngFor="let item of itemsData" (change)="addOrRemove(valueField ? item[valueField] : item)"
         [tag]="valueField ? item[valueField] : item" label="{{ item[displayField] }}">
       </narik-checkbox>
     </div>

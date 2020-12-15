@@ -4,11 +4,11 @@ export interface Host {
   /**
    * An `Observable` that emit whenever state of host changes.
    */
-  readonly change: Observable<any>;
+  readonly change$: Observable<any>;
 }
 
 export function IsHost(obj: any): obj is Host {
-  return obj && 'change' in obj && isObservable(obj.change);
+  return obj && 'change$' in obj && isObservable(obj.change$);
 }
 /**
  * Command host

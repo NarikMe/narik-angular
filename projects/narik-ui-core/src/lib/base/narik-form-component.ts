@@ -70,7 +70,7 @@ export class NarikFormComponent
   moduleUiKey: string;
 
   @Output()
-  Change = new EventEmitter<any>();
+  change = new EventEmitter<any>();
 
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
@@ -137,7 +137,7 @@ export class NarikFormComponent
     const _oldValue = this._value;
     this._value = this.convertValue(val);
     this.onModelChange(this._value);
-    this.Change.emit(this._value);
+    this.change.emit(this._value);
     this.valueChanged(this._value, _oldValue);
   }
   get value(): any {

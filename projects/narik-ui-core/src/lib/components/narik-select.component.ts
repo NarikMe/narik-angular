@@ -1,28 +1,28 @@
-import { Input, OnInit, Injector } from "@angular/core";
-import { ControlValueAccessor } from "@angular/forms";
+import { Input, OnInit, Injector } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 
-import { NarikDataDisplayValueComponent } from "../base/narik-data-display-value-component";
+import { NarikDataDisplayValueComponent } from '../base/narik-data-display-value-component';
 import {
   CommandInfo,
   CommandHost,
   CommandProcessor,
   DialogRef,
   NavigationService,
-  MODULE_UI_KEY,
-} from "@narik/infrastructure";
-import { ReplaySubject } from "rxjs";
-import { Observable } from "rxjs";
-import { NarikInject } from "@narik/core";
-import { filter } from "rxjs/operators";
-import { ActivatedRoute } from "@angular/router";
+} from '@narik/infrastructure';
+import { ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { NarikInject } from '@narik/core';
+import { filter } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
-export class NarikSelect extends NarikDataDisplayValueComponent
+export class NarikSelect
+  extends NarikDataDisplayValueComponent
   implements ControlValueAccessor, OnInit, CommandHost {
   private changeSubject = new ReplaySubject(1);
 
-  defaultNavigationProvider = "route";
+  defaultNavigationProvider = 'route';
 
-  change: Observable<any>;
+  change$: Observable<any>;
 
   @NarikInject(CommandProcessor)
   commandProcessor: CommandProcessor;
@@ -34,7 +34,7 @@ export class NarikSelect extends NarikDataDisplayValueComponent
   route: ActivatedRoute;
 
   get uiKey(): string {
-    return "select";
+    return 'select';
   }
 
   _multiple: boolean;
@@ -60,10 +60,10 @@ export class NarikSelect extends NarikDataDisplayValueComponent
 
   constructor(injector: Injector) {
     super(injector);
-    this.change = this.changeSubject.asObservable();
+    this.change$ = this.changeSubject.asObservable();
   }
   protected useData(data: any[]) {
-    throw new Error("Subclass Must Override useData.");
+    throw new Error('Subclass Must Override useData.');
   }
 
   protected detectChanges() {
@@ -71,13 +71,13 @@ export class NarikSelect extends NarikDataDisplayValueComponent
   }
 
   processCommand(cmd: CommandInfo) {
-    if (cmd.commandKey === "refresh") {
+    if (cmd.commandKey === 'refresh') {
       this.reLoadData();
-    } else if (cmd.commandKey === "list") {
+    } else if (cmd.commandKey === 'list') {
       this.showList();
-    } else if (cmd.commandKey === "new") {
+    } else if (cmd.commandKey === 'new') {
       this.newOrEditEntity();
-    } else if (cmd.commandKey === "edit") {
+    } else if (cmd.commandKey === 'edit') {
       this.newOrEditEntity(this.value);
     } else {
       this.commandProcessor.processCommand(this, cmd);
@@ -94,14 +94,14 @@ export class NarikSelect extends NarikDataDisplayValueComponent
   }
   protected showList() {
     const data = {};
-    data["__dialogTitle"] = "list_" + (this.dataKey || this.dataInfo.dataKey);
+    data['__dialogTitle'] = 'list_' + (this.dataKey || this.dataInfo.dataKey);
     this.navigationService
       .navigate(
         this.navigationService.createNavigationCommand(
           this.defaultNavigationProvider,
-          (this.dataKey || this.dataInfo.dataKey) + "-list"
+          (this.dataKey || this.dataInfo.dataKey) + '-list'
         ),
-        "dialog",
+        'dialog',
         {
           relativeTo: this.route,
         },
@@ -115,14 +115,14 @@ export class NarikSelect extends NarikDataDisplayValueComponent
           entityId: value,
         }
       : {};
-    data["__dialogTitle"] = this.dataKey || this.dataInfo.dataKey;
+    data['__dialogTitle'] = this.dataKey || this.dataInfo.dataKey;
     this.navigationService
       .navigate(
         this.navigationService.createNavigationCommand(
           this.defaultNavigationProvider,
           this.dataKey || this.dataInfo.dataKey
         ),
-        "dialog",
+        'dialog',
         {
           relativeTo: this.route,
         },
@@ -130,7 +130,7 @@ export class NarikSelect extends NarikDataDisplayValueComponent
       )
       .then((d: DialogRef<any>) => {
         d.events
-          .pipe(filter((x) => x.eventType === "ENTITY_UPDATED"))
+          .pipe(filter((x) => x.eventType === 'ENTITY_UPDATED'))
           .subscribe((x) => {
             this.reLoadData();
           });
@@ -138,4 +138,4 @@ export class NarikSelect extends NarikDataDisplayValueComponent
   }
 }
 
-export const NARIK_SELECT_INPUTS: string[] = ["multiple"];
+export const NARIK_SELECT_INPUTS: string[] = ['multiple'];

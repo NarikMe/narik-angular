@@ -1,4 +1,5 @@
-import { isString } from "./string.util";
+import { ComponentFactory } from '@angular/core';
+import { isString } from './string.util';
 
 export function isEquivalent(obj1, obj2, ignoreCase = false): boolean {
   if (!obj1 && !obj2) {
@@ -22,7 +23,7 @@ export function isEquivalent(obj1, obj2, ignoreCase = false): boolean {
 }
 
 export function isObject(value) {
-  return typeof value === "object";
+  return typeof value === 'object';
 }
 export function isPresent(value) {
   return value !== null && value !== undefined;
@@ -37,7 +38,7 @@ export function isDate(value) {
 }
 
 export function isFunction(value) {
-  return typeof value === "function";
+  return typeof value === 'function';
 }
 
 export function isArray(value) {
@@ -49,15 +50,15 @@ export function toDtoArray(
   valueField?: string,
   displayFiled?: string
 ): { id: any; title: any }[] {
-  return data.map(x => {
+  return data.map((x) => {
     return isString(x)
       ? {
           id: x,
-          title: x
+          title: x,
         }
       : {
           id: x[valueField],
-          title: x[displayFiled]
+          title: x[displayFiled],
         };
   });
 }
@@ -66,7 +67,7 @@ export function getNestedValue(obj: any, path: string) {
   if (!obj || !path) {
     return null;
   }
-  for (const item of path.split(".")) {
+  for (const item of path.split('.')) {
     if (item) {
       obj = obj[item];
     }

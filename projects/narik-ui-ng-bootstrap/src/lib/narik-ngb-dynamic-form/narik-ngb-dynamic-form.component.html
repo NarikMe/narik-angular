@@ -59,9 +59,13 @@
   let-item
   let-invisibleItems="invisibleItems"
   let-model="model"
+  let-form="form"
   let-disableItems="disableItems"
 >
-  <ng-container *ngIf="!item.hideExpr || !invisibleItems[item.name]">
+  <ng-container
+    [formGroup]="form"
+    *ngIf="!item.hideExpr || !invisibleItems[item.name]"
+  >
     <ng-container *ngIf="!customFormComponentKeysObject[item.type || 'text']">
       <ng-container
         *ngIf="
@@ -75,7 +79,6 @@
       >
         <narik-input
           [name]="item.name"
-          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [type]="item.type || 'text'"
@@ -88,7 +91,6 @@
       <ng-container *ngIf="item.type == 'boolean'">
         <narik-checkbox
           [name]="item.name"
-          
           [options]="item.options"
           [formControlName]="item.model"
           label="{{ item.label | translate }}"
@@ -98,7 +100,6 @@
       <ng-container *ngIf="item.type == 'date'">
         <narik-date-picker
           [options]="item.options"
-          
           [name]="item.name"
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
@@ -110,7 +111,6 @@
         <narik-select
           [options]="item.options"
           [name]="item.name"
-          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
@@ -122,7 +122,6 @@
         <narik-autocomplete
           [options]="item.options"
           [name]="item.name"
-          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [minSearchLength]="item.options.minSearchLength || 0"
@@ -136,7 +135,6 @@
         <narik-radio-group
           [options]="item.options"
           [name]="item.name"
-          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"
@@ -148,7 +146,6 @@
         <narik-checkbox-list
           [options]="item.options"
           [name]="item.name"
-          
           [required]="item.required"
           placeHolder="{{ item.options.placeHolder | translate }}"
           [dataInfo]="item.dataInfo"

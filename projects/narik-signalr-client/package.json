@@ -1,6 +1,6 @@
 {
   "name": "@narik/signalr-client",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "peerDependencies": {
     "@angular/common": "~11.0.2",
     "@angular/core": "~11.0.2",

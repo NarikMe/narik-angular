@@ -3,8 +3,8 @@ import {
   DialogInputContent,
   ModuleManager,
   PARAMETERS,
-} from "@narik/infrastructure";
-import { UUID } from "angular2-uuid";
+} from '@narik/infrastructure';
+import { UUID } from 'angular2-uuid';
 
 import {
   DialogService,
@@ -25,7 +25,7 @@ import {
   DIALOG_INPUT_COMPONENT,
   FieldTypes,
   DIALOG_REF,
-} from "@narik/infrastructure";
+} from '@narik/infrastructure';
 import {
   Injectable,
   Type,
@@ -41,23 +41,25 @@ import {
   StaticProvider,
   Renderer2,
   RendererFactory2,
-} from "@angular/core";
-import { DOCUMENT } from "@angular/common";
-import { ReplaySubject } from "rxjs";
-import { isString, isArray, isFunction } from "@narik/common";
-import { filter } from "rxjs/operators";
-import { first } from "rxjs/operators";
+  Optional,
+} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ReplaySubject } from 'rxjs';
+import { isString, isArray, isFunction } from '@narik/common';
+import { filter } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import {
   NarikInject,
   NarikGlobalInject,
-} from "../decorators/narik-inject.decorator";
-import { ToastrService } from "ngx-toastr";
-import { TranslateService } from "@ngx-translate/core";
-import { OverlayContainer, Overlay } from "@angular/cdk/overlay";
-import { take } from "rxjs/operators";
+} from '../decorators/narik-inject.decorator';
+import { GlobalConfig, ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
+import { OverlayContainer, Overlay } from '@angular/cdk/overlay';
+import { take } from 'rxjs/operators';
+import { TOASTR_OPTION } from '../injectionTokens';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class NarikDialogService extends DialogService {
   private openDialogs = new Map<string, DialogRef<any>>();
@@ -93,13 +95,16 @@ export class NarikDialogService extends DialogService {
     private eventAggregatorService: EventAggregatorService,
     private moduleManager: ModuleManager,
     moduleRef: NgModuleRef<any>,
-    @Inject(DOCUMENT) private document
+    @Inject(DOCUMENT) private document,
+    @Optional()
+    @Inject(TOASTR_OPTION)
+    private toastrOption: GlobalConfig
   ) {
     super();
     this.registerModule(moduleRef, componentFactoryResolver, injector);
     this.moduleManager.narikLoaded.subscribe(() => {
       this.eventAggregatorService
-        .listen<{ moduleKey: string }>("MODULE_LOAD_COMPLETELY")
+        .listen<{ moduleKey: string }>('MODULE_LOAD_COMPLETELY')
         .subscribe((module: { moduleKey: string; moduleInfo: ModuleInfo }) => {
           if (module.moduleInfo && module.moduleInfo.module) {
             this.registerModule(
@@ -142,7 +147,10 @@ export class NarikDialogService extends DialogService {
   }
 
   error(message: string | string[] | any, title?: string, options?: any) {
-    this.showMessage(message, title, MessageType.Error, options);
+    this.showMessage(message, title, MessageType.Error, {
+      ...this.toastrOption,
+      ...options,
+    });
   }
   showMessage(
     message: string | string[],
@@ -150,16 +158,20 @@ export class NarikDialogService extends DialogService {
     type?: MessageType,
     options?: any
   ) {
+    options = {
+      ...this.toastrOption,
+      ...options,
+    };
     if (isArray(message)) {
       message = (message as string[])
         .map((x) => this.translateService.instant(x))
-        .join(" ");
+        .join(' ');
     } else if (isString(message)) {
       message = this.translateService.instant(message);
     } else {
       message = Object.keys(message)
         .map((x) => this.translateService.instant(message[x]))
-        .join(" ");
+        .join(' ');
     }
     type = type || MessageType.Success;
     switch (type) {
@@ -185,28 +197,27 @@ export class NarikDialogService extends DialogService {
   }
 
   showDialog<T>(
-    content: Type<any> | TemplateRef<any>,
+    content: Type<any> | TemplateRef<any> | ComponentFactory<any>,
     title?: string,
     data?: any,
     actions?: DialogAction[],
     options?: DialogOption,
     validateOnClose?: (
-      dialogresult: DialogResult<T>
+      dialogResult: DialogResult<T>
     ) => boolean | Promise<boolean>,
-    onClose?: (dialogresult: DialogResult<T>) => void,
-    providers?: StaticProvider[],
-    resolver?: ComponentFactoryResolver
+    onClose?: (dialogResult: DialogResult<T>) => void,
+    providers?: StaticProvider[]
   ): DialogRef<T> {
     options = options || {};
     const containers = this.createDialogContainer(options, actions, title);
     const dialogContainerRef = containers.container;
     const dialogOverlayContainerRef = containers.overLaycontainer;
 
-    const result = new NarikDialogRef<T>("dialog-" + UUID.UUID(), null);
+    const result = new NarikDialogRef<T>('dialog-' + UUID.UUID(), null);
     const renderer = this.rendererFactory.createRenderer(null, null);
     renderer.setAttribute(
       dialogContainerRef.location.nativeElement,
-      "narik-dialog-id",
+      'narik-dialog-id',
       result.id
     );
     result.container = dialogContainerRef.instance;
@@ -215,19 +226,21 @@ export class NarikDialogService extends DialogService {
         content,
         data || {}
       );
-    } else if (content instanceof Type) {
-      if (!resolver) {
-        resolver = this.componentFactoryResolver;
-      }
-      const factory = resolver.resolveComponentFactory(content as Type<T>);
+    } else if (content instanceof Type || content instanceof ComponentFactory) {
+      const factory =
+        content instanceof ComponentFactory
+          ? content
+          : this.componentFactoryResolver.resolveComponentFactory(
+              content as Type<T>
+            );
       providers = providers || [];
       providers.push({ provide: DIALOG_REF, useValue: result });
       providers.push({ provide: PARAMETERS, useValue: data });
 
       let parentInjector: Injector = this.injector;
 
-      if ((resolver as any).ngModule) {
-        parentInjector = ((resolver as any).ngModule as NgModuleRef<any>)
+      if ((factory as any).ngModule) {
+        parentInjector = ((factory as any).ngModule as NgModuleRef<any>)
           .injector;
       }
 
@@ -257,9 +270,9 @@ export class NarikDialogService extends DialogService {
     const overlayContainer = this.injector.get(OverlayContainer, undefined);
     if (overlayContainer) {
       const host = overlayContainer.getContainerElement();
-      const pane = this.document.createElement("div");
+      const pane = this.document.createElement('div');
       pane.id = `cdk-overlay-dialog-${this.nextUniqueId++}`;
-      pane.classList.add("cdk-overlay-pane");
+      pane.classList.add('cdk-overlay-pane');
       host.appendChild(pane);
       pane.appendChild(dialogOverlayContainerRef.location.nativeElement);
     } else {
@@ -284,7 +297,7 @@ export class NarikDialogService extends DialogService {
       });
     }
     result.events
-      .pipe(filter((x) => x.eventType === "CLOSE_REQUEST"))
+      .pipe(filter((x) => x.eventType === 'CLOSE_REQUEST'))
       .subscribe((e: DialogEvent) => {
         if (
           result.componentInstance &&
@@ -314,7 +327,7 @@ export class NarikDialogService extends DialogService {
     message: string,
     title?: string,
     actions?: DialogAction[],
-    onResult?: (dialogresult: DialogResult<any>) => void
+    onResult?: (dialogResult: DialogResult<any>) => void
   ): DialogRef<any> {
     return this.showDialog(
       this.messageComponent,
@@ -343,7 +356,7 @@ export class NarikDialogService extends DialogService {
     title?: string,
     fields?: EntityField[],
     entity?: any,
-    onResult?: (dialogresult: DialogResult<DialogInputContent>) => void,
+    onResult?: (dialogResult: DialogResult<DialogInputContent>) => void,
     actions?: DialogAction[],
     options?: DialogOption
   ): DialogRef<any> {
@@ -380,7 +393,7 @@ export class NarikDialogService extends DialogService {
     placeHolder?: string,
     fieldType?: FieldTypes,
     defaultValue?: any,
-    onResult?: (dialogresult: DialogResult<DialogInputContent>) => void,
+    onResult?: (dialogResult: DialogResult<DialogInputContent>) => void,
     actions?: DialogAction[],
     options?: DialogOption
   ): DialogRef<any> {
@@ -389,7 +402,7 @@ export class NarikDialogService extends DialogService {
       title,
       [
         {
-          name: "input",
+          name: 'input',
           fieldType: fieldType || FieldTypes.Text,
           options: {
             plaveHolder: placeHolder,
@@ -423,7 +436,7 @@ export class NarikDialogService extends DialogService {
   close(
     dialog: DialogRef<any> | string,
     dialogResult?: DialogResult<any>,
-    eventSource?: "DIALOG" | "CONTENT"
+    eventSource?: 'DIALOG' | 'CONTENT'
   ) {
     let _dialog: DialogRef<any>;
     if (isString(dialog)) {
@@ -444,10 +457,10 @@ export class NarikDialogService extends DialogService {
   private doClose(
     _dialog: DialogRef<any>,
     dialogResult?: DialogResult<any>,
-    eventSource?: "DIALOG" | "CONTENT"
+    eventSource?: 'DIALOG' | 'CONTENT'
   ) {
     _dialog.events.next({
-      eventType: "CLOSED",
+      eventType: 'CLOSED',
       eventData: dialogResult,
       eventSource: eventSource,
     });
@@ -518,7 +531,7 @@ export class NarikDialogRef<T> implements DialogRef<T> {
     this._closed = new Promise((resolve, reject) => {
       this.events
         .pipe(
-          filter((x) => x.eventType === "CLOSED"),
+          filter((x) => x.eventType === 'CLOSED'),
           first()
         )
         .subscribe((e: DialogEvent) => {
@@ -534,9 +547,9 @@ export class NarikDialogRef<T> implements DialogRef<T> {
     });
   }
 
-  close(dialogResult?: DialogResult<any>, eventSource?: "DIALOG" | "CONTENT") {
+  close(dialogResult?: DialogResult<any>, eventSource?: 'DIALOG' | 'CONTENT') {
     this.eventSubject.next({
-      eventType: "CLOSE_REQUEST",
+      eventType: 'CLOSE_REQUEST',
       eventData: dialogResult,
       eventSource: eventSource,
     });
@@ -545,20 +558,20 @@ export class NarikDialogRef<T> implements DialogRef<T> {
 
 export class DialogActions {
   static ok: DialogAction = {
-    label: "ok",
-    dialogResult: "ok",
+    label: 'ok',
+    dialogResult: 'ok',
   };
   static cancel: DialogAction = {
-    label: "cancel",
-    dialogResult: "cancel",
+    label: 'cancel',
+    dialogResult: 'cancel',
   };
   static yes: DialogAction = {
-    label: "yes",
-    dialogResult: "yes",
+    label: 'yes',
+    dialogResult: 'yes',
   };
   static no: DialogAction = {
-    label: "no",
-    dialogResult: "no",
+    label: 'no',
+    dialogResult: 'no',
   };
 
   static ok_cancel = [DialogActions.ok, DialogActions.cancel];

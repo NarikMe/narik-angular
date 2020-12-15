@@ -1,10 +1,16 @@
-import { NarikUiListForm } from "@narik/ui-lib";
-import { Component, Injector } from "@angular/core";
-import { DynamicForm } from "@narik/core";
-
-@DynamicForm("GeneralListComponent")
+import { NarikUiListForm } from '@narik/ui-lib';
+import { Component, forwardRef, Injector } from '@angular/core';
+import { DynamicComponent } from '@narik/core';
+import { HOST_TOKEN } from '@narik/infrastructure';
+@DynamicComponent('GeneralListComponent')
 @Component({
-  templateUrl: "general-list.component.html"
+  templateUrl: 'general-list.component.html',
+  providers: [
+    {
+      provide: HOST_TOKEN,
+      useExisting: forwardRef(() => GeneralListComponent),
+    },
+  ],
 })
 export class GeneralListComponent extends NarikUiListForm<any> {
   constructor(injector: Injector) {

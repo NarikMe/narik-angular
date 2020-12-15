@@ -25,12 +25,7 @@ import {
   addProviderToModule,
 } from '@schematics/angular/utility/ast-utils';
 import { Change, InsertChange } from '@schematics/angular/utility/change';
-import { getProjectTargets } from '@schematics/angular/utility/project-targets';
-import {
-  BrowserBuilderTarget,
-  Builders,
-  ServeBuilderTarget,
-} from '@schematics/angular/utility/workspace-models';
+
 import {
   WorkspaceProject,
   WorkspaceSchema,
@@ -48,9 +43,9 @@ const layoutStyles: any = {
   coreui: ['node_modules/@coreui/icons/css/free.css'],
 };
 const commonStyles = [
-  'node_modules/@fortawesome/fontawesome-free/css/all.min.css',
-  'node_modules/ngx-toastr/toastr.css',
-  'src/styles/styles.scss',
+  '~@fortawesome/fontawesome-free/css/all.min.css',
+  '~ngx-toastr/toastr-bs4-alert',
+  './styles/styles.scss',
 ];
 
 const uiStyles: any = {
@@ -75,7 +70,7 @@ const uiStyles: any = {
     'node_modules/@narik/ui-swimlane/styles/narik-ui-swimlane.css',
   ],
   primeng: [
-    'node_modules/primeng/resources/themes/nova-light/theme.css',
+    'node_modules/primeng/resources/themes/nova/theme.css',
     'node_modules/primeng/resources/primeng.min.css',
     'node_modules/primeicons/primeicons.css',
     'node_modules/@narik/ui-primeng/styles/narik-ui-prime.css',
@@ -174,36 +169,36 @@ const commonDependencies: any[] = [
   },
   {
     name: '@narik/infrastructure',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/common',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/core',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/app-core',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/ui-core',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/jwt-authentication',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/client-storage',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
 ];
 
 const rtlUiDependency: any = {
-  'ng-bootstrap': [{ name: 'bootstrap-v4-rtl', version: '^4.4.1-2' }],
+  'ng-bootstrap': [{ name: 'bootstrap-v4-rtl', version: '^4.5.2-1' }],
 };
 const layoutDependency: any = {
   ngxadmin: [
@@ -290,7 +285,7 @@ const uiDependency: any = {
   material: [
     {
       name: '@narik/ui-material',
-      version: '^5.0.0',
+      version: '^5.1.0',
     },
     {
       name: '@angular/material',
@@ -300,15 +295,15 @@ const uiDependency: any = {
   devextreme: [
     {
       name: '@narik/ui-devextreme',
-      version: '^5.0.0',
+      version: '^5.1.0',
     },
     {
       name: 'devextreme',
-      version: '^20.2.30',
+      version: '^20.2.4',
     },
     {
       name: 'devextreme-angular',
-      version: '^20.2.30',
+      version: '^20.2.4',
     },
     {
       name: 'stream',
@@ -316,15 +311,15 @@ const uiDependency: any = {
     },
   ],
   'ng-bootstrap': [
-    { name: '@narik/ui-ng-bootstrap', version: '^5.0.0' },
-    { name: '@narik/ui-swimlane', version: '^5.0.0' },
+    { name: '@narik/ui-ng-bootstrap', version: '^5.1.0' },
+    { name: '@narik/ui-swimlane', version: '^5.1.0' },
     { name: '@swimlane/ngx-datatable', version: '^18.0.0' },
     { name: '@ng-bootstrap/ng-bootstrap', version: '^8.0.0' },
     { name: '@angular/localize', version: '^11.0.0' },
   ],
   nebular: [
-    { name: '@narik/ui-nebular', version: '^5.0.0' },
-    { name: '@narik/ui-swimlane', version: '^5.0.0' },
+    { name: '@narik/ui-nebular', version: '^5.1.0' },
+    { name: '@narik/ui-swimlane', version: '^5.1.0' },
     { name: '@swimlane/ngx-datatable', version: '^18.0.0' },
     { name: '@nebular/theme', version: '7.0.0-beta.1' },
     { name: '@nebular/date-fns', version: '7.0.0-beta.1' },
@@ -333,7 +328,7 @@ const uiDependency: any = {
   primeng: [
     { name: 'primeng', version: '^10.0.3' },
     { name: 'primeicons', version: '^4.0.0' },
-    { name: '@narik/ui-primeng', version: '^5.0.0' },
+    { name: '@narik/ui-primeng', version: '^5.1.0' },
   ],
 };
 
@@ -348,8 +343,9 @@ export function ngAdd(_options: AddSchema): Rule {
     addCustomBuilder(),
     addExtraFiles(ui, rtl, layout),
     updateTsConfig(ui),
-    updateIndexhtml(ui, rtl),
+    updateIndexHtml(ui, rtl),
     addLocalization(ui),
+    // addToMainTs(),
     // addModuleImports(ui, rtl),
     // addModuleProvids(ui),
     // updateAppModule(),
@@ -507,19 +503,31 @@ function addLocalization(ui: string) {
   return (host: Tree, context: SchematicContext) => {
     if (ui === 'ng-bootstrap') {
       const localizePolyfill = `import '@angular/localize/init';`;
-      const localizeStr = `/***************************************************************************************************
-   * Load \`$localize\` onto the global scope - used if i18n tags appear in Angular templates.
-   */
-  ${localizePolyfill}
-  `;
+      const localizeStr = `
+/***************************************************************************************************
+* Load \`$localize\` onto the global scope - used if i18n tags appear in Angular templates.
+*/
+${localizePolyfill}`;
 
-      const projectName: string = getWorkspace(host).defaultProject!;
-      prendendToTargetOptionFile(
+      const projectName: string | undefined = getWorkspace(host).defaultProject;
+      if (projectName) {
+        appendToTargetOptionFile(host, projectName, 'polyfills', localizeStr);
+      }
+    }
+
+    return host;
+  };
+}
+
+function addToMainTs() {
+  return (host: Tree, context: SchematicContext) => {
+    const projectName: string | undefined = getWorkspace(host).defaultProject;
+    if (projectName) {
+      appendToTargetOptionFile(
         host,
         projectName,
-        '@angular-builders/custom-webpack:browser',
-        'polyfills',
-        localizeStr
+        'main',
+        `import 'reflect-metadata';`
       );
     }
 
@@ -527,85 +535,34 @@ function addLocalization(ui: string) {
   };
 }
 
-function getAllOptionValues<T>(
+function appendToTargetOptionFile(
   host: Tree,
   projectName: string,
-  builderName: string,
-  optionName: string
-) {
-  const targets = getProjectTargets(host, projectName);
-
-  // Find all targets of a specific build in a project.
-  const builderTargets: (
-    | BrowserBuilderTarget
-    | ServeBuilderTarget
-  )[] = Object.values(targets).filter(
-    (target: BrowserBuilderTarget | ServeBuilderTarget) =>
-      target.builder === builderName
-  );
-
-  console.log(builderTargets);
-  // Get all options contained in target configuration partials.
-  const configurationOptions = builderTargets
-    .filter((t) => t.configurations)
-    .map((t) => Object.values(t.configurations!))
-    .reduce((acc, cur) => acc.concat(...cur), []);
-
-  // Now we have all option sets. We can use it to find all references to a given property.
-  const allOptions = [
-    ...builderTargets.map((t) => t.options),
-    ...configurationOptions,
-  ];
-
-  // Get all values for the option name and dedupe them.
-  // Deduping will only work for primitives, but the keys we want here are strings so it's ok.
-  const optionValues: T[] = allOptions
-    .filter((o) => o[optionName])
-    .map((o) => o[optionName])
-    .reduce((acc, cur) => (!acc.includes(cur) ? acc.concat(cur) : acc), []);
-
-  return optionValues;
-}
-
-function prendendToTargetOptionFile(
-  host: Tree,
-  projectName: string,
-  builderName: string,
   optionName: string,
   str: string
 ) {
-  // Get all known polyfills for browser builders on this project.
-  const optionValues = getAllOptionValues<string>(
-    host,
-    projectName,
-    builderName,
-    optionName
-  );
+  const workspace = getWorkspace(host);
+  const project = workspace.projects[projectName];
+  const buildTargetOptions = getProjectTarget(project, 'build');
+  const path = buildTargetOptions.options[optionName];
+  const data = host.read(path);
+  if (!data) {
+    // If the file doesn't exist, just ignore it.
+    return;
+  }
+  const content = virtualFs.fileBufferToString(data);
+  if (content.includes(str) || content.includes(str.replace(/'/g, '"'))) {
+    // If the file already contains the polyfill (or variations), ignore it too.
+    return;
+  }
 
-  optionValues.forEach((path) => {
-    const data = host.read(path);
-    if (!data) {
-      // If the file doesn't exist, just ignore it.
-      return;
-    }
-    const localizePolyfill = `import '@angular/localize/init';`;
-    const content = virtualFs.fileBufferToString(data);
-    if (
-      content.includes(localizePolyfill) ||
-      content.includes(localizePolyfill.replace(/'/g, '"'))
-    ) {
-      // If the file already contains the polyfill (or variations), ignore it too.
-      return;
-    }
-
-    // Add string at the start of the file.
-    const recorder = host.beginUpdate(path);
-    recorder.insertLeft(0, str);
-    host.commitUpdate(recorder);
-  });
+  // Add string at the end of the file.
+  const recorder = host.beginUpdate(path);
+  recorder.insertRight(content.length, str);
+  host.commitUpdate(recorder);
 }
 
-function updateIndexhtml(ui: string, rtl: boolean) {
+function updateIndexHtml(ui: string, rtl: boolean) {
   return (host: Tree) => {
     if (host.exists('src/index.html')) {
       let sourceText = host.read('src/index.html')!.toString('utf-8');
@@ -1042,27 +999,8 @@ export function addStyles(
   return function (host: Tree, context: SchematicContext): Tree {
     const workspace = getWorkspace(host);
     const project = workspace.projects[workspace.defaultProject!];
-    let assets: string[] = [];
-    if (!rtl || ui !== 'ng-bootstrap') {
-      assets.push('node_modules/bootstrap/dist/css/bootstrap.css');
-    } else {
-      assets.push('node_modules/bootstrap-v4-rtl/css/bootstrap.css');
-    }
-    assets = assets.concat(commonStyles);
+    const assets: string[] = ['src/styles.scss'];
 
-    if (uiStyles[ui]) {
-      assets = assets.concat(uiStyles[ui] as string[]);
-    }
-
-    if (layoutStyles[layout]) {
-      assets = assets.concat(layoutStyles[layout] as string[]);
-    }
-
-    if (rtl) {
-      if (rtlUiStyles[ui]) {
-        assets = assets.concat(rtlUiStyles[ui] as string[]);
-      }
-    }
     context.logger.log('info', `🔍 Adding styles...`);
     addStyleToTarget(project, 'build', host, assets, workspace);
     addStyleToTarget(project, 'test', host, assets, workspace);
@@ -1071,6 +1009,41 @@ export function addStyles(
   };
 }
 
+function createStyles(ui: string, rtl: boolean, layout: string): string[] {
+  let assets: string[] = [];
+  if (!rtl || ui !== 'ng-bootstrap') {
+    assets.push('~bootstrap/scss/bootstrap');
+  } else {
+    assets.push('~bootstrap-v4-rtl/scss/bootstrap');
+  }
+  assets = assets.concat(commonStyles);
+
+  if (uiStyles[ui]) {
+    assets = assets.concat(
+      (uiStyles[ui] as string[]).map((x) => x.replace('node_modules/', '~'))
+    );
+  }
+
+  if (layoutStyles[layout]) {
+    assets = assets.concat(
+      (layoutStyles[layout] as string[]).map((x) =>
+        x.replace('node_modules/', '~')
+      )
+    );
+  }
+
+  if (rtl) {
+    if (rtlUiStyles[ui]) {
+      assets = assets.concat(
+        (rtlUiStyles[ui] as string[]).map((x) =>
+          x.replace('node_modules/', '~')
+        )
+      );
+    }
+  }
+
+  return assets;
+}
 function getLayoutModule(layout: string) {
   switch (layout) {
     case 'ngxadmin':
@@ -1102,6 +1075,7 @@ export function addExtraFiles(
     context.logger.log('info', `🔍 Adding  extra...`);
     const layoutModule = getLayoutModule(layout);
     const layoutModulePath = getLayoutModulePath(layout);
+    const styles = createStyles(ui, rtl, layout);
     const templateSource = apply(url('./files'), [
       applyTemplates({
         direction: rtl ? 'RTL' : 'LTR',
@@ -1109,6 +1083,7 @@ export function addExtraFiles(
         layoutStr: layout,
         layoutModule: layoutModule,
         layoutModulePath: layoutModulePath,
+        styles: styles,
       }),
       forEach((fileEntry: FileEntry) => {
         if (fileEntry.path.indexOf('@') >= 0) {

@@ -1,11 +1,11 @@
 import {
   NarikDataOrientedComponent,
   NARIK_DATA_ORIENTED_INPUTS,
-  NARIK_DATA_ORIENTED_OUTPUTS
-} from "./narik-data-oriented-component";
-import { Input, Injector } from "@angular/core";
-import { DEFAULT_VALUE_DISPLAY_FIELD_NAMES } from "./../injectionTokens";
-import { isArray } from "@narik/common";
+  NARIK_DATA_ORIENTED_OUTPUTS,
+} from './narik-data-oriented-component';
+import { Input, Injector } from '@angular/core';
+import { DEFAULT_VALUE_DISPLAY_FIELD_NAMES } from './../injectionTokens';
+import { isArray } from '@narik/common';
 
 export abstract class NarikDataDisplayValueComponent extends NarikDataOrientedComponent {
   _displayField: string;
@@ -31,13 +31,13 @@ export abstract class NarikDataDisplayValueComponent extends NarikDataOrientedCo
     super(injector);
 
     const defaultFieldNames = injector.get(DEFAULT_VALUE_DISPLAY_FIELD_NAMES, {
-      valueField: "id",
-      displayField: "title"
+      valueField: 'id',
+      displayField: 'title',
     });
     this.displayField = defaultFieldNames.displayField;
     this.valueField = defaultFieldNames.valueField;
 
-    this.dataChange.subscribe(x => {
+    this.dataChange.subscribe((x) => {
       if (this.value) {
         this.checkRaiseselectedItemChange(this.value);
       }
@@ -56,18 +56,20 @@ export abstract class NarikDataDisplayValueComponent extends NarikDataOrientedCo
 
   private checkRaiseselectedItemChange(value) {
     if (isArray(this.dataSource)) {
-      const item = this.dataSource.filter(x => x[this.valueField] === value)[0];
+      const item = this.dataSource.filter(
+        (x) => x[this.valueField] === value
+      )[0];
       this.selectedItemChange.emit(item);
     }
   }
 }
 
 export const NARIK_DATA_DISPLAY_VALUE_OUTPUTS: string[] = [
-  ...NARIK_DATA_ORIENTED_OUTPUTS
+  ...NARIK_DATA_ORIENTED_OUTPUTS,
 ];
 
 export const NARIK_DATA_DISPLAY_VALUE_INPUTS: string[] = [
-  "displayField",
-  "valueField",
-  ...NARIK_DATA_ORIENTED_INPUTS
+  'displayField',
+  'valueField',
+  ...NARIK_DATA_ORIENTED_INPUTS,
 ];

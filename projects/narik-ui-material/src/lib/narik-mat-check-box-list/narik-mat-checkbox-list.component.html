@@ -3,7 +3,7 @@
   <mat-label *ngIf="label">{{label}}</mat-label>
   <input matInput placeholder="Input" style="display: none">
   <div [ngClass]='{"vertical-content" : layoutDirection=="vertical"}'>
-    <narik-mat-checkbox *ngFor="let item of itemsData" (Change)='addOrRemove(valueField ?  item[valueField]:item);'
+    <narik-mat-checkbox *ngFor="let item of itemsData" (change)='addOrRemove(valueField ?  item[valueField]:item);'
       labelPosition="after" color='' [tag]='valueField ?  item[valueField]:item' label='{{item[displayField]}}'></narik-mat-checkbox>
   </div>
 </mat-form-field>

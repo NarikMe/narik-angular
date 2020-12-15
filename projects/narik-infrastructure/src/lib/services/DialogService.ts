@@ -1,4 +1,4 @@
-import { ReplaySubject } from "rxjs";
+import { ReplaySubject } from 'rxjs';
 
 import {
   ElementRef,
@@ -8,18 +8,19 @@ import {
   StaticProvider,
   EventEmitter,
   ComponentFactoryResolver,
-} from "@angular/core";
+  ComponentFactory,
+} from '@angular/core';
 
-import { EntityField, FieldTypes } from "../interfaces/meta-data.model";
+import { EntityField, FieldTypes } from '../interfaces/meta-data.model';
 
 /**
  * Message type
  */
 export enum MessageType {
-  Success = "Success",
-  Error = "Error",
-  Warn = "Warn",
-  Info = "Info",
+  Success = 'Success',
+  Error = 'Error',
+  Warn = 'Warn',
+  Info = 'Info',
 }
 
 /**
@@ -141,7 +142,7 @@ export interface DialogResult<T> {
  */
 export interface DialogInputContent {
   entity: any;
-  fields: any[] ;
+  fields: any[];
 }
 
 /**
@@ -150,7 +151,7 @@ export interface DialogInputContent {
 export interface DialogEvent {
   eventType: string;
   eventData?: any;
-  eventSource?: "DIALOG" | "CONTENT";
+  eventSource?: 'DIALOG' | 'CONTENT';
 }
 
 /**
@@ -188,7 +189,7 @@ export interface DialogRef<T> {
    * @param [dialogResult]  result that should be returned
    * @param [eventSource] who call the close.
    */
-  close(dialogResult?: DialogResult<any>, eventSource?: "DIALOG" | "CONTENT");
+  close(dialogResult?: DialogResult<any>, eventSource?: 'DIALOG' | 'CONTENT');
 }
 
 /**
@@ -249,17 +250,16 @@ export abstract class DialogService {
    * @returns dialog dialog
    */
   abstract showDialog<T>(
-    content: Type<any> | TemplateRef<any>,
+    content: Type<any> | TemplateRef<any> | ComponentFactory<any>,
     title?: string,
     data?: any,
     actions?: DialogAction[],
     options?: DialogOption,
     validateOnClose?: (
-      dialogresult: DialogResult<T>
+      dialogResult: DialogResult<T>
     ) => boolean | Promise<boolean>,
-    onClose?: (dialogresult: DialogResult<T>) => void,
-    providers?: StaticProvider[],
-    resolver?: ComponentFactoryResolver
+    onClose?: (dialogResult: DialogResult<T>) => void,
+    providers?: StaticProvider[]
   ): DialogRef<T>;
 
   /**
@@ -274,7 +274,7 @@ export abstract class DialogService {
     message: string,
     title?: string,
     actions?: DialogAction[],
-    onResult?: (dialogresult: DialogResult<any>) => void
+    onResult?: (dialogResult: DialogResult<any>) => void
   ): DialogRef<any>;
 
   /**
@@ -301,7 +301,7 @@ export abstract class DialogService {
     title?: string,
     fields?: EntityField[],
     entity?: any,
-    onResult?: (dialogresult: DialogResult<DialogInputContent>) => void,
+    onResult?: (dialogResult: DialogResult<DialogInputContent>) => void,
     actions?: DialogAction[],
     options?: DialogOption
   ): DialogRef<DialogInputContent>;
@@ -325,7 +325,7 @@ export abstract class DialogService {
     placeHolder?: string,
     fieldType?: FieldTypes,
     defaultValue?: any,
-    onResult?: (dialogresult: DialogResult<DialogInputContent>) => void,
+    onResult?: (dialogResult: DialogResult<DialogInputContent>) => void,
     actions?: DialogAction[],
     options?: DialogOption
   ): DialogRef<any>;
@@ -347,7 +347,7 @@ export abstract class DialogService {
   abstract close(
     dialog: DialogRef<any> | string,
     dialogResult?: DialogResult<any>,
-    eventSource?: "DIALOG" | "CONTENT"
+    eventSource?: 'DIALOG' | 'CONTENT'
   );
 
   /**

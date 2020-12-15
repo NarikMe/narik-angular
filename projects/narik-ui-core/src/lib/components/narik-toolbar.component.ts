@@ -8,6 +8,7 @@ import {
   ShortcutService,
   DialogService,
   HOST_TOKEN,
+  IsHost,
 } from '@narik/infrastructure';
 import { NarikInject } from '@narik/core';
 import { getParentComponent } from '@narik/common';
@@ -116,7 +117,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);
 
-    this.host = injector.get(HOST_TOKEN, undefined) as CommandHost;
+    this.host = injector.get(HOST_TOKEN, null) as CommandHost;
 
     if (!this.host && viewContainerRef) {
       this.host = getParentComponent<CommandHost>(viewContainerRef);
@@ -132,8 +133,8 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
         this.showLabel = info.showLabel;
       }
       this.items = info.items;
-      if (this.host && this.host.change) {
-        this.host.change.pipe(debounceTime(100)).subscribe((x) => {
+      if (IsHost(this.host)) {
+        this.host.change$.pipe(debounceTime(100)).subscribe((x) => {
           this.applyContextExpressions();
         });
       }

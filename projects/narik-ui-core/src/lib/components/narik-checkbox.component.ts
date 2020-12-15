@@ -1,8 +1,8 @@
-import { Input } from "@angular/core";
+import { Input } from '@angular/core';
 import {
   NarikFormComponent,
-  NARIK_UI_FORM_INPUTS
-} from "../base/narik-form-component";
+  NARIK_UI_FORM_INPUTS,
+} from '../base/narik-form-component';
 export abstract class NarikCheckBox extends NarikFormComponent {
   _tag: any;
 
@@ -15,4 +15,4 @@ export abstract class NarikCheckBox extends NarikFormComponent {
   }
 }
 
-export const NARIK_CHECKBOX_INPUTS: string[] = ["tag", ...NARIK_UI_FORM_INPUTS];
+export const NARIK_CHECKBOX_INPUTS: string[] = ['tag', ...NARIK_UI_FORM_INPUTS];

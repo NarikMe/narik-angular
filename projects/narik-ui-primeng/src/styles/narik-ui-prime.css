@@ -7,7 +7,9 @@
 }
 
 .toolbar-separator {
-  vertical-align: middle
+  vertical-align: middle;
+  height: 24px;
+  margin-left: 2px;
 }
 
 .toolbar-separator:last-child {
@@ -15,8 +17,9 @@
 }
 
 .input-container {
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
   position: relative;
   padding: 16px;
@@ -54,23 +57,22 @@ p-dropdown {
 }
 
 .ui-toolbar {
-  padding: .25em .5em !important;
+  padding: 0.25em 0.5em !important;
 }
 
-.ui-calendar>.ui-inputtext {
-  line-height: 1.4
+.ui-calendar > .ui-inputtext {
+  line-height: 1.4;
 }
 
-.ui-autocomplete>.ui-inputtext {
-  line-height: 1.4
+.ui-autocomplete > .ui-inputtext {
+  line-height: 1.4;
 }
-
 
 p-radiobutton {
   margin-right: 6px;
 }
 
-.check-box-list>narik-checkbox {
+.check-box-list > narik-checkbox {
   margin-right: 6px;
 }
 
@@ -82,7 +84,7 @@ p-radiobutton {
   display: block;
 }
 
-.ui-calendar>.ui-inputtext {
+.ui-calendar > .ui-inputtext {
   width: calc(100% - 33px);
 }
 
@@ -95,7 +97,7 @@ p-radiobutton {
 }
 
 .modal-dialog {
-  overflow-y: initial !important
+  overflow-y: initial !important;
 }
 
 .modal-body {

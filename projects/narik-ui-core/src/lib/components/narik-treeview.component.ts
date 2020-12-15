@@ -1,13 +1,14 @@
-import { CommandHost, CommandInfo } from "@narik/infrastructure";
+import { CommandHost, CommandInfo } from '@narik/infrastructure';
 
-import { Input, EventEmitter, Output, Injector } from "@angular/core";
-import { Observable } from "rxjs";
-import { isEquivalent } from "@narik/common";
-import { NarikUiComponent } from "../base/narik-ui-component";
+import { Input, EventEmitter, Output, Injector } from '@angular/core';
+import { Observable } from 'rxjs';
+import { isEquivalent } from '@narik/common';
+import { NarikUiComponent } from '../base/narik-ui-component';
 
-export abstract class NarikTreeview extends NarikUiComponent
+export abstract class NarikTreeview
+  extends NarikUiComponent
   implements CommandHost {
-  change: Observable<any>;
+  change$: Observable<any>;
 
   _selectedNode: any;
 
@@ -46,9 +47,9 @@ export abstract class NarikTreeview extends NarikUiComponent
     super(injector);
   }
   processCommand(cmd: CommandInfo) {
-    if (cmd.commandKey === "add") {
+    if (cmd.commandKey === 'add') {
       this.addNode(this.selectedNode);
-    } else if (cmd.commandKey === "delete") {
+    } else if (cmd.commandKey === 'delete') {
       if (this.selectedNode) {
         this.deleteNode(this.selectedNode);
       }

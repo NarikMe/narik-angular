@@ -1,15 +1,22 @@
-@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes';
+@import "~@nebular/theme/styles/theming";
+@import "~@nebular/theme/styles/themes";
+@import "~@nebular/theme/styles/globals";
 
-$nb-themes: nb-register-theme((
-  // app wise variables for each theme
-  sidebar-header-gap: 2rem,
-  sidebar-header-height: initial,
-  layout-content-width: 1400px,
-  header-height: 5.45rem,
-  font-family-primary: Roboto,
-  font-family-secondary: Exo,
-  card-height-tiny: 13.5rem,
-), default, default);
+$nb-themes: nb-register-theme(
+  (
+    // app wise variables for each theme
+    sidebar-header-gap: 2rem,
+    sidebar-header-height: initial,
+    layout-content-width: 1400px,
+    header-height: 5.45rem,
+    font-family-primary: Roboto,
+    font-family-secondary: Exo,
+    card-height-tiny: 13.5rem
+  ),
+  default,
+  default
+);
 
-
+@include nb-install() {
+  @include nb-theme-global();
+}

@@ -12,11 +12,12 @@ import {
   CommandProcessor,
   ValidationService,
   FormTitleResolver,
-  ComponentTypeResolver
-} from "@narik/infrastructure";
+  ComponentTypeResolver,
+} from '@narik/infrastructure';
 
-import { Type } from "@angular/core";
-import { ConfigOptions } from "@narik/infrastructure";
+import { Type } from '@angular/core';
+import { ConfigOptions } from '@narik/infrastructure';
+import { GlobalConfig } from 'ngx-toastr';
 
 export interface NarikCoreModuleConfig {
   configFilePath?: string;
@@ -37,4 +38,5 @@ export interface NarikCoreModuleConfig {
   componentTypeResolver?: Type<ComponentTypeResolver>;
   defaultLang?: string;
   useDefaultLang?: boolean;
+  toastrOption?: Partial<GlobalConfig>;
 }

@@ -1,0 +1,2 @@
+<% for( style of styles){ %>
+@import '<%= style %>';<%}%>

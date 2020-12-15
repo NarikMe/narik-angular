@@ -4,7 +4,7 @@
     <div class="check-box-list">
       <narik-checkbox
       [ngClass]="{'vertical-check-box-item': layoutDirection==='vertical'}"
-      *ngFor="let item of itemsData" (Change)="addOrRemove(valueField ? item[valueField] : item)"
+      *ngFor="let item of itemsData" (change)="addOrRemove(valueField ? item[valueField] : item)"
         [tag]="valueField ? item[valueField] : item" label="{{ item[displayField] }}">
       </narik-checkbox>
     </div>

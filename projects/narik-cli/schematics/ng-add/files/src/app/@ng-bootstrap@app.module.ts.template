@@ -35,6 +35,8 @@ import { MainComponent } from './main/main.component';
 import { MainViewComponent } from './main-view/main-view.component';
 <%= layoutModulePath %>
 import { ShareModule } from "./modules/share/share.module";
+import 'reflect-metadata';
+
 
 const moduleKey = "main";
 
@@ -55,7 +57,10 @@ const moduleKey = "main";
       configFilePath: "assets/app-config.json",
       defaultLang: "en",
       useDefaultLang: true,
-      commandProcessor: DemoCommandProcessor
+      commandProcessor: DemoCommandProcessor,
+      toastrOption: {
+        positionClass: <%= direction==="RTL" ?  "'toast-top-left'":"'toast-top-right'" %> 
+      }
     }),
     NarikUiCoreModule,
     NarikAppCoreModule.forRoot({}),

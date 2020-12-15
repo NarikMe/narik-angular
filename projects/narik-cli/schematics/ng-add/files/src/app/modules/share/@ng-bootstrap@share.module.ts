@@ -1,21 +1,21 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { NarikUiNgBootstrapModule } from "@narik/ui-ng-bootstrap";
-import { NarikSwimlaneDataTableModule } from "@narik/ui-swimlane";
-import { COMPONENTS, DYNAMIC_COMPONENTS } from "./index";
+import { NarikUiNgBootstrapModule } from '@narik/ui-ng-bootstrap';
+import { NarikSwimlaneDataTableModule } from '@narik/ui-swimlane';
+import { COMPONENTS, DYNAMIC_COMPONENTS } from './index';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     NarikUiNgBootstrapModule,
     NarikSwimlaneDataTableModule,
   ],
   declarations: [COMPONENTS],
   exports: [],
-  providers: []
+  providers: [],
 })
 export class ShareModule {
   // https://github.com/angular/angular/issues/35314

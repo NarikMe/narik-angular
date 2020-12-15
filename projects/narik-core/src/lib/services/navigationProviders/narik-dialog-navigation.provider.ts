@@ -3,9 +3,14 @@ import {
   DialogRef,
   DialogService,
   NavigationProvider,
-} from "@narik/infrastructure";
+} from '@narik/infrastructure';
 
-import { Injectable } from "@angular/core";
+import {
+  ComponentFactory,
+  ComponentFactoryResolver,
+  Injectable,
+  Type,
+} from '@angular/core';
 import {
   NavigationExtras,
   PRIMARY_OUTLET,
@@ -13,14 +18,15 @@ import {
   UrlSegmentGroup,
   ActivatedRoute,
   UrlTree,
-} from "@angular/router";
-import { NarikBaseNavigationProvider } from "./narik-base-navigation.provider";
-import { isArray, isString } from "@narik/common";
+} from '@angular/router';
+import { NarikBaseNavigationProvider } from './narik-base-navigation.provider';
+import { isArray, isString } from '@narik/common';
 
 @Injectable()
-export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
+export class NarikDialogNavigationProvider
+  extends NarikBaseNavigationProvider
   implements NavigationProvider {
-  key = "dialog";
+  key = 'dialog';
 
   constructor(private dialogService: DialogService, router: Router) {
     super(router);
@@ -64,19 +70,24 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
         primary
       );
       if (route && route.route) {
-        let resolver;
+        let resolver: ComponentFactoryResolver;
+        let component: Type<any> | ComponentFactory<any> =
+          route.route.component;
         const config = this.parentLoadedConfig(extras.relativeTo.snapshot);
         if (config) {
           resolver = config.module.componentFactoryResolver;
+          if (resolver) {
+            component = resolver.resolveComponentFactory(component);
+          }
         }
         const dialog = this.dialogService.showDialog(
-          route.route.component,
-          data ? data["__dialogTitle"] : undefined,
+          component,
+          data ? data['__dialogTitle'] : undefined,
           {
             routeByCustomProvider: true,
             path: primary.segments[0].path,
             ...route.route.data,
-            ...data
+            ...data,
           },
           [],
           dialogOptions || {
@@ -86,8 +97,7 @@ export class NarikDialogNavigationProvider extends NarikBaseNavigationProvider
           },
           undefined,
           undefined,
-          [{ provide: ActivatedRoute, useValue: extras.relativeTo }],
-          resolver
+          [{ provide: ActivatedRoute, useValue: extras.relativeTo }]
         );
         resolve(dialog);
       } else {

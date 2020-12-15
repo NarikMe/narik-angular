@@ -1,13 +1,14 @@
-import { isPresent, isString, toFilterFunction, isArray } from "@narik/common";
+import { isPresent, isString, toFilterFunction, isArray } from '@narik/common';
 import {
   NarikDataSource,
   FilterItems,
-  NarikViewField
-} from "@narik/infrastructure";
-import { NarikDataTable } from "@narik/ui-core";
-import { Subject } from "rxjs";
+  NarikViewField,
+  IPagingInfo,
+} from '@narik/infrastructure';
+import { NarikDataTable } from '@narik/ui-core';
+import { Subject } from 'rxjs';
 
-import { SelectionModel } from "@angular/cdk/collections";
+import { SelectionModel } from '@angular/cdk/collections';
 import {
   AfterViewInit,
   Component,
@@ -18,33 +19,53 @@ import {
   AfterContentInit,
   ChangeDetectorRef,
   AfterViewChecked,
-  Injector
-} from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
+  Injector,
+} from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
-import { MatLazyDataSource } from "../data-source/mat-lazy-data-source";
-import { MatLocalDataSource } from "../data-source/mat-local-data-source";
-import { takeWhile } from "rxjs/operators";
-import { debounceTime } from "rxjs/operators";
-import { distinctUntilChanged } from "rxjs/operators";
+import { MatLazyDataSource } from '../data-source/mat-lazy-data-source';
+import { MatLocalDataSource } from '../data-source/mat-local-data-source';
+import { takeWhile } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-  selector: "narik-mat-data-table , narik-data-table",
-  templateUrl: "narik-mat-data-table.component.html"
+  selector: 'narik-mat-data-table , narik-data-table',
+  templateUrl: 'narik-mat-data-table.component.html',
 })
-export class NarikMatDataTable extends NarikDataTable
+export class NarikMatDataTable
+  extends NarikDataTable
   implements OnInit, AfterViewInit, AfterContentInit, AfterViewChecked {
   fieldNames: string[] = [];
   filterObj: any = {};
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild("searchInput", { static: false }) searchInput: ElementRef;
+  private _sort: MatSort;
+  private _paginator: MatPaginator;
+
+  @ViewChild(MatSort, { static: false })
+  set sort(value: MatSort) {
+    this._sort = value;
+    this.setUiOptionsOnDataSource();
+  }
+  get sort(): MatSort {
+    return this._sort;
+  }
+
+  @ViewChild(MatPaginator, { static: false })
+  set paginator(value: MatPaginator) {
+    this._paginator = value;
+    this.setUiOptionsOnDataSource();
+  }
+  get paginator() {
+    return this._paginator;
+  }
+
+  @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   filterChange = new Subject<FilterItems>();
   selection: SelectionModel<any>;
-  _selectMode: "None" | "One" | "Multiple" = "Multiple";
+  _selectMode: 'None' | 'One' | 'Multiple' = 'Multiple';
   _showRowNumber = true;
-  _containerCssClass = "mat-table-container";
+  _containerCssClass = 'mat-table-container';
   _rowCssClass: string;
   searchSubject = new Subject<any>();
 
@@ -73,10 +94,10 @@ export class NarikMatDataTable extends NarikDataTable
   }
 
   @Input()
-  set selectMode(value: "None" | "One" | "Multiple") {
+  set selectMode(value: 'None' | 'One' | 'Multiple') {
     this._selectMode = value;
   }
-  get selectMode(): "None" | "One" | "Multiple" {
+  get selectMode(): 'None' | 'One' | 'Multiple' {
     return this._selectMode;
   }
 
@@ -93,12 +114,11 @@ export class NarikMatDataTable extends NarikDataTable
   }
 
   ngOnInit() {
-    this.makeColumns();
     this.selection = new SelectionModel<any>(
-      this.selectMode === "Multiple",
+      this.selectMode === 'Multiple',
       []
     );
-    this.selection.changed.subscribe(x => {
+    this.selection.changed.subscribe((x) => {
       this.selectedItems = this.selection.selected;
     });
 
@@ -110,9 +130,15 @@ export class NarikMatDataTable extends NarikDataTable
             x: { filterValue: string; column: any },
             y: { filterValue: string; column: any }
           ) => {
-            if (!x) { return false; }
-            if (x.filterValue !== y.filterValue) { return false; }
-            if (!x.column && !y.column) { return true; }
+            if (!x) {
+              return false;
+            }
+            if (x.filterValue !== y.filterValue) {
+              return false;
+            }
+            if (!x.column && !y.column) {
+              return true;
+            }
             if (x.column && y.column) {
               return (x.column.model = y.column.model);
             }
@@ -120,7 +146,7 @@ export class NarikMatDataTable extends NarikDataTable
           }
         )
       )
-      .subscribe(f => {
+      .subscribe((f) => {
         this.doFilter(f.filterValue, f.column);
       });
   }
@@ -141,15 +167,22 @@ export class NarikMatDataTable extends NarikDataTable
   dblclick(row) {
     this.rowDoubleClick.emit(row);
   }
-  initDataSource(ds: NarikDataSource<any>) {
-    if (ds instanceof MatLocalDataSource) {
-      this.initLocalDataSource(this.dataSource as MatLocalDataSource<any>);
-    } else {
-      this.initRemoteDataSource(this.dataSource as MatLazyDataSource<any>);
+
+  setUiOptionsOnDataSource() {
+    if (this.dataSource) {
+      if (this.dataSource instanceof MatLocalDataSource) {
+        this.initLocalDataSource(this.dataSource as MatLocalDataSource<any>);
+      } else {
+        this.initRemoteDataSource(this.dataSource as MatLazyDataSource<any>);
+      }
     }
+  }
+
+  initDataSource(ds: NarikDataSource<any>) {
+    this.setUiOptionsOnDataSource();
     this.dataSource.dataObservable
-      .pipe(takeWhile(x => this.isAlive))
-      .subscribe(x => {
+      .pipe(takeWhile((x) => this.isAlive))
+      .subscribe((x) => {
         this.selection.clear();
       });
     this.dataSource.loadData();
@@ -166,19 +199,19 @@ export class NarikMatDataTable extends NarikDataTable
   }
 
   makeColumns() {
-    this.fieldNames = this.fields ? this.fields.map(x => x.model) : [];
-    if (this.selectMode !== "None") {
-      this.fieldNames.unshift("select");
+    this.fieldNames = this.fields ? this.fields.map((x) => x.model) : [];
+    if (this.selectMode !== 'None') {
+      this.fieldNames.unshift('select');
     }
     if (this.showRowNumber) {
-      this.fieldNames.unshift("index");
+      this.fieldNames.unshift('index');
     }
     if (this.rowCommands && this.rowCommands.length !== 0) {
-      this.fieldNames.push("actions");
+      this.fieldNames.push('actions');
     }
 
-    this.fields.forEach(x => {
-      this.filterObj["$$" + x.model] = x.type;
+    this.fields.forEach((x) => {
+      this.filterObj['$$' + x.model] = x.type;
     });
   }
 
@@ -191,12 +224,12 @@ export class NarikMatDataTable extends NarikDataTable
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.currentData.forEach(row => this.selection.select(row));
+      : this.currentData.forEach((row) => this.selection.select(row));
   }
   applyFilter(filterValue, column?: NarikViewField) {
     this.searchSubject.next({
       filterValue: filterValue,
-      column: column
+      column: column,
     });
   }
   doFilter(filterValue, column?: NarikViewField) {
@@ -217,47 +250,47 @@ export class NarikMatDataTable extends NarikDataTable
   }
 
   createFilter(filterValue, column: NarikViewField): FilterItems {
-    this.filterObj[column ? column.model : "$$overallFilter"] = isString(
+    this.filterObj[column ? column.model : '$$overallFilter'] = isString(
       filterValue
     )
       ? filterValue.trim()
       : filterValue;
 
     const filter0: FilterItems = {
-      condition: "or",
-      filters: []
+      condition: 'or',
+      filters: [],
     };
-    if (this.filterObj["$$overallFilter"]) {
-      this.fields.forEach(x => {
-        if (!x.type || x.type === "text") {
+    if (this.filterObj['$$overallFilter']) {
+      this.fields.forEach((x) => {
+        if (!x.type || x.type === 'text') {
           filter0.filters.push({
             field: x.model,
-            operator: "contains",
-            value: this.filterObj["$$overallFilter"]
+            operator: 'contains',
+            value: this.filterObj['$$overallFilter'],
           });
         }
       });
     }
 
     const filter1: FilterItems = {
-      condition: "and",
-      filters: []
+      condition: 'and',
+      filters: [],
     };
     for (const filterKey in this.filterObj) {
-      if (!filterKey.startsWith("$$")) {
+      if (!filterKey.startsWith('$$')) {
         if (
           this.filterObj.hasOwnProperty(filterKey) &&
           isPresent(this.filterObj[filterKey]) &&
-          this.filterObj[filterKey] !== ""
+          this.filterObj[filterKey] !== ''
         ) {
           filter1.filters.push({
             field: filterKey,
             operator:
-              !this.filterObj["$$" + filterKey] ||
-              this.filterObj["$$" + filterKey] === "text"
-                ? "contains"
-                : "eq",
-            value: this.filterObj[filterKey]
+              !this.filterObj['$$' + filterKey] ||
+              this.filterObj['$$' + filterKey] === 'text'
+                ? 'contains'
+                : 'eq',
+            value: this.filterObj[filterKey],
           });
         }
       }
@@ -268,8 +301,8 @@ export class NarikMatDataTable extends NarikDataTable
       return filter1;
     } else if (filter1.filters.length !== 0 && filter0.filters.length !== 0) {
       return {
-        condition: "and",
-        filters: [filter0, filter1]
+        condition: 'and',
+        filters: [filter0, filter1],
       };
     } else {
       return null;
@@ -279,7 +312,12 @@ export class NarikMatDataTable extends NarikDataTable
   rowCommandClicked(commandKey, row) {
     this.rowCommandClick.emit({
       key: commandKey,
-      item: row
+      item: row,
     });
+  }
+
+  protected fieldsChanged() {
+    super.fieldsChanged();
+    this.makeColumns();
   }
 }

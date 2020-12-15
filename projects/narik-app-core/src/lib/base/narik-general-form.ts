@@ -1,4 +1,4 @@
-import { NarikInject } from "@narik/core";
+import { NarikInject } from '@narik/core';
 import {
   CommandInfo,
   DIALOG_REF,
@@ -10,10 +10,10 @@ import {
   NarikComponent,
   MODULE_UI_KEY,
   CommandProcessor,
-  PARAMETERS
-} from "@narik/infrastructure";
-import { ReplaySubject } from "rxjs";
-import { Observable } from "rxjs";
+  PARAMETERS,
+} from '@narik/infrastructure';
+import { ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import {
   ChangeDetectorRef,
@@ -22,22 +22,24 @@ import {
   SimpleChanges,
   ViewChild,
   Type,
-} from "@angular/core";
+} from '@angular/core';
 
-import { PARAMETER_RESOLVER } from "../injectionTokens";
-import { BusyIndicator } from "../interfaces/busy-indicator";
-import { NarikParameterResolver } from "../services/narik-parameter-resolver";
-import { QueryService } from "../services/queryService";
-import { QUERY_SERVICE_TYPE } from "../internal-injectionTokens";
+import { PARAMETER_RESOLVER } from '../injectionTokens';
+import { BusyIndicator } from '../interfaces/busy-indicator';
+import { NarikParameterResolver } from '../services/narik-parameter-resolver';
+import { QueryService } from '../services/queryService';
+import { QUERY_SERVICE_TYPE } from '../internal-injectionTokens';
 
 /**
  * Narik general form
  */
-export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
+export class NarikGeneralForm<TE extends NarikEntity>
+  extends NarikComponent
   implements CommandHost, OnChanges {
   private changeSubject = new ReplaySubject(1);
 
-  change: Observable<any>;
+  change$: Observable<any>;
+
   get isInDialog(): boolean {
     return !!this.dialogRef;
   }
@@ -66,8 +68,6 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
   @NarikInject(PARAMETERS, null)
   parameters: any;
 
-
-
   _isBusy: boolean;
   set isBusy(value: boolean) {
     if (this.busyIndicator) {
@@ -84,8 +84,9 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
   constructor(private injector: Injector) {
     super();
 
-    const localInjector = Injector.create(
-      [
+    const localInjector = Injector.create({
+      parent: injector,
+      providers: [
         { provide: NarikGeneralForm, useValue: this },
         {
           provide: PARAMETER_RESOLVER,
@@ -98,12 +99,11 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
           deps: [Injector],
         },
       ],
-      injector
-    );
+    });
 
     this.parameterResolver = localInjector.get(PARAMETER_RESOLVER);
     this.queryService = localInjector.get(QueryService);
-    this.change = this.changeSubject.asObservable();
+    this.change$ = this.changeSubject.asObservable();
     this.detectChanges();
   }
 
@@ -112,13 +112,13 @@ export class NarikGeneralForm<TE extends NarikEntity> extends NarikComponent
   }
 
   processCommand(cmd: CommandInfo) {
-    if (cmd.commandKey === "close" && this.dialogRef) {
+    if (cmd.commandKey === 'close' && this.dialogRef) {
       this.dialogRef.close(
         {
           componentInstance: this,
-          dialogResult: "close",
+          dialogResult: 'close',
         },
-        "CONTENT"
+        'CONTENT'
       );
     } else {
       this.commandProcessor.processCommand(this, cmd);
