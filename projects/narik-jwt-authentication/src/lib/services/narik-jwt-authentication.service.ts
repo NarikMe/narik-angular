@@ -7,16 +7,16 @@ import {
   LoginResult,
   AUTHENTICATION_LOGOUT_END_POINT,
   DataStorageService,
-  LOGIN_PAGE_URL
-} from "@narik/infrastructure";
+  LOGIN_PAGE_URL,
+  HttpService,
+} from '@narik/infrastructure';
 
-import { Inject, Injectable } from "@angular/core";
-import { NarikHttpService } from "@narik/core";
-import { first } from "rxjs/operators";
-import { ReplaySubject } from "rxjs";
-import { Observable } from "rxjs";
-import { TOKEN_STORAGE } from "../injectionTokens";
-import { Router } from "@angular/router";
+import { Inject, Injectable } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { TOKEN_STORAGE } from '../injectionTokens';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class NarikJwtAuthentication extends AuthenticationService {
@@ -25,7 +25,7 @@ export class NarikJwtAuthentication extends AuthenticationService {
   private _token: any;
 
   constructor(
-    private service: NarikHttpService,
+    private httpService: HttpService,
     private dataStorage: DataStorageService,
     private router: Router,
     @Inject(AUTHENTICATION_LOGIN_END_POINT) private authEndPoint: string,
@@ -55,16 +55,16 @@ export class NarikJwtAuthentication extends AuthenticationService {
   init() {
     this.dataStorage
       .getData(this.tokenStorage, {
-        dataKey: "auth-token"
+        dataKey: 'auth-token',
       })
-      .subscribe(token => {
+      .subscribe((token) => {
         if (token) {
           this._token = token;
           this.dataStorage
             .getData(this.tokenStorage, {
-              dataKey: "current-user"
+              dataKey: 'current-user',
             })
-            .subscribe(result => {
+            .subscribe((result) => {
               this._currentUserValue = result;
               this._currentUserSubject.next(this._currentUserValue);
             });
@@ -73,7 +73,7 @@ export class NarikJwtAuthentication extends AuthenticationService {
   }
   login(loginmodel: LoginModel): Promise<LoginResult> {
     return new Promise<LoginResult>((resolve, reject) => {
-      return this.service
+      return this.httpService
         .post(this.authEndPoint, loginmodel)
         .pipe(first())
         .subscribe(
@@ -87,16 +87,16 @@ export class NarikJwtAuthentication extends AuthenticationService {
                 .addData(this.tokenStorage, [
                   {
                     dataInfo: {
-                      dataKey: "auth-token"
+                      dataKey: 'auth-token',
                     },
-                    data: result.token
+                    data: result.token,
                   },
                   {
                     dataInfo: {
-                      dataKey: "current-user"
+                      dataKey: 'current-user',
                     },
-                    data: result.loginedUser
-                  }
+                    data: result.loginedUser,
+                  },
                 ])
                 .pipe(first())
                 .subscribe(() => {
@@ -106,24 +106,24 @@ export class NarikJwtAuthentication extends AuthenticationService {
               resolve(result);
             }
           },
-          err => reject(err)
+          (err) => reject(err)
         );
     });
   }
   logout(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-       this.service
+      this.httpService
         .post(this.logoutEndPoint, {})
         .pipe(first())
-        .subscribe(result => {
+        .subscribe((result) => {
           this.dataStorage
             .removeItems(this.tokenStorage, [
               {
-                dataKey: "auth-token"
+                dataKey: 'auth-token',
               },
               {
-                dataKey: "current-user"
-              }
+                dataKey: 'current-user',
+              },
             ])
             .subscribe(() => {
               this._currentUserValue = undefined;
@@ -136,7 +136,7 @@ export class NarikJwtAuthentication extends AuthenticationService {
   }
   refresh(): Promise<ApplicationUser> {
     return new Promise<ApplicationUser>((resolve, reject) => {
-      return this.service
+      return this.httpService
         .get(this.authRefreshEndPoint)
         .pipe(first())
         .subscribe((result: LoginResult) => {

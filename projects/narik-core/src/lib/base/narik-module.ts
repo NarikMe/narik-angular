@@ -1,19 +1,16 @@
+import { Injector, NgModuleRef } from '@angular/core';
 import {
+  ConfigService,
+  HttpService,
+  JsonService,
   ModuleInfo,
   ModuleManager,
-  ConfigService,
-  JsonService
-} from "@narik/infrastructure";
-import { Observable } from "rxjs";
-import { of } from "rxjs";
-import { map, first } from "rxjs/operators";
+} from '@narik/infrastructure';
+import { Observable, of } from 'rxjs';
+import { first, map } from 'rxjs/operators';
+import { NarikInject } from '../decorators/narik-inject.decorator';
 
-import { Injector, NgModuleRef } from "@angular/core";
-
-import { NarikHttpService } from "../services/narik-http.service";
-import { NarikInject } from "../decorators/narik-inject.decorator";
-
-export abstract class NarikModule  {
+export abstract class NarikModule {
   abstract readonly key: string;
   abstract readonly moduleInfo: Observable<ModuleInfo>;
 
@@ -23,8 +20,8 @@ export abstract class NarikModule  {
   @NarikInject(NgModuleRef)
   private moduleRef: NgModuleRef<any>;
 
-  @NarikInject(NarikHttpService)
-  private httpService: NarikHttpService;
+  @NarikInject(HttpService)
+  private httpService: HttpService;
 
   @NarikInject(JsonService)
   private jsonService: JsonService;
@@ -36,9 +33,9 @@ export abstract class NarikModule  {
 
   constructor(private injector: Injector) {
     this.configService.configLoaded.pipe(first()).subscribe(() => {
-      this.moduleRootPath = this.configService.getConfig("modulesMetaDataRoot");
+      this.moduleRootPath = this.configService.getConfig('modulesMetaDataRoot');
       if (!this.moduleRootPath) {
-        throw new Error("modulesMetaDataRoot is null");
+        throw new Error('modulesMetaDataRoot is null');
       }
       this.registerModule();
     });
@@ -47,7 +44,7 @@ export abstract class NarikModule  {
   protected registerModule() {
     const moduleInfo = this.moduleInfo;
     if (moduleInfo) {
-      moduleInfo.subscribe(info => {
+      moduleInfo.subscribe((info) => {
         info.module = this.moduleRef;
         this.moduleManager.addOrUpdateModule(this.key, info);
       });
@@ -57,7 +54,7 @@ export abstract class NarikModule  {
   protected loadInfoFromJson(): Observable<ModuleInfo> {
     return this.jsonService
       .getJson(`${this.moduleRootPath}/${this.key.toLowerCase()}.json`)
-      .pipe(map(x => x as ModuleInfo));
+      .pipe(map((x) => x as ModuleInfo));
   }
 
   protected loadInfoFromData(info: ModuleInfo): Observable<ModuleInfo> {

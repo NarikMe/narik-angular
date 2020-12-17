@@ -1,4 +1,4 @@
-import { isArray } from "./object.util";
+import { isArray } from './object.util';
 
 export function promiseSerial(tasks) {
   const aArgs = [];
@@ -9,13 +9,13 @@ export function promiseSerial(tasks) {
   if (!self) {
     self = this;
   }
-  return Promise.all(aArgs).then(function(args) {
+  return Promise.all(aArgs).then(function (args) {
     let current = Promise.resolve.call(Promise);
     const result = [];
-    tasks.forEach(function(task) {
+    tasks.forEach(function (task) {
       if (task && task.apply) {
         result.push(
-          (current = current.then(function() {
+          (current = current.then(function () {
             return task.apply(self, args);
           }))
         );
@@ -25,4 +25,11 @@ export function promiseSerial(tasks) {
     });
     return Promise.all(result);
   });
+}
+export async function promiseSerial2(
+  tasks: (() => Promise<any>)[]
+): Promise<any> {
+  for (const task of tasks) {
+    await task();
+  }
 }

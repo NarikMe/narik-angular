@@ -1,5 +1,5 @@
-import { isEquivalent } from "@narik/common";
-import { NarikInject } from "@narik/core";
+import { isEquivalent } from '@narik/common';
+import { NarikInject } from '@narik/core';
 import {
   CommandInfo,
   NarikDataSource,
@@ -14,26 +14,26 @@ import {
   DataInfo,
   ConfigService,
   MetaDataService,
-  MODULE_UI_KEY
-} from "@narik/infrastructure";
-import { DynamicFormService } from "@narik/ui-core";
-import { takeWhile, filter, finalize } from "rxjs/operators";
+  MODULE_UI_KEY,
+} from '@narik/infrastructure';
+import { DynamicFormService } from '@narik/ui-core';
+import { takeWhile, filter, finalize } from 'rxjs/operators';
 
-import { Injector, OnInit } from "@angular/core";
-import { ActivatedRoute, Route } from "@angular/router";
+import { Injector, OnInit } from '@angular/core';
+import { ActivatedRoute, Route } from '@angular/router';
 
 import {
   DEFAULT_PAGING_INFO,
-  LIST_DEFAULT_VIEW_OPTION
-} from "../injectionTokens";
-import { ListFormConfig } from "../interfaces/form-config.model";
+  LIST_DEFAULT_VIEW_OPTION,
+} from '../injectionTokens';
+import { ListFormConfig } from '../interfaces/form-config.model';
 import {
   DefaultListViewOption,
-  ListFormViewOption
-} from "../interfaces/form-view-option.model";
-import { ServerResponse } from "../interfaces/server-response.model";
-import { StringConstants } from "../util/constants";
-import { NarikGeneralForm } from "./narik-general-form";
+  ListFormViewOption,
+} from '../interfaces/form-view-option.model';
+import { ServerResponse } from '../interfaces/server-response.model';
+import { StringConstants } from '../util/constants';
+import { NarikGeneralForm } from './narik-general-form';
 
 /**
  * Narik list form
@@ -49,7 +49,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
   _config: ListFormConfig;
   _selectedItems: any[];
   viewOptions: any;
-  defaultNavigationProvider = "route";
+  defaultNavigationProvider = 'route';
 
   protected entityKeyField: string;
 
@@ -76,7 +76,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
 
   @NarikInject(DEFAULT_PAGING_INFO, {
     pageSize: 20,
-    availablePageSizes: [10, 20, 50, 100]
+    availablePageSizes: [10, 20, 50, 100],
   })
   defaultPagingInfo: IPagingInfo;
 
@@ -150,18 +150,18 @@ export abstract class NarikListForm<TE extends NarikEntity>
       return this.config.listDataInfo;
     }
     return {
-      dataKey: this.config.entityKey
+      dataKey: this.config.entityKey,
     };
   }
 
   constructor(injector: Injector) {
     super(injector);
     this.entityKeyField =
-      this.configService.getConfig("entityKeyField") || "viewModelId";
+      this.configService.getConfig('entityKeyField') || 'viewModelId';
 
     this.viewOptions = this.metaDataService.getValue<any>(
       this.moduleKey,
-      "viewOptions"
+      'viewOptions'
     );
   }
 
@@ -172,8 +172,8 @@ export abstract class NarikListForm<TE extends NarikEntity>
     if (this.config && this.config.isDynamic) {
       this.fields = this.dynamicFormService
         .createFieldsFromEntityFields(this.config.fields)
-        .filter(x => x.showInList)
-        .sort(function(obj1, obj2) {
+        .filter((x) => x.showInList)
+        .sort(function (obj1, obj2) {
           return (
             (obj1.orderInList || obj1.order) - (obj2.orderInList || obj2.order)
           );
@@ -182,8 +182,8 @@ export abstract class NarikListForm<TE extends NarikEntity>
     if (!this.config.isServerSideData) {
       if (this.dataSource && this.config.bindIsBusyToDataSourceBusy) {
         this._dataSource.loadingObservable
-          .pipe(takeWhile(x => this.isAlive))
-          .subscribe(isBusy => (this.isBusy = isBusy));
+          .pipe(takeWhile((x) => this.isAlive))
+          .subscribe((isBusy) => (this.isBusy = isBusy));
       }
 
       if (!this.dataSource && !this.hasDataSource) {
@@ -213,7 +213,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
         (config.isServerSideData
           ? {
               pageSize: this.defaultPagingInfo.pageSize,
-              availablePageSizes: this.defaultPagingInfo.availablePageSizes
+              availablePageSizes: this.defaultPagingInfo.availablePageSizes,
             }
           : undefined);
       if (config.pagingInfo) {
@@ -257,10 +257,10 @@ export abstract class NarikListForm<TE extends NarikEntity>
     }
     const data = selectedEntity
       ? {
-          entityId: selectedEntity[this.entityKeyField]
+          entityId: selectedEntity[this.entityKeyField],
         }
       : {};
-    data["__dialogTitle"] = this.config.entityKey;
+    data['__dialogTitle'] = this.config.entityKey;
 
     this.navigationService
       .navigate(
@@ -273,15 +273,15 @@ export abstract class NarikListForm<TE extends NarikEntity>
           relativeTo: this.route,
           queryParams: selectedEntity
             ? { entityId: selectedEntity[this.entityKeyField] }
-            : {}
+            : {},
         },
         data
       )
       .then((d: DialogRef<any>) => {
         if (d.events) {
           d.events
-            .pipe(filter(x => x.eventType === "ENTITY_UPDATED"))
-            .subscribe(x => {
+            .pipe(filter((x) => x.eventType === 'ENTITY_UPDATED'))
+            .subscribe((x) => {
               this.refresh();
             });
         }
@@ -294,13 +294,13 @@ export abstract class NarikListForm<TE extends NarikEntity>
     }
     if (this.selectedItems && this.selectedItems.length !== 0) {
       this.dialogService
-        .showConfirm("info.delete-confirm", "info.confirm")
+        .showConfirm('info.delete-confirm', 'info.confirm')
         .closed.then((confirmResult: DialogResult<any>) => {
-          if (confirmResult.dialogResult === "yes") {
+          if (confirmResult.dialogResult === 'yes') {
             this.isBusy = true;
-            const data = this.selectedItems.map(x => {
+            const data = this.selectedItems.map((x) => {
               return {
-                id: x[this.entityKeyField]
+                id: x[this.entityKeyField],
               };
             });
             this.queryService
@@ -310,7 +310,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
                   this.isBusy = false;
                 })
               )
-              .subscribe(x => {
+              .subscribe((x) => {
                 this.refresh();
               });
           }
@@ -322,24 +322,24 @@ export abstract class NarikListForm<TE extends NarikEntity>
     this.processCommand({
       commandKey: info.key,
       commandData: {
-        row: info.item
-      }
+        row: info.item,
+      },
     });
   }
   processCommand(cmd: CommandInfo) {
     switch (cmd.commandKey) {
-      case "refresh":
+      case 'refresh':
         this.refresh();
         break;
-      case "edit":
+      case 'edit':
         if (this.selectedEntity) {
           this.newOrEditEntity(this.selectedEntity);
         }
         break;
-      case "new":
+      case 'new':
         this.newOrEditEntity();
         break;
-      case "delete":
+      case 'delete':
         this.deleteEntities();
         break;
       default:
@@ -353,17 +353,17 @@ export abstract class NarikListForm<TE extends NarikEntity>
       this.config.options &&
       this.config.options.editNavigationProvider
     ) {
-      return this.config.options.editNavigationProvider === "dialog"
-        ? "dialog"
+      return this.config.options.editNavigationProvider === 'dialog'
+        ? 'dialog'
         : this.defaultNavigationProvider;
     }
 
     if (this.viewOptions) {
-      return this.viewOptions.editNavigationProvider === "dialog"
-        ? "dialog"
+      return this.viewOptions.editNavigationProvider === 'dialog'
+        ? 'dialog'
         : this.defaultNavigationProvider;
     }
 
-    return "dialog";
+    return 'dialog';
   }
 }

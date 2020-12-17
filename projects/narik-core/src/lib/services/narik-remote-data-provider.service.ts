@@ -1,4 +1,4 @@
-import { formatString, replaceString } from "@narik/common";
+import { formatString, replaceString } from '@narik/common';
 import {
   DataInfo,
   ModuleManager,
@@ -6,20 +6,20 @@ import {
   MODULE_DATA_KEY,
   ModuleDataInfo,
   MetaDataService,
-  UrlCreatorService
-} from "@narik/infrastructure";
-import { Observable } from "rxjs";
-import { first } from "rxjs/operators";
-import { ReplaySubject } from "rxjs";
-import { Subject } from "rxjs";
-import { Injectable, Injector } from "@angular/core";
-import { NarikHttpService } from "./narik-http.service";
+  UrlCreatorService,
+  HttpService,
+} from '@narik/infrastructure';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { Injectable, Injector } from '@angular/core';
 
 @Injectable()
 export class NarikRemoteDataProviderService extends RemoteDataProviderService {
-  key = "remote";
+  key = 'remote';
   order = 100;
-  dayaKeyTemplate = "{0}_{1}";
+  dayaKeyTemplate = '{0}_{1}';
 
   protected dataStreams: Map<string, Subject<any>> = new Map<
     string,
@@ -29,7 +29,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
   private modulesDataInformations = new Map<string, ModuleDataInfo>();
 
   constructor(
-    private httpService: NarikHttpService,
+    private httpService: HttpService,
     private injector: Injector,
     private moduleManager: ModuleManager,
     private metaDataService: MetaDataService
@@ -40,7 +40,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
         this.addRemoteDataInfo(module.key, module.value.metaData.dataInfo);
       }
     }
-    this.moduleManager.modulesChanged.subscribe(x => {
+    this.moduleManager.modulesChanged.subscribe((x) => {
       if (x.moduleInfo.metaData && x.moduleInfo.metaData.dataInfo) {
         this.addRemoteDataInfo(x.moduleKey, x.moduleInfo.metaData.dataInfo);
       }
@@ -61,14 +61,14 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
   getData<T>(dataInfo: DataInfo): Observable<T> {
     let _dataUrl = dataInfo.dataUrl;
     let _remoteDataProvider = dataInfo.remoteDataProvider;
-    let _parameterPrefix = "";
+    let _parameterPrefix = '';
     if (!_dataUrl) {
       let _dataInfo = { ...dataInfo };
       if (!_dataInfo.moduleKey) {
         _dataInfo.moduleKey = this.injector.get(MODULE_DATA_KEY);
       }
 
-      if (!dataInfo.actionType || dataInfo.actionType === "DATA") {
+      if (!dataInfo.actionType || dataInfo.actionType === 'DATA') {
         const dataItemInformations = this.metaDataService.getDataItemInformation(
           _dataInfo.moduleKey,
           _dataInfo.dataKey
@@ -83,22 +83,22 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
       if (moduleDataItemInformations) {
         if (!_dataInfo.dataUrl) {
           const urlInfo = moduleDataItemInformations.dataUrlInfo;
-          if (!dataInfo.actionType || dataInfo.actionType === "DATA") {
+          if (!dataInfo.actionType || dataInfo.actionType === 'DATA') {
             _dataInfo.dataUrl = urlInfo.dataPathTemplate;
-          } else if (dataInfo.actionType === "GET") {
+          } else if (dataInfo.actionType === 'GET') {
             _dataInfo.dataUrl = urlInfo.getPathTemplate;
-          } else if (dataInfo.actionType === "LIST") {
+          } else if (dataInfo.actionType === 'LIST') {
             _dataInfo.dataUrl = urlInfo.listPathTemplate;
-          } else if (dataInfo.actionType === "POST") {
+          } else if (dataInfo.actionType === 'POST') {
             _dataInfo.dataUrl = urlInfo.postPathTemplate;
-          } else if (dataInfo.actionType === "UPDATE") {
+          } else if (dataInfo.actionType === 'UPDATE') {
             _dataInfo.dataUrl = urlInfo.updatePathTemplate;
-          } else if (dataInfo.actionType === "DELETE") {
+          } else if (dataInfo.actionType === 'DELETE') {
             _dataInfo.dataUrl = urlInfo.deletePathTemplate;
-          } else if (dataInfo.actionType === "COMPLETE") {
+          } else if (dataInfo.actionType === 'COMPLETE') {
             _dataInfo.dataUrl = urlInfo.completePathTemplate;
           } else {
-            _dataInfo.dataUrl = urlInfo[dataInfo.actionType + "PathTemplate"];
+            _dataInfo.dataUrl = urlInfo[dataInfo.actionType + 'PathTemplate'];
           }
 
           _parameterPrefix = urlInfo.parameterPrefix;
@@ -107,7 +107,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
           }
           if (
             !_dataInfo.dataUrlMethod &&
-            (!dataInfo.actionType || dataInfo.actionType === "DATA")
+            (!dataInfo.actionType || dataInfo.actionType === 'DATA')
           ) {
             _dataInfo.dataUrlMethod = urlInfo.defaultDataUrlMethod;
           }
@@ -115,17 +115,17 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
       }
 
       if (!_dataInfo.dataUrlMethod) {
-        _dataInfo.dataUrlMethod = "";
+        _dataInfo.dataUrlMethod = '';
       }
-      _dataUrl = replaceString(_dataInfo.dataUrl, _dataInfo, "", "{", "}");
+      _dataUrl = replaceString(_dataInfo.dataUrl, _dataInfo, '', '{', '}');
     }
 
     if (
       !dataInfo.dataMethod ||
-      dataInfo.dataMethod === "GET" ||
-      dataInfo.dataMethod === "PUT"
+      dataInfo.dataMethod === 'GET' ||
+      dataInfo.dataMethod === 'PUT'
     ) {
-      _parameterPrefix = _parameterPrefix || "";
+      _parameterPrefix = _parameterPrefix || '';
       if (dataInfo.urlParameters || dataInfo.dataParameters) {
         if (_parameterPrefix && _dataUrl.indexOf(_parameterPrefix) >= 0) {
           _dataUrl = replaceString(
@@ -135,7 +135,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
           );
         } else {
           if (!_remoteDataProvider) {
-            throw new Error("RemoteDataProvider Dos Not Determined");
+            throw new Error('RemoteDataProvider Dos Not Determined');
           }
           const urlCreatorService = this.injector.get(UrlCreatorService);
           _dataUrl = urlCreatorService.applyParameters(
@@ -155,17 +155,17 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
         );
       }
     }
-    if (dataInfo.dataMethod === "POST") {
+    if (dataInfo.dataMethod === 'POST') {
       return this.httpService.post(
         _dataUrl,
         dataInfo.dataParameters || {}
       ) as Observable<T>;
-    } else if (dataInfo.dataMethod === "DELETE") {
+    } else if (dataInfo.dataMethod === 'DELETE') {
       return this.httpService.delete(
         _dataUrl,
         dataInfo.dataParameters || {}
       ) as Observable<T>;
-    } else if (dataInfo.dataMethod === "PUT") {
+    } else if (dataInfo.dataMethod === 'PUT') {
       return this.httpService.put(
         _dataUrl,
         dataInfo.dataParameters || {}
@@ -186,7 +186,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
       this.dataStreams.set(fullKey, dataSubject);
       this.getData(dataInfo)
         .pipe(first())
-        .subscribe(data => dataSubject.next(data));
+        .subscribe((data) => dataSubject.next(data));
       return dataSubject.asObservable();
     }
   }

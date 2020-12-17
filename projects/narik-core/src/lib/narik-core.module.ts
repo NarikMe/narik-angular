@@ -1,76 +1,73 @@
-import { NarikComponentTypeResolver } from './services/narik-component-type-resolver.service';
-import { promiseSerial } from '@narik/common';
-import { NarikJsonService } from './services/narik-json.service';
-import { NarikConfigService } from './services/narik-config.service';
-import {
-  AuthorizationService,
-  DATA_PROVIDER,
-  DATA_STORAGE,
-  DataProviderService,
-  DataStorageService,
-  DEFAULT_LANG,
-  DialogService,
-  ErrorHandleService,
-  EventAggregatorService,
-  ModuleManager,
-  NavigationProvider,
-  NavigationService,
-  RemoteDataProviderService,
-  UrlCreator,
-  UrlCreatorService,
-  USE_DEFAULT_LANG,
-  CONFIG_PATH,
-  ConfigService,
-  JsonService,
-  CommandProcessor,
-  ValidationService,
-  ShortcutService,
-  FormTitleResolver,
-  CONFIG_OPTIONS,
-  ComponentTypeResolver,
-} from '@narik/infrastructure';
-import { ToastrModule } from 'ngx-toastr';
-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
+  APP_INITIALIZER,
   Inject,
   Injector,
   ModuleWithProviders,
   NgModule,
-  APP_INITIALIZER,
 } from '@angular/core';
-
+import {
+  AuthorizationService,
+  CommandProcessor,
+  ComponentTypeResolver,
+  ConfigService,
+  CONFIG_OPTIONS,
+  CONFIG_PATH,
+  DataProviderService,
+  DataStorageService,
+  DATA_PROVIDER,
+  DATA_STORAGE,
+  DEFAULT_LANG,
+  DialogService,
+  ErrorHandleService,
+  EventAggregatorService,
+  FormTitleResolver,
+  HttpService,
+  JsonService,
+  ModuleManager,
+  NavigationProvider,
+  NavigationService,
+  RemoteDataProviderService,
+  ShortcutService,
+  UrlCreator,
+  UrlCreatorService,
+  USE_DEFAULT_LANG,
+  ValidationService,
+} from '@narik/infrastructure';
+import { ToastrModule } from 'ngx-toastr';
 import { COMPONENTS, EXPORT_COMPONENTS } from './index';
+import { TOASTR_OPTION } from './injectionTokens';
 import { NarikCoreModuleConfig } from './interfaces/narik-core-module.config';
-import { StaticDataProvider } from './services/dataProviders/static-data-provider';
 import { LocalStorageDataProvider } from './services/dataProviders/local-storage-data-provider';
 import { MemoryDataProvider } from './services/dataProviders/memory-data-provider';
 import { RemoteDataProvider } from './services/dataProviders/remote-data-provider';
 import { SessionStorageDataProvider } from './services/dataProviders/session-storage-data-provider';
+import { StaticDataProvider } from './services/dataProviders/static-data-provider';
 import { HttpErrorInterceptor } from './services/errorHandlers/narik-http-error-handler';
+import { NarikComponentTypeResolver } from './services/narik-component-type-resolver.service';
+import { NarikConfigService } from './services/narik-config.service';
 import { NarikDataProviderService } from './services/narik-data-provider.service';
 import { NarikDataStorageService } from './services/narik-data-storage.service';
-
 import { NarikDialogService } from './services/narik-dialog.service';
+import { NarikEmptyCommandProcessor } from './services/narik-empty-command-processor.service';
 import { NarikErrorHandleService } from './services/narik-error-handle.service';
 import { NarikEventAggregatorService } from './services/narik-event-aggregator.service';
+import { NarikFormTitleResolver } from './services/narik-form-title-resolver.service';
+import { NarikHttpService } from './services/narik-http.service';
+import { NarikJsonService } from './services/narik-json.service';
 import { NarikModuleManager } from './services/narik-module-manager.service';
 import { NarikNavigationService } from './services/narik-navigation.service';
 import { NarikRemoteDataProviderService } from './services/narik-remote-data-provider.service';
 import { NarikRoleBasedAuthorizationService } from './services/narik-role-base-authorization.service';
-
+import { NarikShortcutService } from './services/narik-shortcut.service';
 import { NarikTranslateService } from './services/narik-translation.service';
 import { NarikUrlCreatorService } from './services/narik-url-creator.service';
-import { ApiUrlCreator } from './services/urlCreator/api-url-creator';
-import { ODataUrlCreator } from './services/urlCreator/odata-url-creator';
-import { NarikEmptyCommandProcessor } from './services/narik-empty-command-processor.service';
 import { NarikValidationService } from './services/narik-validation.service';
-import { NarikShortcutService } from './services/narik-shortcut.service';
 import { NarikDialogNavigationProvider } from './services/navigationProviders/narik-dialog-navigation.provider';
 import { NarikRouteNavigationProvider } from './services/navigationProviders/narik-route-navigation.provider';
-import { NarikFormTitleResolver } from './services/narik-form-title-resolver.service';
+import { ApiUrlCreator } from './services/urlCreator/api-url-creator';
+import { ODataUrlCreator } from './services/urlCreator/odata-url-creator';
 import { AppInjector } from './util/app-injector';
-import { TOASTR_OPTION } from './injectionTokens';
 
 @NgModule({
   imports: [ToastrModule.forRoot()],
@@ -81,7 +78,10 @@ import { TOASTR_OPTION } from './injectionTokens';
       provide: RemoteDataProviderService,
       useClass: NarikRemoteDataProviderService,
     },
-
+    {
+      provide: HttpService,
+      useClass: NarikHttpService,
+    },
     {
       provide: SessionStorageDataProvider,
       useClass: SessionStorageDataProvider,
@@ -284,14 +284,11 @@ export function initConfig(
   moduleManager: ModuleManager
 ): () => Promise<any> {
   const promise = (): Promise<any> => {
-    // return configService.init().then(() => {
-    //   moduleManager.init();
-    // });
-
-    return promiseSerial([
-      () => configService.init(),
-      () => moduleManager.init(),
-    ]);
+    // return promiseSerial2([
+    //   () => configService.init(),
+    //   () => moduleManager.init(),
+    // ]);
+    return configService.init();
   };
   return promise;
 }
