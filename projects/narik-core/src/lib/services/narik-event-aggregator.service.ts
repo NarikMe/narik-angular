@@ -1,40 +1,40 @@
 import {
   EventAggregatorService,
-  ModuleManager,
   EventInfo,
   MetaDataService,
-  MetaData
-} from "@narik/infrastructure";
-import { Observable } from "rxjs";
-import { filter } from "rxjs/operators";
-import { pluck, share } from "rxjs/operators";
+  MetaData,
+} from '@narik/infrastructure';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { pluck, share } from 'rxjs/operators';
 
-import { Injectable } from "@angular/core";
-import { ReplaySubject } from "rxjs";
-import { Subject } from "rxjs";
-import { BehaviorSubject } from "rxjs";
+import { Injectable, Optional } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class NarikEventAggregatorService extends EventAggregatorService {
   private eventsInfo = new Map<string, EventInfo>();
   private subjects = new Map<string, Subject<any>>();
 
-  constructor(private metadataService: MetaDataService) {
+  constructor(@Optional() private metadataService: MetaDataService) {
     super();
 
-    const metaDataItems = this.metadataService.getAllMetaData().valuesArray();
-    for (const metaData of metaDataItems) {
-      this.addMetaDataEvents(metaData);
+    if (this.metadataService) {
+      const metaDataItems = this.metadataService.getAllMetaData().valuesArray();
+      for (const metaData of metaDataItems) {
+        this.addMetaDataEvents(metaData);
+      }
+      this.metadataService.metaDataAdded.subscribe((x) => {
+        this.addMetaDataEvents(x.metaData);
+      });
     }
-
-    this.metadataService.metaDataAdded.subscribe(x => {
-      this.addMetaDataEvents(x.metaData);
-    });
   }
 
   private addMetaDataEvents(metaData: MetaData) {
-    if (metaData["events"]) {
-      for (const event of metaData["events"].valuesArray()) {
+    if (metaData['events']) {
+      for (const event of metaData['events'].valuesArray()) {
         this.eventsInfo.set(event.key, event);
       }
     }
@@ -51,9 +51,9 @@ export class NarikEventAggregatorService extends EventAggregatorService {
     if (!eventInfo || !eventInfo.info) {
       return new Subject<any>();
     } else {
-      if (eventInfo.info.subjectType === "ReplaySubject") {
+      if (eventInfo.info.subjectType === 'ReplaySubject') {
         return new ReplaySubject(eventInfo.info.subjectParam || 1);
-      } else if (eventInfo.info.subjectType === "ReplaySubject") {
+      } else if (eventInfo.info.subjectType === 'ReplaySubject') {
         return new BehaviorSubject(eventInfo.info.subjectParam);
       }
     }
@@ -63,14 +63,14 @@ export class NarikEventAggregatorService extends EventAggregatorService {
     const subject = this.getSubject(eventType);
     subject.next({
       eventType: eventType,
-      eventArgs: eventArgs
+      eventArgs: eventArgs,
     });
   }
   listen<T>(eventType: any): Observable<T> {
     const subject = this.getSubject(eventType);
     return subject.pipe(
-      filter(x => x.eventType === eventType),
-      pluck<any, T>("eventArgs"),
+      filter((x) => x.eventType === eventType),
+      pluck<any, T>('eventArgs'),
       share()
     );
   }
