@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { HttpService } from '@narik/infrastructure';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
+@Injectable()
 export class NarikHttpService extends HttpService {
   constructor(private httpClient: HttpClient) {
     super();

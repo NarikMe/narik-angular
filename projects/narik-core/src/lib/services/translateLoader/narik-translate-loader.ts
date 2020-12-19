@@ -1,29 +1,26 @@
-import { ConfigService } from "@narik/infrastructure";
-import { HttpClient } from "@angular/common/http";
-import { TranslateLoader } from "@ngx-translate/core";
-import { first } from "rxjs/operators";
-import { Observable } from "rxjs";
-import { forkJoin } from "rxjs";
-import { of } from "rxjs";
+import { ConfigService, HttpService } from '@narik/infrastructure';
+import { TranslateLoader } from '@ngx-translate/core';
+import { forkJoin, Observable, of } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 export class NarikTranslateLoader implements TranslateLoader {
-  private root = "";
+  private root = '';
 
   constructor(
-    private http: HttpClient,
+    private http: HttpService,
     private configService: ConfigService,
     private items: string[] = []
   ) {}
 
-  private slash = "/";
+  private slash = '/';
   public getTranslation(lang: string): any {
     if (this.root) {
       return this.getTranslationInternal(lang);
     } else {
-      return Observable.create(observer => {
+      return new Observable((observer) => {
         this.configService.configLoaded.pipe(first()).subscribe(() => {
-          this.root = this.configService.getConfig("translationsPath");
-          this.getTranslationInternal(lang).subscribe(x => observer.next(x));
+          this.root = this.configService.getConfig('translationsPath');
+          this.getTranslationInternal(lang).subscribe((x) => observer.next(x));
         });
       });
     }
@@ -31,15 +28,15 @@ export class NarikTranslateLoader implements TranslateLoader {
 
   private getTranslationInternal(lang: string): Observable<any> {
     if (this.items.length !== 0) {
-      const loaders: any[] = this.items.map(x => {
+      const loaders: any[] = this.items.map((x) => {
         return this.http.get(
           `${this.root}${this.slash}${lang}${this.slash}${x}.json`
         );
       });
-      return Observable.create(observer => {
-        forkJoin(loaders).subscribe(trnslations => {
+      return new Observable((observer) => {
+        forkJoin(loaders).subscribe((translations) => {
           let result = {};
-          trnslations.map(x => (result = Object.assign(result, x)));
+          translations.map((x) => (result = Object.assign(result, x)));
           observer.next(result);
         });
       });

@@ -25,7 +25,6 @@ export class NarikConfigService extends ConfigService {
   ) {
     super();
 
-    console.log('NarikConfigService');
     if (configOptions && configOptions.configFilePath) {
       this.configPath = configOptions.configFilePath;
     }
@@ -36,33 +35,26 @@ export class NarikConfigService extends ConfigService {
     return this.configLoadedSubject.asObservable();
   }
   init(): Promise<any> {
-    try {
-      console.log('Start init NarikConfigService');
-      return this.httpService
-        .get(
-          this.configPath +
-            (this.configOptions &&
-            this.configOptions.addTimeParameterToConfigFilePath
-              ? '?t=' + new Date().getTime()
-              : '')
-        )
-        .pipe(
-          tap((x) => {
-            this.configData = x;
-            for (const key in x) {
-              if (x.hasOwnProperty(key)) {
-                this.configKeys.push(key);
-              }
+    return this.httpService
+      .get(
+        this.configPath +
+          (this.configOptions &&
+          this.configOptions.addTimeParameterToConfigFilePath
+            ? '?t=' + new Date().getTime()
+            : '')
+      )
+      .pipe(
+        tap((x) => {
+          this.configData = x;
+          for (const key in x) {
+            if (x.hasOwnProperty(key)) {
+              this.configKeys.push(key);
             }
-            this.configLoadedSubject.next(true);
-          })
-        )
-        .toPromise();
-    } catch (error) {
-      console.log('error in config init');
-      console.log('error');
-      return Promise.resolve();
-    }
+          }
+          this.configLoadedSubject.next(true);
+        })
+      )
+      .toPromise();
   }
   getConfig<T>(key: string): T {
     return this.configData[key] as T;

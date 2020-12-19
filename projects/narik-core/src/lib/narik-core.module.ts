@@ -34,6 +34,7 @@ import {
   USE_DEFAULT_LANG,
   ValidationService,
 } from '@narik/infrastructure';
+import { promiseSerial } from '@narik/common';
 import { ToastrModule } from 'ngx-toastr';
 import { COMPONENTS, EXPORT_COMPONENTS } from './index';
 import { TOASTR_OPTION } from './injectionTokens';
@@ -179,77 +180,65 @@ export class NarikCoreModule {
       providers: [
         {
           provide: ErrorHandleService,
-          useClass:
-            (config && config.errorHandleService) || NarikErrorHandleService,
+          useClass: config?.errorHandleService || NarikErrorHandleService,
         },
         {
           provide: DataProviderService,
-          useClass:
-            (config && config.dataProviderService) || NarikDataProviderService,
+          useClass: config?.dataProviderService || NarikDataProviderService,
         },
         {
           provide: DataStorageService,
-          useClass:
-            (config && config.dataStorageService) || NarikDataStorageService,
+          useClass: config?.dataStorageService || NarikDataStorageService,
         },
         {
           provide: DialogService,
-          useClass: (config && config.dialogService) || NarikDialogService,
+          useClass: config?.dialogService || NarikDialogService,
         },
         {
           provide: UrlCreatorService,
-          useClass:
-            (config && config.urlCreatorService) || NarikUrlCreatorService,
+          useClass: config?.urlCreatorService || NarikUrlCreatorService,
         },
         {
           provide: ModuleManager,
-          useClass:
-            (config && config.moduleManagerService) || NarikModuleManager,
+          useClass: config?.moduleManagerService || NarikModuleManager,
         },
         {
           provide: ValidationService,
-          useClass:
-            (config && config.validationService) || NarikValidationService,
+          useClass: config?.validationService || NarikValidationService,
         },
         {
           provide: EventAggregatorService,
           useClass:
-            (config && config.eventAggregatorService) ||
-            NarikEventAggregatorService,
+            config?.eventAggregatorService || NarikEventAggregatorService,
         },
         {
           provide: AuthorizationService,
           useClass:
-            (config && config.authorizationService) ||
-            NarikRoleBasedAuthorizationService,
+            config?.authorizationService || NarikRoleBasedAuthorizationService,
         },
         {
           provide: ConfigService,
-          useClass: (config && config.configService) || NarikConfigService,
+          useClass: config?.configService || NarikConfigService,
         },
         {
           provide: JsonService,
-          useClass: (config && config.jsonService) || NarikJsonService,
+          useClass: config?.jsonService || NarikJsonService,
         },
         {
           provide: ComponentTypeResolver,
-          useClass:
-            (config && config.componentTypeResolver) ||
-            NarikComponentTypeResolver,
+          useClass: config?.componentTypeResolver || NarikComponentTypeResolver,
         },
         {
           provide: FormTitleResolver,
-          useClass:
-            (config && config.formTitleResolver) || NarikFormTitleResolver,
+          useClass: config?.formTitleResolver || NarikFormTitleResolver,
         },
         {
           provide: CommandProcessor,
-          useClass:
-            (config && config.commandProcessor) || NarikEmptyCommandProcessor,
+          useClass: config?.commandProcessor || NarikEmptyCommandProcessor,
         },
         {
           provide: DEFAULT_LANG,
-          useValue: (config && config.defaultLang) || 'en',
+          useValue: config?.defaultLang || 'en',
         },
         {
           provide: NavigationService,
@@ -257,16 +246,18 @@ export class NarikCoreModule {
         },
         {
           provide: USE_DEFAULT_LANG,
-          useValue: config && config.useDefaultLang,
+          useValue: config?.isNativeApp,
         },
         { provide: CONFIG_PATH, useValue: config && config.configFilePath },
         { provide: CONFIG_OPTIONS, useValue: config && config.configOptions },
-        {
-          provide: APP_INITIALIZER,
-          useFactory: initConfig,
-          deps: [ConfigService, ModuleManager],
-          multi: true,
-        },
+        config?.isNativeApp
+          ? []
+          : {
+              provide: APP_INITIALIZER,
+              useFactory: initNarik,
+              deps: [ConfigService, ModuleManager],
+              multi: true,
+            },
         {
           provide: ShortcutService,
           useClass: NarikShortcutService,
@@ -279,16 +270,15 @@ export class NarikCoreModule {
     };
   }
 }
-export function initConfig(
+export function initNarik(
   configService: ConfigService,
   moduleManager: ModuleManager
 ): () => Promise<any> {
   const promise = (): Promise<any> => {
-    // return promiseSerial2([
-    //   () => configService.init(),
-    //   () => moduleManager.init(),
-    // ]);
-    return configService.init();
+    return promiseSerial([
+      () => configService.init(),
+      () => moduleManager.init(),
+    ]);
   };
   return promise;
 }
