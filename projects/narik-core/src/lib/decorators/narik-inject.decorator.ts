@@ -1,41 +1,41 @@
-import { Type, InjectionToken, InjectFlags, Injector } from "@angular/core";
-import { AppInjector } from "../util/app-injector";
+import { Type, InjectionToken, InjectFlags, Injector } from '@angular/core';
+import { AppInjector } from '../util/app-injector';
 
 export function NarikInject<T>(
   token: Type<T> | InjectionToken<T> | any,
   notFoundValue: T = null,
   flags?: InjectFlags
 ) {
-  return function(target: any, key: string) {
+  return function (target: any, key: string) {
     const prev = Object.getOwnPropertyDescriptor(target, key);
-    const getter = function() {
-      if (this["$$$Inject_" + token.toString()]) {
-        return this["$$$Inject_" + token.toString()];
+    const getter = function () {
+      if (this['$$$Inject_' + token.toString()]) {
+        return this['$$$Inject_' + token.toString()];
       }
-      let localInjector = this.injector || this["$$$_Injector"];
+      let localInjector = this.injector || this['$$$_Injector'];
       if (!localInjector) {
         for (const filedKey in this) {
           if (this.hasOwnProperty(filedKey)) {
             if (
               this[filedKey] instanceof Injector ||
               (this[filedKey] &&
-                this[filedKey].constructor.name === "Injector_")
+                this[filedKey].constructor.name === 'Injector_')
             ) {
               localInjector = this[filedKey];
-              this["$$$_Injector"] = localInjector;
+              this['$$$_Injector'] = localInjector;
             }
           }
         }
       }
       if (!localInjector) {
         console.warn(
-          "Could not find local Injector in  (" +
+          'Could not find local Injector in  (' +
             target.constructor.name +
-            "), use root injector instead!"
+            '), use root injector instead!'
         );
       } else {
         if (
-          localInjector.constructor.name === "StaticInjector" &&
+          localInjector.constructor.name === 'StaticInjector' &&
           localInjector.parent
         ) {
           localInjector = localInjector.parent;
@@ -46,13 +46,13 @@ export function NarikInject<T>(
         notFoundValue,
         flags
       );
-      this["$$$" + token.toString()] = value;
+      this['$$$' + token.toString()] = value;
       return value;
     };
     Object.defineProperty(target, key, {
       get: getter,
       enumerable: prev == null ? true : prev.enumerable,
-      configurable: prev == null ? true : prev.configurable
+      configurable: prev == null ? true : prev.configurable,
     });
   };
 }
@@ -62,25 +62,25 @@ export function NarikGlobalInject<T>(
   notFoundValue: T = null,
   flags?: InjectFlags
 ) {
-  return function(target: any, key: string) {
+  return function (target: any, key: string) {
     const prev = Object.getOwnPropertyDescriptor(target, key);
-    const getter = function() {
-      if (this["$$$Inject_" + token.toString()]) {
-        return this["$$$Inject_" + token.toString()];
+    const getter = function () {
+      if (this['$$$Inject_' + token.toString()]) {
+        return this['$$$Inject_' + token.toString()];
       }
       const localInjectors: any[] = this.injectors;
 
       if (!localInjectors) {
         console.warn(
-          "Could not find local Injectors in  (" +
+          'Could not find local Injectors in  (' +
             target.constructor.name +
-            ")!"
+            ')!'
         );
       } else {
         for (let i = localInjectors.length - 1; i >= 0; --i) {
           const injector = localInjectors[i];
           const value = injector.get(token, notFoundValue, flags);
-          this["$$$" + token.toString()] = value;
+          this['$$$' + token.toString()] = value;
           return value;
         }
         return undefined;
@@ -89,7 +89,7 @@ export function NarikGlobalInject<T>(
     Object.defineProperty(target, key, {
       get: getter,
       enumerable: prev == null ? true : prev.enumerable,
-      configurable: prev == null ? true : prev.configurable
+      configurable: prev == null ? true : prev.configurable,
     });
   };
 }
