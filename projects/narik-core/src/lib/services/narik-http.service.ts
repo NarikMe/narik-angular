@@ -8,12 +8,9 @@ import { map } from 'rxjs/operators';
 export class NarikHttpService extends HttpService {
   constructor(private httpClient: HttpClient) {
     super();
-    console.log(typeof httpClient);
-    console.log(httpClient);
   }
 
   get(url: string): Observable<Object> {
-    console.log(url);
     return this.httpClient
       .get(url)
       .pipe<Object>(map((result) => this.extractData(result)));
