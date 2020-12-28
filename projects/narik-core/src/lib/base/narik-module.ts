@@ -15,7 +15,7 @@ export abstract class NarikModule {
   abstract readonly moduleInfo: Observable<ModuleInfo>;
 
   @NarikInject(ModuleManager)
-  private moduleManager: ModuleManager;
+  protected moduleManager: ModuleManager;
 
   @NarikInject(NgModuleRef)
   private moduleRef: NgModuleRef<any>;
@@ -27,7 +27,7 @@ export abstract class NarikModule {
   private jsonService: JsonService;
 
   @NarikInject(ConfigService)
-  private configService: ConfigService;
+  protected configService: ConfigService;
 
   private moduleRootPath: string;
 
