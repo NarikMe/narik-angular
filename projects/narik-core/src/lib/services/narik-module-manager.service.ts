@@ -4,18 +4,18 @@ import {
   ModuleEventArg,
   ModuleEventType,
   ModuleManager,
-  ConfigService
-} from "@narik/infrastructure";
-import { Subject } from "rxjs";
+  ConfigService,
+  HttpService,
+} from '@narik/infrastructure';
+import { Subject } from 'rxjs';
 
-import { Injectable, Injector } from "@angular/core";
+import { Injectable, Injector } from '@angular/core';
 
-import { NarikInject } from "../decorators/narik-inject.decorator";
-import { NarikHttpService } from "./narik-http.service";
-import { NarikTranslateService } from "./narik-translation.service";
-import { tap } from "rxjs/operators";
-import { ReplaySubject } from "rxjs";
-import { Observable } from "rxjs";
+import { NarikInject } from '../decorators/narik-inject.decorator';
+import { NarikTranslateService } from './narik-translation.service';
+import { tap } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class NarikModuleManager extends ModuleManager {
@@ -35,7 +35,7 @@ export class NarikModuleManager extends ModuleManager {
 
   constructor(
     private injector: Injector,
-    private httpService: NarikHttpService,
+    private httpService: HttpService,
     private configService: ConfigService,
     private translateService: NarikTranslateService
   ) {
@@ -63,13 +63,13 @@ export class NarikModuleManager extends ModuleManager {
     this.modulesChangedSubject.next({
       moduleEventType: isExists ? ModuleEventType.Update : ModuleEventType.Add,
       moduleKey: key,
-      moduleInfo: moduleInfo
+      moduleInfo: moduleInfo,
     });
 
     Promise.all(translatePromices).then(() => {
-      this.eventAggregatorService.publish("MODULE_LOAD_COMPLETELY", {
+      this.eventAggregatorService.publish('MODULE_LOAD_COMPLETELY', {
         moduleKey: key,
-        moduleInfo: moduleInfo
+        moduleInfo: moduleInfo,
       });
     });
   }
@@ -79,17 +79,17 @@ export class NarikModuleManager extends ModuleManager {
     this.modulesChangedSubject.next({
       moduleEventType: ModuleEventType.Remove,
       moduleKey: key,
-      moduleInfo: info
+      moduleInfo: info,
     });
   }
 
   init(): Promise<any> {
-    const moduleRootPath = this.configService.getConfig("modulesMetaDataRoot");
+    const moduleRootPath = this.configService.getConfig('modulesMetaDataRoot');
     return this.httpService
       .get(`${moduleRootPath}/narik.json`)
       .pipe(
         tap((info: ModuleInfo) => {
-          this.addOrUpdateModule("narik", info);
+          this.addOrUpdateModule('narik', info);
           this.narikLoadedSubject.next();
         })
       )

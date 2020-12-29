@@ -1,28 +1,28 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { NarikTranslateLoader } from "./translateLoader/narik-translate-loader";
-import { Observable } from "rxjs";
-import { isString } from "@narik/common";
+import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NarikTranslateLoader } from './translateLoader/narik-translate-loader';
+import { Observable } from 'rxjs';
+import { isString } from '@narik/common';
+import { HttpService } from '@narik/infrastructure';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class NarikTranslateService {
   constructor(
     private translateService: TranslateService,
-    private http: HttpClient
+    private http: HttpService
   ) {}
 
   instant(
     key: string | Array<string>,
     interpolateParams?: Object
   ): string | any {
-    if (isString(key) && key.indexOf("_") > 0) {
-      const items = (key as string).split("_");
+    if (isString(key) && key.indexOf('_') > 0) {
+      const items = (key as string).split('_');
       return items
-        .map(item => this.translateService.instant(item, interpolateParams))
-        .join(" ");
+        .map((item) => this.translateService.instant(item, interpolateParams))
+        .join(' ');
     }
     return this.translateService.instant(key, interpolateParams);
   }
@@ -44,7 +44,7 @@ export class NarikTranslateService {
       if (reLoad) {
         this.translateService
           .reloadLang(this.translateService.currentLang)
-          .subscribe(x => {
+          .subscribe((x) => {
             this.translateService.use(this.translateService.currentLang);
             resolve(true);
           });
@@ -53,7 +53,7 @@ export class NarikTranslateService {
           this.translateService.currentLang,
           item
         );
-        this.http.get(url).subscribe(result => {
+        this.http.get(url).subscribe((result) => {
           this.translateService.setTranslation(
             this.translateService.currentLang,
             result,

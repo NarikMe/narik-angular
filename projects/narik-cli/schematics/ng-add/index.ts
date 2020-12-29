@@ -393,7 +393,6 @@ function updateAppModule(): Rule {
       }
     }
 
-    console.log(sourceText);
     return host;
   };
 }

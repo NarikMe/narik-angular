@@ -39,4 +39,5 @@ export interface NarikCoreModuleConfig {
   defaultLang?: string;
   useDefaultLang?: boolean;
   toastrOption?: Partial<GlobalConfig>;
+  isNativeApp?: boolean;
 }

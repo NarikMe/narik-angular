@@ -2,14 +2,15 @@ import {
   ConfigService,
   CONFIG_PATH,
   CONFIG_OPTIONS,
-  ConfigOptions
-} from "@narik/infrastructure";
-import { NarikHttpService } from "./narik-http.service";
-import { Inject, Injectable } from "@angular/core";
-import { tap } from "rxjs/operators";
-import { Subject } from "rxjs";
-import { Observable } from "rxjs";
-import { ReplaySubject } from "rxjs";
+  ConfigOptions,
+  HttpService,
+} from '@narik/infrastructure';
+
+import { Inject, Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class NarikConfigService extends ConfigService {
@@ -18,11 +19,12 @@ export class NarikConfigService extends ConfigService {
   private configLoadedSubject: Subject<any>;
 
   constructor(
-    private httpService: NarikHttpService,
+    private httpService: HttpService,
     @Inject(CONFIG_OPTIONS) private configOptions: ConfigOptions,
     @Inject(CONFIG_PATH) private configPath: string
   ) {
     super();
+
     if (configOptions && configOptions.configFilePath) {
       this.configPath = configOptions.configFilePath;
     }
@@ -38,11 +40,11 @@ export class NarikConfigService extends ConfigService {
         this.configPath +
           (this.configOptions &&
           this.configOptions.addTimeParameterToConfigFilePath
-            ? "?t=" + new Date().getTime()
-            : "")
+            ? '?t=' + new Date().getTime()
+            : '')
       )
       .pipe(
-        tap(x => {
+        tap((x) => {
           this.configData = x;
           for (const key in x) {
             if (x.hasOwnProperty(key)) {

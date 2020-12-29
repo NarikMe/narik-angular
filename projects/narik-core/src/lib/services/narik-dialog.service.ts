@@ -88,7 +88,7 @@ export class NarikDialogService extends DialogService {
 
   constructor(
     private injector: Injector,
-    @Inject(DIALOG_OVERLAY_CONTAINER)
+    @Optional() @Inject(DIALOG_OVERLAY_CONTAINER)
     private dialogOverlayContainerType: Type<DialogOverlayContainer>,
     private applicationRef: ApplicationRef,
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -498,6 +498,11 @@ export class NarikDialogService extends DialogService {
   }
 
   createOverlay(options: DialogOption): ComponentRef<DialogOverlayContainer> {
+    if (!this.dialogOverlayContainerType) {
+      throw new Error(
+        'There is no provider for DIALOG_OVERLAY_CONTAINER! You can import "NarikUiCoreModule" or provide it manually'
+      );
+    }
     const overlayFactory = this.componentFactoryResolver.resolveComponentFactory(
       this.dialogOverlayContainerType
     );

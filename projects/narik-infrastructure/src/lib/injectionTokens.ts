@@ -48,7 +48,7 @@ export const MODULE_DATA_KEY = new InjectionToken<string>('ModuleDataKey');
 export const MODULE_UI_KEY = new InjectionToken<string>('ModuleUiKey');
 
 export const DEFAULT_LANG = new InjectionToken<string>('DefaultLang');
-export const USE_DEFAULT_LANG = new InjectionToken<string>('UseDefaultLang');
+export const USE_DEFAULT_LANG = new InjectionToken<boolean>('UseDefaultLang');
 
 export const AUTHENTICATION_LOGIN_END_POINT = new InjectionToken<string>(
   'AUTHENTICATION_END_POINT'
