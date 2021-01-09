@@ -7,45 +7,48 @@ import {
   ViewChild,
   ElementRef,
   Output,
-  EventEmitter
-} from "@angular/core";
-import { NG_VALUE_ACCESSOR } from "@angular/forms";
+  EventEmitter,
+} from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { NARIK_MAT_FORM_INPUTS } from "../base/narik-mat-form-field";
-import { NarikMatSelectBase } from "../base/narik-mat-select-base";
-import { Observable } from "rxjs";
-import { Subject } from "rxjs";
-import { startWith } from "rxjs/operators";
-import { debounceTime } from "rxjs/operators";
-import { distinctUntilChanged } from "rxjs/operators";
-import { map } from "rxjs/operators";
-import { SPACE, ENTER } from "@angular/cdk/keycodes";
-import { NARIK_DATA_DISPLAY_VALUE_INPUTS, NARIK_SELECT_INPUTS, NARIK_DATA_DISPLAY_VALUE_OUTPUTS } from "../input-output-items";
-
+import { NARIK_MAT_FORM_INPUTS } from '../base/narik-mat-form-field';
+import { NarikMatSelectBase } from '../base/narik-mat-select-base';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
+import { startWith } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { SPACE, ENTER } from '@angular/cdk/keycodes';
+import {
+  NARIK_DATA_DISPLAY_VALUE_INPUTS,
+  NARIK_SELECT_INPUTS,
+  NARIK_DATA_DISPLAY_VALUE_OUTPUTS,
+} from '../input-output-items';
 
 @Component({
-  selector: "narik-mat-select , narik-select",
-  templateUrl: "narik-mat-select.component.html",
-  styleUrls: ["narik-mat-select.component.css"],
+  selector: 'narik-mat-select , narik-select',
+  templateUrl: 'narik-mat-select.component.html',
+  styleUrls: ['narik-mat-select.component.css'],
   inputs: [
     ...NARIK_MAT_FORM_INPUTS,
     ...NARIK_DATA_DISPLAY_VALUE_INPUTS,
-    ...NARIK_SELECT_INPUTS
+    ...NARIK_SELECT_INPUTS,
   ],
   outputs: [...NARIK_DATA_DISPLAY_VALUE_OUTPUTS],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NarikMatSelect),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class NarikMatSelect extends NarikMatSelectBase implements OnInit {
   optionData: any[] = [];
   filteredData: Observable<any[]>;
   textChanged = new Subject<{ filter: string; force: boolean }>();
-  @ViewChild("input", { static: false })
+  @ViewChild('input', { static: false })
   input: ElementRef;
 
   isOver = false;
@@ -61,7 +64,7 @@ export class NarikMatSelect extends NarikMatSelectBase implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.optionData.filter(
-      item => item[this.displayField].toLowerCase().indexOf(filterValue) === 0
+      (item) => item[this.displayField].toLowerCase().indexOf(filterValue) === 0
     );
   }
 
@@ -79,7 +82,7 @@ export class NarikMatSelect extends NarikMatSelectBase implements OnInit {
     if (keyEvent.keyCode !== ENTER) {
       this.textChanged.next({
         filter: this.input.nativeElement.value,
-        force: false
+        force: false,
       });
     }
   }
@@ -88,16 +91,16 @@ export class NarikMatSelect extends NarikMatSelectBase implements OnInit {
     this.optionData = data;
     this.textChanged.next({
       filter: this.input ? this.input.nativeElement.value : null,
-      force: true
+      force: true,
     });
   }
 
-  @HostListener("mouseover")
+  @HostListener('mouseover')
   onHover() {
     this.isOver = true;
   }
 
-  @HostListener("mouseleave")
+  @HostListener('mouseleave')
   onLeave() {
     this.isOver = false;
   }
