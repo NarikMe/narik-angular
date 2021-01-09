@@ -1,2 +1,2 @@
-export * from "./narik-nb-busy-indicator.component";
-export * from "./narik-nb-busy-indicator.module";
+export * from './narik-nb-busy-indicator.component';
+export * from './narik-nb-busy-indicator.module';

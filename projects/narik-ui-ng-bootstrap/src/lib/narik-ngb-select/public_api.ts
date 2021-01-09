@@ -1,2 +1,2 @@
-export * from "./narik-ngb-select.component";
-export * from "./narik-ngb-select.module";
+export * from './narik-ngb-select.component';
+export * from './narik-ngb-select.module';

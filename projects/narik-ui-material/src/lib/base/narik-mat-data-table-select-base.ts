@@ -1,14 +1,15 @@
-import { Mixin } from "@narik/common";
-import { NarikDataTableSelect } from "@narik/ui-core";
+import { Mixin } from '@narik/common';
+import { NarikDataTableSelect } from '@narik/ui-core';
 
-import { NarikMatFormFieldInput } from "./narik-mat-form-field";
+import { NarikMatFormFieldInput } from './narik-mat-form-field';
 
 export interface INarikMatDataTableSelectBase
-  extends NarikMatFormFieldInput,
-    NarikDataTableSelect {}
+    extends NarikMatFormFieldInput,
+        NarikDataTableSelect {}
 
-export class NarikMatDataTableSelectBase extends Mixin<
-  INarikMatDataTableSelectBase
->(NarikDataTableSelect, NarikMatFormFieldInput) {}
+export class NarikMatDataTableSelectBase extends Mixin<INarikMatDataTableSelectBase>(
+    NarikDataTableSelect,
+    NarikMatFormFieldInput
+) {}
 {
 }

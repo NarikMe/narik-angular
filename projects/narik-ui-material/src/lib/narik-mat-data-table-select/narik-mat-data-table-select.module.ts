@@ -18,23 +18,23 @@ import { NarikMatToolbarModule } from '../narik-mat-toolbar/narik-mat-toolbar.mo
 import { NarikMatDataTableModule } from '../narik-mat-data-table/narik-mat-data-table.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatSelectModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatAutocompleteModule,
-    TranslateModule,
-    NarikMatToolbarModule,
-    NarikMatDataTableModule,
-  ],
-  declarations: [NarikMatDataTableSelect],
-  exports: [NarikMatDataTableSelect],
-  providers: [],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatSelectModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatAutocompleteModule,
+        TranslateModule,
+        NarikMatToolbarModule,
+        NarikMatDataTableModule,
+    ],
+    declarations: [NarikMatDataTableSelect],
+    exports: [NarikMatDataTableSelect],
+    providers: [],
 })
 export class NarikMatDataTableSelectModule {}

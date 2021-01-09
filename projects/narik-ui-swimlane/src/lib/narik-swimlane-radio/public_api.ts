@@ -1,2 +1,2 @@
-export * from "./narik-swimlane-radio-group.component";
-export * from "./narik-swimlane-radio.module";
+export * from './narik-swimlane-radio-group.component';
+export * from './narik-swimlane-radio.module';

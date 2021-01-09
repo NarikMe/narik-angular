@@ -1,5 +1,5 @@
-import { DataInfo, DataOption } from "./../interfaces/data-info.model";
-import { Observable } from "rxjs";
+import { DataInfo, DataOption } from './../interfaces/data-info.model';
+import { Observable } from 'rxjs';
 
 /**
  * Data provider Service
@@ -7,41 +7,44 @@ import { Observable } from "rxjs";
  * {@link https://github.com/NarikMe/narik-angular/wiki/Data-framework| more information }
  */
 export abstract class DataProviderService {
-  /**
-   * Gets data
-   * @param dataInfo information about data that should be retrieved
-   * @param options options about data that should be retrieved
-   * @returns data An `Observable` that emit whenever data returned. It emits only once.
-   */
-  abstract getData(dataInfo: DataInfo, options?: DataOption): Observable<any>;
-  /**
-   * Gets data
-   * @param dataInfo information about data that should be retrieved
-   * @param options options about data that should be retrieved
-   * @returns data An `Observable` that emit whenever data returned. It emits only once.
-   */
+    /**
+     * Gets data
+     * @param dataInfo information about data that should be retrieved
+     * @param options options about data that should be retrieved
+     * @returns data An `Observable` that emit whenever data returned. It emits only once.
+     */
+    abstract getData(dataInfo: DataInfo, options?: DataOption): Observable<any>;
+    /**
+     * Gets data
+     * @param dataInfo information about data that should be retrieved
+     * @param options options about data that should be retrieved
+     * @returns data An `Observable` that emit whenever data returned. It emits only once.
+     */
 
-  abstract getData<T>(dataInfo: DataInfo, options?: DataOption): Observable<T>;
+    abstract getData<T>(
+        dataInfo: DataInfo,
+        options?: DataOption
+    ): Observable<T>;
 
-  /**
-   * Gets getDataStream
-   * @param dataInfo information about data that should be retrieved
-   * @param options options about data that should be retrieved
-   * @returns data An `Observable` that emit whenever data changed. It emits whenever data changed.
-   */
+    /**
+     * Gets getDataStream
+     * @param dataInfo information about data that should be retrieved
+     * @param options options about data that should be retrieved
+     * @returns data An `Observable` that emit whenever data changed. It emits whenever data changed.
+     */
 
-  abstract getDataStream(
-    dataInfo: DataInfo,
-    options?: DataOption
-  ): Observable<any>;
-  /**
-   * Gets getDataStream
-   * @param dataInfo information about data that should be retrieved
-   * @param options options about data that should be retrieved
-   * @returns data An `Observable` that emit whenever data changed. It emits whenever data changed.
-   */
-  abstract getDataStream<T>(
-    dataInfo: DataInfo,
-    options?: DataOption
-  ): Observable<T>;
+    abstract getDataStream(
+        dataInfo: DataInfo,
+        options?: DataOption
+    ): Observable<any>;
+    /**
+     * Gets getDataStream
+     * @param dataInfo information about data that should be retrieved
+     * @param options options about data that should be retrieved
+     * @returns data An `Observable` that emit whenever data changed. It emits whenever data changed.
+     */
+    abstract getDataStream<T>(
+        dataInfo: DataInfo,
+        options?: DataOption
+    ): Observable<T>;
 }

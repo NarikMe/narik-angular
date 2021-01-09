@@ -1,1 +1,1 @@
-export * from "./narik-jwt-authentication.service"
+export * from './narik-jwt-authentication.service';

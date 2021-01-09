@@ -15,21 +15,21 @@ import { NarikDevSelectModule } from '../narik-dev-select/narik-dev-select.modul
 import { NarikDevDynamicForm } from './narik-dev-dynamic-form.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    NarikDevInputModule,
-    NarikDevSelectModule,
-    NarikDevCheckBoxModule,
-    NarikDevRadioGroupModule,
-    NarikDevAutoCompleteModule,
-    NarikDevDatePickerModule,
-    NarikDevCheckBoxListModule,
-    NarikCommonModule,
-  ],
-  declarations: [NarikDevDynamicForm],
-  exports: [NarikDevDynamicForm],
-  providers: [],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        NarikDevInputModule,
+        NarikDevSelectModule,
+        NarikDevCheckBoxModule,
+        NarikDevRadioGroupModule,
+        NarikDevAutoCompleteModule,
+        NarikDevDatePickerModule,
+        NarikDevCheckBoxListModule,
+        NarikCommonModule,
+    ],
+    declarations: [NarikDevDynamicForm],
+    exports: [NarikDevDynamicForm],
+    providers: [],
 })
 export class NarikDevDynamicFormModule {}

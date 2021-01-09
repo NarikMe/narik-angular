@@ -1,1 +1,1 @@
-export * from "./narik-swimlane-core.module";
+export * from './narik-swimlane-core.module';

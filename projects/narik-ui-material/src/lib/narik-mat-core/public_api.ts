@@ -1,1 +1,1 @@
-export * from "./narik-mat-core.module";
+export * from './narik-mat-core.module';

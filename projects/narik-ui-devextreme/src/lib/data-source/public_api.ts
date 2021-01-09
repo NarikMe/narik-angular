@@ -1,1 +1,1 @@
-export * from "./dev-lazy-data-source";
+export * from './dev-lazy-data-source';

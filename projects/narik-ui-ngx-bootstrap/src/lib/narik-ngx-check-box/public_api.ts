@@ -1,2 +1,2 @@
-export * from "./narik-ngx-checkbox.component";
-export * from "./narik-ngx-checkbox.module";
+export * from './narik-ngx-checkbox.component';
+export * from './narik-ngx-checkbox.module';

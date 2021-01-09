@@ -17,23 +17,23 @@ import { NarikMatSelectModule } from '../narik-mat-select/narik-mat-select.modul
 import { NarikMatDynamicForm } from './narik-mat-dynamic-form.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    NarikCommonModule,
-    NarikMatInputModule,
-    NarikMatSelectModule,
-    NarikMatCheckBoxModule,
-    NarikMatRadioGroupModule,
-    NarikMatAutoCompleteModule,
-    NarikMatDatePickerModule,
-    NarikMatDataTableSelectModule,
-    NarikMatCheckBoxListModule,
-    FlexLayoutModule,
-  ],
-  declarations: [NarikMatDynamicForm],
-  exports: [NarikMatDynamicForm],
-  providers: [],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        NarikCommonModule,
+        NarikMatInputModule,
+        NarikMatSelectModule,
+        NarikMatCheckBoxModule,
+        NarikMatRadioGroupModule,
+        NarikMatAutoCompleteModule,
+        NarikMatDatePickerModule,
+        NarikMatDataTableSelectModule,
+        NarikMatCheckBoxListModule,
+        FlexLayoutModule,
+    ],
+    declarations: [NarikMatDynamicForm],
+    exports: [NarikMatDynamicForm],
+    providers: [],
 })
 export class NarikMatDynamicFormModule {}

@@ -1,2 +1,2 @@
-export * from "./narik-prime-data-table.component";
-export * from "./narik-prime-data-table.module";
+export * from './narik-prime-data-table.component';
+export * from './narik-prime-data-table.module';

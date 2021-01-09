@@ -1,1 +1,1 @@
-export * from "./client-data-storage-provider";
+export * from './client-data-storage-provider';

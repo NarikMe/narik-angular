@@ -2,33 +2,33 @@
  * Filter items
  */
 export interface FilterItems {
-  /**
-   * condition  `or` | `and`
-   */
-  condition: string;
+    /**
+     * condition  `or` | `and`
+     */
+    condition: string;
 
-  /**
-   * filters
-   */
-  filters: (FilterItem | FilterItems)[];
+    /**
+     * filters
+     */
+    filters: (FilterItem | FilterItems)[];
 }
 
 /**
  * Filter item
  */
 export interface FilterItem {
-  /**
-   * field
-   */
-  field?: string;
+    /**
+     * field
+     */
+    field?: string;
 
-  /**
-   * operator
-   */
-  operator?: any;
+    /**
+     * operator
+     */
+    operator?: any;
 
-  /**
-   * value
-   */
-  value?: any;
+    /**
+     * value
+     */
+    value?: any;
 }

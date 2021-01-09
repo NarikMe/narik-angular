@@ -1,1 +1,1 @@
-export * from "./shortcut.pipe";
+export * from './shortcut.pipe';

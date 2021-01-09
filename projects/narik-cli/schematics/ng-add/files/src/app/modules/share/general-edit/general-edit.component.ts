@@ -5,16 +5,16 @@ import { HOST_TOKEN } from '@narik/infrastructure';
 
 @DynamicComponent('GeneralEditComponent')
 @Component({
-  templateUrl: 'general-edit.component.html',
-  providers: [
-    {
-      provide: HOST_TOKEN,
-      useExisting: forwardRef(() => GeneralEditComponent),
-    },
-  ],
+    templateUrl: 'general-edit.component.html',
+    providers: [
+        {
+            provide: HOST_TOKEN,
+            useExisting: forwardRef(() => GeneralEditComponent),
+        },
+    ],
 })
 export class GeneralEditComponent extends NarikUiEditForm<any> {
-  constructor(injector: Injector) {
-    super(injector);
-  }
+    constructor(injector: Injector) {
+        super(injector);
+    }
 }

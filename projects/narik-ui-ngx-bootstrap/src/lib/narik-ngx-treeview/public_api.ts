@@ -1,2 +1,2 @@
-export * from "./narik-ngx-treeview.component";
-export * from "./narik-ngx-treeview.module";
+export * from './narik-ngx-treeview.component';
+export * from './narik-ngx-treeview.module';

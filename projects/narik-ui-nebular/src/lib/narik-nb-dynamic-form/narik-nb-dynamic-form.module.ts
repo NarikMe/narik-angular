@@ -15,22 +15,22 @@ import { NarikCommonModule } from '@narik/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    NarikNebularInputModule,
-    NarikNebularSelectModule,
-    NarikNebularCheckBoxModule,
-    NarikNebularRadioGroupModule,
-    NarikNebularAutoCompleteModule,
-    NarikNebularDatePickerModule,
-    NarikNebularCheckBoxListModule,
-    NarikCommonModule,
-    FlexLayoutModule,
-  ],
-  declarations: [NarikNebularDynamicForm],
-  exports: [NarikNebularDynamicForm],
-  providers: [],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        NarikNebularInputModule,
+        NarikNebularSelectModule,
+        NarikNebularCheckBoxModule,
+        NarikNebularRadioGroupModule,
+        NarikNebularAutoCompleteModule,
+        NarikNebularDatePickerModule,
+        NarikNebularCheckBoxListModule,
+        NarikCommonModule,
+        FlexLayoutModule,
+    ],
+    declarations: [NarikNebularDynamicForm],
+    exports: [NarikNebularDynamicForm],
+    providers: [],
 })
 export class NarikNebularDynamicFormModule {}

@@ -1,1 +1,1 @@
-export * from "./narik-signalR-client.service";
+export * from './narik-signalR-client.service';

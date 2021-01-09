@@ -1,1 +1,1 @@
-export * from "./prime-lazy-data-source";
+export * from './prime-lazy-data-source';

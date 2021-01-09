@@ -1,2 +1,2 @@
-export * from "./narik-nb-radio-group.component";
-export * from "./narik-nb-radio.module";
+export * from './narik-nb-radio-group.component';
+export * from './narik-nb-radio.module';

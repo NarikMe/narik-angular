@@ -1,2 +1,2 @@
-export * from "./narik-prime-select.component";
-export * from "./narik-prime-select.module";
+export * from './narik-prime-select.component';
+export * from './narik-prime-select.module';

@@ -4,10 +4,10 @@ import { NarikInput } from '@narik/ui-core';
 import { NarikMatFormFieldInput } from './narik-mat-form-field';
 
 export interface INarikMatInputBase
-  extends NarikMatFormFieldInput,
-    NarikInput {}
+    extends NarikMatFormFieldInput,
+        NarikInput {}
 
 export class NarikMatInputBase extends Mixin<INarikMatInputBase>(
-  NarikInput,
-  NarikMatFormFieldInput
+    NarikInput,
+    NarikMatFormFieldInput
 ) {}

@@ -1,1 +1,1 @@
-export * from "./narik-form.directive";
+export * from './narik-form.directive';

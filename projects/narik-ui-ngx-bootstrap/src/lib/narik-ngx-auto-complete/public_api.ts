@@ -1,2 +1,2 @@
-export * from "./narik-ngx-auto-complete.component";
-export * from "./narik-ngx-auto-complete.module";
+export * from './narik-ngx-auto-complete.component';
+export * from './narik-ngx-auto-complete.module';
