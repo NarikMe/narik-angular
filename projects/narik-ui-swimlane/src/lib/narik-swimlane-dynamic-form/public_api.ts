@@ -1,2 +1,2 @@
-export * from "./narik-swimlane-dynamic-form.module";
-export * from "./narik-swimlane-dynamic-form.component";
+export * from './narik-swimlane-dynamic-form.module';
+export * from './narik-swimlane-dynamic-form.component';

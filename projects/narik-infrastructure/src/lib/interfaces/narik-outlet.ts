@@ -1,3 +1,3 @@
 export interface NarikOutlet {
-  addView(view: any);
+    addView(view: any);
 }

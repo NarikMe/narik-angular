@@ -1,4 +1,4 @@
 export enum StringConstants {
-  Prameter_EntityId = "entityId",
-  Prameter_Config = "config"
+    Prameter_EntityId = 'entityId',
+    Prameter_Config = 'config',
 }

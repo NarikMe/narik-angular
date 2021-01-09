@@ -1,40 +1,40 @@
 import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  HostListener
-} from "@angular/core";
+    Component,
+    OnInit,
+    Input,
+    Output,
+    EventEmitter,
+    HostListener,
+} from '@angular/core';
 
 @Component({
-  selector: "narik-mat-tab-header",
-  templateUrl: "narik-mat-tab-outlet-close-header.component.html",
-  styleUrls: ["narik-mat-tab-outlet-close-header.component.css"]
+    selector: 'narik-mat-tab-header',
+    templateUrl: 'narik-mat-tab-outlet-close-header.component.html',
+    styleUrls: ['narik-mat-tab-outlet-close-header.component.css'],
 })
 export class NarikMatTabOutletHeaderComponent implements OnInit {
-  isOver = false;
+    isOver = false;
 
-  @Input()
-  title: string;
+    @Input()
+    title: string;
 
-  @Output()
-  closeRequest = new EventEmitter<any>();
+    @Output()
+    closeRequest = new EventEmitter<any>();
 
-  @HostListener("mouseover") onHover() {
-    this.isOver = true;
-  }
+    @HostListener('mouseover') onHover() {
+        this.isOver = true;
+    }
 
-  @HostListener("mouseleave")
-  onLeave() {
-    this.isOver = false;
-  }
+    @HostListener('mouseleave')
+    onLeave() {
+        this.isOver = false;
+    }
 
-  constructor() {}
+    constructor() {}
 
-  ngOnInit() {}
+    ngOnInit() {}
 
-  requestClose() {
-    this.closeRequest.emit();
-  }
+    requestClose() {
+        this.closeRequest.emit();
+    }
 }

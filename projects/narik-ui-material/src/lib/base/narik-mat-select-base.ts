@@ -4,12 +4,12 @@ import { NarikSelect } from '@narik/ui-core';
 import { NarikMatFormFieldInput } from './narik-mat-form-field';
 
 export interface INarikMatSelectBase
-  extends NarikMatFormFieldInput,
-    NarikSelect {}
+    extends NarikMatFormFieldInput,
+        NarikSelect {}
 
 export class NarikMatSelectBase extends Mixin<INarikMatSelectBase>(
-  NarikSelect,
-  NarikMatFormFieldInput
+    NarikSelect,
+    NarikMatFormFieldInput
 ) {}
 {
 }

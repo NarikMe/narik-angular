@@ -1,6 +1,6 @@
 export interface ServerResponse<T> {
-  data?: T;
-  errors?: string[];
-  isSucceed?: boolean;
-  count?: number;
+    data?: T;
+    errors?: string[];
+    isSucceed?: boolean;
+    count?: number;
 }

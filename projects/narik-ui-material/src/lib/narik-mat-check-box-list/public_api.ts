@@ -1,2 +1,2 @@
-export * from "./narik-mat-checkbox-list.component";
-export * from "./narik-mat-checkbox-list.module";
+export * from './narik-mat-checkbox-list.component';
+export * from './narik-mat-checkbox-list.module';

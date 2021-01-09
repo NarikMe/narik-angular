@@ -1,1 +1,1 @@
-export * from "./narik-signalR.config";
+export * from './narik-signalR.config';

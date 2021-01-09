@@ -1,34 +1,34 @@
-import { ComponentLoaderHostDirective } from "@narik/common";
+import { ComponentLoaderHostDirective } from '@narik/common';
 import {
-  DialogOption,
-  DialogOverlayContainer,
-  DialogRef
-} from "@narik/infrastructure";
+    DialogOption,
+    DialogOverlayContainer,
+    DialogRef,
+} from '@narik/infrastructure';
 
-import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
-  templateUrl: "narik-dialog-overlay-container.component.html",
-  styleUrls: ["narik-dialog-overlay-container.component.css"]
+    templateUrl: 'narik-dialog-overlay-container.component.html',
+    styleUrls: ['narik-dialog-overlay-container.component.css'],
 })
 export class NarikDialogOverlayContainerComponent
-  implements DialogOverlayContainer, OnInit {
-  @ViewChild(ComponentLoaderHostDirective, { static: true })
-  loaderHost: ComponentLoaderHostDirective;
+    implements DialogOverlayContainer, OnInit {
+    @ViewChild(ComponentLoaderHostDirective, { static: true })
+    loaderHost: ComponentLoaderHostDirective;
 
-  dialogRef: DialogRef<any>;
-  get contentContainerRef(): ViewContainerRef {
-    return this.loaderHost.viewContainerRef;
-  }
-
-  options: DialogOption;
-  constructor() {}
-
-  ngOnInit() {}
-
-  modalClick(e) {
-    if (!this.options.isFullScreen && !this.options.disableAutoClose) {
-      this.dialogRef.close(undefined, "DIALOG");
+    dialogRef: DialogRef<any>;
+    get contentContainerRef(): ViewContainerRef {
+        return this.loaderHost.viewContainerRef;
     }
-  }
+
+    options: DialogOption;
+    constructor() {}
+
+    ngOnInit() {}
+
+    modalClick(e) {
+        if (!this.options.isFullScreen && !this.options.disableAutoClose) {
+            this.dialogRef.close(undefined, 'DIALOG');
+        }
+    }
 }

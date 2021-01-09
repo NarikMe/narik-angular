@@ -1,1 +1,1 @@
-export * from "./client-storage-options";
+export * from './client-storage-options';

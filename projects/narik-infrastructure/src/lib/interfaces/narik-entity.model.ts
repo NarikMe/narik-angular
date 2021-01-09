@@ -1,7 +1,6 @@
-
 /**
  * Narik entity
  */
 export interface NarikEntity {
-  viewModelId: number;
+    viewModelId: number;
 }

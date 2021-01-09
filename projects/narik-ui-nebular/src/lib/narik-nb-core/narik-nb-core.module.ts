@@ -1,11 +1,11 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [],
-  exports: [],
-  providers: []
+    imports: [CommonModule],
+    declarations: [],
+    exports: [],
+    providers: [],
 })
 export class NarikNebularCoreModule {}

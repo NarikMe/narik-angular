@@ -1,2 +1,2 @@
-export * from "./narik-mat-data-table-select.component";
-export * from "./narik-mat-data-table-select.module";
+export * from './narik-mat-data-table-select.component';
+export * from './narik-mat-data-table-select.module';

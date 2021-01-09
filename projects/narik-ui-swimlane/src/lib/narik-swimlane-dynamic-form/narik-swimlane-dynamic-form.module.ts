@@ -15,22 +15,22 @@ import { NarikCommonModule } from '@narik/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    NarikSwimlaneInputModule,
-    NarikSwimlaneSelectModule,
-    NarikSwimlaneCheckBoxModule,
-    NarikSwimlaneRadioGroupModule,
-    NarikSwimlaneAutoCompleteModule,
-    NarikSwimlaneDatePickerModule,
-    NarikSwimlaneCheckBoxListModule,
-    NarikCommonModule,
-    FlexLayoutModule,
-  ],
-  declarations: [NarikSwimlaneDynamicForm],
-  exports: [NarikSwimlaneDynamicForm],
-  providers: [],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        NarikSwimlaneInputModule,
+        NarikSwimlaneSelectModule,
+        NarikSwimlaneCheckBoxModule,
+        NarikSwimlaneRadioGroupModule,
+        NarikSwimlaneAutoCompleteModule,
+        NarikSwimlaneDatePickerModule,
+        NarikSwimlaneCheckBoxListModule,
+        NarikCommonModule,
+        FlexLayoutModule,
+    ],
+    declarations: [NarikSwimlaneDynamicForm],
+    exports: [NarikSwimlaneDynamicForm],
+    providers: [],
 })
 export class NarikSwimlaneDynamicFormModule {}

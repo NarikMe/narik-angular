@@ -1,19 +1,19 @@
-import { UUID } from "angular2-uuid";
-import { NarikToolBar } from "@narik/ui-core";
-import { Component, Injector, ViewContainerRef, OnInit } from "@angular/core";
+import { UUID } from 'angular2-uuid';
+import { NarikToolBar } from '@narik/ui-core';
+import { Component, Injector, ViewContainerRef, OnInit } from '@angular/core';
 
 @Component({
-  selector: "narik-toolbar , narik-swimlane-toolbar",
-  templateUrl: "narik-swimlane-toolbar.component.html"
+    selector: 'narik-toolbar , narik-swimlane-toolbar',
+    templateUrl: 'narik-swimlane-toolbar.component.html',
 })
 export class NarikSwimlaneToolBar extends NarikToolBar implements OnInit {
-  uniqueId = "";
-  toolbarItems: any[] = [];
+    uniqueId = '';
+    toolbarItems: any[] = [];
 
-  constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
-    super(injector, viewContainerRef);
-    this.uniqueId = "toolbar" + UUID.UUID();
-  }
+    constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
+        super(injector, viewContainerRef);
+        this.uniqueId = 'toolbar' + UUID.UUID();
+    }
 
-  ngOnInit() {}
+    ngOnInit() {}
 }

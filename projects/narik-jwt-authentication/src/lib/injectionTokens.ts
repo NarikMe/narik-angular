@@ -1,5 +1,5 @@
-import { InjectionToken } from "@angular/core";
+import { InjectionToken } from '@angular/core';
 
-export const TOKEN_STORAGE = new InjectionToken<"memory" | "localStorage" | "sessionStorage" | "clientStorage">(
-  "TOKEN_STORAGE"
-);
+export const TOKEN_STORAGE = new InjectionToken<
+    'memory' | 'localStorage' | 'sessionStorage' | 'clientStorage'
+>('TOKEN_STORAGE');

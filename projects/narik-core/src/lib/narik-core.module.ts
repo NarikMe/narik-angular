@@ -1,38 +1,38 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
-  APP_INITIALIZER,
-  Inject,
-  Injector,
-  ModuleWithProviders,
-  NgModule,
+    APP_INITIALIZER,
+    Inject,
+    Injector,
+    ModuleWithProviders,
+    NgModule,
 } from '@angular/core';
 import {
-  AuthorizationService,
-  CommandProcessor,
-  ComponentTypeResolver,
-  ConfigService,
-  CONFIG_OPTIONS,
-  CONFIG_PATH,
-  DataProviderService,
-  DataStorageService,
-  DATA_PROVIDER,
-  DATA_STORAGE,
-  DEFAULT_LANG,
-  DialogService,
-  ErrorHandleService,
-  EventAggregatorService,
-  FormTitleResolver,
-  HttpService,
-  JsonService,
-  ModuleManager,
-  NavigationProvider,
-  NavigationService,
-  RemoteDataProviderService,
-  ShortcutService,
-  UrlCreator,
-  UrlCreatorService,
-  USE_DEFAULT_LANG,
-  ValidationService,
+    AuthorizationService,
+    CommandProcessor,
+    ComponentTypeResolver,
+    ConfigService,
+    CONFIG_OPTIONS,
+    CONFIG_PATH,
+    DataProviderService,
+    DataStorageService,
+    DATA_PROVIDER,
+    DATA_STORAGE,
+    DEFAULT_LANG,
+    DialogService,
+    ErrorHandleService,
+    EventAggregatorService,
+    FormTitleResolver,
+    HttpService,
+    JsonService,
+    ModuleManager,
+    NavigationProvider,
+    NavigationService,
+    RemoteDataProviderService,
+    ShortcutService,
+    UrlCreator,
+    UrlCreatorService,
+    USE_DEFAULT_LANG,
+    ValidationService,
 } from '@narik/infrastructure';
 import { promiseSerial } from '@narik/common';
 import { ToastrModule } from 'ngx-toastr';
@@ -71,214 +71,236 @@ import { ODataUrlCreator } from './services/urlCreator/odata-url-creator';
 import { AppInjector } from './util/app-injector';
 
 @NgModule({
-  imports: [ToastrModule.forRoot()],
-  declarations: [COMPONENTS],
-  exports: [EXPORT_COMPONENTS],
-  providers: [
-    {
-      provide: RemoteDataProviderService,
-      useClass: NarikRemoteDataProviderService,
-    },
-    {
-      provide: HttpService,
-      useClass: NarikHttpService,
-    },
-    {
-      provide: SessionStorageDataProvider,
-      useClass: SessionStorageDataProvider,
-    },
-    {
-      provide: LocalStorageDataProvider,
-      useClass: LocalStorageDataProvider,
-    },
-    {
-      provide: MemoryDataProvider,
-      useClass: MemoryDataProvider,
-    },
+    imports: [ToastrModule.forRoot()],
+    declarations: [COMPONENTS],
+    exports: [EXPORT_COMPONENTS],
+    providers: [
+        {
+            provide: RemoteDataProviderService,
+            useClass: NarikRemoteDataProviderService,
+        },
+        {
+            provide: HttpService,
+            useClass: NarikHttpService,
+        },
+        {
+            provide: SessionStorageDataProvider,
+            useClass: SessionStorageDataProvider,
+        },
+        {
+            provide: LocalStorageDataProvider,
+            useClass: LocalStorageDataProvider,
+        },
+        {
+            provide: MemoryDataProvider,
+            useClass: MemoryDataProvider,
+        },
 
-    {
-      provide: DATA_PROVIDER,
-      useExisting: SessionStorageDataProvider,
-      multi: true,
-    },
-    {
-      provide: DATA_PROVIDER,
-      useClass: StaticDataProvider,
-      multi: true,
-    },
-    {
-      provide: DATA_PROVIDER,
-      useExisting: LocalStorageDataProvider,
-      multi: true,
-    },
-    {
-      provide: DATA_PROVIDER,
-      useExisting: MemoryDataProvider,
-      multi: true,
-    },
-    {
-      provide: DATA_PROVIDER,
-      useClass: RemoteDataProvider,
-      multi: true,
-    },
-    {
-      provide: DATA_STORAGE,
-      useExisting: SessionStorageDataProvider,
-      multi: true,
-    },
-    {
-      provide: DATA_STORAGE,
-      useExisting: LocalStorageDataProvider,
-      multi: true,
-    },
-    {
-      provide: DATA_STORAGE,
-      useExisting: MemoryDataProvider,
-      multi: true,
-    },
-    {
-      provide: UrlCreator,
-      useClass: ApiUrlCreator,
-      multi: true,
-    },
-    {
-      provide: UrlCreator,
-      useClass: ODataUrlCreator,
-      multi: true,
-    },
-    {
-      provide: NavigationProvider,
-      useClass: NarikDialogNavigationProvider,
-      multi: true,
-    },
-    {
-      provide: NavigationProvider,
-      useClass: NarikRouteNavigationProvider,
-      multi: true,
-    },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-  ],
+        {
+            provide: DATA_PROVIDER,
+            useExisting: SessionStorageDataProvider,
+            multi: true,
+        },
+        {
+            provide: DATA_PROVIDER,
+            useClass: StaticDataProvider,
+            multi: true,
+        },
+        {
+            provide: DATA_PROVIDER,
+            useExisting: LocalStorageDataProvider,
+            multi: true,
+        },
+        {
+            provide: DATA_PROVIDER,
+            useExisting: MemoryDataProvider,
+            multi: true,
+        },
+        {
+            provide: DATA_PROVIDER,
+            useClass: RemoteDataProvider,
+            multi: true,
+        },
+        {
+            provide: DATA_STORAGE,
+            useExisting: SessionStorageDataProvider,
+            multi: true,
+        },
+        {
+            provide: DATA_STORAGE,
+            useExisting: LocalStorageDataProvider,
+            multi: true,
+        },
+        {
+            provide: DATA_STORAGE,
+            useExisting: MemoryDataProvider,
+            multi: true,
+        },
+        {
+            provide: UrlCreator,
+            useClass: ApiUrlCreator,
+            multi: true,
+        },
+        {
+            provide: UrlCreator,
+            useClass: ODataUrlCreator,
+            multi: true,
+        },
+        {
+            provide: NavigationProvider,
+            useClass: NarikDialogNavigationProvider,
+            multi: true,
+        },
+        {
+            provide: NavigationProvider,
+            useClass: NarikRouteNavigationProvider,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpErrorInterceptor,
+            multi: true,
+        },
+    ],
 })
 export class NarikCoreModule {
-  constructor(
-    translateService: NarikTranslateService,
-    @Inject(DEFAULT_LANG) defaultLang: string,
-    @Inject(USE_DEFAULT_LANG) useDefaultLang: boolean,
-    injector: Injector
-  ) {
-    translateService.setDefaultLang(defaultLang);
-    if (useDefaultLang) {
-      translateService.use(defaultLang);
+    constructor(
+        translateService: NarikTranslateService,
+        @Inject(DEFAULT_LANG) defaultLang: string,
+        @Inject(USE_DEFAULT_LANG) useDefaultLang: boolean,
+        injector: Injector
+    ) {
+        translateService.setDefaultLang(defaultLang);
+        if (useDefaultLang) {
+            translateService.use(defaultLang);
+        }
+        AppInjector.injector = injector;
     }
-    AppInjector.injector = injector;
-  }
-  static forRoot(
-    config?: NarikCoreModuleConfig
-  ): ModuleWithProviders<NarikCoreModule> {
-    return {
-      ngModule: NarikCoreModule,
-      providers: [
-        {
-          provide: ErrorHandleService,
-          useClass: config?.errorHandleService || NarikErrorHandleService,
-        },
-        {
-          provide: DataProviderService,
-          useClass: config?.dataProviderService || NarikDataProviderService,
-        },
-        {
-          provide: DataStorageService,
-          useClass: config?.dataStorageService || NarikDataStorageService,
-        },
-        {
-          provide: DialogService,
-          useClass: config?.dialogService || NarikDialogService,
-        },
-        {
-          provide: UrlCreatorService,
-          useClass: config?.urlCreatorService || NarikUrlCreatorService,
-        },
-        {
-          provide: ModuleManager,
-          useClass: config?.moduleManagerService || NarikModuleManager,
-        },
-        {
-          provide: ValidationService,
-          useClass: config?.validationService || NarikValidationService,
-        },
-        {
-          provide: EventAggregatorService,
-          useClass:
-            config?.eventAggregatorService || NarikEventAggregatorService,
-        },
-        {
-          provide: AuthorizationService,
-          useClass:
-            config?.authorizationService || NarikRoleBasedAuthorizationService,
-        },
-        {
-          provide: ConfigService,
-          useClass: config?.configService || NarikConfigService,
-        },
-        {
-          provide: JsonService,
-          useClass: config?.jsonService || NarikJsonService,
-        },
-        {
-          provide: ComponentTypeResolver,
-          useClass: config?.componentTypeResolver || NarikComponentTypeResolver,
-        },
-        {
-          provide: FormTitleResolver,
-          useClass: config?.formTitleResolver || NarikFormTitleResolver,
-        },
-        {
-          provide: CommandProcessor,
-          useClass: config?.commandProcessor || NarikEmptyCommandProcessor,
-        },
-        {
-          provide: DEFAULT_LANG,
-          useValue: config?.defaultLang || 'en',
-        },
-        {
-          provide: NavigationService,
-          useClass: NarikNavigationService,
-        },
-        {
-          provide: USE_DEFAULT_LANG,
-          useValue: config?.isNativeApp,
-        },
-        { provide: CONFIG_PATH, useValue: config && config.configFilePath },
-        { provide: CONFIG_OPTIONS, useValue: config && config.configOptions },
-        config?.isNativeApp
-          ? []
-          : {
-              provide: APP_INITIALIZER,
-              useFactory: initNarik,
-              deps: [ConfigService, ModuleManager],
-              multi: true,
-            },
-        {
-          provide: ShortcutService,
-          useClass: NarikShortcutService,
-        },
-        {
-          provide: TOASTR_OPTION,
-          useValue: config?.toastrOption,
-        },
-      ],
-    };
-  }
+    static forRoot(
+        config?: NarikCoreModuleConfig
+    ): ModuleWithProviders<NarikCoreModule> {
+        return {
+            ngModule: NarikCoreModule,
+            providers: [
+                {
+                    provide: ErrorHandleService,
+                    useClass:
+                        config?.errorHandleService || NarikErrorHandleService,
+                },
+                {
+                    provide: DataProviderService,
+                    useClass:
+                        config?.dataProviderService || NarikDataProviderService,
+                },
+                {
+                    provide: DataStorageService,
+                    useClass:
+                        config?.dataStorageService || NarikDataStorageService,
+                },
+                {
+                    provide: DialogService,
+                    useClass: config?.dialogService || NarikDialogService,
+                },
+                {
+                    provide: UrlCreatorService,
+                    useClass:
+                        config?.urlCreatorService || NarikUrlCreatorService,
+                },
+                {
+                    provide: ModuleManager,
+                    useClass:
+                        config?.moduleManagerService || NarikModuleManager,
+                },
+                {
+                    provide: ValidationService,
+                    useClass:
+                        config?.validationService || NarikValidationService,
+                },
+                {
+                    provide: EventAggregatorService,
+                    useClass:
+                        config?.eventAggregatorService ||
+                        NarikEventAggregatorService,
+                },
+                {
+                    provide: AuthorizationService,
+                    useClass:
+                        config?.authorizationService ||
+                        NarikRoleBasedAuthorizationService,
+                },
+                {
+                    provide: ConfigService,
+                    useClass: config?.configService || NarikConfigService,
+                },
+                {
+                    provide: JsonService,
+                    useClass: config?.jsonService || NarikJsonService,
+                },
+                {
+                    provide: ComponentTypeResolver,
+                    useClass:
+                        config?.componentTypeResolver ||
+                        NarikComponentTypeResolver,
+                },
+                {
+                    provide: FormTitleResolver,
+                    useClass:
+                        config?.formTitleResolver || NarikFormTitleResolver,
+                },
+                {
+                    provide: CommandProcessor,
+                    useClass:
+                        config?.commandProcessor || NarikEmptyCommandProcessor,
+                },
+                {
+                    provide: DEFAULT_LANG,
+                    useValue: config?.defaultLang || 'en',
+                },
+                {
+                    provide: NavigationService,
+                    useClass: NarikNavigationService,
+                },
+                {
+                    provide: USE_DEFAULT_LANG,
+                    useValue: config?.isNativeApp,
+                },
+                {
+                    provide: CONFIG_PATH,
+                    useValue: config && config.configFilePath,
+                },
+                {
+                    provide: CONFIG_OPTIONS,
+                    useValue: config && config.configOptions,
+                },
+                config?.isNativeApp
+                    ? []
+                    : {
+                          provide: APP_INITIALIZER,
+                          useFactory: initNarik,
+                          deps: [ConfigService, ModuleManager],
+                          multi: true,
+                      },
+                {
+                    provide: ShortcutService,
+                    useClass: NarikShortcutService,
+                },
+                {
+                    provide: TOASTR_OPTION,
+                    useValue: config?.toastrOption,
+                },
+            ],
+        };
+    }
 }
 export function initNarik(
-  configService: ConfigService,
-  moduleManager: ModuleManager
+    configService: ConfigService,
+    moduleManager: ModuleManager
 ): () => Promise<any> {
-  const promise = (): Promise<any> => {
-    return promiseSerial([
-      () => configService.init(),
-      () => moduleManager.init(),
-    ]);
-  };
-  return promise;
+    const promise = (): Promise<any> => {
+        return promiseSerial([
+            () => configService.init(),
+            () => moduleManager.init(),
+        ]);
+    };
+    return promise;
 }

@@ -1,2 +1,2 @@
-export * from "./narik-swimlane-checkbox.component";
-export * from "./narik-swimlane-checkbox.module";
+export * from './narik-swimlane-checkbox.component';
+export * from './narik-swimlane-checkbox.module';

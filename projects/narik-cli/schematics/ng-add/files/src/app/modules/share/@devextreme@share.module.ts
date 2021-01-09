@@ -5,12 +5,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, NarikUiDevextremeModule],
-  declarations: [COMPONENTS],
-  exports: [],
-  providers: [],
+    imports: [CommonModule, ReactiveFormsModule, NarikUiDevextremeModule],
+    declarations: [COMPONENTS],
+    exports: [],
+    providers: [],
 })
 export class ShareModule {
-  // https://github.com/angular/angular/issues/35314
-  static dynamicComponents = [...DYNAMIC_COMPONENTS];
+    // https://github.com/angular/angular/issues/35314
+    static dynamicComponents = [...DYNAMIC_COMPONENTS];
 }

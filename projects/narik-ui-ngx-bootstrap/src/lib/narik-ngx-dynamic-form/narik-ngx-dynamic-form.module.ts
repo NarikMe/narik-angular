@@ -13,20 +13,20 @@ import { NarikNgxDynamicForm } from './narik-ngx-dynamic-form.component';
 import { NarikCommonModule } from '@narik/common';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    NarikNgxInputModule,
-    NarikNgxSelectModule,
-    NarikNgxCheckBoxModule,
-    NarikNgxRadioGroupModule,
-    NarikNgxAutoCompleteModule,
-    NarikNgxDatePickerModule,
-    NarikCommonModule,
-  ],
-  declarations: [NarikNgxDynamicForm],
-  exports: [NarikNgxDynamicForm],
-  providers: [],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        NarikNgxInputModule,
+        NarikNgxSelectModule,
+        NarikNgxCheckBoxModule,
+        NarikNgxRadioGroupModule,
+        NarikNgxAutoCompleteModule,
+        NarikNgxDatePickerModule,
+        NarikCommonModule,
+    ],
+    declarations: [NarikNgxDynamicForm],
+    exports: [NarikNgxDynamicForm],
+    providers: [],
 })
 export class NarikNgxDynamicFormModule {}

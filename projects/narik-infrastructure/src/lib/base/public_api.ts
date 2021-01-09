@@ -1,1 +1,1 @@
-export * from "./narik.component";
+export * from './narik.component';

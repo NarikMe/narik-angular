@@ -1,25 +1,25 @@
-import { DataInfo } from "./data-info.model";
+import { DataInfo } from './data-info.model';
 
 /**
  * Narik view field
  */
 export interface NarikViewField {
-  model: string;
-  name?: string;
-  type?: string;
-  label?: string;
-  dataInfo?: DataInfo;
-  options?: any;
-  showInList?: boolean;
-  showInEdit?: boolean;
-  order?: number;
-  orderInList?: number;
-  orderInEdit?: number;
-  required?: boolean;
-  hideExpr?: string;
-  disableExpr?: string;
-  validators?: string[];
-  validatorParams?: any;
+    model: string;
+    name?: string;
+    type?: string;
+    label?: string;
+    dataInfo?: DataInfo;
+    options?: any;
+    showInList?: boolean;
+    showInEdit?: boolean;
+    order?: number;
+    orderInList?: number;
+    orderInEdit?: number;
+    required?: boolean;
+    hideExpr?: string;
+    disableExpr?: string;
+    validators?: string[];
+    validatorParams?: any;
 }
 
 /**
@@ -28,5 +28,5 @@ export interface NarikViewField {
  * @returns  obj is NarikViewField
  */
 export function isNarikViewField(obj: any) {
-  return "model" in obj;
+    return 'model' in obj;
 }

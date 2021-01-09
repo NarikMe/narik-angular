@@ -1,1 +1,1 @@
-export * from "./swimlane-lazy-data-source";
+export * from './swimlane-lazy-data-source';

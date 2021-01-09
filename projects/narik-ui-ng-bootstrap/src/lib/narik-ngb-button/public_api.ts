@@ -1,2 +1,2 @@
-export * from "./narik-ngb-button.component";
-export * from "./narik-ngb-button.module";
+export * from './narik-ngb-button.component';
+export * from './narik-ngb-button.module';
