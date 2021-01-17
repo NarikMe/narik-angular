@@ -562,6 +562,46 @@
           }
         }
       }
+    },
+    "narik-firebase": {
+      "projectType": "library",
+      "root": "projects/narik-firebase",
+      "sourceRoot": "projects/narik-firebase/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/narik-firebase/tsconfig.lib.json",
+            "project": "projects/narik-firebase/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/narik-firebase/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/narik-firebase/src/test.ts",
+            "tsConfig": "projects/narik-firebase/tsconfig.spec.json",
+            "karmaConfig": "projects/narik-firebase/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/narik-firebase/tsconfig.lib.json",
+              "projects/narik-firebase/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   }
 }

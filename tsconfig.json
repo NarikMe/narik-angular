@@ -107,6 +107,10 @@
       ],
       "@narik/ui-nebular/*": [
         "dist/ui-nebular/*"
+      ],
+      "narik-firebase": [
+        "dist/narik-firebase/narik-firebase",
+        "dist/narik-firebase"
       ]
     }
   }

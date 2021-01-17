@@ -1,0 +1,25 @@
+{
+    "name": "@narik/firebase",
+    "version": "5.0.0",
+    "peerDependencies": {
+        "@angular/common": "^11.0.9",
+        "@angular/core": "^11.0.9"
+    },
+    "dependencies": {
+        "tslib": "^2.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NarikMe/narik-angular.git"
+    },
+    "homepage": "http://narik.me",
+    "license": "MIT",
+    "description": "Framework to create angular application",
+    "keywords": [
+        "angular",
+        "Narik"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.npmjs.com/"
+    }
+}
