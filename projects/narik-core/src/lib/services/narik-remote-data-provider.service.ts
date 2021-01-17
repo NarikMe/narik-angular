@@ -26,7 +26,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
         Subject<any>
     >();
 
-    private modulesDataInformations = new Map<string, ModuleDataInfo>();
+    private modulesDataInformation = new Map<string, ModuleDataInfo>();
 
     constructor(
         private httpService: HttpService,
@@ -54,8 +54,8 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
     }
 
     protected addRemoteDataInfo(moduleKey: string, dataInfo: ModuleDataInfo) {
-        if (!this.modulesDataInformations.has(moduleKey)) {
-            this.modulesDataInformations.set(moduleKey, dataInfo);
+        if (!this.modulesDataInformation.has(moduleKey)) {
+            this.modulesDataInformation.set(moduleKey, dataInfo);
         }
     }
 
@@ -83,7 +83,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
                     _dataInfo = Object.assign(dataItemInformations, _dataInfo);
                 }
             }
-            const moduleDataItemInformations = this.modulesDataInformations.get(
+            const moduleDataItemInformations = this.modulesDataInformation.get(
                 _dataInfo.moduleKey
             );
             if (moduleDataItemInformations) {
