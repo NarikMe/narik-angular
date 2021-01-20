@@ -62,9 +62,8 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
     isDataProviderFor(dataInfo: DataInfo) {
         return true;
     }
-    getData(dataInfo: DataInfo): Observable<any>;
-    getData<T>(dataInfo: DataInfo): Observable<T>;
-    getData<T>(dataInfo: DataInfo): Observable<T> {
+
+    handleData<T = any>(dataInfo: DataInfo): Observable<T> {
         let _dataUrl = dataInfo.dataUrl;
         let _remoteDataProvider = dataInfo.remoteDataProvider;
         let _parameterPrefix = '';
@@ -198,16 +197,14 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
         }
     }
 
-    getDataStream(dataInfo: DataInfo): Observable<any>;
-    getDataStream<T>(dataInfo: DataInfo): Observable<T>;
-    getDataStream<T>(dataInfo: DataInfo): Observable<T> {
+    getDataStream<T = any>(dataInfo: DataInfo): Observable<T> {
         const fullKey = this.getFullKey(dataInfo);
         if (this.dataStreams.has(fullKey)) {
             return this.dataStreams.get(fullKey);
         } else {
             const dataSubject = new ReplaySubject<T>(1);
             this.dataStreams.set(fullKey, dataSubject);
-            this.getData(dataInfo)
+            this.handleData(dataInfo)
                 .pipe(first())
                 .subscribe((data) => dataSubject.next(data));
             return dataSubject.asObservable();

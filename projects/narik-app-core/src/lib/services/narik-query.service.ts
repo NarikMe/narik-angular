@@ -19,7 +19,7 @@ export class NarikQueryService<T> extends QueryService<T> {
     moduleDataKey: string;
 
     @NarikInject(RemoteDataProviderService)
-    remoteDataProvider: RemoteDataProviderService;
+    remoteDataProviderService: RemoteDataProviderService;
 
     constructor(private injector: Injector) {
         super();
@@ -28,8 +28,8 @@ export class NarikQueryService<T> extends QueryService<T> {
     get(info: DataInfo): Observable<ServerResponse<T>> {
         info.actionType = info.actionType || 'GET';
         this.completeDataInfo(info);
-        return this.remoteDataProvider
-            .getData(info)
+        return this.remoteDataProviderService
+            .handleData(info)
             .pipe(
                 map(
                     (result) =>
@@ -43,8 +43,8 @@ export class NarikQueryService<T> extends QueryService<T> {
     getList(info: DataInfo): Observable<ServerResponse<T[]>> {
         info.actionType = info.actionType || 'LIST';
         this.completeDataInfo(info);
-        return this.remoteDataProvider
-            .getData(info)
+        return this.remoteDataProviderService
+            .handleData(info)
             .pipe(
                 map(
                     (result) =>
@@ -61,8 +61,8 @@ export class NarikQueryService<T> extends QueryService<T> {
             info.dataMethod || (info.actionType === 'UPDATE' ? 'PUT' : 'POST');
         this.completeDataInfo(info);
         this.completePostDataInfo(info, data);
-        return this.remoteDataProvider
-            .getData(info)
+        return this.remoteDataProviderService
+            .handleData(info)
             .pipe(
                 map(
                     (result) =>
@@ -78,8 +78,8 @@ export class NarikQueryService<T> extends QueryService<T> {
         this.completeDataInfo(info);
         this.completePostDataInfo(info, data);
         info.dataMethod = 'POST';
-        return this.remoteDataProvider
-            .getData(info)
+        return this.remoteDataProviderService
+            .handleData(info)
             .pipe(
                 map(
                     (result) =>

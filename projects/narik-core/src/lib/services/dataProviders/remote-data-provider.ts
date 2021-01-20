@@ -27,15 +27,12 @@ export class RemoteDataProvider
     isDataProviderFor(dataInfo: DataInfo) {
         return true;
     }
-    getData(dataInfo: DataInfo): Observable<any>;
-    getData<T>(dataInfo: DataInfo): Observable<T>;
-    getData<T>(dataInfo: DataInfo): Observable<T> {
-        return this.remoteDataProvider.getData(dataInfo);
+
+    getData<T = any>(dataInfo: DataInfo): Observable<T> {
+        return this.remoteDataProvider.handleData(dataInfo);
     }
 
-    getDataStream(dataInfo: DataInfo): Observable<any>;
-    getDataStream<T>(dataInfo: DataInfo): Observable<T>;
-    getDataStream<T>(dataInfo: DataInfo): Observable<T> {
+    getDataStream<T = any>(dataInfo: DataInfo): Observable<T> {
         return this.remoteDataProvider.getDataStream(dataInfo);
     }
 }

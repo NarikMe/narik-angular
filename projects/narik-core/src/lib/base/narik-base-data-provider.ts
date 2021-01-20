@@ -39,9 +39,7 @@ export abstract class NarikBaseDataProvider implements DataProvider {
         return formatString(this.dayaKeyTemplate, moduleKey, dataInfo.dataKey);
     }
 
-    getDataStream(dataInfo: DataInfo): Observable<any>;
-    getDataStream<T>(dataInfo: DataInfo): Observable<T>;
-    getDataStream<T>(dataInfo: DataInfo): Observable<T> {
+    getDataStream<T = any>(dataInfo: DataInfo): Observable<T> {
         const fullKey = this.getFullKey(dataInfo);
         if (this.dataStreams.has(fullKey)) {
             return this.dataStreams.get(fullKey);

@@ -54,12 +54,14 @@ export class NarikTranslateService {
                     });
             } else {
                 const url = translateLoader.getTranslateFilePath(
-                    this.translateService.currentLang,
+                    this.translateService.currentLang ||
+                        this.translateService.defaultLang,
                     item
                 );
                 this.http.get(url).subscribe((result) => {
                     this.translateService.setTranslation(
-                        this.translateService.currentLang,
+                        this.translateService.currentLang ||
+                            this.translateService.defaultLang,
                         result,
                         true
                     );
