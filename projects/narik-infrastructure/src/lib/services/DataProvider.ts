@@ -28,22 +28,7 @@ export interface DataProvider {
      * @param dataInfo information about data that should retrieved
      * @returns data An `Observable` that emit whenever data returned. It emits only once.
      */
-    getData(dataInfo: DataInfo): Observable<any>;
-
-    /**
-     * getData
-     *
-     * @param dataInfo information about data that should retrieved
-     * @returns data An `Observable` that emit whenever data returned. It emits only once.
-     */
-    getData<T>(dataInfo: DataInfo): Observable<T>;
-    /**
-     * getDataStream
-     *
-     * @param dataInfo information about data that should retrieved
-     * @returns data An `Observable` that emit whenever data changed. It emits whenever data changed.
-     */
-    getDataStream(dataInfo: DataInfo): Observable<any>;
+    getData<T = any>(dataInfo: DataInfo): Observable<T>;
 
     /**
      * getDataStream
@@ -51,7 +36,7 @@ export interface DataProvider {
      * @param dataInfo information about data that should retrieved
      * @returns data An `Observable` that emit whenever data changed. It emits whenever data changed.
      */
-    getDataStream<T>(dataInfo: DataInfo): Observable<T>;
+    getDataStream<T = any>(dataInfo: DataInfo): Observable<T>;
 
     /**
      * isDataProviderFor

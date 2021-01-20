@@ -26,7 +26,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
         Subject<any>
     >();
 
-    private modulesDataInformations = new Map<string, ModuleDataInfo>();
+    private modulesDataInformation = new Map<string, ModuleDataInfo>();
 
     constructor(
         private httpService: HttpService,
@@ -54,17 +54,16 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
     }
 
     protected addRemoteDataInfo(moduleKey: string, dataInfo: ModuleDataInfo) {
-        if (!this.modulesDataInformations.has(moduleKey)) {
-            this.modulesDataInformations.set(moduleKey, dataInfo);
+        if (!this.modulesDataInformation.has(moduleKey)) {
+            this.modulesDataInformation.set(moduleKey, dataInfo);
         }
     }
 
     isDataProviderFor(dataInfo: DataInfo) {
         return true;
     }
-    getData(dataInfo: DataInfo): Observable<any>;
-    getData<T>(dataInfo: DataInfo): Observable<T>;
-    getData<T>(dataInfo: DataInfo): Observable<T> {
+
+    handleData<T = any>(dataInfo: DataInfo): Observable<T> {
         let _dataUrl = dataInfo.dataUrl;
         let _remoteDataProvider = dataInfo.remoteDataProvider;
         let _parameterPrefix = '';
@@ -83,7 +82,7 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
                     _dataInfo = Object.assign(dataItemInformations, _dataInfo);
                 }
             }
-            const moduleDataItemInformations = this.modulesDataInformations.get(
+            const moduleDataItemInformations = this.modulesDataInformation.get(
                 _dataInfo.moduleKey
             );
             if (moduleDataItemInformations) {
@@ -198,16 +197,14 @@ export class NarikRemoteDataProviderService extends RemoteDataProviderService {
         }
     }
 
-    getDataStream(dataInfo: DataInfo): Observable<any>;
-    getDataStream<T>(dataInfo: DataInfo): Observable<T>;
-    getDataStream<T>(dataInfo: DataInfo): Observable<T> {
+    getDataStream<T = any>(dataInfo: DataInfo): Observable<T> {
         const fullKey = this.getFullKey(dataInfo);
         if (this.dataStreams.has(fullKey)) {
             return this.dataStreams.get(fullKey);
         } else {
             const dataSubject = new ReplaySubject<T>(1);
             this.dataStreams.set(fullKey, dataSubject);
-            this.getData(dataInfo)
+            this.handleData(dataInfo)
                 .pipe(first())
                 .subscribe((data) => dataSubject.next(data));
             return dataSubject.asObservable();

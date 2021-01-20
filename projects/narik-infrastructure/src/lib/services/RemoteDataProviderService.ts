@@ -7,31 +7,17 @@ import { DataInfo } from '../interfaces/data-info.model';
  */
 export abstract class RemoteDataProviderService {
     /**
-     * Gets data
-     * @param dataInfo
-     * @returns data
-     */
-    abstract getData(dataInfo: DataInfo): Observable<any>;
-
-    /**
-     * Gets data
+     * handle data
      * @template T
      * @param dataInfo
      * @returns data
      */
-    abstract getData<T>(dataInfo: DataInfo): Observable<T>;
-
+    abstract handleData<T = any>(dataInfo: DataInfo): Observable<T>;
     /**
-     * Gets data stream
+     * get dataStream
+     * @template T
      * @param dataInfo
-     * @returns data stream
+     * @returns data
      */
-    abstract getDataStream(dataInfo: DataInfo): Observable<any>;
-
-    /**
-     * Gets data stream
-     * @param dataInfo
-     * @returns data stream
-     */
-    abstract getDataStream<T>(dataInfo: DataInfo): Observable<T>;
+    abstract getDataStream<T = any>(dataInfo: DataInfo): Observable<T>;
 }
