@@ -3,7 +3,9 @@
     "version": "5.0.0",
     "peerDependencies": {
         "@angular/common": "^11.0.9",
-        "@angular/core": "^11.0.9"
+        "@angular/core": "^11.0.9",
+        "@angular/fire": "^6.1.4",
+        "firebase": "^7.0 || ^8.0"
     },
     "dependencies": {
         "tslib": "^2.0.0"

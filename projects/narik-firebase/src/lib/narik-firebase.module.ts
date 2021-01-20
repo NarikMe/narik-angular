@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { NarikFirebaseComponent } from './narik-firebase.component';
-
-
+import { RemoteDataProviderService } from '@narik/infrastructure';
+import { NarikFirestoreDataProviderService } from './narik-firestore-data-provider.service';
 
 @NgModule({
-  declarations: [NarikFirebaseComponent],
-  imports: [
-  ],
-  exports: [NarikFirebaseComponent]
+    providers: [
+        {
+            provide: RemoteDataProviderService,
+            useClass: NarikFirestoreDataProviderService,
+        },
+    ],
 })
-export class NarikFirebaseModule { }
+export class NarikFirebaseModule {}
