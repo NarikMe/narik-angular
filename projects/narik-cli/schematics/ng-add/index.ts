@@ -13,10 +13,15 @@ import {
     SchematicsException,
 } from '@angular-devkit/schematics';
 
+import { workspaces, JsonArray } from '@angular-devkit/core';
+
 import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 import { virtualFs } from '@angular-devkit/core';
 import { Schema as AddSchema } from './schema';
-import { getWorkspace } from '@schematics/angular/utility/config';
+import {
+    getWorkspace,
+    updateWorkspace,
+} from '@schematics/angular/utility/workspace';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 import {
     addImportToModule,
@@ -98,7 +103,7 @@ const rtlUiStyles: any = {
 const devDependencies: any[] = [
     {
         name: '@angular-builders/custom-webpack',
-        version: '^11.0.0-beta.1',
+        version: '^11.0.0',
     },
     {
         name: 'cheerio',
@@ -204,7 +209,7 @@ const layoutDependency: any = {
     ngxadmin: [
         {
             name: '@nebular/theme',
-            version: '7.0.0-beta.1',
+            version: '^7.0.0',
         },
         {
             name: 'eva-icons',
@@ -212,7 +217,7 @@ const layoutDependency: any = {
         },
         {
             name: '@nebular/eva-icons',
-            version: '7.0.0-beta.1',
+            version: '^7.0.0',
         },
         {
             name: 'roboto-fontface',
@@ -321,8 +326,8 @@ const uiDependency: any = {
         { name: '@narik/ui-nebular', version: '^5.1.0' },
         { name: '@narik/ui-swimlane', version: '^5.1.0' },
         { name: '@swimlane/ngx-datatable', version: '^18.0.0' },
-        { name: '@nebular/theme', version: '7.0.0-beta.1' },
-        { name: '@nebular/date-fns', version: '7.0.0-beta.1' },
+        { name: '@nebular/theme', version: '^7.0.0' },
+        { name: '@nebular/date-fns', version: '^7.0.0' },
         { name: 'date-fns', version: '^2.16.0' },
     ],
     primeng: [
@@ -345,18 +350,13 @@ export function ngAdd(_options: AddSchema): Rule {
         updateTsConfig(ui),
         updateIndexHtml(ui, rtl),
         addLocalization(ui),
-        // addToMainTs(),
-        // addModuleImports(ui, rtl),
-        // addModuleProvids(ui),
-        // updateAppModule(),
         installPackageJsonDependencies(),
     ]);
 }
 
 function updateAppModule(): Rule {
-    return (host: Tree) => {
-        const workspace = getWorkspace(host);
-        const project = workspace.projects[workspace.defaultProject!];
+    return async (host: Tree) => {
+        const project = await getProject(host);
         const modulePath = getAppModulePath(host, getProjectMainFile(project));
         const sourceText = host.read(modulePath)!.toString('utf-8');
 
@@ -395,8 +395,6 @@ function updateAppModule(): Rule {
                 }
             }
         }
-
-        return host;
     };
 }
 
@@ -520,8 +518,8 @@ function sortObjectByKeys(obj: { [key: string]: string }) {
     );
 }
 
-function addLocalization(ui: string) {
-    return (host: Tree, context: SchematicContext) => {
+function addLocalization(ui: string): Rule {
+    return async (host: Tree, context: SchematicContext) => {
         if (ui === 'ng-bootstrap') {
             const localizePolyfill = `import '@angular/localize/init';`;
             const localizeStr = `
@@ -530,8 +528,9 @@ function addLocalization(ui: string) {
 */
 ${localizePolyfill}`;
 
-            const projectName: string | undefined = getWorkspace(host)
-                .defaultProject;
+            const workspace = await getWorkspace(host);
+            const projectName: string | undefined = workspace.extensions
+                .defaultProject as string;
             if (projectName) {
                 appendToTargetOptionFile(
                     host,
@@ -541,15 +540,14 @@ ${localizePolyfill}`;
                 );
             }
         }
-
-        return host;
     };
 }
 
 function addToMainTs() {
-    return (host: Tree, context: SchematicContext) => {
-        const projectName: string | undefined = getWorkspace(host)
-            .defaultProject;
+    return async (host: Tree, context: SchematicContext) => {
+        const workspace = await getWorkspace(host);
+        const projectName: string | undefined = workspace.extensions
+            .defaultProject as string;
         if (projectName) {
             appendToTargetOptionFile(
                 host,
@@ -563,31 +561,33 @@ function addToMainTs() {
     };
 }
 
-function appendToTargetOptionFile(
+async function appendToTargetOptionFile(
     host: Tree,
     projectName: string,
     optionName: string,
     str: string
 ) {
-    const workspace = getWorkspace(host);
-    const project = workspace.projects[projectName];
+    const project = await getProject(host, projectName);
     const buildTargetOptions = getProjectTarget(project, 'build');
-    const path = buildTargetOptions.options[optionName];
-    const data = host.read(path);
-    if (!data) {
-        // If the file doesn't exist, just ignore it.
-        return;
-    }
-    const content = virtualFs.fileBufferToString(data);
-    if (content.includes(str) || content.includes(str.replace(/'/g, '"'))) {
-        // If the file already contains the polyfill (or variations), ignore it too.
-        return;
-    }
 
-    // Add string at the end of the file.
-    const recorder = host.beginUpdate(path);
-    recorder.insertRight(content.length, str);
-    host.commitUpdate(recorder);
+    if (buildTargetOptions.options) {
+        const path = buildTargetOptions.options[optionName];
+        const data = host.read(path as string);
+        if (!data) {
+            // If the file doesn't exist, just ignore it.
+            return;
+        }
+        const content = virtualFs.fileBufferToString(data);
+        if (content.includes(str) || content.includes(str.replace(/'/g, '"'))) {
+            // If the file already contains the polyfill (or variations), ignore it too.
+            return;
+        }
+
+        // Add string at the end of the file.
+        const recorder = host.beginUpdate(path as string);
+        recorder.insertRight(content.length, str);
+        host.commitUpdate(recorder);
+    }
 }
 
 function updateIndexHtml(ui: string, rtl: boolean) {
@@ -687,8 +687,8 @@ function updateTsConfig(ui: string) {
     };
 }
 
-function addModuleProvids(ui: string) {
-    const provids: any[] = [
+function addModuleProviders(ui: string) {
+    const providers: any[] = [
         {
             key: `{provide: MODULE_DATA_KEY,useValue: moduleKey}`,
             link: undefined,
@@ -717,13 +717,12 @@ function addModuleProvids(ui: string) {
         },
     ];
 
-    return (host: Tree) => {
-        const workspace = getWorkspace(host);
-        const project = workspace.projects[workspace.defaultProject!];
+    return async (host: Tree) => {
+        const project = await getProject(host);
         const modulePath = getAppModulePath(host, getProjectMainFile(project));
         const moduleSource = getSourceFile(host, modulePath);
 
-        for (const provide of provids) {
+        for (const provide of providers) {
             if (provide.uiKey && provide.uiKey !== ui) {
                 continue;
             }
@@ -820,9 +819,8 @@ function addModuleImports(ui: string, rtl: boolean) {
         },
     ];
 
-    return (host: Tree) => {
-        const workspace = getWorkspace(host);
-        const project = workspace.projects[workspace.defaultProject!];
+    return async (host: Tree) => {
+        const project = await getProject(host);
         const appModulePath = getAppModulePath(
             host,
             getProjectMainFile(project)
@@ -871,11 +869,31 @@ export function addModuleImportToRootModule(
     host: Tree,
     moduleName: string,
     src: string,
-    project: WorkspaceProject,
+    project: workspaces.ProjectDefinition,
     isModuleImport: boolean = true
 ) {
     const modulePath = getAppModulePath(host, getProjectMainFile(project));
     addModuleImportToModule(host, modulePath, moduleName, src, isModuleImport);
+}
+
+export async function getProject(
+    host: Tree,
+    projectName?: string,
+    workSpace?: workspaces.WorkspaceDefinition
+): Promise<workspaces.ProjectDefinition> {
+    const workspace = workSpace || (await getWorkspace(host));
+    const project = workspace.projects.get(
+        projectName || (workspace.extensions.defaultProject as string)
+    );
+
+    if (project) {
+        return project;
+    }
+    throw new Error(
+        `Could not find project : ${
+            projectName || (workspace.extensions.defaultProject as string)
+        }`
+    );
 }
 
 export function addModuleImportToModule(
@@ -1021,7 +1039,9 @@ export function hasNgModuleImport(
     return false;
 }
 
-export function getProjectMainFile(project: WorkspaceProject): string {
+export function getProjectMainFile(
+    project: workspaces.ProjectDefinition
+): string {
     const buildOptions = getProjectTargetOptions(project, 'build');
 
     if (!buildOptions.main) {
@@ -1031,24 +1051,20 @@ export function getProjectMainFile(project: WorkspaceProject): string {
         );
     }
 
-    return buildOptions.main;
+    return buildOptions.main as string;
 }
 
-export function addStyles(
-    ui: string,
-    rtl: boolean,
-    layout: string
-): (host: Tree, context: SchematicContext) => Tree {
-    return function (host: Tree, context: SchematicContext): Tree {
-        const workspace = getWorkspace(host);
-        const project = workspace.projects[workspace.defaultProject!];
-        const assets: string[] = ['src/styles.scss'];
+export function addStyles(ui: string, rtl: boolean, layout: string): Rule {
+    return async function (host: Tree, context: SchematicContext) {
+        const workspace = await getWorkspace(host);
+        const project = await getProject(host, undefined, workspace);
+        const styles: string[] = ['src/styles.scss'];
 
         context.logger.log('info', `🔍 Adding styles...`);
-        addStyleToTarget(project, 'build', host, assets, workspace);
-        addStyleToTarget(project, 'test', host, assets, workspace);
-        context.logger.log('info', `🔍 Added styles...`);
-        return host;
+        addStyleToTarget(project, 'build', styles);
+        addStyleToTarget(project, 'test', styles);
+
+        return updateWorkspace(workspace);
     };
 }
 
@@ -1178,17 +1194,19 @@ export function addExtraFiles(
     };
 }
 
-export function addCustomBuilder(): (
-    host: Tree,
-    context: SchematicContext
-) => Tree {
-    return function (host: Tree, context: SchematicContext): Tree {
-        const workspace = getWorkspace(host);
-        const project = workspace.projects[workspace.defaultProject!];
+export function addCustomBuilder(): Rule {
+    return async function (host: Tree, context: SchematicContext) {
+        const workspace = await getWorkspace(host);
+        const project = await getProject(host, undefined, workspace);
         const buildTargetOptions = getProjectTarget(project, 'build');
+
+        context.logger.log('info', `🔍 111`);
 
         buildTargetOptions.builder = '@angular-builders/custom-webpack:browser';
 
+        if (!buildTargetOptions.options) {
+            buildTargetOptions.options = {};
+        }
         buildTargetOptions.options.customWebpackConfig = {
             path: './extra-webpack.config.js',
             mergeStrategies: {
@@ -1206,22 +1224,19 @@ export function addCustomBuilder(): (
 
         context.logger.log('info', `🔍 Adding custom builder...`);
 
-        host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
-
-        return host;
+        return updateWorkspace(workspace);
+        // host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
     };
 }
 
 export function getProjectTarget(
-    project: WorkspaceProject,
+    project: workspaces.ProjectDefinition,
     buildTarget: string
 ) {
-    const targetConfig =
-        (project.architect && project.architect[buildTarget]) ||
-        (project.targets && project.targets[buildTarget]);
+    const buildTargetObject = project.targets.get(buildTarget);
 
-    if (targetConfig) {
-        return targetConfig;
+    if (buildTargetObject) {
+        return buildTargetObject;
     }
 
     throw new Error(
@@ -1230,50 +1245,39 @@ export function getProjectTarget(
 }
 
 export function getProjectTargetOptions(
-    project: WorkspaceProject,
+    project: workspaces.ProjectDefinition,
     buildTarget: string
 ) {
-    const targetConfig =
-        (project.architect && project.architect[buildTarget]) ||
-        (project.targets && project.targets[buildTarget]);
-
-    if (targetConfig && targetConfig.options) {
-        return targetConfig.options;
+    const buildTargetObject = project.targets.get(buildTarget);
+    if (buildTargetObject && buildTargetObject.options) {
+        return buildTargetObject.options;
     }
 
-    throw new Error(
+    throw new SchematicsException(
         `Cannot determine project target configuration for: ${buildTarget}.`
     );
 }
 
 export function addStyleToTarget(
-    project: WorkspaceProject,
+    project: workspaces.ProjectDefinition,
     targetName: string,
-    host: Tree,
-    assetPaths: string[],
-    workspace: WorkspaceSchema
+    styles: string[]
 ) {
     const targetOptions = getProjectTargetOptions(project, targetName);
+    let existingStyles = targetOptions.styles as JsonArray | undefined;
 
-    for (const assetPath of assetPaths) {
-        if (!targetOptions.styles) {
-            targetOptions.styles = [assetPath];
-        } else {
-            const existingStyles = targetOptions.styles.map(
-                (style: string | { input: string }) => {
-                    return typeof style === 'string' ? style : style.input;
-                }
-            );
+    if (!existingStyles) {
+        existingStyles = [];
+    }
 
-            const hasStyle = existingStyles.find((style: string) => {
-                return style.includes(assetPath);
-            });
-
-            if (!hasStyle) {
-                targetOptions.styles.push(assetPath);
-            }
+    for (const styleItem of styles) {
+        const hasStyle = existingStyles.find((style: string) => {
+            return style === styleItem;
+        });
+        if (!hasStyle) {
+            existingStyles.push(styleItem);
         }
     }
 
-    host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
+    targetOptions.styles = existingStyles;
 }

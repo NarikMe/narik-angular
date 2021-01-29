@@ -41,7 +41,7 @@
               (input)="
                 dt1.filter($event.target.value, col.field, col.filterMatchMode)
               "
-              [value]="dt1.filters[col.field]?.value"
+              [value]="dt1.filters[col.field][0]?.value"
             />
           </ng-container>
         </ng-container>
