@@ -58,7 +58,7 @@ export class NarikPrimeDataTable extends NarikDataTable {
     }
 
     createFilter(filter) {
-        var result = {
+        const result = {
             condition: 'and',
             filters: [],
         };

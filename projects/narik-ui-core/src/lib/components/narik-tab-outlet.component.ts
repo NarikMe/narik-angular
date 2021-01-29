@@ -36,7 +36,7 @@ export abstract class NarikTabOutlet
     constructor(injector: Injector) {
         super(injector);
 
-        this.name = name || PRIMARY_OUTLET;
+        this.name = this.name || PRIMARY_OUTLET;
         this.parentContexts.onChildOutletCreated(this.name, this as any);
     }
 
