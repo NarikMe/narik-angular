@@ -6,12 +6,12 @@ module.exports = (config) => {
     const index = config.plugins.findIndex((p) => {
         return p instanceof AngularCompilerPlugin.ivy.AngularWebpackPlugin;
     });
-    const oldOptions = config.plugins[index].pluginOptions;
-    oldOptions.directTemplateLoading = false;
-    config.plugins.splice(index);
+    const options = config.plugins[index].pluginOptions;
+    options.directTemplateLoading = false;
+    config.plugins.splice(index, 1);
 
     config.plugins.push(
-        new AngularCompilerPlugin.ivy.AngularWebpackPlugin(oldOptions)
+        new AngularCompilerPlugin.ivy.AngularWebpackPlugin(options)
     );
 
     config.module.rules.unshift({
@@ -22,7 +22,7 @@ module.exports = (config) => {
                 loader: '@narik/webpack-tools',
                 options: {
                     resolver: new LayoutResolver(),
-                    basePath: path.dirname(oldOptions.tsconfig),
+                    basePath: path.dirname(options.tsconfig),
                 },
             },
         ],
