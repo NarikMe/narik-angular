@@ -7,7 +7,6 @@ import {
     ViewContainerRef,
     StaticProvider,
     EventEmitter,
-    ComponentFactoryResolver,
     ComponentFactory,
 } from '@angular/core';
 
@@ -238,8 +237,8 @@ export abstract class DialogService {
     ): any;
 
     /**
-     * Shows an component or template inside dialog.
-     * @param content component or dialog.
+     * Shows an component or template or webComponent inside dialog.
+     * @param content component of dialog.
      * @param [title] title of dialog.
      * @param [data] data that should send to component inside dialog.
      * @param [actions] actions of dialog.
@@ -250,7 +249,7 @@ export abstract class DialogService {
      * @returns dialog dialog
      */
     abstract showDialog<T>(
-        content: Type<any> | TemplateRef<any> | ComponentFactory<any>,
+        content: Type<any> | TemplateRef<any> | ComponentFactory<any> | string,
         title?: string,
         data?: any,
         actions?: DialogAction[],

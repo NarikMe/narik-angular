@@ -201,7 +201,7 @@ export class NarikDialogService extends DialogService {
     }
 
     showDialog<T>(
-        content: Type<any> | TemplateRef<any> | ComponentFactory<any>,
+        content: Type<any> | TemplateRef<any> | ComponentFactory<any> | string,
         title?: string,
         data?: any,
         actions?: DialogAction[],
@@ -278,6 +278,26 @@ export class NarikDialogService extends DialogService {
             }
 
             result.componentInstance = dialogContent.instance;
+        } else if (isString(content)) {
+            const element = renderer.createElement(content);
+
+            renderer.insertBefore(
+                renderer.parentNode(
+                    dialogContainerRef.instance.contentContainerRef.element
+                        .nativeElement
+                ),
+                element,
+                dialogContainerRef.instance.contentContainerRef.element
+                    .nativeElement
+            );
+
+            if (data) {
+                for (const key in data) {
+                    if (Object.prototype.hasOwnProperty.call(data, key)) {
+                        element[key] = data[key];
+                    }
+                }
+            }
         }
         result.element = dialogOverlayContainerRef.location.nativeElement;
         const overlayContainer = this.injector.get(OverlayContainer, undefined);
