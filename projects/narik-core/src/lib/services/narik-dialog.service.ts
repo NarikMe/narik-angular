@@ -298,6 +298,7 @@ export class NarikDialogService extends DialogService {
                     }
                 }
             }
+            result.componentInstance = element;
         }
         result.element = dialogOverlayContainerRef.location.nativeElement;
         const overlayContainer = this.injector.get(OverlayContainer, undefined);
