@@ -22,6 +22,7 @@ import {
     SimpleChanges,
     ViewChild,
     Type,
+    Directive,
 } from '@angular/core';
 
 import { PARAMETER_RESOLVER } from '../injectionTokens';
@@ -33,10 +34,11 @@ import { QUERY_SERVICE_TYPE } from '../internal-injectionTokens';
 /**
  * Narik general form
  */
+@Directive()
 export class NarikGeneralForm<TE extends NarikEntity>
     extends NarikComponent
     implements CommandHost, OnChanges {
-    private changeSubject = new ReplaySubject(1);
+    private changeSubject = new ReplaySubject<void>(1);
 
     change$: Observable<any>;
 
