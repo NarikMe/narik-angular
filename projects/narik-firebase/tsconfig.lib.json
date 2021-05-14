@@ -5,7 +5,7 @@
         "outDir": "../../out-tsc/lib",
         "target": "es2015",
         "declaration": true,
-        "declarationMap": true,
+        "declarationMap": false,
         "inlineSources": true,
         "types": [],
         "lib": ["dom", "es2018"]
@@ -14,7 +14,8 @@
         "skipTemplateCodegen": true,
         "strictMetadataEmit": true,
         "enableResourceInlining": true,
-        "enableIvy": false
+        "enableIvy": true,
+        "compilationMode": "partial"
     },
     "exclude": ["src/test.ts", "**/*.spec.ts"]
 }
