@@ -12,6 +12,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "declarationMap": false,
+    "skipLibCheck": true,
     "types": [],
     "lib": [
       "dom",
