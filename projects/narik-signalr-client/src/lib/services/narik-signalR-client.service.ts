@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { pluck } from 'rxjs/operators';
 import { share } from 'rxjs/operators';
 
@@ -30,7 +30,7 @@ export class NarikSignalRMessagingService extends RemoteMessagingService {
     listen<T>(messageType: any): Observable<T> {
         return this.messagingSubject.pipe(
             filter((x) => x.messageType === messageType),
-            pluck<any, T>('messageData'),
+            map((x) => x.messageData),
             share()
         );
     }
