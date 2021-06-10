@@ -108,9 +108,13 @@
       "@narik/ui-nebular/*": [
         "dist/ui-nebular/*"
       ],
-      "narik-firebase": [
-        "dist/narik-firebase/narik-firebase",
-        "dist/narik-firebase"
+      "@narik/custom-validators": [
+        "dist/custom-validators/custom-validators",
+        "dist/custom-validators"
+      ],
+      "@narik/firebase": [
+        "dist/firebase/narik-firebase",
+        "dist/firebase"
       ]
     }
   }

@@ -6,7 +6,6 @@
     "@angular/core": "~11.0.2",
     "@ngx-translate/core": "^13.0.0",
     "ngx-toastr": "^13.0.0",
-    "ngx-custom-validators": "^10.0.0",
     "@angular/cdk": "~11.0.0"
   },
   "dependencies": {},

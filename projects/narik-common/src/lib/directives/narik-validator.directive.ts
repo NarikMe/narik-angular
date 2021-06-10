@@ -3,7 +3,6 @@ import {
     NG_VALIDATORS,
     Validator,
     AbstractControl,
-    Validators,
 } from '@angular/forms';
 import { ValidationService } from '@narik/infrastructure';
 

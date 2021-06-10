@@ -161,8 +161,8 @@ const commonDependencies: any[] = [
         version: '^13.0.0',
     },
     {
-        name: 'ngx-custom-validators',
-        version: '^10.0.0',
+        name: '@narik/custom-validators',
+        version: '^6.0.0',
     },
     {
         name: 'class-validator',

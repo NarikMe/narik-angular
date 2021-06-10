@@ -1,6 +1,6 @@
 import { ValidationService, NarikValidator } from '@narik/infrastructure';
 import { Validators } from '@angular/forms';
-import { CustomValidators } from 'ngx-custom-validators';
+import { CustomValidators } from '@narik/custom-validators';
 
 export class NarikValidationService extends ValidationService {
     _validators: any = {
