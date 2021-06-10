@@ -10,6 +10,7 @@ import {
     HostBinding,
     Injector,
     AfterViewInit,
+    Directive,
 } from '@angular/core';
 import {
     ControlValueAccessor,
@@ -23,6 +24,7 @@ import {
     NARIK_UI_COMPONENT_INPUTS,
 } from './narik-ui-component';
 
+@Directive()
 export class NarikFormComponent
     extends NarikUiComponent
     implements ControlValueAccessor, AfterViewInit {

@@ -2,8 +2,9 @@ import {
     NarikFormComponent,
     NARIK_UI_FORM_INPUTS,
 } from './../base/narik-form-component';
-import { Input, Injector } from '@angular/core';
+import { Input, Injector, Directive } from '@angular/core';
 
+@Directive()
 export class NarikInput extends NarikFormComponent {
     _type = 'text';
     _maxlength: number;

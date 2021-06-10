@@ -1,8 +1,9 @@
-import { OnInit, Input } from '@angular/core';
+import { OnInit, Input, Directive } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 import { NarikDataDisplayValueComponent } from '../base/narik-data-display-value-component';
 
+@Directive()
 export class NarikAutoComplete
     extends NarikDataDisplayValueComponent
     implements ControlValueAccessor, OnInit {

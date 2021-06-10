@@ -1,10 +1,11 @@
 import { CommandHost, CommandInfo } from '@narik/infrastructure';
 
-import { Input, EventEmitter, Output, Injector } from '@angular/core';
+import { Input, EventEmitter, Output, Injector, Directive } from '@angular/core';
 import { Observable } from 'rxjs';
 import { isEquivalent } from '@narik/common';
 import { NarikUiComponent } from '../base/narik-ui-component';
 
+@Directive()
 export abstract class NarikTreeview
     extends NarikUiComponent
     implements CommandHost {

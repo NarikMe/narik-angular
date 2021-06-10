@@ -21,6 +21,7 @@ import {
     ViewContainerRef,
     ElementRef,
     HostBinding,
+    Directive,
 } from '@angular/core';
 import { isString, isArray, isElementVisible } from '@narik/common';
 import { evalStringExpression } from '@narik/common';
@@ -48,6 +49,7 @@ export interface ToolBarItem {
     shortcut?: string;
     items?: (ToolBarItem | string)[];
 }
+@Directive()
 export class NarikToolBar extends NarikUiComponent implements OnInit {
     readonly expressionPrefix = '$$$narik';
     invisibleItems: any = {};

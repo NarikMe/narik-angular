@@ -7,6 +7,7 @@ import { takeWhile } from 'rxjs/operators';
 
 import {
     AfterViewInit,
+    Directive,
     ElementRef,
     EventEmitter,
     Injector,
@@ -17,6 +18,7 @@ import {
 
 import { NarikUiComponent } from '../base/narik-ui-component';
 
+@Directive()
 export class NarikButton
     extends NarikUiComponent
     implements AfterViewInit, OnInit {

@@ -4,9 +4,10 @@ import {
     MODULE_UI_KEY,
 } from '@narik/infrastructure';
 
-import { Input, Injector } from '@angular/core';
+import { Input, Injector, Directive } from '@angular/core';
 import { NarikInject } from '@narik/core';
 
+@Directive()
 export class NarikUiComponent extends NarikComponent {
     _options: any = {};
     _defaultOptions = {};

@@ -1,7 +1,7 @@
 import { MetaDataService, MODULE_UI_KEY } from '@narik/infrastructure';
 import { NarikInject } from '@narik/core';
 import { FORM_ITEM_DEFAULT_CLASS } from './../injectionTokens';
-import { Input, Injector } from '@angular/core';
+import { Input, Injector, Directive } from '@angular/core';
 
 import {
     FloatLabelType,
@@ -9,6 +9,7 @@ import {
     MAT_FORM_FIELD_DEFAULT_OPTIONS,
 } from '@angular/material/form-field';
 
+@Directive()
 export class NarikMatFormFieldInput {
     _cssClass: string;
     _floatLabel: FloatLabelType = 'auto';

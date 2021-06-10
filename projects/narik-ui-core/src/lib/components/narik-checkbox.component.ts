@@ -1,8 +1,9 @@
-import { Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import {
     NarikFormComponent,
     NARIK_UI_FORM_INPUTS,
 } from '../base/narik-form-component';
+@Directive()
 export abstract class NarikCheckBox extends NarikFormComponent {
     _tag: any;
 

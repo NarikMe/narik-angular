@@ -19,7 +19,7 @@ import {
 import { DynamicFormService } from '@narik/ui-core';
 import { takeWhile, filter, finalize } from 'rxjs/operators';
 
-import { Injector, OnInit } from '@angular/core';
+import { Directive, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 
 import {
@@ -38,6 +38,7 @@ import { NarikGeneralForm } from './narik-general-form';
 /**
  * Narik list form
  */
+ @Directive()
 export abstract class NarikListForm<TE extends NarikEntity>
     extends NarikGeneralForm<TE>
     implements OnInit {

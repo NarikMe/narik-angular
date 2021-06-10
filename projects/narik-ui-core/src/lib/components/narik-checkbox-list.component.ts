@@ -1,11 +1,12 @@
 import { isEquivalent } from '@narik/common';
 
-import { AfterViewInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Directive, QueryList, ViewChildren } from '@angular/core';
 
 import { NarikDataDisplayValueComponent } from '../base/narik-data-display-value-component';
 import { NarikCheckBox } from './narik-checkbox.component';
 import { takeWhile } from 'rxjs/operators';
 
+@Directive()
 export class NarikCheckBoxList
     extends NarikDataDisplayValueComponent
     implements AfterViewInit {

@@ -4,11 +4,12 @@ import {
     DialogAction,
     DialogRef,
 } from '@narik/infrastructure';
-import { EventEmitter, ViewChild, ViewContainerRef } from '@angular/core';
+import { Directive, EventEmitter, ViewChild, ViewContainerRef } from '@angular/core';
 import { ComponentLoaderHostDirective } from '@narik/common';
 import { AnimationEvent } from '@angular/animations';
 import { state, style, transition, animate } from '@angular/animations';
 
+@Directive()
 export class NarikDialogContainer implements DialogContainer {
     isOpen = false;
     closeAnimationCompleted = new EventEmitter<any>();

@@ -3,10 +3,11 @@ import {
     NARIK_DATA_ORIENTED_INPUTS,
     NARIK_DATA_ORIENTED_OUTPUTS,
 } from './narik-data-oriented-component';
-import { Input, Injector } from '@angular/core';
+import { Input, Injector, Directive } from '@angular/core';
 import { DEFAULT_VALUE_DISPLAY_FIELD_NAMES } from './../injectionTokens';
 import { isArray } from '@narik/common';
 
+@Directive()
 export abstract class NarikDataDisplayValueComponent extends NarikDataOrientedComponent {
     _displayField: string;
     _valueField: string;

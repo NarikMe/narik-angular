@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Input, OnInit, Injector, Output, EventEmitter } from '@angular/core';
+import { Input, OnInit, Injector, Output, EventEmitter, Directive } from '@angular/core';
 import { isEquivalent } from '@narik/common';
 import {
     DataInfo,
@@ -15,6 +15,7 @@ import {
     NARIK_UI_FORM_INPUTS,
 } from './narik-form-component';
 
+@Directive()
 export abstract class NarikDataOrientedComponent
     extends NarikFormComponent
     implements OnInit {
