@@ -9,7 +9,8 @@ import {
   ConfigService,
   MODULE_DATA_KEY,
   MODULE_UI_KEY,
-  ModuleInfo
+  ModuleInfo,
+  ComponentTypeResolver
 } from "@narik/infrastructure";
 import {
   NarikCoreModule,
@@ -109,8 +110,20 @@ const moduleKey = "main";
   bootstrap: [AppComponent]
 })
 export class AppModule extends NarikModule {
-  constructor(injector: Injector) {
+  constructor(
+    injector: Injector,
+    componentTypeResolver: ComponentTypeResolver
+  ) {
     super(injector);
+
+    componentTypeResolver.registerComponentType(
+      'GeneralListComponent',
+      GeneralListComponent
+    );
+    componentTypeResolver.registerComponentType(
+      'GeneralEditComponent',
+      GeneralEditComponent
+    );
   }
 
   get key() {
