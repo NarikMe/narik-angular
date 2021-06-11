@@ -3,7 +3,7 @@
 Narik is a framework that helps you create your angular application more creatively in less time. You will find Narik interesting in many different aspects, once you use it.  
 
 
-**Narik 5 is ready. Compatible with Angular 11.**
+**Narik 6 is ready. Compatible with Angular 12.**
 
 
 [Online Demo](http://narik.me/demo/app)
