@@ -149,7 +149,7 @@ const commonDependencies: any[] = [
         version: '^1.9.0',
     },
     {
-        name: 'lodash-ex',
+        name: 'lodash-es',
         version: '^4.17.20',
     },
     {
@@ -166,7 +166,7 @@ const commonDependencies: any[] = [
     },
     {
         name: 'class-validator',
-        version: '^0.12.2',
+        version: '^0.13.1',
     },
     {
         name: 'data-adapter',

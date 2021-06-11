@@ -40,6 +40,10 @@ import { NbDateFnsDateModule } from "@nebular/date-fns";
 import 'reflect-metadata';
 
 
+import { GeneralListComponent } from './modules/share/general-list/general-list.component';
+import { GeneralEditComponent } from './modules/share/general-edit/general-edit.component';
+
+
 const moduleKey = "main";
 
 @NgModule({
