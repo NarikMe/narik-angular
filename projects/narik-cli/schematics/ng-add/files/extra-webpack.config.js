@@ -4,14 +4,14 @@ const LayoutResolver = require('./build-tools/layout-resolver');
 
 module.exports = (config) => {
     const index = config.plugins.findIndex((p) => {
-        return p instanceof AngularCompilerPlugin.ivy.AngularWebpackPlugin;
+        return p instanceof AngularCompilerPlugin.AngularWebpackPlugin;
     });
     const options = config.plugins[index].pluginOptions;
     options.directTemplateLoading = false;
     config.plugins.splice(index, 1);
 
     config.plugins.push(
-        new AngularCompilerPlugin.ivy.AngularWebpackPlugin(options)
+        new AngularCompilerPlugin.AngularWebpackPlugin(options)
     );
 
     config.module.rules.unshift({

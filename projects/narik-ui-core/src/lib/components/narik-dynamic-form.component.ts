@@ -7,7 +7,7 @@ import {
     IsHost,
 } from '@narik/infrastructure';
 
-import { Injector, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { Directive, Injector, Input, OnInit, ViewContainerRef } from '@angular/core';
 
 import { DynamicFormService } from '../services/dynamic-form.service';
 import { FormGroup } from '@angular/forms';
@@ -15,6 +15,7 @@ import { debounceTime } from 'rxjs/operators';
 import { evalStringExpression, getParentComponent } from '@narik/common';
 import { NarikUiComponent } from '../base/narik-ui-component';
 
+@Directive()
 export class NarikDynamicForm extends NarikUiComponent implements OnInit {
     readonly expressionPrefix = '$$$narik';
     customFormComponentKeys: string[] = [];

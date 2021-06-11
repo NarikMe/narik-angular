@@ -11,6 +11,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "declarationMap": false,
     "types": [],
     "lib": [
       "dom",
@@ -24,7 +25,8 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
-    "enableIvy":false
+    "enableIvy": true,
+    "compilationMode": "partial"
   },
   "exclude": [
     "src/test.ts",

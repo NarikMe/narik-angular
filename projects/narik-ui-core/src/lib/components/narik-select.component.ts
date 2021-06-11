@@ -14,11 +14,13 @@ import { Observable } from 'rxjs';
 import { NarikInject } from '@narik/core';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { Directive } from '@angular/core';
 
+@Directive()
 export class NarikSelect
     extends NarikDataDisplayValueComponent
     implements ControlValueAccessor, OnInit, CommandHost {
-    private changeSubject = new ReplaySubject(1);
+    private changeSubject = new ReplaySubject<void>(1);
 
     defaultNavigationProvider = 'route';
 

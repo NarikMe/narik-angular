@@ -24,9 +24,9 @@ export class NarikModuleManager extends ModuleManager {
     readonly modulesChanged: Observable<ModuleEventArg>;
     readonly modulesChangedSubject: Subject<ModuleEventArg>;
 
-    private narikLoadedSubject: Subject<any>;
+    private narikLoadedSubject: Subject<void>;
 
-    get narikLoaded(): Observable<any> {
+    get narikLoaded(): Observable<void> {
         return this.narikLoadedSubject.asObservable();
     }
 

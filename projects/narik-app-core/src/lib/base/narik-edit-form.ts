@@ -1,4 +1,4 @@
-import { ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import { Directive, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 import {
     FormGroup,
     FormBuilder,
@@ -44,6 +44,7 @@ import { NarikGeneralForm } from './narik-general-form';
 /**
  * Narik edit form
  */
+@Directive()
 export abstract class NarikEditForm<TE extends NarikEntity>
     extends NarikGeneralForm<TE>
     implements OnInit {

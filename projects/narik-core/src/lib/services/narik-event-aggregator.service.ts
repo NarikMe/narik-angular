@@ -5,7 +5,7 @@ import {
     MetaData,
 } from '@narik/infrastructure';
 import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { pluck, share } from 'rxjs/operators';
 
 import { Injectable, Optional } from '@angular/core';
@@ -72,7 +72,7 @@ export class NarikEventAggregatorService extends EventAggregatorService {
         const subject = this.getSubject(eventType);
         return subject.pipe(
             filter((x) => x.eventType === eventType),
-            pluck<any, T>('eventArgs'),
+            map((x) => x.eventArgs),
             share()
         );
     }

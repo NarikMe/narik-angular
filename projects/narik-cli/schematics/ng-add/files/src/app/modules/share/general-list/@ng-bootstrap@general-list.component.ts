@@ -1,8 +1,6 @@
 import { NarikUiListForm } from '@narik/ui-swimlane';
 import { Component, forwardRef, Injector } from '@angular/core';
-import { DynamicComponent } from '@narik/core';
 import { HOST_TOKEN } from '@narik/infrastructure';
-@DynamicComponent('GeneralListComponent')
 @Component({
     templateUrl: 'general-list.component.html',
     providers: [

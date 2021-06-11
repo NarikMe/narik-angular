@@ -5,8 +5,9 @@ import {
     IPagingInfo,
     NarikDataSource,
 } from '@narik/infrastructure';
-import { Input, Output, EventEmitter } from '@angular/core';
+import { Input, Output, EventEmitter, Directive } from '@angular/core';
 import { isArray } from '@narik/common';
+@Directive()
 export class NarikDataTable extends NarikUiComponent {
     get uiKey(): string {
         return 'data-table';

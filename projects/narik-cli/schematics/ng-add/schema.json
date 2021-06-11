@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "add",
+  "$id": "add",
   "title": "Add Narik app",
   "type": "object",
   "properties": {

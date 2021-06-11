@@ -8,6 +8,7 @@ import {
     StaticProvider,
     OnInit,
     OnDestroy,
+    Directive,
 } from '@angular/core';
 import {
     ChildrenOutletContexts,
@@ -18,6 +19,7 @@ import {
 import { NarikUiComponent } from '../base/narik-ui-component';
 import { UUID } from 'angular2-uuid';
 
+@Directive()
 export abstract class NarikTabOutlet
     extends NarikUiComponent
     implements NarikOutlet, OnInit, OnDestroy {

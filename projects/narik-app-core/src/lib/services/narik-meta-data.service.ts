@@ -7,7 +7,7 @@ import {
     DataInfo,
     DefaultMetaDataKeys,
 } from '@narik/infrastructure';
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 
 import { isArray, isObject } from '@narik/common';
 

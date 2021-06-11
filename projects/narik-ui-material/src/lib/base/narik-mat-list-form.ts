@@ -1,9 +1,10 @@
 import { NarikEntity } from '@narik/infrastructure';
 import { NarikListForm } from '@narik/app-core';
-import { OnInit, AfterViewInit, Injector } from '@angular/core';
+import { OnInit, AfterViewInit, Injector, Directive } from '@angular/core';
 import { MatLazyDataSource } from '../data-source/mat-lazy-data-source';
 import { MatLocalDataSource } from '../data-source/mat-local-data-source';
 
+@Directive()
 export class NarikUiListForm<T extends NarikEntity>
     extends NarikListForm<T>
     implements OnInit, AfterViewInit {
