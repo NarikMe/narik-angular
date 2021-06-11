@@ -49,7 +49,8 @@ const layoutStyles: any = {
 };
 const commonStyles = [
     '~@fortawesome/fontawesome-free/css/all.min.css',
-    '~ngx-toastr/toastr-bs4-alert',
+    // '~ngx-toastr/toastr-bs4-alert',
+    '~ngx-toastr/toastr',
     './styles/styles.scss',
 ];
 
