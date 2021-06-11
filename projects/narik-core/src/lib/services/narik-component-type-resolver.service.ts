@@ -20,4 +20,8 @@ export class NarikComponentTypeResolver extends ComponentTypeResolver {
             `Could not find any type for "${key}". To define a dynamic component use @DynamicComponent(key)`
         );
     }
+
+    registerComponentType(key: string, componentType: Type<any>) {
+        DynamicComponents[key] = componentType;
+    }
 }
