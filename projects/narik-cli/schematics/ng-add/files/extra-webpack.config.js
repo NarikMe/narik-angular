@@ -14,19 +14,24 @@ module.exports = (config) => {
         new AngularCompilerPlugin.AngularWebpackPlugin(options)
     );
 
-    config.module.rules.unshift({
-        test: /\.html?$/,
-        use: [
-            'raw-loader',
-            {
-                loader: '@narik/webpack-tools',
-                options: {
-                    resolver: new LayoutResolver(),
-                    basePath: path.dirname(options.tsconfig),
+    config.module.rules.unshift(
+        {
+            test: /\.html$/i,
+            use: [
+                {
+                    loader: '@narik/webpack-tools',
+                    options: {
+                        resolver: new LayoutResolver(),
+                        basePath: path.dirname(options.tsconfig),
+                    },
                 },
-            },
-        ],
-    });
+            ],
+        },
+        {
+            test: /\.html$/i,
+            type: 'asset/source',
+        }
+    );
 
     return config;
 };
