@@ -1015,27 +1015,30 @@ export function hasNgModuleImport(
         throw new Error(
             `Could not find NgModule declaration inside: "${modulePath}"`
         );
+    } else {
+        // tslint:disable-next-line:no-non-null-assertion
+        for (const property of (ngModuleMetadata as ts.ObjectLiteralExpression)!
+            .properties) {
+            if (
+                !ts.isPropertyAssignment(property) ||
+                property.name.getText() !== 'imports' ||
+                !ts.isArrayLiteralExpression(property.initializer)
+            ) {
+                continue;
+            }
+
+            /* tslint:disable-next-line: no-any */
+            if (
+                property.initializer.elements.some(
+                    (element: any) => element.getText() === className
+                )
+            ) {
+                return true;
+            }
+        }
     }
 
     /* tslint:disable-next-line: no-non-null-assertion */
-    for (const property of ngModuleMetadata!.properties) {
-        if (
-            !ts.isPropertyAssignment(property) ||
-            property.name.getText() !== 'imports' ||
-            !ts.isArrayLiteralExpression(property.initializer)
-        ) {
-            continue;
-        }
-
-        /* tslint:disable-next-line: no-any */
-        if (
-            property.initializer.elements.some(
-                (element: any) => element.getText() === className
-            )
-        ) {
-            return true;
-        }
-    }
 
     return false;
 }
