@@ -8,7 +8,7 @@
         "e2e": "ng e2e",
         "doc": "compodoc -p projects/tsconfig.compodoc.json -s -o -w --theme  material  --disableRoutesGraph",
         "build:infrastructure": "ng build narik-infrastructure && node build-tools/copy.js readme.md dist/infrastructure",
-        "build:custom-validators": "ng build narik-custom-validators && node build-tools/copy.js readme.md dist/custom-validators",
+        "build:custom-validators": "ng build narik-custom-validators",
         "build:common": "ng build narik-common && node build-tools/copy.js readme.md dist/common",
         "build:core": "ng build narik-core && node build-tools/copy.js readme.md dist/core",
         "build:ui-core": "ng build narik-ui-core && node build-tools/copy.js readme.md dist/ui-core",
