@@ -602,37 +602,6 @@
           }
         }
       }
-    },
-    "narik-custom-validators": {
-      "projectType": "library",
-      "root": "projects/narik-custom-validators",
-      "sourceRoot": "projects/narik-custom-validators/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/narik-custom-validators/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/narik-custom-validators/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/narik-custom-validators/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/narik-custom-validators/src/test.ts",
-            "tsConfig": "projects/narik-custom-validators/tsconfig.spec.json",
-            "karmaConfig": "projects/narik-custom-validators/karma.conf.js"
-          }
-        }
-      }
     }
   }
 }
