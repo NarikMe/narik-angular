@@ -8,7 +8,6 @@
         "e2e": "ng e2e",
         "doc": "compodoc -p projects/tsconfig.compodoc.json -s -o -w --theme  material  --disableRoutesGraph",
         "build:infrastructure": "ng build narik-infrastructure && node build-tools/copy.js readme.md dist/infrastructure",
-        "build:custom-validators": "ng build narik-custom-validators",
         "build:common": "ng build narik-common && node build-tools/copy.js readme.md dist/common",
         "build:core": "ng build narik-core && node build-tools/copy.js readme.md dist/core",
         "build:ui-core": "ng build narik-ui-core && node build-tools/copy.js readme.md dist/ui-core",
@@ -26,7 +25,7 @@
         "build:client-storage": "ng build narik-client-storage && node build-tools/copy.js readme.md dist/client-storage",
         "build:firebase": "ng build narik-firebase && node build-tools/copy.js readme.md dist/firebase",
         "debug:cli": "node --inspect-brk ./node_modules/@angular/cli/bin/ng serve",
-        "build": "npm run build:infrastructure && npm run build:custom-validators && npm run build:common && npm run build:core  && npm run build:ui-core &&    npm run build:app-core && npm run build:ui-material && npm run build:ui-ng-bootstrap && npm run build:ui-ngx-bootstrap && npm run build:ui-devextreme  && npm run build:ui-nebular && npm run build:ui-primeng && npm run build:ui-swimlane && npm run build:jwt && npm run build:client-storage && npm run build:signalr && npm run build:firebase &&  npm run build:cli",
+        "build": "npm run build:infrastructure && npm run build:common && npm run build:core  && npm run build:ui-core &&    npm run build:app-core && npm run build:ui-material && npm run build:ui-ng-bootstrap && npm run build:ui-ngx-bootstrap && npm run build:ui-devextreme  && npm run build:ui-nebular && npm run build:ui-primeng && npm run build:ui-swimlane && npm run build:jwt && npm run build:client-storage && npm run build:signalr && npm run build:firebase &&  npm run build:cli",
         "version": "node build-tools/version.js",
         "publish": "node build-tools/publish.js"
     },
