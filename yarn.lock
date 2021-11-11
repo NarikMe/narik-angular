@@ -1801,6 +1801,13 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
+"@narik/custom-validators@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@narik/custom-validators/-/custom-validators-7.0.1.tgz#c383df8fb7abdfde58c815188a9df9265397b0b2"
+  integrity sha512-Im6L3yqvg2jMYpVsHhzBO6CI8ZlQFPJZNKSG9nfSjJgMGY/2yGBzddEOR+geFDXQ6Ohmp3tkLEHoJLwFXZA5dA==
+  dependencies:
+    tslib "^2.1.0"
+
 "@nebular/theme@^8.0.0":
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/@nebular/theme/-/theme-8.0.0.tgz#808ba716cd96dc02d14aeec5583daf6d71ddec26"
