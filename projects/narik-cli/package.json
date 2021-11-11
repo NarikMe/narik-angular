@@ -1,6 +1,6 @@
 {
   "name": "narik",
-  "version": "6.0.2",
+  "version": "7.0.0",
   "scripts": {
     "build": "..\\..\\node_modules\\.bin\\tsc -p tsconfig.schematics.json",
     "copy:schemas": "node ../../build-tools/copy.js schematics\\*\\schema.json ..\\..\\dist\\narik\\schematics\\ ",
