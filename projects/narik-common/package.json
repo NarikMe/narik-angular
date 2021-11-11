@@ -1,9 +1,9 @@
 {
   "name": "@narik/common",
-  "version": "6.0.1",
+  "version": "7.0.0",
   "peerDependencies": {
-    "@angular/common": "^12.0.3",
-    "@angular/core": "^12.0.3",
+    "@angular/common": "^13.0.0",
+    "@angular/core": "^13.0.0",
     "data-adapter": "~0.2.3",
     "@angular/cdk": "~12.0.4"
   },

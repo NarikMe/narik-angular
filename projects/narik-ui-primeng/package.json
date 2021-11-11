@@ -1,9 +1,9 @@
 {
   "name": "@narik/ui-primeng",
-  "version": "6.0.1",
+  "version": "7.0.0",
   "peerDependencies": {
-    "@angular/common": "^12.0.3",
-    "@angular/core": "^12.0.3",
+    "@angular/common": "^13.0.0",
+    "@angular/core": "^13.0.0",
     "primeicons": "~4.1.0",
     "primeng": "^12.0.0-rc.1",
     "@angular/flex-layout": "^12.0.0-beta.34"

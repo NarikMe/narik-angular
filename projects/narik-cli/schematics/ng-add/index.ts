@@ -104,7 +104,7 @@ const rtlUiStyles: any = {
 const devDependencies: any[] = [
     {
         name: '@angular-builders/custom-webpack',
-        version: '^12.1.0',
+        version: '^13.1.0',
     },
     {
         name: 'cheerio',
@@ -122,12 +122,12 @@ const commonDependencies: any[] = [
     },
     {
         name: '@angular/cdk',
-        version: '^12.0.4',
+        version: '^13.0.0',
     },
 
     {
         name: '@ngx-translate/core',
-        version: '^13.0.0',
+        version: '^14.0.0',
     },
     {
         name: 'angular2-text-mask',
@@ -135,7 +135,7 @@ const commonDependencies: any[] = [
     },
     {
         name: '@angular/flex-layout',
-        version: '^12.0.0-beta.34',
+        version: '^12.0.0-beta.35',
     },
     {
         name: 'angular2-uuid',
@@ -143,11 +143,11 @@ const commonDependencies: any[] = [
     },
     {
         name: 'bootstrap',
-        version: '^5.0.1',
+        version: '^5.1.3',
     },
     {
         name: 'localforage',
-        version: '^1.9.0',
+        version: '^1.10.0',
     },
     {
         name: 'lodash-es',
@@ -159,11 +159,11 @@ const commonDependencies: any[] = [
     },
     {
         name: 'ngx-toastr',
-        version: '^14.0.0',
+        version: '^14.1.4',
     },
     {
         name: '@narik/custom-validators',
-        version: '^6.0.0',
+        version: '^7.0.0',
     },
     {
         name: 'class-validator',
@@ -175,31 +175,31 @@ const commonDependencies: any[] = [
     },
     {
         name: '@narik/infrastructure',
-        version: '^6.0.0',
+        version: '^7.0.0',
     },
     {
         name: '@narik/common',
-        version: '^6.0.0',
+        version: '^7.0.0',
     },
     {
         name: '@narik/core',
-        version: '^6.0.0',
+        version: '^7.0.0',
     },
     {
         name: '@narik/app-core',
-        version: '^6.0.0',
+        version: '^7.0.0',
     },
     {
         name: '@narik/ui-core',
-        version: '^6.0.0',
+        version: '^7.0.0',
     },
     {
         name: '@narik/jwt-authentication',
-        version: '^6.0.0',
+        version: '^7.0.0',
     },
     {
         name: '@narik/client-storage',
-        version: '^6.0.0',
+        version: '^7.0.0',
     },
 ];
 
@@ -210,7 +210,7 @@ const layoutDependency: any = {
     ngxadmin: [
         {
             name: '@nebular/theme',
-            version: '^7.0.0',
+            version: '^8.0.0',
         },
         {
             name: 'eva-icons',
@@ -218,7 +218,7 @@ const layoutDependency: any = {
         },
         {
             name: '@nebular/eva-icons',
-            version: '^7.0.0',
+            version: '^8.0.0',
         },
         {
             name: 'roboto-fontface',
@@ -230,7 +230,7 @@ const layoutDependency: any = {
         },
     ],
     architectui: [
-        { name: '@ng-bootstrap/ng-bootstrap', version: '^8.0.0' },
+        { name: '@ng-bootstrap/ng-bootstrap', version: '^10.0.0' },
         {
             name: 'ngx-perfect-scrollbar',
             version: '^10.0.0',
@@ -291,25 +291,25 @@ const uiDependency: any = {
     material: [
         {
             name: '@narik/ui-material',
-            version: '^6.0.0',
+            version: '^7.0.0',
         },
         {
             name: '@angular/material',
-            version: '^12.0.4',
+            version: '^13.0.0',
         },
     ],
     devextreme: [
         {
             name: '@narik/ui-devextreme',
-            version: '^6.0.0',
+            version: '^7.0.0',
         },
         {
             name: 'devextreme',
-            version: '^21.1.3',
+            version: '^21.2.3',
         },
         {
             name: 'devextreme-angular',
-            version: '^21.1.3',
+            version: '^21.2.3',
         },
         {
             name: 'stream',
@@ -317,24 +317,24 @@ const uiDependency: any = {
         },
     ],
     'ng-bootstrap': [
-        { name: '@narik/ui-ng-bootstrap', version: '^6.0.0' },
-        { name: '@narik/ui-swimlane', version: '^6.0.0' },
-        { name: '@swimlane/ngx-datatable', version: '^19.0.0' },
-        { name: '@ng-bootstrap/ng-bootstrap', version: '^9.1.2' },
-        { name: '@angular/localize', version: '^12.0.4' },
+        { name: '@narik/ui-ng-bootstrap', version: '^7.0.0' },
+        { name: '@narik/ui-swimlane', version: '^7.0.0' },
+        { name: '@swimlane/ngx-datatable', version: '^20.0.0' },
+        { name: '@ng-bootstrap/ng-bootstrap', version: '^10.0.0' },
+        { name: '@angular/localize', version: '^13.0.0' },
     ],
     nebular: [
-        { name: '@narik/ui-nebular', version: '^6.0.0' },
-        { name: '@narik/ui-swimlane', version: '^6.0.0' },
-        { name: '@swimlane/ngx-datatable', version: '^19.0.0' },
-        { name: '@nebular/theme', version: '^7.0.0' },
-        { name: '@nebular/date-fns', version: '^7.0.0' },
+        { name: '@narik/ui-nebular', version: '^7.0.0' },
+        { name: '@narik/ui-swimlane', version: '^7.0.0' },
+        { name: '@swimlane/ngx-datatable', version: '^20.0.0' },
+        { name: '@nebular/theme', version: '^8.0.0' },
+        { name: '@nebular/date-fns', version: '^8.0.0' },
         { name: 'date-fns', version: '^2.22.1' },
     ],
     primeng: [
-        { name: 'primeng', version: '^12.0.0-rc.1' },
-        { name: 'primeicons', version: '^4.0.0' },
-        { name: '@narik/ui-primeng', version: '^6.0.0' },
+        { name: 'primeng', version: '^12.2.2' },
+        { name: 'primeicons', version: '^5.0.0' },
+        { name: '@narik/ui-primeng', version: '^7.0.0' },
     ],
 };
 

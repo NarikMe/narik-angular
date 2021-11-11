@@ -1,5 +1,5 @@
 const fs = require('fs');
-const version = '6.0.1';
+const version = '7.0.0';
 const { lstatSync, readdirSync } = require('fs');
 const { join } = require('path');
 
