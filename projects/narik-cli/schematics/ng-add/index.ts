@@ -104,11 +104,15 @@ const rtlUiStyles: any = {
 const devDependencies: any[] = [
     {
         name: '@angular-builders/custom-webpack',
-        version: '^13.1.0',
+        version: '^13.0.0',
     },
     {
         name: 'cheerio',
         version: '^1.0.0-rc.10',
+    },
+    {
+        name: '@types/validator',
+        version: '^13.7.1',
     },
     {
         name: '@narik/webpack-tools',
@@ -122,7 +126,7 @@ const commonDependencies: any[] = [
     },
     {
         name: '@angular/cdk',
-        version: '^13.0.0',
+        version: '^13.1.0',
     },
 
     {
@@ -135,7 +139,7 @@ const commonDependencies: any[] = [
     },
     {
         name: '@angular/flex-layout',
-        version: '^12.0.0-beta.35',
+        version: '^13.0.0-beta.36',
     },
     {
         name: 'angular2-uuid',
