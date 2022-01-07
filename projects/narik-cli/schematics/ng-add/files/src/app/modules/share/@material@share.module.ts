@@ -21,7 +21,7 @@ export const PICK_FORMATS = {
 };
 @Injectable()
 export class PickDateAdapter extends NativeDateAdapter {
-    format(date: Date, displayFormat: any): string {
+    override format(date: Date, displayFormat: any): string {
         if (displayFormat === 'input') {
             return new DatePipe('en-US').transform(
                 date,
