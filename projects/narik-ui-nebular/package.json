@@ -4,8 +4,8 @@
   "peerDependencies": {
     "@angular/common": "^13.0.0",
     "@angular/core": "^13.0.0",
-    "@nebular/theme": "~7.0.0",
-    "@angular/flex-layout": "^12.0.0-beta.34"
+    "@nebular/theme": "~8.0.0",
+    "@angular/flex-layout": "^13.0.0-beta.36"
   },
   "dependencies": {},
   "repository": {
