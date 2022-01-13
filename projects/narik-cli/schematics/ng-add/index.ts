@@ -214,7 +214,7 @@ const layoutDependency: any = {
     ngxadmin: [
         {
             name: '@nebular/theme',
-            version: '^8.0.0',
+            version: '^9.0.0',
         },
         {
             name: 'eva-icons',
@@ -222,7 +222,7 @@ const layoutDependency: any = {
         },
         {
             name: '@nebular/eva-icons',
-            version: '^8.0.0',
+            version: '^9.0.0',
         },
         {
             name: 'roboto-fontface',
@@ -331,8 +331,8 @@ const uiDependency: any = {
         { name: '@narik/ui-nebular', version: '^7.0.0' },
         { name: '@narik/ui-swimlane', version: '^7.0.0' },
         { name: '@swimlane/ngx-datatable', version: '^20.0.0' },
-        { name: '@nebular/theme', version: '^8.0.0' },
-        { name: '@nebular/date-fns', version: '^8.0.0' },
+        { name: '@nebular/theme', version: '^9.0.0' },
+        { name: '@nebular/date-fns', version: '^9.0.0' },
         { name: 'date-fns', version: '^2.22.1' },
     ],
     primeng: [
