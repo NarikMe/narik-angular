@@ -20,7 +20,7 @@ export * from './AuthorizationService';
 export * from './JsonService';
 export * from './ConfigService';
 export * from './RemoteMessagingService';
-export * from './comandProcessor';
+export * from './ComandProcessor';
 export * from './ValidationService';
 export * from './ShortcutService';
 export * from './FormTitleResolver';
