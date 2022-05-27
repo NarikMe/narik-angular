@@ -37,7 +37,8 @@ import { QUERY_SERVICE_TYPE } from '../internal-injectionTokens';
 @Directive()
 export class NarikGeneralForm<TE extends NarikEntity>
     extends NarikComponent
-    implements CommandHost, OnChanges {
+    implements CommandHost, OnChanges
+{
     private changeSubject = new ReplaySubject<void>(1);
 
     change$: Observable<any>;
@@ -115,18 +116,26 @@ export class NarikGeneralForm<TE extends NarikEntity>
 
     processCommand(cmd: CommandInfo) {
         if (cmd.commandKey === 'close' && this.dialogRef) {
-            this.dialogRef.close(
-                {
-                    componentInstance: this,
-                    dialogResult: 'close',
-                },
-                'CONTENT'
-            );
+            this.canClose().then((result) => {
+                if (result) {
+                    this.dialogRef.close(
+                        {
+                            componentInstance: this,
+                            dialogResult: 'close',
+                        },
+                        'CONTENT'
+                    );
+                }
+            });
         } else {
             this.commandProcessor.processCommand(this, cmd);
         }
 
         this.detectChanges();
+    }
+
+    protected async canClose(): Promise<boolean> {
+        return true;
     }
 
     protected detectChanges() {
