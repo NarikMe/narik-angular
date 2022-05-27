@@ -31,19 +31,19 @@ const logic = {
 
 const operatorsMap = {
     contains: function (a, b) {
-        return (a || '').indexOf(b) >= 0;
+        return isString(a) && (a || '').indexOf(b) >= 0;
     },
     doesnotcontain: function (a, b) {
-        return (a || '').indexOf(b) === -1;
+        return isString(a) && (a || '').indexOf(b) === -1;
     },
     doesnotendwith: function (a, b) {
-        return (a || '').indexOf(b, (a || '').length - (b || '').length) < 0;
+        return isString(a) && (a || '').indexOf(b, (a || '').length - (b || '').length) < 0;
     },
     doesnotstartwith: function (a, b) {
-        return (a || '').lastIndexOf(b, 0) === -1;
+        return isString(a) && (a || '').lastIndexOf(b, 0) === -1;
     },
     endswith: function (a, b) {
-        return (a || '').indexOf(b, (a || '').length - (b || '').length) >= 0;
+        return  isString(a) && (a || '').indexOf(b, (a || '').length - (b || '').length) >= 0;
     },
     eq: function (a, b) {
         return a === b;
@@ -76,7 +76,7 @@ const operatorsMap = {
         return a !== b;
     },
     startswith: function (a, b) {
-        return (a || '').lastIndexOf(b, 0) === 0;
+        return isString(a) && (a || '').lastIndexOf(b, 0) === 0;
     },
 };
 
