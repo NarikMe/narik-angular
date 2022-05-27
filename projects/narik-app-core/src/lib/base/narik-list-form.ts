@@ -284,7 +284,7 @@ export abstract class NarikListForm<TE extends NarikEntity>
             .then((d: DialogRef<any>) => {
                 if (d.events) {
                     d.events
-                        .pipe(filter((x) => x.eventType === 'ENTITY_UPDATED'))
+                        .pipe(filter((x) => x.eventType === 'ENTITY_UPDATED' || x.eventType === 'ENTITY_DELETED'))
                         .subscribe((x) => {
                             this.refresh();
                         });
