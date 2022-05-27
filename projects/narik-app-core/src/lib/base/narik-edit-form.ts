@@ -1,4 +1,10 @@
-import { Directive, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    Injector,
+    OnInit,
+    ViewChild,
+} from '@angular/core';
 import {
     FormGroup,
     FormBuilder,
@@ -47,7 +53,8 @@ import { NarikGeneralForm } from './narik-general-form';
 @Directive()
 export abstract class NarikEditForm<TE extends NarikEntity>
     extends NarikGeneralForm<TE>
-    implements OnInit {
+    implements OnInit
+{
     protected entityKeyField: string;
 
     formsOptions: any;
@@ -233,7 +240,7 @@ export abstract class NarikEditForm<TE extends NarikEntity>
     protected addToPostData(postData: any) {
         return postData;
     }
-    submit() {
+    submit(actionAfterSuccess?: () => void) {
         if (
             this.config.readOnly ||
             (this.config.allowEdit === false &&
@@ -268,9 +275,8 @@ export abstract class NarikEditForm<TE extends NarikEntity>
                             dataMethod: this.currentEntity[this.entityKeyField]
                                 ? 'PUT'
                                 : 'POST',
-                            urlParameters: this.currentEntity[
-                                this.entityKeyField
-                            ],
+                            urlParameters:
+                                this.currentEntity[this.entityKeyField],
                         },
                         postData
                     )
@@ -287,6 +293,9 @@ export abstract class NarikEditForm<TE extends NarikEntity>
                             });
                         }
                         this.currentEntity = result.data;
+                        if (isFunction(actionAfterSuccess)) {
+                            actionAfterSuccess();
+                        }
                     });
             }
         });
@@ -361,6 +370,7 @@ export abstract class NarikEditForm<TE extends NarikEntity>
                 this.form.patchValue(denormalizeEntity, {
                     emitEvent: false,
                 });
+                this.form.markAsPristine();
 
                 this.isBusy = false;
             });
@@ -436,6 +446,11 @@ export abstract class NarikEditForm<TE extends NarikEntity>
                             )
                             .subscribe((x) => {
                                 if (this.dialogRef) {
+                                    this.dialogRef.events.next({
+                                        eventType: 'ENTITY_DELETED',
+                                    });
+                                }
+                                if (this.dialogRef) {
                                     this.dialogRef.close();
                                 } else {
                                     this.newEntity();
@@ -450,6 +465,24 @@ export abstract class NarikEditForm<TE extends NarikEntity>
         if (cmd.commandKey === 'save') {
             this.submit();
         }
+        if (cmd.commandKey === 'saveAndClose') {
+            this.submit(() => {
+                if (this.dialogRef) {
+                    this.dialogRef.close(
+                        {
+                            componentInstance: this,
+                            dialogResult: 'close',
+                        },
+                        'CONTENT'
+                    );
+                }
+            });
+        }
+        if (cmd.commandKey === 'saveAndNew') {
+            this.submit(() => {
+                this.reset();
+            });
+        }
         if (cmd.commandKey === 'delete') {
             this.deleteEntity();
         } else if (cmd.commandKey === 'new') {
@@ -457,6 +490,20 @@ export abstract class NarikEditForm<TE extends NarikEntity>
         } else {
             super.processCommand(cmd);
         }
+    }
+
+    protected async canClose(): Promise<boolean> {
+        if (this.form.dirty) {
+            return this.dialogService
+                .showConfirm(
+                    `It looks like you're in the middle of writing something and you haven't saved all of your content. Are you sure you want to close the dialog?`,
+                    'Unsaved changes'
+                )
+                .closed.then((x) => {
+                    return x.dialogResult === 'yes';
+                });
+        }
+        return true;
     }
 
     protected buildForm(): FormGroup {
